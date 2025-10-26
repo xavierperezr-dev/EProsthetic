@@ -1,0 +1,5 @@
+{
+  "name": "TS Project (E&P)",
+  "description": "An application to filter and manage dental lab cases for an Exocad workflow. It allows users to search and filter cases by patient, dentist, status, restoration type, and due date.",
+  "requestFramePermissions": []
+}

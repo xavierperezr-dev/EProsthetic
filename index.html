@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exocad Workflow Manager</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --bg-primary: #E2E8F0; /* slate-200 for more contrast */
+        --bg-secondary: #FFFFFF; /* White */
+        --accent-primary: #241E4E; /* Nobel Biocare Purple */
+        --accent-primary-hover: #3D357E; /* Lighter Purple for hover */
+        --text-primary: #241E4E; /* Nobel Biocare Purple for headings */
+        --text-secondary: #505050; /* Dark Grey for body text */
+        --border-color: #E5E7EB; /* slate-200 */
+        --card-bg-raspberry: #e03e52;
+        --card-bg-salmon: #ffa38b;
+        --card-bg-yellow: #fed880;
+        --card-bg-teal: #7ae1bf;
+        --card-bg-blue: #007398;
+        --card-bg-cornflower: #87a9e2;
+      }
+      body {
+        font-family: "Mark Pro", "Manrope", sans-serif;
+        background-color: var(--bg-primary);
+        color: var(--text-secondary);
+      }
+      table {
+        font-family: Arial, sans-serif;
+      }
+
+      .page-container-enter {
+        animation: fadeIn 0.5s ease-out forwards;
+      }
+
+      .page-container-exit {
+        animation: fadeOut 0.5s ease-in forwards;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px) scale(0.98);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      @keyframes fadeOut {
+        from {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+        to {
+          opacity: 0;
+          transform: translateY(-20px) scale(0.98);
+        }
+      }
+
+      @keyframes simpleFadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+
+      .animate-simple-fade-in {
+        animation: simpleFadeIn 0.3s ease-out forwards;
+      }
+      
+      /* Hide scrollbar for Chrome, Safari and Opera */
+      .no-scrollbar::-webkit-scrollbar {
+          display: none;
+      }
+
+      /* Hide scrollbar for IE, Edge and Firefox */
+      .no-scrollbar {
+          -ms-overflow-style: none;  /* IE and Edge */
+          scrollbar-width: none;  /* Firefox */
+      }
+
+      /* Custom scrollbar styles */
+      .custom-scrollbar::-webkit-scrollbar {
+          width: 8px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+          background: transparent;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: #cbd5e1; /* slate-300 */
+          border-radius: 10px;
+          border: 2px solid #ffffff; /* bg-white */
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+          background: #94a3b8; /* slate-400 */
+      }
+      .custom-scrollbar {
+          scrollbar-width: thin; /* Firefox */
+          scrollbar-color: #cbd5e1 #ffffff; /* Firefox thumb and track */
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.1.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
+    "react/": "https://aistudiocdn.com/react@^19.1.1/",
+    "react-dom": "https://aistudiocdn.com/react-dom@^19.1.1",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.27.0"
+  }
+}
+</script>
+</head>
+  <body class="bg-slate-100 text-slate-800">
+    <div id="root"></div>
+    <div id="modal-root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
