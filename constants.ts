@@ -779,43 +779,43 @@ export const ZIRCONIA_BRIDGE_DATA = [
     rowKey: 'screw', 
     cc: { np: '37367', rp: '37606', wp: '37606' }, 
     branemark: { np: '311171', rp: '28815', wp: '28844' }, 
-    triChannel: { np: '28837', rp: '28816', wp: '28816', '6.0': '28816' } 
+    triChannel: { np: '28837', rp: '28816', wp: '28816', '6': '28816' } 
   },
   { 
     rowKey: 'screwdriver', 
     cc: { np: 'Omnigrip', rp: 'Omnigrip', wp: 'Omnigrip' }, 
     branemark: { np: 'Unigrip', rp: 'Unigrip', wp: 'Unigrip' }, 
-    triChannel: { np: 'Unigrip', rp: 'Unigrip', wp: 'Unigrip', '6.0': 'Unigrip' } 
+    triChannel: { np: 'Unigrip', rp: 'Unigrip', wp: 'Unigrip', '6': 'Unigrip' } 
   },
   { 
     rowKey: 'labScrew', 
     cc: { np: '37374', rp: '37607', wp: '37607' }, 
     branemark: { np: '37894', rp: '37895', wp: '' }, 
-    triChannel: { np: '', rp: '', wp: '', '6.0': '' } 
+    triChannel: { np: '', rp: '', wp: '', '6': '' } 
   },
   { 
     rowKey: 'elosScanbody', 
     cc: { np: 'IO 2B-A SA', rp: 'IO 2B-B SA', wp: 'IO 2B-C SA' }, 
     branemark: { np: 'IO 6A-A', rp: 'IO 6A-B', wp: 'IO 6A-C' }, 
-    triChannel: { np: 'IO 2A-A', rp: 'IO 2A-B', wp: 'IO 2A-C', '6.0': 'IO 2A-D' } 
+    triChannel: { np: 'IO 2A-A', rp: 'IO 2A-B', wp: 'IO 2A-C', '6': 'IO 2A-D' } 
   },
   { 
     rowKey: 'elosScanbodyKit', 
     cc: { np: '', rp: 'IO 2B SA Kit', wp: '' }, 
     branemark: { np: '', rp: 'IO 6A Kit', wp: '' }, 
-    triChannel: { np: '', rp: 'IO 2A Kit', wp: '', '6.0': '' } 
+    triChannel: { np: '', rp: 'IO 2A Kit', wp: '', '6': '' } 
   },
   { 
     rowKey: 'replicaIOS', 
     cc: { np: 'PMA-NBA35-1', rp: 'PMA-NBA43-1', wp: 'PMA-NBA60-1' }, 
     branemark: { np: 'PMA-BRA35-1', rp: 'PMA-BRA41-1', wp: 'PMA-BRA51-1' }, 
-    triChannel: { np: 'PMA-NBR35-1', rp: 'PMA-NBR43-1', wp: 'PMA-NBR50-1', '6.0': 'PMA-NBR60-1' } 
+    triChannel: { np: 'PMA-NBR35-1', rp: 'PMA-NBR43-1', wp: 'PMA-NBR50-1', '6': 'PMA-NBR60-1' } 
   },
   { 
     rowKey: 'desktopScanbody', 
     cc: { np: '300457', rp: '300458', wp: '300459' }, 
     branemark: { np: '300460', rp: '300461', wp: '300462' }, 
-    triChannel: { np: '300452', rp: '300453', wp: '300454', '6.0': '300469' } 
+    triChannel: { np: '300452', rp: '300453', wp: '300454', '6': '300469' } 
   },
 ];
 
@@ -841,13 +841,13 @@ export const ZIRCONIA_BRIDGE_BRANEMARK_DATA = [
 ];
 
 export const ZIRCONIA_BRIDGE_TRICHANNEL_DATA = [
-  { rowKey: 'screw', np: '28837', rp: '28816', wp: '28816', '6.0': '28816' },
-  { rowKey: 'screwdriver', np: 'Unigrip', rp: 'Unigrip', wp: 'Unigrip', '6.0': 'Unigrip' },
-  { rowKey: 'labScrew', np: '', rp: '', wp: '', '6.0': '' },
-  { rowKey: 'elosScanbody', np: 'IO 2A-A', rp: 'IO 2A-B', wp: 'IO 2A-C', '6.0': 'IO 2A-D' },
-  { rowKey: 'elosScanbodyKit', np: '', rp: 'IO 2A Kit', wp: '', '6.0': '' },
-  { rowKey: 'replicaIOS', np: 'PMA-NBR35-1', rp: 'PMA-NBR43-1', wp: 'PMA-NBR50-1', '6.0': 'PMA-NBR60-1' },
-  { rowKey: 'desktopScanbody', np: '300452', rp: '300453', wp: '300454', '6.0': '300469' },
+  { rowKey: 'screw', np: '28837', rp: '28816', wp: '28816', '6': '28816' },
+  { rowKey: 'screwdriver', np: 'Unigrip', rp: 'Unigrip', wp: 'Unigrip', '6': 'Unigrip' },
+  { rowKey: 'labScrew', np: '', rp: '', wp: '', '6': '' },
+  { rowKey: 'elosScanbody', np: 'IO 2A-A', rp: 'IO 2A-B', wp: 'IO 2A-C', '6': 'IO 2A-D' },
+  { rowKey: 'elosScanbodyKit', np: '', rp: 'IO 2A Kit', wp: '', '6': '' },
+  { rowKey: 'replicaIOS', np: 'PMA-NBR35-1', rp: 'PMA-NBR43-1', wp: 'PMA-NBR50-1', '6': 'PMA-NBR60-1' },
+  { rowKey: 'desktopScanbody', np: '300452', rp: '300453', wp: '300454', '6': '300469' },
 ];
 
 export const PROCERA_FCZ_IMPLANT_CROWN_DATA = [
@@ -881,13 +881,13 @@ export const PROCERA_TITANIUM_BRANEMARK_DATA = [
 ];
 
 export const PROCERA_TITANIUM_TRICHANNEL_DATA = [
-  { rowKey: 'screw', np: '36818', rp: '29475', wp: '29475', '6.0': '29475' },
-  { rowKey: 'screwdriver', np: 'Unigrip', rp: 'Unigrip', wp: 'Unigrip', '6.0': 'Unigrip' },
-  { rowKey: 'labScrew', np: '31170', rp: '29293', wp: '29293', '6.0': '29293' },
-  { rowKey: 'elosScanbody', np: 'IO 2A-A', rp: 'IO 2A-B', wp: 'IO 2A-C', '6.0': 'IO 2A-D' },
-  { rowKey: 'elosScanbodyKit', np: '', rp: 'IO 2A Kit', wp: '', '6.0': '' },
-  { rowKey: 'replicaIOS', np: 'PMA-NBR35-1', rp: 'PMA-NBR43-1', wp: 'PMA-NBR50-1', '6.0': 'PMA-NBR60-1' },
-  { rowKey: 'desktopScanbody', np: '300452', rp: '300453', wp: '300454', '6.0': '300455' },
+  { rowKey: 'screw', np: '36818', rp: '29475', wp: '29475', '6': '29475' },
+  { rowKey: 'screwdriver', np: 'Unigrip', rp: 'Unigrip', wp: 'Unigrip', '6': 'Unigrip' },
+  { rowKey: 'labScrew', np: '31170', rp: '29293', wp: '29293', '6': '29293' },
+  { rowKey: 'elosScanbody', np: 'IO 2A-A', rp: 'IO 2A-B', wp: 'IO 2A-C', '6': 'IO 2A-D' },
+  { rowKey: 'elosScanbodyKit', np: '', rp: 'IO 2A Kit', wp: '', '6': '' },
+  { rowKey: 'replicaIOS', np: 'PMA-NBR35-1', rp: 'PMA-NBR43-1', wp: 'PMA-NBR50-1', '6': 'PMA-NBR60-1' },
+  { rowKey: 'desktopScanbody', np: '300452', rp: '300453', wp: '300454', '6': '300455' },
 ];
 
 export const PROCERA_ZIRCONIA_CC_DATA = [
@@ -911,13 +911,13 @@ export const PROCERA_ZIRCONIA_BRANEMARK_DATA = [
 ];
 
 export const PROCERA_ZIRCONIA_TRICHANNEL_DATA = [
-    { rowKey: 'screw', np: '28837', rp: '28816', wp: '28816', '6.0': '28816' },
-    { rowKey: 'screwdriver', np: 'Unigrip', rp: 'Unigrip', wp: 'Unigrip', '6.0': 'Unigrip' },
-    { rowKey: 'labScrew', np: '', rp: '', wp: '', '6.0': '' },
-    { rowKey: 'elosScanbody', np: 'IO 2A-A', rp: 'IO 2A-B', wp: 'IO 2A-C', '6.0': 'IO 2A-D' },
-    { rowKey: 'elosScanbodyKit', np: '', rp: 'IO 2A Kit', wp: '', '6.0': '' },
-    { rowKey: 'replicaIOS', np: 'PMA-NBR35-1', rp: 'PMA-NBR43-1', wp: 'PMA-NBR50-1', '6.0': 'PMA-NBR60-1' },
-    { rowKey: 'desktopScanbody', np: '300452', rp: '300453', wp: '300454', '6.0': '300455' },
+    { rowKey: 'screw', np: '28837', rp: '28816', wp: '28816', '6': '28816' },
+    { rowKey: 'screwdriver', np: 'Unigrip', rp: 'Unigrip', wp: 'Unigrip', '6': 'Unigrip' },
+    { rowKey: 'labScrew', np: '', rp: '', wp: '', '6': '' },
+    { rowKey: 'elosScanbody', np: 'IO 2A-A', rp: 'IO 2A-B', wp: 'IO 2A-C', '6': 'IO 2A-D' },
+    { rowKey: 'elosScanbodyKit', np: '', rp: 'IO 2A Kit', wp: '', '6': '' },
+    { rowKey: 'replicaIOS', np: 'PMA-NBR35-1', rp: 'PMA-NBR43-1', wp: 'PMA-NBR50-1', '6': 'PMA-NBR60-1' },
+    { rowKey: 'desktopScanbody', np: '300452', rp: '300453', wp: '300454', '6': '300455' },
 ];
 
 export const PROCERA_TITANIUM_BRIDGE_CC_DATA = [
@@ -941,13 +941,13 @@ export const PROCERA_TITANIUM_BRIDGE_BRANEMARK_DATA = [
 ];
 
 export const PROCERA_TITANIUM_BRIDGE_TRICHANNEL_UPDATED_DATA = [
-  { rowKey: 'screw', np: '36818', rp: '29475', wp: '29475', '6.0': '29475' },
-  { rowKey: 'screwdriver', np: 'Unigrip', rp: 'Unigrip', wp: 'Unigrip', '6.0': 'Unigrip' },
-  { rowKey: 'labScrew', np: '31170', rp: '38419 / 29293', wp: '38419 / 29293', '6.0': '38419 / 29293' },
-  { rowKey: 'positionLocator', np: 'IO 2A-A', rp: 'IO 2A-B', wp: 'IO 2A-C', '6.0': '-' },
-  { rowKey: 'positionLocatorKit', np: '-', rp: 'IO 2A Kit', wp: '-', '6.0': '-' },
-  { rowKey: 'replicaIOS', np: 'PMA-NBR35-1', rp: 'PMA-NBR43-1', wp: 'PMA-NBR50-1', '6.0': '-' },
-  { rowKey: 'desktopScanbody', np: '300452', rp: '300453', wp: '300454', '6.0': '-' },
+  { rowKey: 'screw', np: '36818', rp: '29475', wp: '29475', '6': '29475' },
+  { rowKey: 'screwdriver', np: 'Unigrip', rp: 'Unigrip', wp: 'Unigrip', '6': 'Unigrip' },
+  { rowKey: 'labScrew', np: '31170', rp: '38419 / 29293', wp: '38419 / 29293', '6': '38419 / 29293' },
+  { rowKey: 'positionLocator', np: 'IO 2A-A', rp: 'IO 2A-B', wp: 'IO 2A-C', '6': '-' },
+  { rowKey: 'positionLocatorKit', np: '-', rp: 'IO 2A Kit', wp: '-', '6': '-' },
+  { rowKey: 'replicaIOS', np: 'PMA-NBR35-1', rp: 'PMA-NBR43-1', wp: 'PMA-NBR50-1', '6': '-' },
+  { rowKey: 'desktopScanbody', np: '300452', rp: '300453', wp: '300454', '6': '-' },
 ];
 
 export const PROCERA_TITANIUM_ASC_CC_DATA = [
@@ -961,13 +961,13 @@ export const PROCERA_TITANIUM_ASC_CC_DATA = [
 ];
 
 export const PROCERA_TITANIUM_ASC_TRICHANNEL_DATA = [
-  { rowKey: 'screw', np: '301725', rp: '301727', wp: '301727', '6.0': '301727' },
-  { rowKey: 'screwdriver', np: 'Omnigrip', rp: 'Omnigrip', wp: 'Omnigrip', '6.0': 'Omnigrip' },
-  { rowKey: 'labScrew', np: '301726', rp: '301728', wp: '301728', '6.0': '301728' },
-  { rowKey: 'elosScanbody', np: 'IO 2A-A', rp: 'IO 2A-B', wp: 'IO 2A-C', '6.0': 'IO 2A-D' },
-  { rowKey: 'elosScanbodyKit', np: '', rp: 'IO 2A Kit', wp: '', '6.0': '' },
-  { rowKey: 'replicaIOS', np: 'PMA-NBR35-1', rp: 'PMA-NBR43-1', wp: 'PMA-NBR50-1', '6.0': 'PMA-NBR60-1' },
-  { rowKey: 'desktopScanbody', np: '300452', rp: '300453', wp: '300454', '6.0': '300455' },
+  { rowKey: 'screw', np: '301725', rp: '301727', wp: '301727', '6': '301727' },
+  { rowKey: 'screwdriver', np: 'Omnigrip', rp: 'Omnigrip', wp: 'Omnigrip', '6': 'Omnigrip' },
+  { rowKey: 'labScrew', np: '301726', rp: '301728', wp: '301728', '6': '301728' },
+  { rowKey: 'elosScanbody', np: 'IO 2A-A', rp: 'IO 2A-B', wp: 'IO 2A-C', '6': 'IO 2A-D' },
+  { rowKey: 'elosScanbodyKit', np: '', rp: 'IO 2A Kit', wp: '', '6': '' },
+  { rowKey: 'replicaIOS', np: 'PMA-NBR35-1', rp: 'PMA-NBR43-1', wp: 'PMA-NBR50-1', '6': 'PMA-NBR60-1' },
+  { rowKey: 'desktopScanbody', np: '300452', rp: '300453', wp: '300454', '6': '300455' },
 ];
 
 export const NOBELPROCERA_TITANIUM_BAR_CC_DATA = [
@@ -991,16 +991,16 @@ export const NOBELPROCERA_TITANIUM_BAR_BRANEMARK_DATA = [
 ];
 
 export const NOBELPROCERA_TITANIUM_BAR_TRICHANNEL_DATA = [
-  { rowKey: 'screw', np: '36818', rp: '29475', wp: '29475', '6.0': '29475' },
-  { rowKey: 'screwdriver', np: 'Unigrip', rp: 'Unigrip', wp: 'Unigrip', '6.0': 'Unigrip' },
-  { rowKey: 'labScrew', np: '31170', rp: '38419 / 29293', wp: '38419 / 29293', '6.0': '38419 / 29293' },
-  { rowKey: 'positionLocator', np: 'IO 2A-A', rp: 'IO 2A-B', wp: 'IO 2A-C', '6.0': '-' },
+  { rowKey: 'screw', np: '36818', rp: '29475', wp: '29475', '6': '29475' },
+  { rowKey: 'screwdriver', np: 'Unigrip', rp: 'Unigrip', wp: 'Unigrip', '6': 'Unigrip' },
+  { rowKey: 'labScrew', np: '31170', rp: '38419 / 29293', wp: '38419 / 29293', '6': '38419 / 29293' },
+  { rowKey: 'positionLocator', np: 'IO 2A-A', rp: 'IO 2A-B', wp: 'IO 2A-C', '6': '-' },
   // FIX: The error "An object literal cannot have multiple properties with the same name" was reported for line 613, which was likely incorrect.
   // The object below (originally on line 664) was inconsistent with other similar data structures (e.g., NOBELPROCERA_TITANIUM_BAR_CC_DATA), which use a single 'kit' property.
   // Refactored to use 'kit' for consistency and correctness.
   { rowKey: 'positionLocatorKit', kit: 'IO 2A Kit' },
-  { rowKey: 'replicaIOS', np: 'PMA-NBR35-1', rp: 'PMA-NBR43-1', wp: 'PMA-NBR50-1', '6.0': 'PMA-NBR60-1' },
-  { rowKey: 'scanbodyDTX', np: '300452', rp: '300453', wp: '300454', '6.0': '300455' },
+  { rowKey: 'replicaIOS', np: 'PMA-NBR35-1', rp: 'PMA-NBR43-1', wp: 'PMA-NBR50-1', '6': 'PMA-NBR60-1' },
+  { rowKey: 'scanbodyDTX', np: '300452', rp: '300453', wp: '300454', '6': '300455' },
 ];
 
 export const NOBEL_PEARL_COMPONENTS_DATA = [

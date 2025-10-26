@@ -255,6 +255,8 @@ Provide the response in the ${language} language as a single, valid JSON object 
             playsInline
             className="w-full h-full object-contain"
             src={videoSrc}
+            disablePictureInPicture
+            controlsList="nodownload"
           />
         ) : imageUrls && imageUrls.length > 0 ? (
           <>

@@ -553,9 +553,9 @@ export const TableIcon: React.FC<{ className?: string }> = ({ className }) => (
 
 export const GlobeIcon: React.FC<{ className?: string }> = ({ className }) => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 21V3m0 18a9 9 0 006.75-3.25M12 3a9 9 0 016.75 3.25" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M3 12h18" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9 9 0 100-18 9 9 0 000 18z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 9h16.5M3.75 15h16.5" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 3.75c-3.142 0-6 4.318-6 9.625s2.858 9.625 6 9.625c3.142 0 6-4.318 6-9.625S15.142 3.75 12 3.75z" />
     </svg>
 );
 

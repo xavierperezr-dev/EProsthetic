@@ -10,6 +10,7 @@ interface PreMilledBlanksPageProps {
   isTableEditMode?: boolean;
   data: any[];
   onDataChange: (newData: any[]) => void;
+  imageUrl?: string;
 }
 
 const Tooltip: React.FC<{ text: string; children: React.ReactNode }> = ({ text, children }) => {
@@ -222,21 +223,15 @@ const ConnectionTable: React.FC<{
   );
 };
 
-const PreMilledBlanksPage: React.FC<PreMilledBlanksPageProps> = ({ t, storeCountry, connectionType, isTableEditMode, data, onDataChange }) => {
-  const imageUrls = {
-    cc: 'https://store.nobelbiocare.com/es/es/media/catalog/product/cache/8b702e05dee6f1504d8f77fa0603bd46/t/r/trm60.041_0af0.png',
-    externalHex: 'https://store.nobelbiocare.com/es/es/media/catalog/product/cache/8b702e05dee6f1504d8f77fa0603bd46/t/r/trm60.001_bfd0.png',
-    triChannel: 'https://store.nobelbiocare.com/es/es/media/catalog/product/cache/8b702e05dee6f1504d8f77fa0603bd46/t/r/trm60.005_ac7c.png'
-  };
-
+const PreMilledBlanksPage: React.FC<PreMilledBlanksPageProps> = ({ t, storeCountry, connectionType, isTableEditMode, data, onDataChange, imageUrl }) => {
   const renderConnectionTable = () => {
     switch (connectionType) {
       case 'CC':
-        return <ConnectionTable connectionKey="cc" title="Conical Connection (CC)" t={t} storeCountry={storeCountry} imageUrl={imageUrls.cc} isTableEditMode={!!isTableEditMode} data={data} onDataChange={onDataChange} />;
+        return <ConnectionTable connectionKey="cc" title="Conical Connection (CC)" t={t} storeCountry={storeCountry} imageUrl={imageUrl} isTableEditMode={!!isTableEditMode} data={data} onDataChange={onDataChange} />;
       case 'Branemark':
-        return <ConnectionTable connectionKey="externalHex" title="Brånemark System® (Hexágono Externo)" t={t} storeCountry={storeCountry} imageUrl={imageUrls.externalHex} isTableEditMode={!!isTableEditMode} data={data} onDataChange={onDataChange} />;
+        return <ConnectionTable connectionKey="externalHex" title="Brånemark System® (Hexágono Externo)" t={t} storeCountry={storeCountry} imageUrl={imageUrl} isTableEditMode={!!isTableEditMode} data={data} onDataChange={onDataChange} />;
       case 'Tri-channel':
-        return <ConnectionTable connectionKey="triChannel" title="NobelReplace® (Tri-channel)" t={t} storeCountry={storeCountry} imageUrl={imageUrls.triChannel} isTableEditMode={!!isTableEditMode} data={data} onDataChange={onDataChange} />;
+        return <ConnectionTable connectionKey="triChannel" title="NobelReplace® (Tri-channel)" t={t} storeCountry={storeCountry} imageUrl={imageUrl} isTableEditMode={!!isTableEditMode} data={data} onDataChange={onDataChange} />;
       default:
         return null;
     }

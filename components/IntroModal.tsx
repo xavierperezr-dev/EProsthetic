@@ -17,9 +17,11 @@ const VideoBackground: React.FC<{ children: React.ReactNode; videoSrc: string }>
             playsInline
             className="absolute top-0 left-0 w-full h-full object-cover z-0"
             src={videoSrc}
+            disablePictureInPicture
+            controlsList="nodownload"
         ></video>
         <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-60 z-10"></div>
-        <div className="relative z-20 p-8 flex flex-col justify-center h-full">
+        <div className="relative z-20 p-8 flex flex-col justify-start pt-16 h-full">
             {children}
         </div>
     </div>
@@ -56,7 +58,7 @@ const IntroModal: React.FC<IntroModalProps> = ({ onConfirm, t }) => {
 
   return (
     <VideoBackground videoSrc={DESIGN1_VIDEO_SRC}>
-      <img src="https://www.ganarnobelbiocare.com/nobeldesign/E-Prosthetic/Logo/LogoGris.png" alt="Nobel Biocare logo" className="h-10 mx-auto mb-6" />
+      <img src="https://www.ganarnobelbiocare.com/nobeldesign/E-Prosthetic/Logo/LogoGris.png" alt="Nobel Biocare logo" className="h-20 mx-auto mb-6" />
       <h2 className="text-2xl font-bold drop-shadow-lg mb-8">{modalT.title}</h2>
       <div className="space-y-10">
         <div>
@@ -90,7 +92,7 @@ const IntroModal: React.FC<IntroModalProps> = ({ onConfirm, t }) => {
         <button
           onClick={handleConfirm}
           disabled={!selectedLanguage || !selectedCountry}
-          className="w-full max-w-xs px-6 py-3 text-lg font-bold text-white bg-[color:var(--accent-primary)] rounded-lg shadow-md hover:bg-[color:var(--accent-primary-hover)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[color:var(--accent-primary-hover)] transition-all duration-200 disabled:bg-slate-400 disabled:cursor-not-allowed disabled:shadow-none"
+          className="w-full max-w-xs px-4 py-2 text-base font-bold text-white bg-[color:var(--accent-primary)] rounded-lg shadow-md hover:bg-[color:var(--accent-primary-hover)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[color:var(--accent-primary-hover)] transition-all duration-200 disabled:bg-slate-400 disabled:cursor-not-allowed disabled:shadow-none"
         >
           {modalT.confirm_button}
         </button>

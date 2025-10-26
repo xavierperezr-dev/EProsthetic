@@ -42,7 +42,7 @@ const CaseGrid: React.FC<CaseGridProps> = ({ cases, onReferenceClick, onHelp001C
   let colorIndex = 0;
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       {cases.map((caseData) => {
         const bgColorVar = caseData.id === specialCaseId
           ? specialCaseColor

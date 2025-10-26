@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { GoogleGenAI, Type } from "@google/genai";
 // FIX: Imported 'Language' type to use for the 'language' prop.
 import { DentalCase, CaseStatus, RestorationType, Language } from '../types';
@@ -39,6 +39,13 @@ const CaseCard: React.FC<CaseCardProps> = ({ caseData, displayNumber, onReferenc
   const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
 
   const { patientName, status, imageUrls, observaciones, notes, id, restorationType } = caseData;
+  
+  const videoSrc =
+    isHovered && caseData.id === 'EXO024'
+      ? 'https://www.ganarnobelbiocare.com/nobeldesign/E-Prosthetic/Video/People.mp4'
+      : isHovered && caseData.id === 'EXO025'
+      ? 'https://www.ganarnobelbiocare.com/nobeldesign/E-Prosthetic/Video/Pibanimation.mp4'
+      : null;
 
   // Map of background colors that are dark and require light text
   const lightTextColors = ['--card-bg-raspberry', '--card-bg-blue', '--card-bg-cornflower'];
@@ -56,6 +63,15 @@ const CaseCard: React.FC<CaseCardProps> = ({ caseData, displayNumber, onReferenc
     : `text-[color:var(--accent-primary)] ${borderColorClass} hover:bg-slate-800 hover:text-white`;
   const finalInfoButtonClass = `${infoButtonBaseClasses} ${dynamicInfoButtonClasses}`;
 
+
+  useEffect(() => {
+    // This helps to populate the voices list on some browsers.
+    window.speechSynthesis.getVoices();
+    // Cleanup speech synthesis on component unmount.
+    return () => {
+      window.speechSynthesis.cancel();
+    };
+  }, []);
 
   const nextImage = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -116,41 +132,27 @@ const CaseCard: React.FC<CaseCardProps> = ({ caseData, displayNumber, onReferenc
 Product Data: ${JSON.stringify(caseInfoForPrompt, null, 2)}
 
 Tasks:
-1.  **Internet Summary:** Write a brief, clear summary of the product based on your web search.
-2.  **App Summary:** Write a brief summary based ONLY on the provided "Product Data".
+1.  **Internet Summary:** Write a brief, clear summary of the product as a bulleted list (using '*' or '-') based on your web search.
+2.  **App Summary:** Write a brief summary as a bulleted list (using '*' or '-') based ONLY on the provided "Product Data".
 3.  **Product URL:** Find the most relevant product page URL from nobelbiocare.com.
 
-Provide the response in the ${language} language and strictly follow the provided JSON schema.`;
-
-        const responseSchema = {
-          type: Type.OBJECT,
-          properties: {
-            internetSummary: {
-              type: Type.STRING,
-              description: `A brief summary of the product based on web search information, in ${language}.`
-            },
-            appSummary: {
-              type: Type.STRING,
-              description: `A brief summary of the product based on the provided internal app data, in ${language}.`
-            },
-            productUrl: {
-              type: Type.STRING,
-              description: "A direct URL to the product page on www.nobelbiocare.com. If no specific page is found, provide a relevant search URL on the same site."
-            }
-          }
-        };
+Provide the response in the ${language} language as a single, valid JSON object with the following keys: "internetSummary", "appSummary", "productUrl". Do not include any other text or markdown formatting like \`\`\`json. Your entire response must be only the raw JSON object.`;
 
         const genAIResponse = await ai.models.generateContent({
             model: 'gemini-2.5-flash',
             contents: prompt,
             config: {
               tools: [{googleSearch: {}}],
-              responseMimeType: "application/json",
-              responseSchema: responseSchema,
             },
         });
         
-        const responseText = genAIResponse.text.trim();
+        let responseText = genAIResponse.text.trim();
+        // Handle potential markdown code block, just in case the model doesn't follow instructions.
+        const jsonMatch = responseText.match(/```json\s*([\s\S]*?)\s*```/);
+        if (jsonMatch && jsonMatch[1]) {
+            responseText = jsonMatch[1];
+        }
+        
         const parsedData = JSON.parse(responseText);
         
         if (parsedData.internetSummary && parsedData.appSummary && parsedData.productUrl) {
@@ -169,12 +171,21 @@ Provide the response in the ${language} language and strictly follow the provide
 
   const handleSpeak = () => {
     if (!aiSummaryData || isSpeaking) return;
-    
-    window.speechSynthesis.cancel(); // Cancel any previous speech
 
     const textToSpeak = `${t.ai_summary_web_title || "Web Summary"}. ${aiSummaryData.internetSummary}. ${t.ai_summary_app_title || "App Summary"}. ${aiSummaryData.appSummary}`;
     const utterance = new SpeechSynthesisUtterance(textToSpeak);
-    utterance.lang = language;
+
+    // Find a voice for the specified language for better quality.
+    const voices = window.speechSynthesis.getVoices();
+    const voice = voices.find(v => v.lang.startsWith(language));
+    if (voice) {
+      utterance.voice = voice;
+    } else {
+      // Fallback to setting lang property if no specific voice is found.
+      utterance.lang = language;
+    }
+    
+    utterance.rate = 1.2; // Use a slightly safer rate for broader compatibility.
     utteranceRef.current = utterance;
 
     utterance.onstart = () => setIsSpeaking(true);
@@ -182,20 +193,25 @@ Provide the response in the ${language} language and strictly follow the provide
       setIsSpeaking(false);
       utteranceRef.current = null;
     };
-    utterance.onerror = () => {
+    utterance.onerror = (event: SpeechSynthesisErrorEvent) => {
       setIsSpeaking(false);
       utteranceRef.current = null;
-      console.error("Speech synthesis error");
+      console.error("Speech synthesis error:", event.error);
     };
 
-    window.speechSynthesis.speak(utterance);
+    // Kick-start speech synthesis, a common workaround for browser bugs.
+    const synth = window.speechSynthesis;
+    synth.cancel(); // Cancel any previous speech to prevent overlap.
+    if (synth.paused) {
+      synth.resume();
+    }
+    synth.speak(utterance);
   };
 
   const handleStopSpeaking = () => {
     if (isSpeaking) {
+      // The onend event will fire after cancel, resetting the state.
       window.speechSynthesis.cancel();
-      setIsSpeaking(false);
-      utteranceRef.current = null;
     }
   };
 
@@ -231,14 +247,16 @@ Provide the response in the ${language} language and strictly follow the provide
         style={{ borderColor: `var(${bgColorVar})` }}
         onDoubleClick={handleImageDoubleClick}
       >
-        {isHovered && caseData.id === 'EXO024' ? (
+        {videoSrc ? (
           <video
             autoPlay
             loop
             muted
             playsInline
             className="w-full h-full object-contain"
-            src="https://www.ganarnobelbiocare.com/nobeldesign/E-Prosthetic/Video/People.mp4"
+            src={videoSrc}
+            disablePictureInPicture
+            controlsList="nodownload"
           />
         ) : imageUrls && imageUrls.length > 0 ? (
           <>
@@ -310,7 +328,7 @@ Provide the response in the ${language} language and strictly follow the provide
                     </button>
                     {showTooltip && (
                     <div 
-                        className="absolute right-full top-0 mr-2 w-72 p-4 text-sm text-white bg-slate-800/95 rounded-lg shadow-lg z-10 text-left animate-simple-fade-in"
+                        className="absolute right-full top-0 mr-2 w-72 p-4 text-sm text-white bg-slate-800/95 rounded-lg shadow-lg z-10 text-left animate-simple-fade-in flex flex-col"
                         onClick={(e) => e.stopPropagation()}
                     >
                         {isGeneratingDescription ? (
@@ -321,16 +339,17 @@ Provide the response in the ${language} language and strictly follow the provide
                         ) : descriptionError ? (
                         <span className="text-red-400">{descriptionError}</span>
                         ) : aiSummaryData ? (
-                        <div className="space-y-4">
-                            <div>
-                                <h4 className="font-bold text-slate-300 mb-1 border-b border-slate-600 pb-1">{t.ai_summary_web_title}</h4>
-                                <p className="text-slate-200">{aiSummaryData.internetSummary}</p>
+                        <>
+                            <div className="max-h-60 overflow-y-auto custom-scrollbar pr-2 mb-3 space-y-4">
+                                <div>
+                                    <h4 className="font-bold text-slate-300 mb-1 border-b border-slate-600 pb-1">{t.ai_summary_web_title}</h4>
+                                    <p className="text-slate-200 whitespace-pre-wrap">{aiSummaryData.internetSummary}</p>
+                                </div>
+                                <div>
+                                    <h4 className="font-bold text-slate-300 mb-1 border-b border-slate-600 pb-1">{t.ai_summary_app_title}</h4>
+                                    <p className="text-slate-200 whitespace-pre-wrap">{aiSummaryData.appSummary}</p>
+                                </div>
                             </div>
-                            <div>
-                                <h4 className="font-bold text-slate-300 mb-1 border-b border-slate-600 pb-1">{t.ai_summary_app_title}</h4>
-                                <p className="text-slate-200">{aiSummaryData.appSummary}</p>
-                            </div>
-
                             <div className="flex items-center justify-between pt-2 border-t border-slate-600">
                                 <button 
                                     onClick={isSpeaking ? handleStopSpeaking : handleSpeak}
@@ -350,7 +369,7 @@ Provide the response in the ${language} language and strictly follow the provide
                                 <span>{t.product_link_label}</span>
                                 </a>
                             </div>
-                        </div>
+                        </>
                         ) : null}
                     </div>
                     )}
