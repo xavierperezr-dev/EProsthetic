@@ -63,6 +63,12 @@ const enTranslations = {
       [CaseStatus.Standard]: "Standard",
       [CaseStatus.Otros]: "Others",
     },
+    status_short: {
+      [CaseStatus.Local]: "Local",
+      [CaseStatus.Procera]: "Procera",
+      [CaseStatus.Standard]: "Standard",
+      [CaseStatus.Otros]: "Others",
+    },
     procera_warranty: "10 years",
     warranty_tooltip: "Nobel Biocare Warranty",
     restoration_type_label: "Restoration Type",
@@ -598,6 +604,12 @@ const esTranslations = {
       [CaseStatus.Standard]: "Standard",
       [CaseStatus.Otros]: "Otros",
     },
+    status_short: {
+      [CaseStatus.Local]: "Local",
+      [CaseStatus.Procera]: "Procera",
+      [CaseStatus.Standard]: "Standard",
+      [CaseStatus.Otros]: "Otros",
+    },
     procera_warranty: "10 años",
     warranty_tooltip: "Garantía Nobel Biocare",
     restoration_type_label: "Tipo Restauración",
@@ -1087,6 +1099,18 @@ ptTranslations.chatbot = {
     error_message: "Peço desculpa, mas de momento não consigo processar o seu pedido. Por favor, tente novamente mais tarde.",
     sources_title: "Fontes",
 };
+ptTranslations.caseCard.status = {
+    [CaseStatus.Local]: "Produção Local",
+    [CaseStatus.Procera]: "Produção Procera",
+    [CaseStatus.Standard]: "Padrão",
+    [CaseStatus.Otros]: "Outros",
+};
+ptTranslations.caseCard.status_short = {
+    [CaseStatus.Local]: "Local",
+    [CaseStatus.Procera]: "Procera",
+    [CaseStatus.Standard]: "Padrão",
+    [CaseStatus.Otros]: "Outros",
+};
 ptTranslations.caseCard.generate_description_label = "Gerar descrição com IA";
 ptTranslations.caseCard.view_details_label = "Ver detalhes";
 ptTranslations.caseCard.generating_description_tooltip = "Gerando descrição...";
@@ -1197,6 +1221,18 @@ frTranslations.chatbot = {
     error_message: "Je m'excuse, mais je ne peux pas traiter votre demande pour le moment. Veuillez réessayer plus tard.",
     sources_title: "Sources",
 };
+frTranslations.caseCard.status = {
+    [CaseStatus.Local]: "Production Locale",
+    [CaseStatus.Procera]: "Production Procera",
+    [CaseStatus.Standard]: "Standard",
+    [CaseStatus.Otros]: "Autres",
+};
+frTranslations.caseCard.status_short = {
+    [CaseStatus.Local]: "Locale",
+    [CaseStatus.Procera]: "Procera",
+    [CaseStatus.Standard]: "Standard",
+    [CaseStatus.Otros]: "Autres",
+};
 frTranslations.caseCard.generate_description_label = "Générer une description par IA";
 frTranslations.caseCard.view_details_label = "Voir les détails";
 frTranslations.caseCard.generating_description_tooltip = "Génération de la description...";
@@ -1306,6 +1342,18 @@ svTranslations.chatbot = {
     input_placeholder: "Fråga om en produkt...",
     error_message: "Jag ber om ursäkt, men jag kan för närvarande inte behandla din förfrågan. Försök igen senare.",
     sources_title: "Källor",
+};
+svTranslations.caseCard.status = {
+    [CaseStatus.Local]: "Lokal Produktion",
+    [CaseStatus.Procera]: "Procera Produktion",
+    [CaseStatus.Standard]: "Standard",
+    [CaseStatus.Otros]: "Övriga",
+};
+svTranslations.caseCard.status_short = {
+    [CaseStatus.Local]: "Lokal",
+    [CaseStatus.Procera]: "Procera",
+    [CaseStatus.Standard]: "Standard",
+    [CaseStatus.Otros]: "Övriga",
 };
 svTranslations.caseCard.generate_description_label = "Generera AI-beskrivning";
 svTranslations.caseCard.view_details_label = "Visa detaljer";

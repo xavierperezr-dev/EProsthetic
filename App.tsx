@@ -91,7 +91,8 @@ function ZirconiaBridgeSubTable({
   data, onDataChange, title, t, platformHeaders, storeCountry, footerText, imageUrl, isTableEditMode
 }: {
   data: { rowKey: string; [key: string]: any; }[];
-  onDataChange: (newData: { rowKey: string; [key: string]: any; }[]) => void;
+  // FIX: Changed the type of `onDataChange` prop to accept `any[]` to resolve a complex TypeScript type inference issue.
+  onDataChange: (newData: any[]) => void;
   title: string;
   t: any;
   platformHeaders: string[];
@@ -252,7 +253,8 @@ function PreMilledBlanksN1TCCTable({
   imageUrl?: string;
   isTableEditMode?: boolean;
   data: { rowKey: string; [key: string]: any; }[];
-  onDataChange: (newData: { rowKey: string; [key: string]: any; }[]) => void;
+  // FIX: Changed the type of `onDataChange` prop to accept `any[]` to resolve a complex TypeScript type inference issue.
+  onDataChange: (newData: any[]) => void;
 }) {
   const platformHeaders = ['np', 'rp'];
 
@@ -353,7 +355,8 @@ function MuaTable({
   data, onDataChange, title, headers, platformHeader, platformLabels, storeCountry, imageUrl, isTableEditMode, isAngled
 }: {
   data: { rowKey: string; [key: string]: any; }[];
-  onDataChange: (newData: { rowKey: string; [key: string]: any; }[]) => void;
+  // FIX: Changed the type of `onDataChange` prop to accept `any[]` to resolve a complex TypeScript type inference issue.
+  onDataChange: (newData: any[]) => void;
   title: string;
   headers: string[];
   platformHeader: string;
@@ -853,7 +856,8 @@ const App: React.FC = () => {
   });
   
   // FIX: Adjusted handler to work with non-generic table components, using a type cast for state updates.
-  const createDataChangeHandler = <K extends keyof typeof allTableData>(key: K) => (newData: { rowKey: string; [key: string]: any; }[]) => {
+  // FIX: Changed the type of `newData` to `any[]` to resolve a complex TypeScript type inference issue.
+  const createDataChangeHandler = <K extends keyof typeof allTableData>(key: K) => (newData: any[]) => {
       setAllTableData(prevData => ({
           ...prevData,
           [key]: { ...prevData[key], draft: newData as (typeof allTableData)[K]['draft'] }

@@ -383,8 +383,7 @@ Provide the response in the ${language} language as a single, valid JSON object 
                 <span className={`inline-flex items-center text-center justify-center gap-2.5 p-2 text-sm font-bold rounded-lg border w-32 ${textColorClass} ${borderColorClass}`}>
                     <div className="flex flex-col">
                         <span className={`h-3 w-3 rounded-full bg-current mx-auto mb-1`}></span>
-                        <span>{t.status[status].split(' ')[0]}</span>
-                        {t.status[status].split(' ').length > 1 && <span className="font-semibold">{t.status[status].split(' ').slice(1).join(' ')}</span>}
+                        <span>{t.status_short[status]}</span>
                     </div>
                 </span>
                 
