@@ -105,24 +105,28 @@ const Header: React.FC<HeaderProps> = ({
               </button>
               {isMenuOpen && (
                 <div className="absolute top-full right-0 mt-2 w-80 bg-white rounded-md shadow-lg border border-slate-200 z-30 py-2 animate-simple-fade-in max-h-[70vh] overflow-y-auto custom-scrollbar">
-                  {Object.entries(menuData).map(([category, items]) => (
-                    <div key={category}>
-                      <h4 className="px-4 py-2 text-sm font-bold text-slate-500 bg-slate-100 sticky top-0">{category}</h4>
-                      <ul>
-                        {items.map(item => (
-                          <li key={item.id}>
-                            <button
-                              onClick={() => onMenuItemClick(item.id)}
-                              className="w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-purple-50 hover:text-[color:var(--accent-primary)] transition-colors duration-150 flex items-center gap-3"
-                            >
-                              <img src={item.imageUrl} alt={item.label} className="w-10 h-10 object-contain rounded-md bg-slate-100 p-1 flex-shrink-0" />
-                              <span className="flex-grow">{item.label}</span>
-                            </button>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
+                  {/* FIX: Replaced Object.entries with Object.keys to iterate over menuData. This avoids potential type inference issues with Object.entries where item values could be typed as 'unknown', leading to an error when calling '.map'. */}
+                  {Object.keys(menuData).map((category) => {
+                    const items = menuData[category];
+                    return (
+                      <div key={category}>
+                        <h4 className="px-4 py-2 text-sm font-bold text-slate-500 bg-slate-100 sticky top-0">{category}</h4>
+                        <ul>
+                          {items.map(item => (
+                            <li key={item.id}>
+                              <button
+                                onClick={() => onMenuItemClick(item.id)}
+                                className="w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-purple-50 hover:text-[color:var(--accent-primary)] transition-colors duration-150 flex items-center gap-3"
+                              >
+                                <img src={item.imageUrl} alt={item.label} className="w-10 h-10 object-contain rounded-md bg-slate-100 p-1 flex-shrink-0" />
+                                <span className="flex-grow">{item.label}</span>
+                              </button>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    );
+                  })}
                 </div>
               )}
             </div>

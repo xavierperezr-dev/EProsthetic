@@ -1,8 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { GoogleGenAI, Type } from "@google/genai";
-// FIX: Imported 'Language' type to use for the 'language' prop.
 import { DentalCase, CaseStatus, RestorationType, Language } from '../types';
-import { ChevronLeftIcon, ChevronRightIcon, WarrantyIcon, UnitariaIndicatorIcon, MultipleIndicatorIcon, DTXIcon, ExocadIcon, ThreeShapeIcon, DentalwingsIcon, TableIcon, EyeIcon, SparklesIcon, SpinnerIcon, SpeakerWaveIcon, SpeakerXMarkIcon, ExternalLinkIcon, CheckIcon } from './icons';
+import { ChevronLeftIcon, ChevronRightIcon, WarrantyIcon, UnitariaIndicatorIcon, MultipleIndicatorIcon, DTXIcon, ExocadIcon, ThreeShapeIcon, DentalwingsIcon, TableIcon, EyeIcon, CheckIcon } from './icons';
 import CaseDetailIcons from './CaseDetailIcons';
 
 interface CaseCardProps {
@@ -15,28 +13,15 @@ interface CaseCardProps {
   onExosClick: (caseData: DentalCase) => void;
   t: any;
   tNotes: any;
-  // FIX: Changed type to 'Language' to allow 'en' and fix the compilation error.
   language: Language;
   bgColorVar: string;
   isAnyFilterActive: boolean;
 }
 
-interface AiSummaryData {
-  internetSummary: string;
-  appSummary: string;
-  productUrl: string;
-}
-
 const CaseCard = React.forwardRef<HTMLDivElement, CaseCardProps>(({ caseData, displayNumber, onReferenceClick, onHelp001Click, onTablesClick, onTableTestClick, onExosClick, t, tNotes, language, bgColorVar, isAnyFilterActive }, ref) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [aiSummaryData, setAiSummaryData] = useState<AiSummaryData | null>(null);
-  const [isGeneratingDescription, setIsGeneratingDescription] = useState(false);
-  const [descriptionError, setDescriptionError] = useState<string | null>(null);
-  const [isSpeaking, setIsSpeaking] = useState(false);
-  const [showTooltip, setShowTooltip] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [isIdCopied, setIsIdCopied] = useState(false);
-  const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
 
   const { patientName, status, imageUrls, observaciones, notes, id, restorationType } = caseData;
   
@@ -63,16 +48,6 @@ const CaseCard = React.forwardRef<HTMLDivElement, CaseCardProps>(({ caseData, di
     : `text-[color:var(--accent-primary)] ${borderColorClass} hover:bg-slate-800 hover:text-white`;
   const finalInfoButtonClass = `${infoButtonBaseClasses} ${dynamicInfoButtonClasses}`;
 
-
-  useEffect(() => {
-    // This helps to populate the voices list on some browsers.
-    window.speechSynthesis.getVoices();
-    // Cleanup speech synthesis on component unmount.
-    return () => {
-      window.speechSynthesis.cancel();
-    };
-  }, []);
-
   const nextImage = (e: React.MouseEvent) => {
     e.stopPropagation();
     e.preventDefault();
@@ -94,124 +69,6 @@ const CaseCard = React.forwardRef<HTMLDivElement, CaseCardProps>(({ caseData, di
       onReferenceClick(caseData, 'CC');
     } else {
       onReferenceClick(caseData);
-    }
-  };
-
-  const handleGenerateDescription = async (e: React.MouseEvent) => {
-    e.stopPropagation();
-    e.preventDefault();
-
-    if (isGeneratingDescription) return;
-    
-    if (aiSummaryData) {
-      setShowTooltip(prev => !prev);
-      return;
-    }
-
-    setIsGeneratingDescription(true);
-    setDescriptionError(null);
-    setShowTooltip(true);
-
-    try {
-        const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-        
-        const { patientName, id, restorationType, connectionType, status, notes, angulacion, baseCementada, torque } = caseData;
-        const caseInfoForPrompt = {
-            name: patientName[language],
-            id,
-            restorationType,
-            connectionType,
-            status,
-            notes,
-            angulation: angulacion,
-            cementedBase: baseCementada,
-            torque,
-        };
-
-        const prompt = `As a dental prosthetics expert, analyze the product data below and perform a web search.
-Product Data: ${JSON.stringify(caseInfoForPrompt, null, 2)}
-
-Tasks:
-1.  **Internet Summary:** Write a brief, clear summary of the product as a bulleted list (using '*' or '-') based on your web search.
-2.  **App Summary:** Write a brief summary as a bulleted list (using '*' or '-') based ONLY on the provided "Product Data".
-3.  **Product URL:** Find the most relevant product page URL from nobelbiocare.com.
-
-Provide the response in the ${language} language as a single, valid JSON object with the following keys: "internetSummary", "appSummary", "productUrl". Do not include any other text or markdown formatting like \`\`\`json. Your entire response must be only the raw JSON object.`;
-
-        const genAIResponse = await ai.models.generateContent({
-            model: 'gemini-2.5-flash',
-            contents: prompt,
-            config: {
-              tools: [{googleSearch: {}}],
-            },
-        });
-        
-        let responseText = genAIResponse.text.trim();
-        // Handle potential markdown code block, just in case the model doesn't follow instructions.
-        const jsonMatch = responseText.match(/```json\s*([\s\S]*?)\s*```/);
-        if (jsonMatch && jsonMatch[1]) {
-            responseText = jsonMatch[1];
-        }
-        
-        const parsedData = JSON.parse(responseText);
-        
-        if (parsedData.internetSummary && parsedData.appSummary && parsedData.productUrl) {
-            setAiSummaryData(parsedData);
-        } else {
-            throw new Error("Invalid JSON structure from API.");
-        }
-
-    } catch (error) {
-        console.error("Error generating description:", error);
-        setDescriptionError(t.description_error || "Could not generate description.");
-    } finally {
-        setIsGeneratingDescription(false);
-    }
-  };
-
-  const handleSpeak = () => {
-    if (!aiSummaryData || isSpeaking) return;
-
-    const textToSpeak = `${t.ai_summary_web_title || "Web Summary"}. ${aiSummaryData.internetSummary}. ${t.ai_summary_app_title || "App Summary"}. ${aiSummaryData.appSummary}`;
-    const utterance = new SpeechSynthesisUtterance(textToSpeak);
-
-    // Find a voice for the specified language for better quality.
-    const voices = window.speechSynthesis.getVoices();
-    const voice = voices.find(v => v.lang.startsWith(language));
-    if (voice) {
-      utterance.voice = voice;
-    } else {
-      // Fallback to setting lang property if no specific voice is found.
-      utterance.lang = language;
-    }
-    
-    utterance.rate = 1.2; // Use a slightly safer rate for broader compatibility.
-    utteranceRef.current = utterance;
-
-    utterance.onstart = () => setIsSpeaking(true);
-    utterance.onend = () => {
-      setIsSpeaking(false);
-      utteranceRef.current = null;
-    };
-    utterance.onerror = (event: SpeechSynthesisErrorEvent) => {
-      setIsSpeaking(false);
-      utteranceRef.current = null;
-      console.error("Speech synthesis error:", event.error);
-    };
-
-    // Kick-start speech synthesis, a common workaround for browser bugs.
-    const synth = window.speechSynthesis;
-    synth.cancel(); // Cancel any previous speech to prevent overlap.
-    if (synth.paused) {
-      synth.resume();
-    }
-    synth.speak(utterance);
-  };
-
-  const handleStopSpeaking = () => {
-    if (isSpeaking) {
-      // The onend event will fire after cancel, resetting the state.
-      window.speechSynthesis.cancel();
     }
   };
 
@@ -237,7 +94,7 @@ Provide the response in the ${language} language as a single, valid JSON object 
         className={`absolute top-3 right-3 text-xs font-bold rounded-full h-7 w-7 flex items-center justify-center ring-2 ring-white z-10 transition-all duration-200 ${
           isIdCopied
             ? 'bg-green-500 text-white'
-            : 'bg-slate-200 text-slate-900 hover:bg-slate-300'
+            : 'bg-black text-white hover:bg-gray-800'
         }`}
         aria-label={`${t.copy_id_label}: ${caseData.id}`}
         title={`${t.copy_id_label}: ${caseData.id}`}
@@ -318,64 +175,6 @@ Provide the response in the ${language} language as a single, valid JSON object 
                 >
                     <EyeIcon className="h-6 w-6" />
                 </button>
-                <div className="relative">
-                    <button
-                        onClick={handleGenerateDescription}
-                        disabled={isGeneratingDescription}
-                        className={`rounded-full p-1 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-1 disabled:opacity-50 disabled:cursor-wait ${isDarkBg ? 'hover:bg-white/25 focus:ring-white' : 'hover:bg-black/10 focus:ring-slate-800'}`}
-                        aria-label={t.generate_description_label}
-                        title={t.generate_description_tooltip}
-                    >
-                        {isGeneratingDescription && !aiSummaryData ? <SpinnerIcon className="h-6 w-6 animate-spin" /> : <SparklesIcon className="h-6 w-6" />}
-                    </button>
-                    {showTooltip && (
-                    <div 
-                        className="absolute right-full top-0 mr-2 w-72 p-4 text-sm text-white bg-slate-800/95 rounded-lg shadow-lg z-10 text-left animate-simple-fade-in flex flex-col"
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        {isGeneratingDescription ? (
-                        <div className="flex items-center gap-2">
-                            <SpinnerIcon className="h-4 w-4 animate-spin" />
-                            <span>{t.generating_description_tooltip}</span>
-                        </div>
-                        ) : descriptionError ? (
-                        <span className="text-red-400">{descriptionError}</span>
-                        ) : aiSummaryData ? (
-                        <>
-                            <div className="max-h-60 overflow-y-auto custom-scrollbar pr-2 mb-3 space-y-4">
-                                <div>
-                                    <h4 className="font-bold text-slate-300 mb-1 border-b border-slate-600 pb-1">{t.ai_summary_web_title}</h4>
-                                    <p className="text-slate-200 whitespace-pre-wrap">{aiSummaryData.internetSummary}</p>
-                                </div>
-                                <div>
-                                    <h4 className="font-bold text-slate-300 mb-1 border-b border-slate-600 pb-1">{t.ai_summary_app_title}</h4>
-                                    <p className="text-slate-200 whitespace-pre-wrap">{aiSummaryData.appSummary}</p>
-                                </div>
-                            </div>
-                            <div className="flex items-center justify-between pt-2 border-t border-slate-600">
-                                <button 
-                                    onClick={isSpeaking ? handleStopSpeaking : handleSpeak}
-                                    className="text-slate-300 hover:text-white transition-colors flex-shrink-0"
-                                    aria-label={isSpeaking ? t.stop_speech_label : t.text_to_speech_label}
-                                    title={isSpeaking ? t.stop_speech_label : t.text_to_speech_label}
-                                >
-                                    {isSpeaking ? <SpeakerXMarkIcon className="h-5 w-5" /> : <SpeakerWaveIcon className="h-5 w-5" />}
-                                </button>
-                                <a 
-                                href={aiSummaryData.productUrl} 
-                                target="_blank" 
-                                rel="noopener noreferrer"
-                                className="flex items-center gap-2 font-semibold text-blue-300 hover:text-blue-200 hover:underline"
-                                >
-                                <ExternalLinkIcon className="h-4 w-4" />
-                                <span>{t.product_link_label}</span>
-                                </a>
-                            </div>
-                        </>
-                        ) : null}
-                    </div>
-                    )}
-                </div>
             </div>
           </div>
           <div className={`my-3 border-t-2 ${borderColorClass}`}></div>
