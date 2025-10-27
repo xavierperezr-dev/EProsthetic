@@ -15,13 +15,14 @@ import TablaTriChannel from './components/TriChannelTable';
 import { MOCK_CASES, UNIVERSAL_BASE_NON_ROTATING_DATA, UNIVERSAL_BASE_ROTATING_DATA, PRE_MILLED_BLANKS_DATA, PRE_MILLED_DESCRIPTIONS, UNIVERSAL_BASE_ROTATING_CC_DATA, UNIVERSAL_BASE_ROTATING_BRANEMARK_DATA, UNIVERSAL_BASE_ROTATING_TRICHANNEL_DATA, UNIVERSAL_MULTI_UNIT_RECTO_DATA, UNIVERSAL_MULTI_UNIT_CONICO_DATA, PILAR_UNIVERSAL_ON1_NO_ROTATORIO_DATA, PILAR_UNIVERSAL_ON1_ROTATORIO_DATA, N1_BASE_UNITARIA_NO_ROTATORIO_DATA, N1_BASE_PUENTE_ROTATORIO_DATA, N1_TCC_UNITARIA_NO_ROTATORIA_DATA, ZIRCONIA_BRIDGE_DATA, ZIRCONIA_BRIDGE_CC_DATA, ZIRCONIA_BRIDGE_BRANEMARK_DATA, ZIRCONIA_BRIDGE_TRICHANNEL_DATA, REFERENCE_IMAGE_MAP, PRE_MILLED_BLANKS_N1_TCC_DATA, N1_TCC_CASE_DATA, ELOS_TOOLS_DATA, UNIVERSAL_BASE_NON_ROTATING_CC_DATA, UNIVERSAL_BASE_NON_ROTATING_BRANEMARK_DATA, UNIVERSAL_BASE_NON_ROTATING_TRICHANNEL_DATA, UNIVERSAL_BASE_ROTATING_CONICO_CC_DATA, UNIVERSAL_BASE_ROTATING_CONICO_BRANEMARK_DATA, UNIVERSAL_BASE_ROTATING_CONICO_TRICHANNEL_DATA, MULTI_UNIT_CONNECTION_DATA, PROCERA_FCZ_IMPLANT_CROWN_DATA, PROCERA_TITANIUM_CC_DATA, PROCERA_TITANIUM_BRANEMARK_DATA, PROCERA_TITANIUM_TRICHANNEL_DATA, PROCERA_TITANIUM_ASC_CC_DATA, PROCERA_TITANIUM_ASC_TRICHANNEL_DATA, PROCERA_ZIRCONIA_CC_DATA, PROCERA_ZIRCONIA_BRANEMARK_DATA, PROCERA_ZIRCONIA_TRICHANNEL_DATA, PROCERA_TITANIUM_BRIDGE_CC_DATA, PROCERA_TITANIUM_BRIDGE_BRANEMARK_DATA, PROCERA_TITANIUM_BRIDGE_TRICHANNEL_UPDATED_DATA, NOBELPROCERA_TITANIUM_BAR_CC_DATA, NOBELPROCERA_TITANIUM_BAR_BRANEMARK_DATA, NOBELPROCERA_TITANIUM_BAR_TRICHANNEL_DATA, NOBEL_PEARL_COMPONENTS_DATA, MUA_XEAL_CC_RECTO_DATA, MUA_XEAL_CC_ANGULADO_DATA, MUA_XEAL_N1_TCC_RECTO_DATA, MUA_XEAL_N1_TCC_ANGULADO_DATA, MUA_BRANEMARK_RECTO_DATA, MUA_BRANEMARK_ANGULADO_DATA, MUA_TRICHANNEL_RECTO_DATA, MUA_TRICHANNEL_ANGULADO_DATA, TRI_CHANNEL_TABLE_DATA } from './constants';
 import { translations } from './translations';
 import { DentalCase, Filters, RestorationType, ConnectionType, CaseStatus, Language, SoftwareType } from './types';
-import { DownloadIcon, InfoIcon, MagnifyingGlassIcon, ExternalLinkIcon, FilterIcon, ArrowRightIcon } from './components/icons';
+import { DownloadIcon, InfoIcon, MagnifyingGlassIcon, ExternalLinkIcon, FilterIcon, ArrowRightIcon, WhatsAppIcon, CalendarIcon, EmailIcon, PhoneIcon, ClipboardIcon, CheckIcon } from './components/icons';
 import CaseDetailIcons from './components/CaseDetailIcons';
 import ConnectionSelector from './components/ConnectionSelector';
 import BotonesModalContent from './components/BotonesModalContent';
 import ExosModalContent from './components/ExosModalContent';
 import IntroModal from './components/IntroModal';
 import DownloadLibraries from './components/DownloadLibraries';
+import DownloadCenterModalContent from './components/DownloadCenterModalContent';
 
 const getStorePath = (country: Language) => {
     switch (country) {
@@ -32,29 +33,89 @@ const getStorePath = (country: Language) => {
     }
 };
 
-const SupportModal: React.FC<{ t: any }> = ({ t }) => (
-    <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6 bg-slate-50">
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 text-center">
-            <h3 className="font-bold text-lg text-[color:var(--text-primary)] mb-2">{t.support_modal_whatsapp_title}</h3>
-            <p className="text-slate-600 text-sm mb-4">{t.support_modal_intro}</p>
-            <div className="flex justify-center mb-4">
-                <img src={`https://api.qrserver.com/v1/create-qr-code/?size=128x128&data=https%3A%2F%2Fwa.me%2F34935088829`} alt="WhatsApp QR Code" className="w-32 h-32" />
-            </div>
-            <p className="text-slate-500 text-xs">{t.support_modal_manual}</p>
-            <p className="font-semibold text-slate-700">{t.support_modal_contact_name}</p>
-            <p className="font-mono text-slate-700 text-lg">+34 93 508 88 29</p>
-            <p className="text-red-600 font-semibold text-xs mt-1">{t.support_modal_whatsapp_only}</p>
+const SupportModal: React.FC<{ t: any }> = ({ t }) => {
+  const [copied, setCopied] = useState('');
+
+  const copyToClipboard = (text: string, type: 'email' | 'phone') => {
+    navigator.clipboard.writeText(text);
+    setCopied(type);
+    setTimeout(() => setCopied(''), 2000);
+  };
+
+  const emailAddress = "soporte.tecnico@nobelbiocare.com";
+  const phoneNumber = t.support_modal_phone_number_copy;
+  const phoneTel = t.support_modal_phone_tel;
+  const newBookingUrl = "https://outlook.office365.com/book/SoporteTcnicoNobelBiocare@dentalco.org/";
+  const newQrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=128x128&data=${encodeURIComponent(newBookingUrl)}`;
+
+  return (
+    <div className="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-sm">
+      {/* Block 1: WhatsApp */}
+      <div className="bg-white p-4 rounded-lg border border-slate-200 flex flex-col">
+        <div>
+          <h4 className="font-bold text-lg text-[color:var(--text-primary)] mb-2 flex items-center gap-2">
+            <WhatsAppIcon className="h-6 w-6 text-green-500" /> {t.support_modal_whatsapp_title}
+          </h4>
+          <p className="text-slate-600 mb-2">{t.support_modal_intro}</p>
         </div>
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 text-center">
-            <h3 className="font-bold text-lg text-[color:var(--text-primary)] mb-2">{t.support_modal_book_title}</h3>
-            <p className="text-slate-600 text-sm mb-4">{t.support_modal_book_intro}</p>
-            <div className="flex justify-center mb-4">
-                <img src={`https://api.qrserver.com/v1/create-qr-code/?size=128x128&data=https%3A%2F%2Foutlook.office365.com%2Fbook%2FSoporteTcnicoNobelBiocare%40dentalco.org%2F`} alt="Calendar QR Code" className="w-32 h-32" />
-            </div>
-            <a href="https://outlook.office365.com/book/SoporteTcnicoNobelBiocare@dentalco.org/" target="_blank" rel="noopener noreferrer" className="text-center block text-[color:var(--accent-primary)] hover:underline">{t.support_modal_book_link}</a>
+        <div className="mt-auto">
+          <div className="flex justify-center my-4">
+              <img src="https://api.qrserver.com/v1/create-qr-code/?size=128x128&data=https://wa.me/16573635454" alt="WhatsApp QR Code" className="w-32 h-32" />
+          </div>
+          <p className="text-slate-500 text-center text-xs">{t.support_modal_manual} <br /> <b>{t.support_modal_contact_name}</b> <br /> <b>+1 (657) 363-5454</b> ({t.support_modal_whatsapp_only})</p>
         </div>
+      </div>
+
+      {/* Block 2: Calendar */}
+      <div className="bg-white p-4 rounded-lg border border-slate-200 flex flex-col">
+        <div>
+          <h4 className="font-bold text-lg text-[color:var(--text-primary)] mb-2 flex items-center gap-2">
+            <CalendarIcon className="h-6 w-6 text-blue-500" /> {t.support_modal_book_title}
+          </h4>
+          <p className="text-slate-600 mb-2">{t.support_modal_book_intro}</p>
+        </div>
+        <div className="mt-auto">
+          <div className="flex justify-center my-4">
+              <img src={newQrUrl} alt="Calendar QR Code" className="w-32 h-32" />
+          </div>
+          <a href={newBookingUrl} target="_blank" rel="noopener noreferrer" className="text-center block text-[color:var(--accent-primary)] hover:underline">{t.support_modal_book_link}</a>
+        </div>
+      </div>
+      
+      {/* Block 3: Email */}
+      <div className="bg-white p-4 rounded-lg border border-slate-200 flex flex-col">
+          <h4 className="font-bold text-lg text-[color:var(--text-primary)] mb-2 flex items-center gap-2">
+              <EmailIcon className="h-6 w-6 text-red-500" /> {t.support_modal_email_title}
+          </h4>
+          <p className="text-slate-600 mb-4 flex-grow">{t.support_modal_email_intro}</p>
+          <a href={`mailto:${emailAddress}`} className="text-center block text-[color:var(--accent-primary)] hover:underline">{t.support_modal_email_link}</a>
+          <div className="text-center text-slate-500 my-2">{t.support_modal_email_address_text}</div>
+          <div className="relative mt-1">
+              <input type="text" readOnly value={emailAddress} className="w-full bg-slate-100 border-slate-300 rounded-md text-center p-2 text-slate-700" />
+              <button onClick={() => copyToClipboard(emailAddress, 'email')} className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-500 hover:text-[color:var(--accent-primary)]" aria-label={t.copy_email_aria_label}>
+                  {copied === 'email' ? <CheckIcon className="h-5 w-5"/> : <ClipboardIcon className="h-5 w-5"/>}
+              </button>
+          </div>
+      </div>
+
+      {/* Block 4: Phone */}
+      <div className="bg-white p-4 rounded-lg border border-slate-200 flex flex-col">
+          <h4 className="font-bold text-lg text-[color:var(--text-primary)] mb-2 flex items-center gap-2">
+              <PhoneIcon className="h-6 w-6 text-purple-500" /> {t.support_modal_phone_title}
+          </h4>
+          <div className="text-center text-slate-600 mb-4 whitespace-pre-line flex-grow">{t.support_modal_phone_schedule}</div>
+          <a href={`tel:${phoneTel}`} className="w-full text-center py-2 px-4 bg-[color:var(--accent-primary)] text-white font-semibold rounded-md hover:bg-[color:var(--accent-primary-hover)] transition-colors">{t.support_modal_phone_cta}</a>
+          <div className="relative mt-3">
+              <input type="text" readOnly value={phoneNumber} className="w-full bg-slate-100 border-slate-300 rounded-md text-center p-2 text-slate-700" />
+               <button onClick={() => copyToClipboard(phoneNumber, 'phone')} className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-500 hover:text-[color:var(--accent-primary)]" aria-label={t.copy_phone_aria_label}>
+                  {copied === 'phone' ? <CheckIcon className="h-5 w-5"/> : <ClipboardIcon className="h-5 w-5"/>}
+              </button>
+          </div>
+      </div>
     </div>
-);
+  );
+};
+
 
 function TablaComponentesConexion({
   data, title, t, platformHeaders, storeCountry, footerText, imageUrl
@@ -421,7 +482,7 @@ const App: React.FC = () => {
                     const connections = ['CC', 'Branemark', 'Tri-channel', 'Multi-Unit'];
                     const [selectedConn, setSelectedConn] = useState(initialConnection || connections[0]);
                     let tableData, tableTitle, platformHeaders;
-                    // FIX: Use a local `tableT` variable typed as `any` to avoid TypeScript errors and ensure correct translations are passed.
+                    // FIX: Use a local `tableT` variable typed as `any` to dynamically assign the correct translation object based on connection type.
                     let tableT: any;
                     switch(selectedConn) {
                         case 'CC': tableData = PROCERA_TITANIUM_BRIDGE_CC_DATA; tableTitle = t.proceraTitaniumBridgeTable.ccTitle; platformHeaders = ['np', 'rp', 'wp']; tableT = t.proceraFCZImplantCrownTable; break;
@@ -630,6 +691,32 @@ const App: React.FC = () => {
       return categories;
     }, [language, t]);
 
+    const handleDownloadCenterClick = () => {
+        const handleOpenWorkflowSelector = () => {
+            setModalTitle(t.modal.selec_pro_local_title);
+            setModalContent(<SelecProLocal t={t.modal} onClose={handleCloseModal} language={language}/>);
+        };
+
+        const downloadLinks = [
+            { text: 'NobelProcera Overview V3.pdf', href: '#' },
+            { text: 'Local Production Overview V1.2.pdf', href: '#' },
+            { text: 'Material and component compatibility V2.1.pdf', href: '#' },
+        ];
+
+        setModalTitle(t.header.download_center_button);
+        setModalId('modal-download-center');
+        setModalContent(
+            <DownloadCenterModalContent
+                links={downloadLinks}
+                t={t}
+                onClose={handleCloseModal}
+                onOpenWorkflowSelector={handleOpenWorkflowSelector}
+                language={language}
+            />
+        );
+        setIsModalOpen(true);
+    };
+
     return (
         <div className="flex flex-col min-h-screen bg-slate-50">
             <Modal isOpen={isIntroModalOpen} onClose={() => {}} title="" backButtonLabel="" isDismissable={false} showHeader={false} id="modal-intro" maxWidth="max-w-xl">
@@ -643,7 +730,7 @@ const App: React.FC = () => {
                 onLanguageChange={setLanguage}
                 onSupportClick={() => { setIsModalOpen(true); setModalTitle('Soporte Técnico'); setModalContent(<SupportModal t={t.modal} />); }}
                 onCustomerServiceClick={() => { setIsModalOpen(true); setModalTitle(t.modal.customer_service_title); setModalContent(<CustomerServiceModal t={t.modal} language={language}/>); }}
-                onDownloadCenterClick={() => alert('Download center')}
+                onDownloadCenterClick={handleDownloadCenterClick}
                 onGlobeClick={() => setIsIntroModalOpen(true)}
                 t={t.header}
                 isMenuOpen={isMenuOpen}

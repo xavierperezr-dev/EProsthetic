@@ -625,3 +625,19 @@ export const MenuIcon: React.FC<{ className?: string }> = ({ className }) => (
     <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
   </svg>
 );
+
+export const DownloadCenterIllustration: React.FC<{ className?: string }> = ({ className }) => (
+    <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" className={className} aria-hidden="true">
+        <path d="M47.9,33.9A15.9,15.9,0,0,0,32,18a15.8,15.8,0,0,0-15.3,11.2,12.5,12.5,0,0,0-1.2,2.5,12.8,12.8,0,0,0,12.8,15.3H46.4a11.2,11.2,0,0,0,1.5-22.1Z"
+              fill="var(--card-bg-cornflower)"
+              stroke="var(--accent-primary)"
+              strokeMiterlimit="10"
+              strokeWidth="1.5"/>
+        <polyline points="32 28 32 50 26 44 32 50 38 44"
+                  fill="none"
+                  stroke="var(--accent-primary)"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="3"/>
+    </svg>
+);
