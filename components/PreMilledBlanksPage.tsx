@@ -44,7 +44,7 @@ const getStorePath = (country: Language): string => {
   }
 };
 
-const ConnectionTable: React.FC<{
+const TablaConexion: React.FC<{
   connectionKey: 'cc' | 'externalHex' | 'triChannel';
   title: string;
   t: any;
@@ -227,11 +227,11 @@ const PreMilledBlanksPage: React.FC<PreMilledBlanksPageProps> = ({ t, storeCount
   const renderConnectionTable = () => {
     switch (connectionType) {
       case 'CC':
-        return <ConnectionTable connectionKey="cc" title="Conical Connection (CC)" t={t} storeCountry={storeCountry} imageUrl={imageUrl} isTableEditMode={!!isTableEditMode} data={data} onDataChange={onDataChange} />;
+        return <TablaConexion connectionKey="cc" title="Conical Connection (CC)" t={t} storeCountry={storeCountry} imageUrl={imageUrl} isTableEditMode={!!isTableEditMode} data={data} onDataChange={onDataChange} />;
       case 'Branemark':
-        return <ConnectionTable connectionKey="externalHex" title="Brånemark System® (Hexágono Externo)" t={t} storeCountry={storeCountry} imageUrl={imageUrl} isTableEditMode={!!isTableEditMode} data={data} onDataChange={onDataChange} />;
+        return <TablaConexion connectionKey="externalHex" title="Brånemark System® (Hexágono Externo)" t={t} storeCountry={storeCountry} imageUrl={imageUrl} isTableEditMode={!!isTableEditMode} data={data} onDataChange={onDataChange} />;
       case 'Tri-channel':
-        return <ConnectionTable connectionKey="triChannel" title="NobelReplace® (Tri-channel)" t={t} storeCountry={storeCountry} imageUrl={imageUrl} isTableEditMode={!!isTableEditMode} data={data} onDataChange={onDataChange} />;
+        return <TablaConexion connectionKey="triChannel" title="NobelReplace® (Tri-channel)" t={t} storeCountry={storeCountry} imageUrl={imageUrl} isTableEditMode={!!isTableEditMode} data={data} onDataChange={onDataChange} />;
       default:
         return null;
     }

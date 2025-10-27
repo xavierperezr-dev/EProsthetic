@@ -562,21 +562,8 @@ export const GlobeIcon: React.FC<{ className?: string }> = ({ className }) => (
 export const StoreIcon: React.FC<{ className?: string }> = ({ className }) => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 21v-7.5c0-.933.767-1.5 1.5-1.5h4.5c.733 0 1.5.567 1.5 1.5V21m-10.5 0v-7.5c0-.933.767-1.5 1.5-1.5h1.5" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 21v-7.5c0-.933.767-1.5 1.5-1.5h4.5c.733 0 1.5.567 1.5 1.5V21m-15 0v-7.5c0-.933.767-1.5 1.5-1.5H6" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 21v-7.5c0-.933.767-1.5 1.5-1.5H6" />
         <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V9.75a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 9.75V12z" />
-    </svg>
-);
-
-export const ChatbotIcon: React.FC<{ className?: string }> = ({ className }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.76 9.76 0 01-2.53-.401m-1.44-4.825A2.25 2.25 0 003 10.5V8.25c0-1.242.988-2.25 2.22-2.25H10.5a2.25 2.25 0 012.25 2.25v.75" />
-    <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 12a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0z" />
-  </svg>
-);
-
-export const SendIcon: React.FC<{ className?: string }> = ({ className }) => (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
     </svg>
 );
 
@@ -640,4 +627,24 @@ export const YouTubeIcon: React.FC<{ className?: string }> = ({ className }) => 
   <svg fill="currentColor" viewBox="0 0 24 24" className={className}>
     <path d="M21.582 6.186A2.5 2.5 0 0 0 19.82 4.42C18.1 4 12 4 12 4s-6.1 0-7.82.42A2.5 2.5 0 0 0 2.418 6.186 26.004 26.004 0 0 0 2 12s.418 5.814 2.182 7.574A2.5 2.5 0 0 0 4.18 21.34c1.72.42 7.82.42 7.82.42s6.1 0 7.82-.42a2.5 2.5 0 0 0 1.762-1.764A26.004 26.004 0 0 0 22 12s-.418-5.814-2.182-7.574zM10 15.5v-7l6 3.5-6 3.5z"/>
   </svg>
+);
+
+export const MenuIcon: React.FC<{ className?: string }> = ({ className }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+  </svg>
+);
+
+// FIX: Add missing SendIcon for Chatbot component.
+export const SendIcon: React.FC<{ className?: string }> = ({ className }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={className}>
+        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+    </svg>
+);
+
+// FIX: Add missing ChatbotIcon for Chatbot component.
+export const ChatbotIcon: React.FC<{ className?: string }> = ({ className }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.306 3 12c0 2.252 1.01 4.27 2.675 5.69.25.178.468.37.668.571l-.675 2.51a.75.75 0 00.93.93l2.51-.675a10.217 10.217 0 005.69.668zM7.5 12h.008v.008H7.5V12zm3.75 0h.008v.008h-.008V12zm3.75 0h.008v.008h-.008V12z" />
+    </svg>
 );

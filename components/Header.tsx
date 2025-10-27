@@ -1,11 +1,10 @@
 import React from 'react';
-import { InfoIcon, DownloadIcon, GlobeIcon } from './icons';
+import { InfoIcon, DownloadIcon, GlobeIcon, MenuIcon } from './icons';
 import { Language } from '../types';
 
 interface HeaderProps {
   title: string;
   language: Language;
-  // FIX: Changed type to 'Language' to match the state type in App.tsx and fix the compilation error.
   storeCountry: Language;
   onLanguageChange: (lang: Language) => void;
   onSupportClick: () => void;
@@ -13,12 +12,30 @@ interface HeaderProps {
   onDownloadCenterClick: () => void;
   onGlobeClick: () => void;
   t: any;
+  isMenuOpen: boolean;
+  onToggleMenu: () => void;
+  menuData: { [key: string]: { id: string; label: string; imageUrl: string; }[] };
+  onMenuItemClick: (caseId: string) => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ title, language, storeCountry, onLanguageChange, onSupportClick, onCustomerServiceClick, onDownloadCenterClick, onGlobeClick, t }) => {
+const Header: React.FC<HeaderProps> = ({ 
+  title, 
+  language, 
+  storeCountry, 
+  onLanguageChange, 
+  onSupportClick, 
+  onCustomerServiceClick, 
+  onDownloadCenterClick, 
+  onGlobeClick, 
+  t,
+  isMenuOpen,
+  onToggleMenu,
+  menuData,
+  onMenuItemClick
+}) => {
 
   return (
-    <header className="bg-white sticky top-0 z-10 py-4 px-4 sm:px-6 lg:px-8 border-b border-[var(--border-color)] shadow-sm">
+    <header className="bg-white sticky top-0 z-20 py-4 px-4 sm:px-6 lg:px-8 border-b border-[var(--border-color)] shadow-sm">
       <div className="max-w-7xl mx-auto flex flex-col gap-4">
         {/* Top row */}
         <div className="flex justify-end items-center gap-4">
@@ -76,7 +93,39 @@ const Header: React.FC<HeaderProps> = ({ title, language, storeCountry, onLangua
             <h1 className="text-lg font-semibold text-[color:var(--text-primary)] justify-self-center text-center">
               {title}
             </h1>
-            <div className="justify-self-end"></div> {/* Empty div for alignment */}
+            <div className="justify-self-end relative">
+              <button
+                onClick={onToggleMenu}
+                className="flex flex-col items-center justify-center w-16 h-12 bg-[color:var(--accent-primary)] text-white rounded-md hover:bg-[color:var(--accent-primary-hover)] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[color:var(--accent-primary)]"
+                aria-haspopup="true"
+                aria-expanded={isMenuOpen}
+              >
+                <MenuIcon className="h-5 w-5" />
+                <span className="text-xs font-semibold mt-0.5">Menu</span>
+              </button>
+              {isMenuOpen && (
+                <div className="absolute top-full right-0 mt-2 w-80 bg-white rounded-md shadow-lg border border-slate-200 z-30 py-2 animate-simple-fade-in max-h-[70vh] overflow-y-auto custom-scrollbar">
+                  {Object.entries(menuData).map(([category, items]) => (
+                    <div key={category}>
+                      <h4 className="px-4 py-2 text-sm font-bold text-slate-500 bg-slate-100 sticky top-0">{category}</h4>
+                      <ul>
+                        {items.map(item => (
+                          <li key={item.id}>
+                            <button
+                              onClick={() => onMenuItemClick(item.id)}
+                              className="w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-purple-50 hover:text-[color:var(--accent-primary)] transition-colors duration-150 flex items-center gap-3"
+                            >
+                              <img src={item.imageUrl} alt={item.label} className="w-10 h-10 object-contain rounded-md bg-slate-100 p-1 flex-shrink-0" />
+                              <span className="flex-grow">{item.label}</span>
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
         </div>
       </div>
     </header>

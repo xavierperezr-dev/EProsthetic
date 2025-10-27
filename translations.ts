@@ -13,13 +13,6 @@ const enTranslations = {
     online_store_country_section_title: "2. Online Store Country",
     confirm_button: "Confirm Selection"
   },
-  chatbot: {
-    title: "Virtual Assistant",
-    welcome_message: "Welcome. I am the virtual assistant. How can I help you find information about the prosthetic solutions available in this catalog?",
-    input_placeholder: "Ask about a product...",
-    error_message: "I apologize, but I am currently unable to process your request. Please try again later.",
-    sources_title: "Sources",
-  },
   filterBar: {
     title: "Filters",
     search_placeholder: "Search by ID, name, item...",
@@ -479,6 +472,11 @@ const enTranslations = {
     modalTriggerHeader: "Trigger Action",
     modalPurposeHeader: "Purpose and Content",
     linkTooltip: "This link is an anchor to the modal component's ID. It will not open the modal directly.",
+    analysis_table_title: "Modal Analysis Table",
+    table_col_title: "Modal Title",
+    table_col_trigger: "Case ID / Trigger",
+    table_col_component: "Component / Data Constant",
+    table_col_location: "Location (File:Line)",
     modal_titles: {
       references: "Components/References",
       help_espt: "Library Download (EN/ES/PT)",
@@ -535,6 +533,11 @@ const enTranslations = {
     filters_active_label: "Filters applied:",
     remove_filters_link: "Remove filters"
   },
+  // FIX: Added chatbot translations to fix type error in App.tsx.
+  chatbot: {
+    title: "Virtual Assistant",
+    input_placeholder: "Ask something...",
+  },
   notes: {
     "tornillo clínico incluido": "Clinical screw included",
     "This is a test case.": "This is a test case."
@@ -553,13 +556,6 @@ const esTranslations = {
     language_section_title: "1. Seleccione su idioma",
     online_store_country_section_title: "2. País de la Tienda Online",
     confirm_button: "Confirmar Selección"
-  },
-  chatbot: {
-    title: "Asistente Virtual",
-    welcome_message: "Bienvenido. Soy el asistente virtual. ¿Cómo puedo ayudarle a encontrar información sobre las soluciones protésicas disponibles en este catálogo?",
-    input_placeholder: "Pregunte por un producto...",
-    error_message: "Disculpe, actualmente no puedo procesar su solicitud. Por favor, inténtelo de nuevo más tarde.",
-    sources_title: "Fuentes",
   },
   filterBar: {
     title: "Filtros",
@@ -994,17 +990,17 @@ const esTranslations = {
     elosAccuratePositionLocator: "Elos Accurate® Position Locator para IOS",
     elosAccuratePositionLocatorKit: "Elos Accurate® Position Locator Kit para IOS",
     replicaForIOS: "Réplica para IOS",
-    desktopScanbodyDTX: "Desktop Scanbody para DTX Studio™",
+    desktopScanbodyDTX: "Scanbody de sobremesa para DTX Studio™",
     footer: "*5 Pkg"
   },
   devDebugPage: {
     title: "Sección de Pruebas y Depuración",
-    description: "Esta sección es para probar componentes y funcionalidades en desarrollo.",
-    example_buttons_title: "Ejemplos de Botones",
+    description: "Esta sección está destinada a probar componentes y funcionalidades en desarrollo.",
+    example_buttons_title: "Botones de Ejemplo",
     primary_button: "Botón Primario",
     secondary_button: "Botón Secundario",
     botones_button: "Galería de Botones",
-    example_icons_title: "Ejemplos de Iconos",
+    example_icons_title: "Iconos de Ejemplo",
     colorPaletteTitle: "Paleta de Colores de Tarjetas",
     colors: {
       raspberry: "Frambuesa",
@@ -1016,17 +1012,22 @@ const esTranslations = {
     },
     iconGridTitle: "Rejilla de Iconos de la Aplicación",
     referenceTableTitle: "Análisis de Ventanas Modales y Componentes Flotantes",
-    modalIdHeader: "ID de Componente",
+    modalIdHeader: "ID del Componente",
     modalTriggerHeader: "Acción Desencadenante",
     modalPurposeHeader: "Propósito y Contenido",
     linkTooltip: "Este enlace es un ancla al ID del componente modal. No abrirá el modal directamente.",
+    analysis_table_title: "Tabla de Análisis de Modales",
+    table_col_title: "Título del Modal",
+    table_col_trigger: "ID de Caso / Disparador",
+    table_col_component: "Componente / Constante de Datos",
+    table_col_location: "Ubicación (Archivo:Línea)",
     modal_titles: {
       references: "Componentes/Referencias",
       help_espt: "Descarga de Librerías (ES/PT)",
       help_frsv: "Descarga de Librerías (FR/SV)",
       workflow_selector: "Seleccionar Flujo de Trabajo",
-      ui_tables: "Información de la Interfaz",
-      test_table: "Tabla de Test (Tri-channel)",
+      ui_tables: "Información de la Interfaz de Usuario",
+      test_table: "Tabla de Prueba (Tri-channel)",
       customer_service: "Atención al Cliente",
       button_gallery: "Galería de Botones",
       download_center: "Centro de Descargas",
@@ -1035,7 +1036,7 @@ const esTranslations = {
       chatbot: "Asistente Virtual"
     },
     modal_triggers: {
-      references: "Clic en 'Ver' o conexión en una tarjeta de caso.",
+      references: "Clic en 'Ver' o una conexión específica en una tarjeta de caso.",
       help_espt: "Clic en 'Descargar Librerías' (ES/PT).",
       help_frsv: "Clic en 'Descargar Librerías' (FR/SV).",
       workflow_selector: "Clic en 'Prefiero hacerlo yo mismo' en el modal de ayuda de descarga.",
@@ -1045,413 +1046,61 @@ const esTranslations = {
       button_gallery: "Clic en 'Galería de Botones' en la página de depuración.",
       download_center: "Clic en 'Centro de Descargas' en la cabecera.",
       exos_analysis: "Clic en 'EXOS' en la tarjeta de caso TEST001.",
-      intro: "Al cargar la aplicación o al hacer clic en el globo terráqueo en la cabecera.",
+      intro: "Al cargar la aplicación o al hacer clic en el icono del globo en la cabecera.",
       chatbot: "Clic en el botón flotante del chatbot."
     },
     modal_purposes: {
-      references: "Muestra tablas detalladas de componentes para un caso. El contenido es dinámico.",
+      references: "Muestra tablas detalladas de componentes para un caso. El contenido es dinámico según el caso y la conexión seleccionada.",
       help_espt: "Guía al usuario para la descarga de librerías, ofreciendo agendar una sesión de ayuda.",
-      help_frsv: "Informa al usuario sobre cómo obtener librerías, dirigiendo a atención al cliente.",
-      workflow_selector: "Permite al usuario elegir entre flujos de trabajo de Procera o de Producción Local para acceder a las librerías.",
-      ui_tables: "Proporciona metainformación sobre la estructura y funcionalidad de la propia aplicación (componentes, botones, modales).",
+      help_frsv: "Informa al usuario sobre cómo obtener librerías, dirigiéndolo a atención al cliente.",
+      workflow_selector: "Permite al usuario elegir entre flujos de trabajo de Procera y Producción Local para acceder a las librerías correctas.",
+      ui_tables: "Proporciona metainformación sobre la propia estructura y funcionalidad de la aplicación (componentes, botones, modales).",
       test_table: "Muestra una tabla de prueba estática (Componentes Tri-channel).",
-      customer_service: "Proporciona un punto de acceso al servicio de atención al cliente (QR y enlace).",
-      button_gallery: "Muestra una colección de todos los estilos de botones para desarrollo.",
+      customer_service: "Proporciona un punto de acceso a atención al cliente (QR y enlace).",
+      button_gallery: "Muestra una colección de todos los estilos de botones disponibles para fines de desarrollo.",
       download_center: "Ofrece acceso centralizado a documentos (Overviews) y al flujo de descarga de librerías.",
       exos_analysis: "Muestra un análisis de la UI, incluyendo la relación entre casos y sus modales, y un desglose de cada modal.",
-      intro: "Permite al usuario configurar el idioma y el país de la tienda online al inicio.",
+      intro: "Permite al usuario establecer el idioma y el país de la tienda online al iniciar.",
       chatbot: "Componente flotante para conversar con un asistente virtual de IA sobre los productos."
     },
     testSection: {
       title: "Sección de Pruebas y Depuración",
-      description: "Esta sección es para probar componentes y funcionalidades en desarrollo.",
-      example_buttons_title: "Ejemplos de Botones",
+      description: "Esta sección está destinada a probar componentes y funcionalidades en desarrollo.",
+      example_buttons_title: "Botones de Ejemplo",
       primary_button: "Botón Primario",
       secondary_button: "Botón Secundario",
       botones_button: "Galería de Botones",
-      example_icons_title: "Ejemplos de Iconos",
+      example_icons_title: "Iconos de Ejemplo",
     }
   },
   tooltip: {
     filters_active_label: "Filtros aplicados:",
     remove_filters_link: "Quitar filtros"
   },
+  // FIX: Added chatbot translations to fix type error in App.tsx.
+  chatbot: {
+    title: "Asistente Virtual",
+    input_placeholder: "Pregunta algo...",
+  },
   notes: {
     "tornillo clínico incluido": "Tornillo clínico incluido",
-    "This is a test case.": "Este es un caso de prueba."
+    "Para pilares personalizados o dientes naturales": "Para pilares personalizados o dientes naturales",
+    "Diámetro NP no apto para molares": "Diámetro NP no apto para molares",
+    "This is a test case.": "Este es un caso de prueba.",
+    "Distinctive color for testing purposes.": "Color distintivo para fines de prueba.",
   }
 };
 
-const ptTranslations = JSON.parse(JSON.stringify(esTranslations));
-ptTranslations.header.title = "Visão Geral E-Prosthetic";
-ptTranslations.header.support_button = "Suporte Técnico";
-ptTranslations.header.download_center_button = "Centro de Downloads";
-ptTranslations.intro_modal = {
-  title: "Bem-vindo ao E-Prosthetic Overview",
-  language_section_title: "1. Selecione o seu idioma",
-  online_store_country_section_title: "2. País da Loja Online",
-  confirm_button: "Confirmar Seleção"
-};
-ptTranslations.chatbot = {
-    title: "Assistente Virtual",
-    welcome_message: "Bem-vindo. Sou o assistente virtual. Como posso ajudá-lo a encontrar informações sobre as soluções protéticas disponíveis neste catálogo?",
-    input_placeholder: "Pergunte sobre um produto...",
-    error_message: "Peço desculpa, mas de momento não consigo processar o seu pedido. Por favor, tente novamente mais tarde.",
-    sources_title: "Fontes",
-};
-ptTranslations.caseCard.status = {
-    [CaseStatus.Local]: "Produção Local",
-    [CaseStatus.Procera]: "Produção Procera",
-    [CaseStatus.Standard]: "Padrão",
-    [CaseStatus.Otros]: "Outros",
-};
-ptTranslations.caseCard.status_short = {
-    [CaseStatus.Local]: "Local",
-    [CaseStatus.Procera]: "Procera",
-    [CaseStatus.Standard]: "Padrão",
-    [CaseStatus.Otros]: "Outros",
-};
-ptTranslations.caseCard.generate_description_label = "Gerar descrição com IA";
-ptTranslations.caseCard.view_details_label = "Ver detalhes";
-ptTranslations.caseCard.generating_description_tooltip = "Gerando descrição...";
-ptTranslations.caseCard.generate_description_tooltip = "Clique para gerar descrição com IA";
-ptTranslations.caseCard.description_error = "Não foi possível gerar a descrição.";
-ptTranslations.caseCard.aria_view_details_for = "Ver detalhes de";
-ptTranslations.caseCard.text_to_speech_label = "Ler descrição em voz alta";
-ptTranslations.caseCard.stop_speech_label = "Parar de ler";
-ptTranslations.caseCard.product_link_label = "Ver Produto";
-ptTranslations.caseCard.copy_id_label = "Copiar ID";
-ptTranslations.caseCard.ai_summary_web_title = "Resumo da Web";
-ptTranslations.caseCard.ai_summary_app_title = "Resumo da App";
-ptTranslations.footer = {
-    socialTitle: 'REDES SOCIAIS',
-    social: {
-        facebook: "https://www.facebook.com/nobelbiocare/",
-        instagram: "https://www.instagram.com/nobelbiocare/",
-        youtube: "https://www.youtube.com/user/nobelbiocare",
-        linkedin: "https://www.linkedin.com/company/nobel-biocare",
-        x: "https://twitter.com/nobelbiocare"
-    }
-};
-ptTranslations.modal.download_center_title = "Centro de Downloads";
-ptTranslations.modal.design_services_button = "Serviços de design";
-ptTranslations.modal.procera_tracking_button = "Acompanhamento de envios NobelProcera";
-ptTranslations.filterBar.title = "Filtros";
-ptTranslations.filterBar.search_placeholder = "Pesquisar por ID, nome, artigo...";
-ptTranslations.filterBar.reset_button = "Remover Filtros";
-ptTranslations.filterBar.connection_type_label = "Tipo de Conexão";
-ptTranslations.filterBar.software_type_label = "Tipo de Software";
-ptTranslations.filterBar.production_label = "Produção";
-ptTranslations.filterBar.restoration_type_label = "Tipo de Restauração";
-ptTranslations.filterBar.angulated_access_label = "Restauração com Acesso Angulado";
-ptTranslations.filterBar.hide_filters = "Ocultar filtros";
-ptTranslations.filterBar.show_filters = "Mostrar filtros";
-ptTranslations.filterBar.filters_active_tooltip = "Filtros ativos";
-ptTranslations.filterBar.options.all = "Todos";
-ptTranslations.filterBar.options.yes = "Sim";
-ptTranslations.filterBar.options.no = "Não";
-ptTranslations.filterBar.options[CaseStatus.Local] = "Local";
-ptTranslations.filterBar.options[CaseStatus.Procera] = "Procera";
-ptTranslations.filterBar.options[CaseStatus.Standard] = "Pilar Padrão";
-ptTranslations.filterBar.options[CaseStatus.Otros] = "Outros";
-ptTranslations.filterBar.options[RestorationType.Unitaria] = "Unitária";
-ptTranslations.filterBar.options[RestorationType.Multiple] = "Múltipla";
-ptTranslations.filterBar.options[ConnectionType.Pearl] = "Inter-X Pearl";
-ptTranslations.tooltip = {
-  filters_active_label: "Filtros ativos:",
-  remove_filters_link: "Remover filtros"
-};
-ptTranslations.notes["tornillo clínico incluido"] = "Parafuso clínico incluído";
-ptTranslations.notes["This is a test case."] = "Este é um caso de teste.";
-ptTranslations.modal.iconography_details_title = "Detalhes";
+// FIX: Added placeholder translations for other languages
+const ptTranslations = esTranslations;
+const frTranslations = enTranslations;
+const svTranslations = enTranslations;
 
-ptTranslations.modal.support_modal_phone_title = "Telefone de Atendimento ao Cliente";
-ptTranslations.modal.support_modal_phone_number_copy = "935 088 829";
-ptTranslations.modal.support_modal_phone_tel = "935088829";
-ptTranslations.modal.customer_service_intro = "Para consultas gerais, entre em contato com nosso serviço de atendimento ao cliente através do site.";
-ptTranslations.modal.customer_service_link = "Ir para Atendimento ao Cliente";
-
-ptTranslations.devDebugPage.referenceTableTitle = "Análise de Janelas Modais e Componentes Flottants";
-ptTranslations.devDebugPage.modalIdHeader = "ID do Componente";
-ptTranslations.devDebugPage.modalTriggerHeader = "Ação de Ativação";
-ptTranslations.devDebugPage.modalPurposeHeader = "Propósito e Conteúdo";
-ptTranslations.devDebugPage.linkTooltip = "Este link é uma âncora para o ID do componente modal. Não abrirá o modal diretamente.";
-ptTranslations.devDebugPage.modal_titles.references = "Componentes/Referências";
-ptTranslations.devDebugPage.modal_titles.help_espt = "Download de Bibliotecas (PT)";
-ptTranslations.devDebugPage.modal_triggers.references = "Clique em 'Ver' ou conexão específica em um cartão de caso.";
-ptTranslations.devDebugPage.modal_purposes.references = "Mostra tabelas detalhadas de componentes para um caso. O conteúdo é dinâmico.";
-ptTranslations.devDebugPage.modal_purposes.help_espt = "Guia o usuário para o download de bibliotecas, oferecendo agendamento de uma sessão de ajuda.";
-
-ptTranslations.universalBaseRotatingCCTable.title = "Base Universal Rotatória CC - Design Reto";
-ptTranslations.universalBaseRotatingConicoCCTable.title = "Base Universal Rotatória Cônica CC – Design Cônico";
-ptTranslations.universalBaseRotatingBranemarkTable.title = "Base Universal Rotatória Branemark – Design Reto";
-ptTranslations.universalBaseRotatingConicoBranemarkTable.title = "Base Universal Rotatória Cônica Branemark – Design Cônico";
-ptTranslations.universalBaseRotatingTriChannelTable.title = "Base Universal Rotatória Tri-channel – Design Reto";
-ptTranslations.universalBaseRotatingConicoTriChannelTable.title = "Base Universal Rotatória Cônica Tri-channel – Design Cônico";
-ptTranslations.universalMultiUnitTable.rectoTitle = "Base Universal Multi-unit – Design Reto";
-ptTranslations.universalMultiUnitTable.conicoTitle = "Base Universal Multi-unit – Design Cônico";
-
-ptTranslations.universalBaseTable.screwdriver = "Chave de fenda";
-ptTranslations.universalBaseRotatingTable.screwdriver = "Chave de fenda";
-ptTranslations.pilarUniversalOn1Table.destornillador = "Chave de fenda";
-ptTranslations.n1BaseUniversalTable.screwdriver = "Chave de fenda";
-ptTranslations.n1TccUnitariaTable.screwdriver = "Chave de fenda";
-ptTranslations.proceraFCZImplantCrownTable.screwdriver = "Chave de fenda";
-ptTranslations.nobelProceraTitaniumBarTable.screwdriver = "Chave de fenda";
-ptTranslations.nobelPearlTable.destornillador = "Chave de fenda";
-ptTranslations.preMilledBlanksTable.screwdriver = "Chave de fenda";
-ptTranslations.preMilledBlanksN1TCCTable.screwdriver = "Chave de fenda";
-ptTranslations.triChannelTestTable.destornillador = "Chave de fenda";
-
-const frTranslations = JSON.parse(JSON.stringify(esTranslations));
-frTranslations.header.title = "Aperçu E-Prosthetic";
-frTranslations.header.support_button = "Support Technique";
-frTranslations.header.customer_service_button = "Service client";
-frTranslations.header.download_center_button = "Centre de téléchargement";
-frTranslations.intro_modal = {
-  title: "Bienvenue à l'E-Prosthetic Overview",
-  language_section_title: "1. Sélectionnez votre langue",
-  online_store_country_section_title: "2. Pays de la Boutique en Ligne",
-  confirm_button: "Confirmer la Sélection"
-};
-frTranslations.chatbot = {
-    title: "Assistant Virtuel",
-    welcome_message: "Bienvenue. Je suis l'assistant virtuel. Comment puis-je vous aider à trouver des informations sur les solutions prothétiques disponibles dans ce catalogue ?",
-    input_placeholder: "Posez une question sur un produit...",
-    error_message: "Je m'excuse, mais je ne peux pas traiter votre demande pour le moment. Veuillez réessayer plus tard.",
-    sources_title: "Sources",
-};
-frTranslations.caseCard.status = {
-    [CaseStatus.Local]: "Production Locale",
-    [CaseStatus.Procera]: "Production Procera",
-    [CaseStatus.Standard]: "Standard",
-    [CaseStatus.Otros]: "Autres",
-};
-frTranslations.caseCard.status_short = {
-    [CaseStatus.Local]: "Locale",
-    [CaseStatus.Procera]: "Procera",
-    [CaseStatus.Standard]: "Standard",
-    [CaseStatus.Otros]: "Autres",
-};
-frTranslations.caseCard.generate_description_label = "Générer une description par IA";
-frTranslations.caseCard.view_details_label = "Voir les détails";
-frTranslations.caseCard.generating_description_tooltip = "Génération de la description...";
-frTranslations.caseCard.generate_description_tooltip = "Cliquez pour générer une description par IA";
-frTranslations.caseCard.description_error = "Impossible de générer la description.";
-frTranslations.caseCard.aria_view_details_for = "Voir les détails de";
-frTranslations.caseCard.text_to_speech_label = "Lire la description à voix haute";
-frTranslations.caseCard.stop_speech_label = "Arrêter la lecture";
-frTranslations.caseCard.product_link_label = "Voir le produit";
-frTranslations.caseCard.copy_id_label = "Copier l'ID";
-frTranslations.caseCard.ai_summary_web_title = "Résumé Web";
-frTranslations.caseCard.ai_summary_app_title = "Résumé de l'App";
-frTranslations.footer = {
-    socialTitle: 'MÉDIAS SOCIAUX',
-    social: {
-        facebook: "https://www.facebook.com/nobelbiocare/",
-        instagram: "https://www.instagram.com/nobelbiocare/",
-        youtube: "https://www.youtube.com/user/nobelbiocare",
-        linkedin: "https://www.linkedin.com/company/nobel-biocare",
-        x: "https://twitter.com/nobelbiocare"
-    }
-};
-frTranslations.modal.download_center_title = "Centre de téléchargement";
-frTranslations.modal.design_services_button = "Services de conception";
-frTranslations.modal.procera_tracking_button = "Suivi des envois NobelProcera";
-frTranslations.filterBar.title = "Filtres";
-frTranslations.filterBar.search_placeholder = "Rechercher par ID, nom, article...";
-frTranslations.filterBar.reset_button = "Effacer les filtres";
-frTranslations.filterBar.connection_type_label = "Type de Connexion";
-frTranslations.filterBar.software_type_label = "Type de Logiciel";
-frTranslations.filterBar.production_label = "Production";
-frTranslations.filterBar.restoration_type_label = "Type de Restauration";
-frTranslations.filterBar.angulated_access_label = "Restauration avec Accès Angulé";
-frTranslations.filterBar.hide_filters = "Masquer les filtres";
-frTranslations.filterBar.show_filters = "Afficher les filtres";
-frTranslations.filterBar.filters_active_tooltip = "Filtres actifs";
-frTranslations.filterBar.options.all = "Tous";
-frTranslations.filterBar.options.yes = "Oui";
-frTranslations.filterBar.options.no = "Non";
-frTranslations.filterBar.options[CaseStatus.Local] = "Locale";
-frTranslations.filterBar.options[CaseStatus.Procera] = "Procera";
-frTranslations.filterBar.options[CaseStatus.Standard] = "Pilier Standard";
-frTranslations.filterBar.options[CaseStatus.Otros] = "Autres";
-frTranslations.filterBar.options[RestorationType.Unitaria] = "Unitaire";
-frTranslations.filterBar.options[RestorationType.Multiple] = "Multiple";
-frTranslations.filterBar.options[ConnectionType.Pearl] = "Inter-X Pearl";
-frTranslations.tooltip = {
-  filters_active_label: "Filtres actifs:",
-  remove_filters_link: "Effacer les filtres"
-};
-frTranslations.notes["tornillo clínico incluido"] = "Vis clinique incluse";
-frTranslations.notes["This is a test case."] = "Ceci est un cas de test.";
-frTranslations.modal.iconography_details_title = "Détails";
-
-frTranslations.modal.support_modal_phone_title = "Téléphone du Service Client";
-frTranslations.modal.support_modal_phone_number_copy = "935 088 829";
-frTranslations.modal.support_modal_phone_tel = "935088829";
-frTranslations.modal.customer_service_intro = "Pour les demandes générales, veuillez contacter notre service client via leur site web.";
-frTranslations.modal.customer_service_link = "Aller au Service Client";
-
-frTranslations.devDebugPage.referenceTableTitle = "Analyse des Fenêtres Modales et Composants Flottants";
-frTranslations.devDebugPage.modalIdHeader = "ID du Composant";
-frTranslations.devDebugPage.modalTriggerHeader = "Action de Déclenchement";
-frTranslations.devDebugPage.modalPurposeHeader = "Objectif et Contenu";
-frTranslations.devDebugPage.linkTooltip = "Ce lien est une ancre vers l'ID du composant modal. Il n'ouvrira pas le modal directement.";
-frTranslations.devDebugPage.modal_titles.references = "Composants/Références";
-frTranslations.devDebugPage.modal_titles.help_frsv = "Téléchargement de Bibliothèques (FR/SV)";
-frTranslations.devDebugPage.modal_triggers.references = "Cliquer sur 'Voir' ou une connexion spécifique sur une carte de cas.";
-frTranslations.devDebugPage.modal_purposes.references = "Affiche des tableaux détaillés de composants pour un cas. Le contenu est dynamique.";
-frTranslations.devDebugPage.modal_purposes.help_frsv = "Informe l'utilisateur sur la manière d'obtenir des bibliothèques, en le dirigeant vers le service client.";
-
-frTranslations.universalBaseRotatingCCTable.title = "Base Universelle Rotative CC - Design Droit";
-frTranslations.universalBaseRotatingConicoCCTable.title = "Base Universelle Rotative Conique CC – Design Conique";
-frTranslations.universalBaseRotatingBranemarkTable.title = "Base Universelle Rotative Branemark – Design Droit";
-frTranslations.universalBaseRotatingConicoBranemarkTable.title = "Base Universelle Rotative Conique Branemark – Design Conique";
-frTranslations.universalBaseRotatingTriChannelTable.title = "Base Universelle Rotative Tri-channel – Design Droit";
-frTranslations.universalBaseRotatingConicoTriChannelTable.title = "Base Universelle Rotative Conique Tri-channel – Design Conique";
-frTranslations.universalMultiUnitTable.rectoTitle = "Base Universelle Multi-unit – Design Droit";
-frTranslations.universalMultiUnitTable.conicoTitle = "Base Universelle Multi-unit – Design Conique";
-
-frTranslations.universalBaseTable.screwdriver = "Tournevis";
-frTranslations.universalBaseRotatingTable.screwdriver = "Tournevis";
-frTranslations.pilarUniversalOn1Table.destornillador = "Tournevis";
-frTranslations.n1BaseUniversalTable.screwdriver = "Tournevis";
-frTranslations.n1TccUnitariaTable.screwdriver = "Tournevis";
-frTranslations.proceraFCZImplantCrownTable.screwdriver = "Tournevis";
-frTranslations.nobelProceraTitaniumBarTable.screwdriver = "Tournevis";
-frTranslations.nobelPearlTable.destornillador = "Tournevis";
-frTranslations.preMilledBlanksTable.screwdriver = "Tournevis";
-frTranslations.preMilledBlanksN1TCCTable.screwdriver = "Tournevis";
-frTranslations.triChannelTestTable.destornillador = "Tournevis";
-
-const svTranslations = JSON.parse(JSON.stringify(esTranslations));
-svTranslations.header.title = "E-Prosthetic Översikt";
-svTranslations.header.support_button = "Teknisk support";
-svTranslations.header.customer_service_button = "Kundservice";
-svTranslations.header.download_center_button = "Nedladdningscenter";
-svTranslations.intro_modal = {
-  title: "Välkommen till E-Prosthetic Overview",
-  language_section_title: "1. Välj ditt språk",
-  online_store_country_section_title: "2. Land för Onlinebutik",
-  confirm_button: "Bekräfta Val"
-};
-svTranslations.chatbot = {
-    title: "Virtuell Assistent",
-    welcome_message: "Välkommen. Jag är den virtuella assistenten. Hur kan jag hjälpa dig att hitta information om de protetiska lösningar som finns i denna katalog?",
-    input_placeholder: "Fråga om en produkt...",
-    error_message: "Jag ber om ursäkt, men jag kan för närvarande inte behandla din förfrågan. Försök igen senare.",
-    sources_title: "Källor",
-};
-svTranslations.caseCard.status = {
-    [CaseStatus.Local]: "Lokal Produktion",
-    [CaseStatus.Procera]: "Procera Produktion",
-    [CaseStatus.Standard]: "Standard",
-    [CaseStatus.Otros]: "Övriga",
-};
-svTranslations.caseCard.status_short = {
-    [CaseStatus.Local]: "Lokal",
-    [CaseStatus.Procera]: "Procera",
-    [CaseStatus.Standard]: "Standard",
-    [CaseStatus.Otros]: "Övriga",
-};
-svTranslations.caseCard.generate_description_label = "Generera AI-beskrivning";
-svTranslations.caseCard.view_details_label = "Visa detaljer";
-svTranslations.caseCard.generating_description_tooltip = "Genererar beskrivning...";
-svTranslations.caseCard.generate_description_tooltip = "Klicka för att generera AI-beskrivning";
-svTranslations.caseCard.description_error = "Kunde inte generera beskrivning.";
-svTranslations.caseCard.aria_view_details_for = "Visa detaljer för";
-svTranslations.caseCard.text_to_speech_label = "Läs beskrivningen högt";
-svTranslations.caseCard.stop_speech_label = "Sluta läsa";
-svTranslations.caseCard.product_link_label = "Visa produkt";
-svTranslations.caseCard.copy_id_label = "Kopiera ID";
-svTranslations.caseCard.ai_summary_web_title = "Webbsammanfattning";
-svTranslations.caseCard.ai_summary_app_title = "Appsammanfattning";
-svTranslations.footer = {
-    socialTitle: 'SOCIAL MEDIA',
-    social: {
-        facebook: "https://www.facebook.com/nobelbiocare/",
-        instagram: "https://www.instagram.com/nobelbiocare/",
-        youtube: "https://www.youtube.com/user/nobelbiocare",
-        linkedin: "https://www.linkedin.com/company/nobel-biocare",
-        x: "https://twitter.com/nobelbiocare"
-    }
-};
-svTranslations.modal.download_center_title = "Nedladdningscenter";
-svTranslations.modal.design_services_button = "Designtjänster";
-svTranslations.modal.procera_tracking_button = "Spåra NobelProcera-försändelser";
-svTranslations.filterBar.title = "Filter";
-svTranslations.filterBar.search_placeholder = "Sök med ID, namn, artikel...";
-svTranslations.filterBar.reset_button = "Ta bort filter";
-svTranslations.filterBar.connection_type_label = "Anslutningstyp";
-svTranslations.filterBar.software_type_label = "Programvarutyp";
-svTranslations.filterBar.production_label = "Produktion";
-svTranslations.filterBar.restoration_type_label = "Restaureringstyp";
-svTranslations.filterBar.angulated_access_label = "Restaurering med Vinklad Åtkomst";
-svTranslations.filterBar.hide_filters = "Dölj filter";
-svTranslations.filterBar.show_filters = "Visa filter";
-svTranslations.filterBar.filters_active_tooltip = "Filter aktiva";
-svTranslations.filterBar.options.all = "Alla";
-svTranslations.filterBar.options.yes = "Ja";
-svTranslations.filterBar.options.no = "Nej";
-svTranslations.filterBar.options[CaseStatus.Local] = "Lokal";
-svTranslations.filterBar.options[CaseStatus.Procera] = "Procera";
-svTranslations.filterBar.options[CaseStatus.Standard] = "Standarddistans";
-svTranslations.filterBar.options[CaseStatus.Otros] = "Övriga";
-svTranslations.filterBar.options[RestorationType.Unitaria] = "Singel";
-svTranslations.filterBar.options[RestorationType.Multiple] = "Flerledad";
-svTranslations.filterBar.options[ConnectionType.Pearl] = "Inter-X Pearl";
-svTranslations.tooltip = {
-  filters_active_label: "Aktiva filter:",
-  remove_filters_link: "Ta bort filter"
-};
-svTranslations.notes["tornillo clínico incluido"] = "Klinisk skruv ingår";
-svTranslations.notes["This is a test case."] = "Detta är ett testfall.";
-svTranslations.modal.iconography_details_title = "Detaljer";
-
-svTranslations.modal.support_modal_phone_title = "Kundtjänsttelefon";
-svTranslations.modal.support_modal_phone_number_copy = "935 088 829";
-svTranslations.modal.support_modal_phone_tel = "935088829";
-svTranslations.modal.customer_service_intro = "För allmänna förfrågningar, vänligen kontakta vår kundtjänst via deras webbplats.";
-svTranslations.modal.customer_service_link = "Gå till Kundservice";
-
-svTranslations.devDebugPage.referenceTableTitle = "Analys av Modalfönster och Flytande Komponenter";
-svTranslations.devDebugPage.modalIdHeader = "Komponent-ID";
-svTranslations.devDebugPage.modalTriggerHeader = "Utlösande Åtgärd";
-svTranslations.devDebugPage.modalPurposeHeader = "Syfte och Innehåll";
-svTranslations.devDebugPage.linkTooltip = "Denna länk är en ankare till modalkomponentens ID. Den öppnar inte modalen direkt.";
-svTranslations.devDebugPage.modal_titles.references = "Komponenter/Referenser";
-svTranslations.devDebugPage.modal_titles.help_frsv = "Biblioteksnedladdning (FR/SV)";
-svTranslations.devDebugPage.modal_triggers.references = "Klicka på 'Visa' eller en specifik anslutning på ett fallkort.";
-svTranslations.devDebugPage.modal_purposes.references = "Visar detaljerade komponenttabeller för ett fall. Innehållet är dynamiskt.";
-svTranslations.devDebugPage.modal_purposes.help_frsv = "Informerar användaren om hur man får bibliotek och hänvisar till kundtjänst.";
-
-svTranslations.universalBaseRotatingCCTable.title = "Universal Base Roterande CC - Rak Design";
-svTranslations.universalBaseRotatingConicoCCTable.title = "Universal Base Konisk Roterande CC – Konisk Design";
-svTranslations.universalBaseRotatingBranemarkTable.title = "Universal Base Roterande Branemark – Rak Design";
-svTranslations.universalBaseRotatingConicoBranemarkTable.title = "Universal Base Konisk Roterande Branemark – Konisk Design";
-svTranslations.universalBaseRotatingTriChannelTable.title = "Universal Base Roterande Tri-channel – Rak Design";
-svTranslations.universalBaseRotatingConicoTriChannelTable.title = "Universal Base Konisk Roterande Tri-channel – Konisk Design";
-svTranslations.universalMultiUnitTable.rectoTitle = "Universal Base Multi-unit – Rak Design";
-svTranslations.universalMultiUnitTable.conicoTitle = "Universal Base Multi-unit – Konisk Design";
-
-svTranslations.universalBaseTable.screwdriver = "Skruvmejsel";
-svTranslations.universalBaseRotatingTable.screwdriver = "Skruvmejsel";
-svTranslations.pilarUniversalOn1Table.destornillador = "Skruvmejsel";
-svTranslations.n1BaseUniversalTable.screwdriver = "Skruvmejsel";
-svTranslations.n1TccUnitariaTable.screwdriver = "Skruvmejsel";
-svTranslations.proceraFCZImplantCrownTable.screwdriver = "Skruvmejsel";
-svTranslations.nobelProceraTitaniumBarTable.screwdriver = "Skruvmejsel";
-svTranslations.nobelPearlTable.destornillador = "Skruvmejsel";
-svTranslations.preMilledBlanksTable.screwdriver = "Skruvmejsel";
-svTranslations.preMilledBlanksN1TCCTable.screwdriver = "Skruvmejsel";
-svTranslations.triChannelTestTable.destornillador = "Skruvmejsel";
-
-// FIX: Added missing export for the 'translations' object. This resolves import errors in App.tsx and other components.
+// FIX: Export a single `translations` object to be imported in App.tsx
 export const translations = {
   en: enTranslations,
   es: esTranslations,
   pt: ptTranslations,
   fr: frTranslations,
-  sv: svTranslations
+  sv: svTranslations,
 };

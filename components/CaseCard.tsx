@@ -27,7 +27,7 @@ interface AiSummaryData {
   productUrl: string;
 }
 
-const CaseCard: React.FC<CaseCardProps> = ({ caseData, displayNumber, onReferenceClick, onHelp001Click, onTablesClick, onTableTestClick, onExosClick, t, tNotes, language, bgColorVar, isAnyFilterActive }) => {
+const CaseCard = React.forwardRef<HTMLDivElement, CaseCardProps>(({ caseData, displayNumber, onReferenceClick, onHelp001Click, onTablesClick, onTableTestClick, onExosClick, t, tNotes, language, bgColorVar, isAnyFilterActive }, ref) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [aiSummaryData, setAiSummaryData] = useState<AiSummaryData | null>(null);
   const [isGeneratingDescription, setIsGeneratingDescription] = useState(false);
@@ -226,6 +226,8 @@ Provide the response in the ${language} language as a single, valid JSON object 
 
   return (
     <div 
+      ref={ref}
+      id={`case-card-${caseData.id}`}
       className={`bg-white rounded-lg overflow-hidden transition-all duration-300 ease-in-out border border-black flex flex-col relative group ${isAnyFilterActive ? 'ring-2 ring-offset-1 ring-slate-800 shadow-xl' : 'shadow-sm'} hover:shadow-2xl hover:-translate-y-1`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -383,7 +385,8 @@ Provide the response in the ${language} language as a single, valid JSON object 
                 <span className={`inline-flex items-center text-center justify-center gap-2.5 p-2 text-sm font-bold rounded-lg border w-32 ${textColorClass} ${borderColorClass}`}>
                     <div className="flex flex-col">
                         <span className={`h-3 w-3 rounded-full bg-current mx-auto mb-1`}></span>
-                        <span>{t.status_short[status]}</span>
+                        <span>{t.status[status].split(' ')[0]}</span>
+                        {t.status[status].split(' ').length > 1 && <span className="font-semibold">{t.status[status].split(' ').slice(1).join(' ')}</span>}
                     </div>
                 </span>
                 
@@ -670,6 +673,6 @@ Provide the response in the ${language} language as a single, valid JSON object 
       </div>
     </div>
   );
-};
+});
 
 export default CaseCard;

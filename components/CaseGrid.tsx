@@ -15,9 +15,10 @@ interface CaseGridProps {
   // FIX: Changed type to 'Language' to allow 'en' and fix the compilation error.
   language: Language;
   isAnyFilterActive: boolean;
+  caseRefs: React.MutableRefObject<{[key: string]: HTMLDivElement | null}>;
 }
 
-const CaseGrid: React.FC<CaseGridProps> = ({ cases, onReferenceClick, onHelp001Click, onTablesClick, onTableTestClick, onExosClick, t, tNotes, language, isAnyFilterActive }) => {
+const CaseGrid: React.FC<CaseGridProps> = ({ cases, onReferenceClick, onHelp001Click, onTablesClick, onTableTestClick, onExosClick, t, tNotes, language, isAnyFilterActive, caseRefs }) => {
   if (cases.length === 0) {
     return (
       <div className="text-center py-20">
@@ -51,6 +52,8 @@ const CaseGrid: React.FC<CaseGridProps> = ({ cases, onReferenceClick, onHelp001C
         return (
           <CaseCard
             key={caseData.id}
+            // FIX: The ref callback was returning a value, which is not allowed. Changed to a function body that doesn't return anything.
+            ref={el => { caseRefs.current[caseData.id] = el }}
             caseData={caseData}
             displayNumber={caseData.caseNumber}
             onReferenceClick={onReferenceClick}

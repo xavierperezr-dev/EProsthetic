@@ -1,7 +1,7 @@
 import React from 'react';
 import { Language } from '../types';
 
-interface TriChannelTableProps {
+interface TablaTriChannelProps {
   t: any; // Translation object for this specific table
   storeCountry: Language;
   isTableEditMode?: boolean;
@@ -19,7 +19,7 @@ const getStorePath = (country: Language): string => {
 };
 
 
-const TriChannelTable: React.FC<TriChannelTableProps> = ({ t, storeCountry, isTableEditMode, data, onDataChange }) => {
+const TablaTriChannel: React.FC<TablaTriChannelProps> = ({ t, storeCountry, isTableEditMode, data, onDataChange }) => {
   const platformHeaders = ['np', 'rp', 'wp', '6'];
   
   const platformHeaderLabels: { [key: string]: string } = {
@@ -151,4 +151,4 @@ const TriChannelTable: React.FC<TriChannelTableProps> = ({ t, storeCountry, isTa
   );
 };
 
-export default TriChannelTable;
+export default TablaTriChannel;

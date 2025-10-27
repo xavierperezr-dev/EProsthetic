@@ -102,6 +102,19 @@
           scrollbar-width: thin; /* Firefox */
           scrollbar-color: #cbd5e1 #ffffff; /* Firefox thumb and track */
       }
+      
+      @keyframes highlight {
+        from {
+          box-shadow: 0 0 0 4px var(--accent-primary);
+        }
+        to {
+          box-shadow: 0 0 0 0px transparent;
+        }
+      }
+
+      .highlight-card {
+        animation: highlight 1.5s ease-out;
+      }
     </style>
   <script type="importmap">
 {
