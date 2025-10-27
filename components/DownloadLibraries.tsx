@@ -3,6 +3,7 @@ import { DownloadIcon, InfoIcon } from './icons';
 
 interface DownloadLibrariesProps {
   t: any; // Translation object from preMilledBlanksTable
+  title: string;
   links?: {
     exocad?: string;
     shape?: string;
@@ -13,7 +14,7 @@ interface DownloadLibrariesProps {
   isProcera?: boolean;
 }
 
-const DownloadLibraries: React.FC<DownloadLibrariesProps> = ({ t, links, onSupportClick, isProcera = false }) => {
+const DownloadLibraries: React.FC<DownloadLibrariesProps> = ({ t, title, links, onSupportClick, isProcera = false }) => {
   const hasLinks = !!links;
 
   const allButtons = [
@@ -29,7 +30,7 @@ const DownloadLibraries: React.FC<DownloadLibrariesProps> = ({ t, links, onSuppo
   return (
     <div className="my-4 flex flex-col">
       <div className="flex justify-between items-center mb-2">
-        <h4 className="text-sm font-semibold text-slate-600">{t.download_libraries_title}</h4>
+        <h4 className="text-sm font-semibold text-slate-600">{title}</h4>
         <button
             onClick={onSupportClick}
             className="inline-flex items-center gap-1.5 px-2 py-1 text-xs font-semibold text-[color:var(--accent-primary)] bg-white rounded-md border border-[color:var(--accent-primary)] hover:bg-[color:var(--accent-primary)] hover:text-white transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-[color:var(--accent-primary)]"

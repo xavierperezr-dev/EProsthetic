@@ -79,18 +79,9 @@ const enTranslations = {
     aria_view_refs_n1tcc_for: "View N1 TCC references for",
     aria_view_refs_for: "View references for",
     aria_download_for: "Download for",
-    generate_description_label: "Generate AI description",
     view_details_label: "View details",
-    generating_description_tooltip: "Generating description...",
-    generate_description_tooltip: "Click to generate AI description",
-    description_error: "Could not generate description.",
     aria_view_details_for: "View details for",
-    text_to_speech_label: "Read description aloud",
-    stop_speech_label: "Stop reading",
-    product_link_label: "View Product",
     copy_id_label: "Copy ID",
-    ai_summary_web_title: "Web Summary",
-    ai_summary_app_title: "App Summary",
   },
   footer: {
     socialTitle: 'SOCIAL MEDIA',
@@ -368,6 +359,11 @@ const enTranslations = {
     triChannelTitle: "Procera Zirconia Abutment - NobelReplace® (Tri-channel)",
     triChannelFooter: "*5 Pkg",
   },
+  proceraTitaniumBridgeTable: {
+    ccTitle: "Procera Titanium Bridge - Conical Connection",
+    branemarkTitle: "Procera Titanium Bridge - Brånemark System®",
+    triChannelTitle: "Procera Titanium Bridge - NobelReplace® (Tri-channel)",
+  },
   nobelProceraTitaniumBarTable: {
     ccTitle: "NobelProcera Titanium Bar - Conical Connection",
     branemarkTitle: "NobelProcera Titanium Bar - Brånemark System®",
@@ -533,11 +529,6 @@ const enTranslations = {
     filters_active_label: "Filters applied:",
     remove_filters_link: "Remove filters"
   },
-  // FIX: Added chatbot translations to fix type error in App.tsx.
-  chatbot: {
-    title: "Virtual Assistant",
-    input_placeholder: "Ask something...",
-  },
   notes: {
     "tornillo clínico incluido": "Clinical screw included",
     "This is a test case.": "This is a test case."
@@ -623,18 +614,9 @@ const esTranslations = {
     aria_view_refs_n1tcc_for: "Ver referencias N1 TCC",
     aria_view_refs_for: "Ver referencias para",
     aria_download_for: "Descargar para",
-    generate_description_label: "Generar descripción con IA",
     view_details_label: "Ver detalles",
-    generating_description_tooltip: "Generando descripción...",
-    generate_description_tooltip: "Clic para generar descripción con IA",
-    description_error: "No se pudo generar la descripción.",
     aria_view_details_for: "Ver detalles de",
-    text_to_speech_label: "Leer descripción en voz alta",
-    stop_speech_label: "Dejar de leer",
-    product_link_label: "Ver Producto",
     copy_id_label: "Copiar ID",
-    ai_summary_web_title: "Resumen Web",
-    ai_summary_app_title: "Resumen de la App",
   },
   footer: {
     socialTitle: 'REDES SOCIALES',
@@ -912,6 +894,11 @@ const esTranslations = {
     triChannelTitle: "Pilar de Zirconia Procera - NobelReplace® (Tri-channel)",
     triChannelFooter: "*5 Pkg",
   },
+  proceraTitaniumBridgeTable: {
+    ccTitle: "Puente de Titanio Procera - Conical Connection",
+    branemarkTitle: "Puente de Titanio Procera - Brånemark System®",
+    triChannelTitle: "Puente de Titanio Procera - NobelReplace® (Tri-channel)",
+  },
   nobelProceraTitaniumBarTable: {
     ccTitle: "Barra de Titanio NobelProcera - Conical Connection",
     branemarkTitle: "Barra de Titanio NobelProcera - Brånemark System®",
@@ -1076,11 +1063,6 @@ const esTranslations = {
   tooltip: {
     filters_active_label: "Filtros aplicados:",
     remove_filters_link: "Quitar filtros"
-  },
-  // FIX: Added chatbot translations to fix type error in App.tsx.
-  chatbot: {
-    title: "Asistente Virtual",
-    input_placeholder: "Pregunta algo...",
   },
   notes: {
     "tornillo clínico incluido": "Tornillo clínico incluido",

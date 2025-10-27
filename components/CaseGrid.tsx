@@ -50,23 +50,22 @@ const CaseGrid: React.FC<CaseGridProps> = ({ cases, onReferenceClick, onHelp001C
           : regularBgColors[colorIndex++ % regularBgColors.length];
 
         return (
-          <CaseCard
-            key={caseData.id}
-            // FIX: The ref callback was returning a value, which is not allowed. Changed to a function body that doesn't return anything.
-            ref={el => { caseRefs.current[caseData.id] = el }}
-            caseData={caseData}
-            displayNumber={caseData.caseNumber}
-            onReferenceClick={onReferenceClick}
-            onHelp001Click={onHelp001Click}
-            onTablesClick={onTablesClick}
-            onTableTestClick={onTableTestClick}
-            onExosClick={onExosClick}
-            t={t}
-            tNotes={tNotes}
-            language={language}
-            bgColorVar={bgColorVar}
-            isAnyFilterActive={isAnyFilterActive}
-          />
+          <div key={caseData.id} ref={el => { caseRefs.current[caseData.id] = el }}>
+            <CaseCard
+              caseData={caseData}
+              displayNumber={caseData.caseNumber}
+              onReferenceClick={onReferenceClick}
+              onHelp001Click={onHelp001Click}
+              onTablesClick={onTablesClick}
+              onTableTestClick={onTableTestClick}
+              onExosClick={onExosClick}
+              t={t}
+              tNotes={tNotes}
+              language={language}
+              bgColorVar={bgColorVar}
+              isAnyFilterActive={isAnyFilterActive}
+            />
+          </div>
         );
       })}
     </div>

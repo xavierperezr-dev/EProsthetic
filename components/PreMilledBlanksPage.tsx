@@ -1,6 +1,5 @@
 import React from 'react';
 import { ChevronLeftIcon, DownloadIcon, InfoIcon } from './icons';
-import DownloadLibraries from './DownloadLibraries';
 import { Language } from '../types';
 
 interface PreMilledBlanksPageProps {

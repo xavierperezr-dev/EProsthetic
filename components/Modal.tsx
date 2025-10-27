@@ -71,16 +71,16 @@ const Modal: React.FC<ModalProps> = ({
 
   const isIntroModal = id === 'modal-intro';
 
-  const modalContainerClasses = `relative z-10 w-full ${maxWidth} flex flex-col ${
+  const modalContainerClasses = `relative z-10 w-full ${maxWidth} grid grid-rows-[auto_1fr_auto] max-h-[90vh] ${
     isIntroModal
       ? 'bg-transparent'
       : 'bg-white rounded-lg shadow-2xl border border-slate-200'
   }`;
 
-  const contentContainerClasses = `flex-grow overflow-y-auto ${
+  const contentContainerClasses = `overflow-y-auto ${
     isIntroModal
-      ? `max-h-[${showHeader ? '65vh' : '85vh'}]`
-      : `p-6 max-h-[${showHeader ? '65vh' : '85vh'}]`
+      ? ``
+      : `p-6`
   }`;
 
   const statusTagStyles: Record<CaseStatus, string> = {

@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { DentalCase, CaseStatus, RestorationType, Language } from '../types';
-import { ChevronLeftIcon, ChevronRightIcon, WarrantyIcon, UnitariaIndicatorIcon, MultipleIndicatorIcon, DTXIcon, ExocadIcon, ThreeShapeIcon, DentalwingsIcon, TableIcon, EyeIcon, CheckIcon } from './icons';
+import { ChevronLeftIcon, ChevronRightIcon, WarrantyIcon, UnitariaIndicatorIcon, MultipleIndicatorIcon, DTXIcon, ExocadIcon, ThreeShapeIcon, DentalwingsIcon, TableIcon, EyeIcon, ExternalLinkIcon, CheckIcon } from './icons';
 import CaseDetailIcons from './CaseDetailIcons';
 
 interface CaseCardProps {
@@ -18,7 +18,7 @@ interface CaseCardProps {
   isAnyFilterActive: boolean;
 }
 
-const CaseCard = React.forwardRef<HTMLDivElement, CaseCardProps>(({ caseData, displayNumber, onReferenceClick, onHelp001Click, onTablesClick, onTableTestClick, onExosClick, t, tNotes, language, bgColorVar, isAnyFilterActive }, ref) => {
+const CaseCard: React.FC<CaseCardProps> = ({ caseData, displayNumber, onReferenceClick, onHelp001Click, onTablesClick, onTableTestClick, onExosClick, t, tNotes, language, bgColorVar, isAnyFilterActive }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const [isIdCopied, setIsIdCopied] = useState(false);
@@ -83,8 +83,6 @@ const CaseCard = React.forwardRef<HTMLDivElement, CaseCardProps>(({ caseData, di
 
   return (
     <div 
-      ref={ref}
-      id={`case-card-${caseData.id}`}
       className={`bg-white rounded-lg overflow-hidden transition-all duration-300 ease-in-out border border-black flex flex-col relative group ${isAnyFilterActive ? 'ring-2 ring-offset-1 ring-slate-800 shadow-xl' : 'shadow-sm'} hover:shadow-2xl hover:-translate-y-1`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -94,7 +92,7 @@ const CaseCard = React.forwardRef<HTMLDivElement, CaseCardProps>(({ caseData, di
         className={`absolute top-3 right-3 text-xs font-bold rounded-full h-7 w-7 flex items-center justify-center ring-2 ring-white z-10 transition-all duration-200 ${
           isIdCopied
             ? 'bg-green-500 text-white'
-            : 'bg-black text-white hover:bg-gray-800'
+            : 'bg-slate-200 text-slate-900 hover:bg-slate-300'
         }`}
         aria-label={`${t.copy_id_label}: ${caseData.id}`}
         title={`${t.copy_id_label}: ${caseData.id}`}
@@ -472,6 +470,6 @@ const CaseCard = React.forwardRef<HTMLDivElement, CaseCardProps>(({ caseData, di
       </div>
     </div>
   );
-});
+};
 
 export default CaseCard;
