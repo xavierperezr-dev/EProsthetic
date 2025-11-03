@@ -233,7 +233,7 @@ Provide the response in the ${language} language as a single, valid JSON object 
         className={`absolute top-3 right-3 text-xs font-bold rounded-full h-7 w-7 flex items-center justify-center ring-2 ring-white z-10 transition-all duration-200 ${
           isIdCopied
             ? 'bg-green-500 text-white'
-            : 'bg-slate-200 text-slate-900 hover:bg-slate-300'
+            : 'bg-[color:var(--accent-primary)] text-white hover:bg-[color:var(--accent-primary-hover)]'
         }`}
         aria-label={`${t.copy_id_label}: ${caseData.id}`}
         title={`${t.copy_id_label}: ${caseData.id}`}

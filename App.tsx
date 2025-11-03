@@ -23,6 +23,7 @@ import ExosModalContent from './components/ExosModalContent';
 import IntroModal from './components/IntroModal';
 import ResourceButtons from './components/ResourceButtons';
 import DownloadCenterModalContent from './components/DownloadCenterModalContent';
+import AssistantModalContent, { AssistantSelections } from './components/AssistantModalContent';
 
 const getStorePath = (country: Language) => {
     switch (country) {
@@ -303,6 +304,34 @@ const App: React.FC = () => {
         setLanguage(lang);
         setStoreCountry(country);
         setIsIntroModalOpen(false);
+    };
+
+    const handleApplyAssistantFilters = (assistantFilters: AssistantSelections) => {
+      setFilters({
+        searchText: '',
+        softwareType: '',
+        type: assistantFilters.restorationType,
+        status: assistantFilters.status[0] || "",
+        angulation: assistantFilters.angulation,
+        connectionType: assistantFilters.connections[0] || "",
+      });
+      handleCloseModal();
+    };
+
+    const handleOrientadorClick = () => {
+        setModalTitle(t.modal.orientador_title);
+        setModalContent(
+          <AssistantModalContent
+            onClose={handleCloseModal}
+            onApplyFilters={handleApplyAssistantFilters}
+            t={t}
+            allCases={MOCK_CASES}
+            language={language}
+          />
+        );
+        setIsModalOpen(true);
+        setModalId('modal-orientador');
+        setModalFooter(null);
     };
 
     const handleOpenModal = (caseData: DentalCase, initialConnection?: string) => {
@@ -768,6 +797,7 @@ const App: React.FC = () => {
                 onToggleMenu={() => setIsMenuOpen(!isMenuOpen)}
                 menuData={menuData}
                 onMenuItemClick={handleMenuItemClick}
+                onOrientadorClick={handleOrientadorClick}
             />
 
             <div className="flex-1 w-full max-w-screen-2xl mx-auto flex">

@@ -117,6 +117,7 @@ const enTranslations = {
     }
   },
   modal: {
+    orientador_title: "Assistant",
     close_aria_label: "Close modal",
     back_button: "Back",
     descargas_procera_modal_title: "Library Download",
@@ -214,6 +215,28 @@ const enTranslations = {
       },
     },
   },
+  wizard: {
+    step1_title: "Restoration Type",
+    step2_title: "Production Workflow",
+    step3_title: "Angulated Screw Channel",
+    step4_title: "Connection Type",
+    results_title: "Suggested Results",
+    step1_option1: "Unitary",
+    step1_option2: "Multiple",
+    production_options: {
+      [CaseStatus.Local]: "Local Production",
+      [CaseStatus.Procera]: "Procera Production",
+      [CaseStatus.Standard]: "Standard Abutment",
+    },
+    step3_option1: "Yes, I need angulated access",
+    step3_option2: "No, it's not a requirement",
+    no_results_message: "No results were found for your selection. Try adjusting the criteria.",
+    reset_button: "Reset",
+    back_button: "Back",
+    next_button: "Next",
+    finish_button: "View Results",
+    apply_filters_button: "Apply Filters & View Cases",
+  },
   exos_modal: {
     table1_title: "Case - Modal Content Relationship",
     table1_col_case_title: "Case Title",
@@ -675,6 +698,7 @@ const esTranslations = {
     }
   },
   modal: {
+    orientador_title: "Orientador",
     close_aria_label: "Cerrar modal",
     back_button: "Atrás",
     descargas_procera_modal_title: "Descarga de Librerías",
@@ -772,6 +796,28 @@ const esTranslations = {
       },
     },
   },
+  wizard: {
+    step1_title: "Tipo de Restauración",
+    step2_title: "Flujo de Producción",
+    step3_title: "Acceso Angulado al Tornillo",
+    step4_title: "Tipo de Conexión",
+    results_title: "Resultados Sugeridos",
+    step1_option1: "Unitaria",
+    step1_option2: "Múltiple",
+    production_options: {
+      [CaseStatus.Local]: "Producción Local",
+      [CaseStatus.Procera]: "Producción Procera",
+      [CaseStatus.Standard]: "Pilar Estándar",
+    },
+    step3_option1: "Sí, necesito acceso angulado",
+    step3_option2: "No, no es un requisito",
+    no_results_message: "No se encontraron resultados para su selección. Intente ajustar los criterios.",
+    reset_button: "Reiniciar",
+    back_button: "Atrás",
+    next_button: "Siguiente",
+    finish_button: "Ver Resultados",
+    apply_filters_button: "Aplicar Filtros y Ver Casos",
+  },
   exos_modal: {
     table1_title: "Relación Caso - Contenido Modal",
     table1_col_case_title: "Título del Caso",
@@ -1122,6 +1168,7 @@ const esTranslations = {
 // FIX: Added placeholder translations for other languages
 const ptTranslations = {
   ...esTranslations,
+  wizard: { ...enTranslations.wizard },
   caseCard: {
     ...esTranslations.caseCard,
     characteristics_title: "Características da Restauração",
@@ -1151,6 +1198,7 @@ const ptTranslations = {
 };
 const frTranslations = {
   ...enTranslations,
+  wizard: { ...enTranslations.wizard },
   caseCard: {
     ...enTranslations.caseCard,
     characteristics_title: "Caractéristiques de la Restauration",
@@ -1180,6 +1228,7 @@ const frTranslations = {
 };
 const svTranslations = {
   ...enTranslations,
+  wizard: { ...enTranslations.wizard },
   caseCard: {
     ...enTranslations.caseCard,
     characteristics_title: "Restaureringsegenskaper",

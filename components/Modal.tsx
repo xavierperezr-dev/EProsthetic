@@ -34,7 +34,7 @@ const Modal: React.FC<ModalProps> = ({
   isDismissable = true,
   showHeader = true,
   id,
-  maxWidth = 'max-w-7xl',
+  maxWidth = 'max-w-5xl',
   isTableEditMode,
   onSaveChanges,
 }) => {
@@ -77,7 +77,7 @@ const Modal: React.FC<ModalProps> = ({
       : 'bg-white rounded-lg shadow-2xl border border-slate-200'
   }`;
 
-  const contentContainerClasses = `overflow-y-auto ${
+  const contentContainerClasses = `overflow-y-auto max-h-[65vh] ${
     isIntroModal
       ? ``
       : `p-6`
@@ -120,20 +120,27 @@ const Modal: React.FC<ModalProps> = ({
           <div className="p-4 border-b border-slate-200 flex-shrink-0">
             <div className="flex items-center justify-between gap-4">
               <div className="flex items-center gap-3 flex-grow min-w-0">
-                <button
-                  onClick={onClose}
-                  className="inline-flex items-center justify-center gap-1 h-9 px-4 text-sm font-semibold text-slate-700 bg-white rounded-md border border-slate-300 hover:bg-slate-100 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[color:var(--accent-primary)]"
-                >
-                  <ChevronLeftIcon className="w-4 h-4" />
-                  {backButtonLabel}
-                </button>
-                <h2 id="modal-title" className="text-lg font-semibold text-[color:var(--text-primary)] truncate">{title}</h2>
-                {caseData && t?.caseCard?.status && (
-                  <span className={`ml-2 inline-flex items-center gap-2 px-2 py-0.5 text-xs font-semibold rounded-md border ${statusTagStyles[caseData.status]}`}>
-                      <span className={`h-2 w-2 rounded-full ${statusDotStyles[caseData.status]}`}></span>
-                      {t.caseCard.status[caseData.status]}
-                  </span>
+                {backButtonLabel && (
+                  <button
+                    onClick={onClose}
+                    className="inline-flex items-center justify-center gap-1 h-9 px-4 text-sm font-semibold text-slate-700 bg-white rounded-md border border-slate-300 hover:bg-slate-100 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[color:var(--accent-primary)]"
+                  >
+                    <ChevronLeftIcon className="w-4 h-4" />
+                    {backButtonLabel}
+                  </button>
                 )}
+                <div className="flex items-center justify-between flex-grow">
+                  <div className="flex items-center gap-4">
+                      <h2 id="modal-title" className="text-lg font-semibold text-[color:var(--text-primary)] truncate">{title}</h2>
+                      {caseData && t?.caseCard?.status && (
+                        <span className={`ml-2 inline-flex items-center gap-2 px-2 py-0.5 text-xs font-semibold rounded-md border ${statusTagStyles[caseData.status]}`}>
+                            <span className={`h-2 w-2 rounded-full ${statusDotStyles[caseData.status]}`}></span>
+                            {t.caseCard.status[caseData.status]}
+                        </span>
+                      )}
+                  </div>
+                  <div id="modal-header-extra-content"></div>
+                </div>
               </div>
               
               <div className="flex items-center gap-3 flex-shrink-0">

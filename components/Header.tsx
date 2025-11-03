@@ -16,6 +16,7 @@ interface HeaderProps {
   onToggleMenu: () => void;
   menuData: { [key: string]: { id: string; label: string; imageUrl: string; }[] };
   onMenuItemClick: (caseId: string) => void;
+  onOrientadorClick: () => void;
 }
 
 const Header: React.FC<HeaderProps> = ({ 
@@ -31,59 +32,68 @@ const Header: React.FC<HeaderProps> = ({
   isMenuOpen,
   onToggleMenu,
   menuData,
-  onMenuItemClick
+  onMenuItemClick,
+  onOrientadorClick
 }) => {
 
   return (
     <header className="bg-white sticky top-0 z-20 py-4 px-4 sm:px-6 lg:px-8 border-b border-[var(--border-color)] shadow-sm">
       <div className="max-w-7xl mx-auto flex flex-col gap-4">
         {/* Top row */}
-        <div className="flex justify-end items-center gap-4">
-          {(language === 'en' || language === 'es' || language === 'pt') && (
-            <button
-              onClick={onSupportClick}
-              className="inline-flex items-center justify-center gap-2 h-9 px-4 text-sm font-semibold text-white bg-[color:var(--card-bg-raspberry)] rounded-md hover:opacity-90 transition-opacity duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[color:var(--card-bg-raspberry)]"
-            >
-              <InfoIcon className="h-5 w-5" />
-              <span>{t.support_button}</span>
-            </button>
-          )}
-          {(language === 'fr' || language === 'sv') && (
-            <button
-              onClick={onCustomerServiceClick}
-              className="inline-flex items-center justify-center gap-2 h-9 px-4 text-sm font-semibold text-white bg-[color:var(--card-bg-raspberry)] rounded-md hover:opacity-90 transition-opacity duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[color:var(--card-bg-raspberry)]"
-            >
-              <InfoIcon className="h-5 w-5" />
-              <span>{t.customer_service_button}</span>
-            </button>
-          )}
+        <div className="flex justify-between items-center gap-4">
+           <button
+              onClick={onOrientadorClick}
+              className="inline-flex items-center justify-center gap-2 h-9 px-4 text-sm font-semibold text-[color:var(--text-primary)] bg-white rounded-md border border-[color:var(--accent-primary)] hover:bg-purple-50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[color:var(--accent-primary)]"
+           >
+              Orientador .......
+           </button>
+          <div className="flex items-center gap-4">
+            {(language === 'en' || language === 'es' || language === 'pt') && (
+              <button
+                onClick={onSupportClick}
+                className="inline-flex items-center justify-center gap-2 h-9 px-4 text-sm font-semibold text-white bg-[color:var(--card-bg-raspberry)] rounded-md hover:opacity-90 transition-opacity duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[color:var(--card-bg-raspberry)]"
+              >
+                <InfoIcon className="h-5 w-5" />
+                <span>{t.support_button}</span>
+              </button>
+            )}
+            {(language === 'fr' || language === 'sv') && (
+              <button
+                onClick={onCustomerServiceClick}
+                className="inline-flex items-center justify-center gap-2 h-9 px-4 text-sm font-semibold text-white bg-[color:var(--card-bg-raspberry)] rounded-md hover:opacity-90 transition-opacity duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[color:var(--card-bg-raspberry)]"
+              >
+                <InfoIcon className="h-5 w-5" />
+                <span>{t.customer_service_button}</span>
+              </button>
+            )}
 
-          {(language === 'en' || language === 'es' || language === 'pt') && (
-            <button
-              onClick={onDownloadCenterClick}
-              className="hidden sm:inline-flex items-center justify-center gap-2 h-9 px-4 text-sm font-semibold text-white bg-[color:var(--card-bg-raspberry)] rounded-md hover:opacity-90 transition-opacity duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[color:var(--card-bg-raspberry)]"
-            >
-              <DownloadIcon className="h-5 w-5" />
-              <span>{t.download_center_button}</span>
-            </button>
-          )}
+            {(language === 'en' || language === 'es' || language === 'pt') && (
+              <button
+                onClick={onDownloadCenterClick}
+                className="hidden sm:inline-flex items-center justify-center gap-2 h-9 px-4 text-sm font-semibold text-white bg-[color:var(--card-bg-raspberry)] rounded-md hover:opacity-90 transition-opacity duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[color:var(--card-bg-raspberry)]"
+              >
+                <DownloadIcon className="h-5 w-5" />
+                <span>{t.download_center_button}</span>
+              </button>
+            )}
 
-          <div className="h-6 w-px bg-slate-300"></div>
-          
-          <button
-            onClick={onGlobeClick}
-            className="flex items-center gap-2 text-sm font-semibold text-slate-600 hover:text-[color:var(--accent-primary)] transition-colors duration-200"
-            title="Change language and country"
-            aria-label="Change language and online store country"
-          >
-            <GlobeIcon className="h-6 w-6" />
-            <span>{language.toUpperCase()} / {storeCountry.toUpperCase()}</span>
-          </button>
+            <div className="h-6 w-px bg-slate-300"></div>
+            
+            <button
+              onClick={onGlobeClick}
+              className="flex items-center gap-2 text-sm font-semibold text-slate-600 hover:text-[color:var(--accent-primary)] transition-colors duration-200"
+              title="Change language and country"
+              aria-label="Change language and online store country"
+            >
+              <GlobeIcon className="h-6 w-6" />
+              <span>{language.toUpperCase()} / {storeCountry.toUpperCase()}</span>
+            </button>
+          </div>
         </div>
         
         {/* Bottom row */}
         <div className="grid grid-cols-3 items-center">
-            <div className="justify-self-start">
+            <div className="justify-self-start flex items-center gap-4">
                  <img 
                     src="https://www.nobelbiocare.com/themes/custom/nobel/logo.svg" 
                     alt="Nobel Biocare logo" 
