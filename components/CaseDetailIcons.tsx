@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { DentalCase, ConnectionType, RestorationType, CaseStatus } from '../types';
 import { 
     CcIcon, ExtIcon, TriIcon, MuaIcon, UnitariaIndicatorIcon, MultipleIndicatorIcon, 
     N1Icon, AngulationYesIcon, AngulationNoIcon, N1BaseIcon, On1Icon, PearlIcon,
     DTXIcon, ExocadIcon, ThreeShapeIcon, DentalwingsIcon, Icon15, Icon35, Icon20,
-    ScrewIcon
+    ScrewIcon,
+    ChevronDownIcon, ChevronUpIcon
 } from './icons';
 
 interface CaseDetailIconsProps {
@@ -15,6 +16,18 @@ interface CaseDetailIconsProps {
   borderColorClass?: string;
 }
 
+const Tooltip: React.FC<{ text?: string; children: React.ReactNode }> = ({ text, children }) => {
+  if (!text) return <>{children}</>;
+  return (
+    <div className="relative flex items-center group">
+      {children}
+      <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-max max-w-xs p-2 text-xs text-white bg-slate-800 rounded-md shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 pointer-events-none text-center">
+        {text}
+      </div>
+    </div>
+  );
+};
+
 const LabeledBlock: React.FC<{ label: string; children: React.ReactNode; className?: string }> = ({ label, children, className }) => (
     <div className={`flex flex-col items-center text-center ${className}`}>
         <span className="text-[10px] font-bold text-current opacity-80 uppercase tracking-wider mb-1 whitespace-nowrap">{label}</span>
@@ -23,6 +36,7 @@ const LabeledBlock: React.FC<{ label: string; children: React.ReactNode; classNa
 );
 
 const CaseDetailIcons: React.FC<CaseDetailIconsProps> = ({ caseData, isModal = false, t, connectionTypeForTable, borderColorClass }) => {
+  const [isCharacteristicsOpen, setIsCharacteristicsOpen] = useState(true);
   const { id, restorationType, connectionType, patientName, imageUrls, status } = caseData;
 
   const iconSizeClass = "h-14 w-14";
@@ -35,18 +49,18 @@ const CaseDetailIcons: React.FC<CaseDetailIconsProps> = ({ caseData, isModal = f
         if (status === CaseStatus.Otros) {
           return null;
         }
-        return <CcIcon className={iconSizeClass} />;
-      case ConnectionType.TriChannel: return <TriIcon className={iconSizeClass} />;
-      case ConnectionType.Branemark: return <ExtIcon className={iconSizeClass} />;
+        return <Tooltip text={t?.tooltips?.cc}><CcIcon className={iconSizeClass} /></Tooltip>;
+      case ConnectionType.TriChannel: return <Tooltip text={t?.tooltips?.tri_channel}><TriIcon className={iconSizeClass} /></Tooltip>;
+      case ConnectionType.Branemark: return <Tooltip text={t?.tooltips?.branemark}><ExtIcon className={iconSizeClass} /></Tooltip>;
       case ConnectionType.MultiUnit:
         if (status === CaseStatus.Otros) {
           return null;
         }
-        return <MuaIcon className={iconSizeClass} />;
-      case ConnectionType.N1: return <N1Icon className={iconSizeClass} />;
-      case ConnectionType.N1Base: return <N1BaseIcon className={iconSizeClass} />;
-      case ConnectionType.On1: return <On1Icon className={iconSizeClass} />;
-      case ConnectionType.Pearl: return <PearlIcon className={iconSizeClass} />;
+        return <Tooltip text={t?.tooltips?.multi_unit}><MuaIcon className={iconSizeClass} /></Tooltip>;
+      case ConnectionType.N1: return <Tooltip text={t?.tooltips?.n1}><N1Icon className={iconSizeClass} /></Tooltip>;
+      case ConnectionType.N1Base: return <Tooltip text={t?.tooltips?.n1_base}><N1BaseIcon className={iconSizeClass} /></Tooltip>;
+      case ConnectionType.On1: return <Tooltip text={t?.tooltips?.on1}><On1Icon className={iconSizeClass} /></Tooltip>;
+      case ConnectionType.Pearl: return <Tooltip text={t?.tooltips?.pearl}><PearlIcon className={iconSizeClass} /></Tooltip>;
       default: return null;
     }
   };
@@ -57,16 +71,16 @@ const CaseDetailIcons: React.FC<CaseDetailIconsProps> = ({ caseData, isModal = f
 
     if (id === 'EXO024' || id === 'EXO025') {
       return (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-row items-center justify-center gap-2">
           <div className={groupFrameClasses}>
-            <CcIcon className={iconSizeClass} />
-            <MuaIcon className={iconSizeClass} />
-            <AngulationYesIcon className={iconSizeClass} />
+            <Tooltip text={t?.tooltips?.cc}><CcIcon className={iconSizeClass} /></Tooltip>
+            <Tooltip text={t?.tooltips?.multi_unit}><MuaIcon className={iconSizeClass} /></Tooltip>
+            <Tooltip text={t?.tooltips?.angulation_yes}><AngulationYesIcon className={iconSizeClass} /></Tooltip>
           </div>
           <div className={groupFrameClasses}>
-            <ExtIcon className={iconSizeClass} />
-            <TriIcon className={iconSizeClass} />
-            <AngulationNoIcon className={iconSizeClass} />
+            <Tooltip text={t?.tooltips?.branemark}><ExtIcon className={iconSizeClass} /></Tooltip>
+            <Tooltip text={t?.tooltips?.tri_channel}><TriIcon className={iconSizeClass} /></Tooltip>
+            <Tooltip text={t?.tooltips?.angulation_no}><AngulationNoIcon className={iconSizeClass} /></Tooltip>
           </div>
         </div>
       );
@@ -75,56 +89,56 @@ const CaseDetailIcons: React.FC<CaseDetailIconsProps> = ({ caseData, isModal = f
     const allIcons: React.ReactNode[] = [];
     switch (id) {
         case 'EXO014':
-            allIcons.push(<CcIcon className={iconSizeClass} />, <N1Icon className={iconSizeClass} />, <N1BaseIcon className={iconSizeClass} />, <On1Icon className={iconSizeClass} />, <ExtIcon className={iconSizeClass} />, <TriIcon className={iconSizeClass} />, <AngulationNoIcon className={iconSizeClass} />);
+            allIcons.push(<Tooltip text={t?.tooltips?.cc}><CcIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.n1}><N1Icon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.n1_base}><N1BaseIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.on1}><On1Icon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.branemark}><ExtIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.tri_channel}><TriIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.angulation_no}><AngulationNoIcon className={iconSizeClass} /></Tooltip>);
             break;
         case 'EXO027':
         case 'EXO030':
-            allIcons.push(<CcIcon className={iconSizeClass} />, <ExtIcon className={iconSizeClass} />, <TriIcon className={iconSizeClass} />, <AngulationNoIcon className={iconSizeClass} />);
+            allIcons.push(<Tooltip text={t?.tooltips?.cc}><CcIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.branemark}><ExtIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.tri_channel}><TriIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.angulation_no}><AngulationNoIcon className={iconSizeClass} /></Tooltip>);
             break;
         case 'EXO026':
-            allIcons.push(<CcIcon className={iconSizeClass} />, <AngulationYesIcon className={iconSizeClass} />);
+            allIcons.push(<Tooltip text={t?.tooltips?.cc}><CcIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.angulation_yes}><AngulationYesIcon className={iconSizeClass} /></Tooltip>);
             break;
         case 'EXO028':
             return (
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-row items-center justify-center gap-2">
                 <div className={groupFrameClasses}>
-                  <CcIcon className={iconSizeClass} />
-                  <AngulationYesIcon className={iconSizeClass} />
+                  <Tooltip text={t?.tooltips?.cc}><CcIcon className={iconSizeClass} /></Tooltip>
+                  <Tooltip text={t?.tooltips?.angulation_yes}><AngulationYesIcon className={iconSizeClass} /></Tooltip>
                 </div>
                 <div className={groupFrameClasses}>
-                  <TriIcon className={iconSizeClass} />
-                  <AngulationNoIcon className={iconSizeClass} />
+                  <Tooltip text={t?.tooltips?.tri_channel}><TriIcon className={iconSizeClass} /></Tooltip>
+                  <Tooltip text={t?.tooltips?.angulation_no}><AngulationNoIcon className={iconSizeClass} /></Tooltip>
                 </div>
               </div>
             );
         case 'EXO029':
-            allIcons.push(<CcIcon className={iconSizeClass} />, <ExtIcon className={iconSizeClass} />, <TriIcon className={iconSizeClass} />, <MuaIcon className={iconSizeClass} />, <AngulationNoIcon className={iconSizeClass} />);
+            allIcons.push(<Tooltip text={t?.tooltips?.cc}><CcIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.branemark}><ExtIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.tri_channel}><TriIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.multi_unit}><MuaIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.angulation_no}><AngulationNoIcon className={iconSizeClass} /></Tooltip>);
             break;
         case 'EXO032':
-            allIcons.push(<CcIcon className={iconSizeClass} />, <ExtIcon className={iconSizeClass} />, <TriIcon className={iconSizeClass} />, <MuaIcon className={iconSizeClass} />, <AngulationNoIcon className={iconSizeClass} />);
+            allIcons.push(<Tooltip text={t?.tooltips?.cc}><CcIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.branemark}><ExtIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.tri_channel}><TriIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.multi_unit}><MuaIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.angulation_no}><AngulationNoIcon className={iconSizeClass} /></Tooltip>);
             break;
         case 'EXO034':
-             allIcons.push(<CcIcon className={iconSizeClass} />, <N1Icon className={iconSizeClass} />, <ExtIcon className={iconSizeClass} />, <TriIcon className={iconSizeClass} />);
+             allIcons.push(<Tooltip text={t?.tooltips?.cc}><CcIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.n1}><N1Icon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.branemark}><ExtIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.tri_channel}><TriIcon className={iconSizeClass} /></Tooltip>);
              break;
         case 'EXO031': 
             return isModal ? null : <div className="h-14"></div>;
         case 'EXO013':
-            allIcons.push(<N1BaseIcon className={iconSizeClass} />, <AngulationYesIcon className={iconSizeClass} />);
+            allIcons.push(<Tooltip text={t?.tooltips?.n1_base}><N1BaseIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.angulation_yes}><AngulationYesIcon className={iconSizeClass} /></Tooltip>);
             break;
         case 'EXO016':
-            allIcons.push(<CcIcon className={iconSizeClass} />, <ExtIcon className={iconSizeClass} />, <TriIcon className={iconSizeClass} />, <N1Icon className={iconSizeClass} />, <AngulationNoIcon className={iconSizeClass} />);
+            allIcons.push(<Tooltip text={t?.tooltips?.cc}><CcIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.branemark}><ExtIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.tri_channel}><TriIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.n1}><N1Icon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.angulation_no}><AngulationNoIcon className={iconSizeClass} /></Tooltip>);
             break;
         case 'EXO019':
-            allIcons.push(<On1Icon className={iconSizeClass} />, <AngulationNoIcon className={iconSizeClass} />);
+            allIcons.push(<Tooltip text={t?.tooltips?.on1}><On1Icon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.angulation_no}><AngulationNoIcon className={iconSizeClass} /></Tooltip>);
             break;
         case 'EXO020':
-            allIcons.push(<PearlIcon className={iconSizeClass} />, <AngulationNoIcon className={iconSizeClass} />);
+            allIcons.push(<Tooltip text={t?.tooltips?.pearl}><PearlIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.angulation_no}><AngulationNoIcon className={iconSizeClass} /></Tooltip>);
             break;
         case 'EXO021':
-            allIcons.push(<CcIcon className={iconSizeClass} />, <ExtIcon className={iconSizeClass} />, <TriIcon className={iconSizeClass} />, <AngulationNoIcon className={iconSizeClass} />);
+            allIcons.push(<Tooltip text={t?.tooltips?.cc}><CcIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.branemark}><ExtIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.tri_channel}><TriIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.angulation_no}><AngulationNoIcon className={iconSizeClass} /></Tooltip>);
             break;
         case 'EXO022':
-            allIcons.push(<CcIcon className={iconSizeClass} />, <ExtIcon className={iconSizeClass} />, <TriIcon className={iconSizeClass} />, <MuaIcon className={iconSizeClass} />, <AngulationNoIcon className={iconSizeClass} />);
+            allIcons.push(<Tooltip text={t?.tooltips?.cc}><CcIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.branemark}><ExtIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.tri_channel}><TriIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.multi_unit}><MuaIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.angulation_no}><AngulationNoIcon className={iconSizeClass} /></Tooltip>);
             break;
         default:
             const icon = renderConnectionIcon(connectionType);
@@ -143,37 +157,39 @@ const CaseDetailIcons: React.FC<CaseDetailIconsProps> = ({ caseData, isModal = f
     return null;
   };
 
-  if (isModal) {
+  const ModalIconsContent: React.FC = () => {
     if (id === 'EXO014') {
         const platformIcons = (
             <div className="flex items-center justify-center gap-3 flex-wrap">
-                <CcIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'CC'} />
-                <N1Icon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'N1 TCC'} />
-                <N1BaseIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'N1 Base'} />
-                <On1Icon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'On1'} />
-                <ExtIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'Branemark'} />
-                <TriIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'Tri-channel'} />
+                <Tooltip text={t?.tooltips?.cc}><CcIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'CC'} /></Tooltip>
+                <Tooltip text={t?.tooltips?.n1}><N1Icon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'N1 TCC'} /></Tooltip>
+                <Tooltip text={t?.tooltips?.n1_base}><N1BaseIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'N1 Base'} /></Tooltip>
+                <Tooltip text={t?.tooltips?.on1}><On1Icon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'On1'} /></Tooltip>
+                <Tooltip text={t?.tooltips?.branemark}><ExtIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'Branemark'} /></Tooltip>
+                <Tooltip text={t?.tooltips?.tri_channel}><TriIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'Tri-channel'} /></Tooltip>
             </div>
         );
         const Separator = () => <div className="border-l-2 border-slate-200/80 self-stretch h-auto"></div>;
         return (
              <div className="flex items-start justify-between gap-4">
                 <div className="flex items-stretch gap-4 flex-1">
-                    <LabeledBlock label={t?.restoration_type_label || "Tipo Restauración"}><UnitariaIndicatorIcon className={unitariaSizeClass} /></LabeledBlock>
+                    <LabeledBlock label={t?.restoration_type_label || "Tipo Restauración"}><Tooltip text={t?.tooltips?.unitaria}><UnitariaIndicatorIcon className={unitariaSizeClass} /></Tooltip></LabeledBlock>
                     <Separator />
                     <LabeledBlock label={t?.platform_label || "Plataforma"}>{platformIcons}</LabeledBlock>
                     <Separator />
-                    <LabeledBlock label={t?.angulation_label || "Angulación"}><AngulationNoIcon className={iconSizeClass} /></LabeledBlock>
+                    <LabeledBlock label={t?.angulation_label || "Angulación"}><Tooltip text={t?.tooltips?.angulation_no}><AngulationNoIcon className={iconSizeClass} /></Tooltip></LabeledBlock>
                     <Separator />
-                    <LabeledBlock label={t?.torque_label || "Torque"}><Icon35 className={iconSizeClass} /></LabeledBlock>
+                    <LabeledBlock label={t?.torque_label || "Torque"}><Tooltip text={t?.tooltips?.torque_35}><Icon35 className={iconSizeClass} /></Tooltip></LabeledBlock>
                     <Separator />
                     <LabeledBlock label={t?.software_label || "Soft. Compatible"}>
                         <div className="flex flex-col items-center justify-center gap-2 py-1">
-                            <DTXIcon className="h-8" /><ExocadIcon className="h-6" /><ThreeShapeIcon className="h-6" />
+                            <Tooltip text={t?.tooltips?.dtx}><DTXIcon className="h-8" /></Tooltip>
+                            <Tooltip text={t?.tooltips?.exocad}><ExocadIcon className="h-6" /></Tooltip>
+                            <Tooltip text={t?.tooltips?.three_shape}><ThreeShapeIcon className="h-6" /></Tooltip>
                         </div>
                     </LabeledBlock>
                     <Separator />
-                    <LabeledBlock label={t?.screw_label || "Tornillo"}><ScrewIcon className={iconSizeClass} /></LabeledBlock>
+                    <LabeledBlock label={t?.screw_label || "Tornillo"}><Tooltip text={t?.tooltips?.screw_included}><ScrewIcon className={iconSizeClass} /></Tooltip></LabeledBlock>
                 </div>
                 {imageUrls?.[0] && (
                     <div className="flex items-stretch gap-4">
@@ -191,32 +207,32 @@ const CaseDetailIcons: React.FC<CaseDetailIconsProps> = ({ caseData, isModal = f
     if (id === 'EXO032') {
         const restorationIcons = (
             <div className="flex items-center justify-center gap-3 flex-wrap">
-                {restorationType.includes(RestorationType.Multiple) && <MultipleIndicatorIcon className={multipleSizeClass} />}
+                {restorationType.includes(RestorationType.Multiple) && <Tooltip text={t?.tooltips?.multiple}><MultipleIndicatorIcon className={multipleSizeClass} /></Tooltip>}
             </div>
         );
 
         const platformIcons = (
             <div className="flex items-center justify-center gap-3 flex-wrap">
-                <CcIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'CC'} />
-                <ExtIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'Branemark'} />
-                <TriIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'Tri-channel'} />
-                <MuaIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'Multi-Unit'} />
+                <Tooltip text={t?.tooltips?.cc}><CcIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'CC'} /></Tooltip>
+                <Tooltip text={t?.tooltips?.branemark}><ExtIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'Branemark'} /></Tooltip>
+                <Tooltip text={t?.tooltips?.tri_channel}><TriIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'Tri-channel'} /></Tooltip>
+                <Tooltip text={t?.tooltips?.multi_unit}><MuaIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'Multi-Unit'} /></Tooltip>
             </div>
         );
 
-        const angulationIcon = <AngulationNoIcon className={iconSizeClass} />;
+        const angulationIcon = <Tooltip text={t?.tooltips?.angulation_no}><AngulationNoIcon className={iconSizeClass} /></Tooltip>;
 
-        const torqueIcon = <Icon35 className={iconSizeClass} />;
+        const torqueIcon = <Tooltip text={t?.tooltips?.torque_35}><Icon35 className={iconSizeClass} /></Tooltip>;
 
         const softwareIcons = (
             <>
-                <DTXIcon className="h-8" />
-                <ExocadIcon className="h-6" />
-                <ThreeShapeIcon className="h-6" />
+                <Tooltip text={t?.tooltips?.dtx}><DTXIcon className="h-8" /></Tooltip>
+                <Tooltip text={t?.tooltips?.exocad}><ExocadIcon className="h-6" /></Tooltip>
+                <Tooltip text={t?.tooltips?.three_shape}><ThreeShapeIcon className="h-6" /></Tooltip>
             </>
         );
 
-        const screwIcon = <ScrewIcon className={iconSizeClass} />;
+        const screwIcon = <Tooltip text={t?.tooltips?.screw_included}><ScrewIcon className={iconSizeClass} /></Tooltip>;
         
         const imageThumbnail = imageUrls?.[0] ? (
             <div className="flex-shrink-0">
@@ -267,29 +283,29 @@ const CaseDetailIcons: React.FC<CaseDetailIconsProps> = ({ caseData, isModal = f
         );
     }
     if (id === 'EXO034') {
-        const restorationIcons = <MultipleIndicatorIcon className={multipleSizeClass} />;
+        const restorationIcons = <Tooltip text={t?.tooltips?.multiple}><MultipleIndicatorIcon className={multipleSizeClass} /></Tooltip>;
 
         const platformIcons = (
             <div className="flex items-center justify-center gap-3 flex-wrap">
-                <CcIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'CC'} />
-                <N1Icon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'N1 TCC'} />
-                <ExtIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'Branemark'} />
-                <TriIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'Tri-channel'} />
+                <Tooltip text={t?.tooltips?.cc}><CcIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'CC'} /></Tooltip>
+                <Tooltip text={t?.tooltips?.n1}><N1Icon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'N1 TCC'} /></Tooltip>
+                <Tooltip text={t?.tooltips?.branemark}><ExtIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'Branemark'} /></Tooltip>
+                <Tooltip text={t?.tooltips?.tri_channel}><TriIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'Tri-channel'} /></Tooltip>
             </div>
         );
 
-        const angulationIcon = <AngulationNoIcon className={iconSizeClass} />;
-        const torqueIcon = <Icon15 className={iconSizeClass} />;
+        const angulationIcon = <Tooltip text={t?.tooltips?.angulation_no}><AngulationNoIcon className={iconSizeClass} /></Tooltip>;
+        const torqueIcon = <Tooltip text={t?.tooltips?.torque_15}><Icon15 className={iconSizeClass} /></Tooltip>;
 
         const softwareIcons = (
             <>
-                <DTXIcon className="h-8" />
-                <ExocadIcon className="h-6" />
-                <ThreeShapeIcon className="h-6" />
+                <Tooltip text={t?.tooltips?.dtx}><DTXIcon className="h-8" /></Tooltip>
+                <Tooltip text={t?.tooltips?.exocad}><ExocadIcon className="h-6" /></Tooltip>
+                <Tooltip text={t?.tooltips?.three_shape}><ThreeShapeIcon className="h-6" /></Tooltip>
             </>
         );
 
-        const screwIcon = <ScrewIcon className={iconSizeClass} />;
+        const screwIcon = <Tooltip text={t?.tooltips?.screw_included}><ScrewIcon className={iconSizeClass} /></Tooltip>;
         
         const imageThumbnail = imageUrls?.[0] ? (
             <div className="flex-shrink-0">
@@ -342,8 +358,8 @@ const CaseDetailIcons: React.FC<CaseDetailIconsProps> = ({ caseData, isModal = f
 
     const restorationIcons = (
         <div className="flex items-center justify-center gap-3 flex-wrap">
-            {restorationType.includes(RestorationType.Unitaria) && <UnitariaIndicatorIcon className={unitariaSizeClass} />}
-            {restorationType.includes(RestorationType.Multiple) && <MultipleIndicatorIcon className={multipleSizeClass} />}
+            {restorationType.includes(RestorationType.Unitaria) && <Tooltip text={t?.tooltips?.unitaria}><UnitariaIndicatorIcon className={unitariaSizeClass} /></Tooltip>}
+            {restorationType.includes(RestorationType.Multiple) && <Tooltip text={t?.tooltips?.multiple}><MultipleIndicatorIcon className={multipleSizeClass} /></Tooltip>}
         </div>
     );
 
@@ -362,16 +378,16 @@ const CaseDetailIcons: React.FC<CaseDetailIconsProps> = ({ caseData, isModal = f
 
     if (id === 'EXO024' || id === 'EXO025') {
         connectionIcons = (
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-row items-center justify-center gap-2">
               <div className={groupFrameClasses}>
-                <CcIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'CC'} />
-                <MuaIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'Multi-Unit'}/>
-                <AngulationYesIcon className={iconSizeClass} withLeftDot={angulationYesDot} />
+                <Tooltip text={t?.tooltips?.cc}><CcIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'CC'} /></Tooltip>
+                <Tooltip text={t?.tooltips?.multi_unit}><MuaIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'Multi-Unit'}/></Tooltip>
+                <Tooltip text={t?.tooltips?.angulation_yes}><AngulationYesIcon className={iconSizeClass} withLeftDot={angulationYesDot} /></Tooltip>
               </div>
               <div className={groupFrameClasses}>
-                <ExtIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'Branemark'}/>
-                <TriIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'Tri-channel'}/>
-                <AngulationNoIcon className={iconSizeClass} withLeftDot={angulationNoDot} />
+                <Tooltip text={t?.tooltips?.branemark}><ExtIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'Branemark'}/></Tooltip>
+                <Tooltip text={t?.tooltips?.tri_channel}><TriIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'Tri-channel'}/></Tooltip>
+                <Tooltip text={t?.tooltips?.angulation_no}><AngulationNoIcon className={iconSizeClass} withLeftDot={angulationNoDot} /></Tooltip>
               </div>
             </div>
         );
@@ -382,70 +398,70 @@ const CaseDetailIcons: React.FC<CaseDetailIconsProps> = ({ caseData, isModal = f
 
         switch (id) {
             case 'EXO027': case 'EXO030':
-                connIconList.push(<CcIcon key="cc" className={iconSizeClass} withLeftDot={connectionTypeForTable === 'CC'} />, <ExtIcon key="ext" className={iconSizeClass} withLeftDot={connectionTypeForTable === 'Branemark'} />, <TriIcon key="tri" className={iconSizeClass} withLeftDot={connectionTypeForTable === 'Tri-channel'} />);
-                angIconList.push(<AngulationNoIcon key="ang-no" className={iconSizeClass} withLeftDot={angulationNoDot} />);
+                connIconList.push(<Tooltip text={t?.tooltips?.cc} key="cc"><CcIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'CC'} /></Tooltip>, <Tooltip text={t?.tooltips?.branemark} key="ext"><ExtIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'Branemark'} /></Tooltip>, <Tooltip text={t?.tooltips?.tri_channel} key="tri"><TriIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'Tri-channel'} /></Tooltip>);
+                angIconList.push(<Tooltip text={t?.tooltips?.angulation_no} key="ang-no"><AngulationNoIcon className={iconSizeClass} withLeftDot={angulationNoDot} /></Tooltip>);
                 break;
             case 'EXO026':
-                connIconList.push(<CcIcon key="cc" className={iconSizeClass} withLeftDot={connectionTypeForTable === 'CC'} />);
-                angIconList.push(<AngulationYesIcon key="ang-yes" className={iconSizeClass} withLeftDot={angulationYesDot} />);
+                connIconList.push(<Tooltip text={t?.tooltips?.cc} key="cc"><CcIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'CC'} /></Tooltip>);
+                angIconList.push(<Tooltip text={t?.tooltips?.angulation_yes} key="ang-yes"><AngulationYesIcon className={iconSizeClass} withLeftDot={angulationYesDot} /></Tooltip>);
                 break;
             case 'EXO028':
                 connIconList.push(
-                    <div key="exo028-icons" className="flex flex-col gap-2">
+                    <div key="exo028-icons" className="flex flex-row items-center justify-center gap-2">
                         <div className={groupFrameClasses}>
-                            <CcIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'CC'} />
-                            <AngulationYesIcon className={iconSizeClass} withLeftDot={angulationYesDot} />
+                            <Tooltip text={t?.tooltips?.cc}><CcIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'CC'} /></Tooltip>
+                            <Tooltip text={t?.tooltips?.angulation_yes}><AngulationYesIcon className={iconSizeClass} withLeftDot={angulationYesDot} /></Tooltip>
                         </div>
                         <div className={groupFrameClasses}>
-                            <TriIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'Tri-channel'} />
-                            <AngulationNoIcon className={iconSizeClass} withLeftDot={angulationNoDot} />
+                            <Tooltip text={t?.tooltips?.tri_channel}><TriIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'Tri-channel'} /></Tooltip>
+                            <Tooltip text={t?.tooltips?.angulation_no}><AngulationNoIcon className={iconSizeClass} withLeftDot={angulationNoDot} /></Tooltip>
                         </div>
                     </div>
                 );
                 break;
             case 'EXO029':
-                connIconList.push(<CcIcon key="cc" className={iconSizeClass} withLeftDot={connectionTypeForTable === 'CC'} />, <ExtIcon key="ext" className={iconSizeClass} withLeftDot={connectionTypeForTable === 'Branemark'} />, <TriIcon key="tri" className={iconSizeClass} withLeftDot={connectionTypeForTable === 'Tri-channel'} />, <MuaIcon key="mua" className={iconSizeClass} withLeftDot={connectionTypeForTable === 'Multi-Unit'} />);
-                angIconList.push(<AngulationNoIcon key="ang-no" className={iconSizeClass} withLeftDot={angulationNoDot} />);
+                connIconList.push(<Tooltip text={t?.tooltips?.cc} key="cc"><CcIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'CC'} /></Tooltip>, <Tooltip text={t?.tooltips?.branemark} key="ext"><ExtIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'Branemark'} /></Tooltip>, <Tooltip text={t?.tooltips?.tri_channel} key="tri"><TriIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'Tri-channel'} /></Tooltip>, <Tooltip text={t?.tooltips?.multi_unit} key="mua"><MuaIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'Multi-Unit'} /></Tooltip>);
+                angIconList.push(<Tooltip text={t?.tooltips?.angulation_no} key="ang-no"><AngulationNoIcon className={iconSizeClass} withLeftDot={angulationNoDot} /></Tooltip>);
                 break;
             case 'EXO032':
                 // This is handled in App.tsx to appear below the downloads section.
                 // Leave empty to avoid duplication.
                 break;
             case 'EXO013':
-                connIconList.push(<N1BaseIcon className={iconSizeClass} />);
-                angIconList.push(<AngulationYesIcon key="ang-yes" className={iconSizeClass} withLeftDot={angulationNoDot} />);
+                connIconList.push(<Tooltip text={t?.tooltips?.n1_base}><N1BaseIcon className={iconSizeClass} /></Tooltip>);
+                angIconList.push(<Tooltip text={t?.tooltips?.angulation_yes} key="ang-yes"><AngulationYesIcon className={iconSizeClass} withLeftDot={angulationNoDot} /></Tooltip>);
                 break;
             case 'EXO016':
-                connIconList.push(<CcIcon key="cc" className={iconSizeClass} withLeftDot={connectionTypeForTable === 'CC'} />, <ExtIcon key="ext" className={iconSizeClass} withLeftDot={connectionTypeForTable === 'Branemark'} />, <TriIcon key="tri" className={iconSizeClass} withLeftDot={connectionTypeForTable === 'Tri-channel'} />, <N1Icon key="n1" className={iconSizeClass} withLeftDot={connectionTypeForTable === 'N1 TCC'} />);
-                angIconList.push(<AngulationNoIcon key="ang-no" className={iconSizeClass} withLeftDot={angulationNoDot} />);
+                connIconList.push(<Tooltip text={t?.tooltips?.cc} key="cc"><CcIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'CC'} /></Tooltip>, <Tooltip text={t?.tooltips?.branemark} key="ext"><ExtIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'Branemark'} /></Tooltip>, <Tooltip text={t?.tooltips?.tri_channel} key="tri"><TriIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'Tri-channel'} /></Tooltip>, <Tooltip text={t?.tooltips?.n1} key="n1"><N1Icon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'N1 TCC'} /></Tooltip>);
+                angIconList.push(<Tooltip text={t?.tooltips?.angulation_no} key="ang-no"><AngulationNoIcon className={iconSizeClass} withLeftDot={angulationNoDot} /></Tooltip>);
                 break;
             case 'EXO019':
-                connIconList.push(<On1Icon className={iconSizeClass} />);
-                angIconList.push(<AngulationNoIcon key="ang-no" className={iconSizeClass} withLeftDot={angulationNoDot} />);
+                connIconList.push(<Tooltip text={t?.tooltips?.on1}><On1Icon className={iconSizeClass} /></Tooltip>);
+                angIconList.push(<Tooltip text={t?.tooltips?.angulation_no} key="ang-no"><AngulationNoIcon className={iconSizeClass} withLeftDot={angulationNoDot} /></Tooltip>);
                 break;
             case 'EXO020':
-                connIconList.push(<PearlIcon className={iconSizeClass} />);
-                angIconList.push(<AngulationNoIcon key="ang-no" className={iconSizeClass} withLeftDot={angulationNoDot} />);
+                connIconList.push(<Tooltip text={t?.tooltips?.pearl}><PearlIcon className={iconSizeClass} /></Tooltip>);
+                angIconList.push(<Tooltip text={t?.tooltips?.angulation_no} key="ang-no"><AngulationNoIcon className={iconSizeClass} withLeftDot={angulationNoDot} /></Tooltip>);
                 break;
             case 'EXO021':
-                connIconList.push(<CcIcon key="cc" className={iconSizeClass} withLeftDot={connectionTypeForTable === 'CC'} />, <ExtIcon key="ext" className={iconSizeClass} withLeftDot={connectionTypeForTable === 'Branemark'} />, <TriIcon key="tri" className={iconSizeClass} withLeftDot={connectionTypeForTable === 'Tri-channel'} />);
-                angIconList.push(<AngulationNoIcon key="ang-no" className={iconSizeClass} withLeftDot={angulationNoDot} />);
+                connIconList.push(<Tooltip text={t?.tooltips?.cc} key="cc"><CcIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'CC'} /></Tooltip>, <Tooltip text={t?.tooltips?.branemark} key="ext"><ExtIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'Branemark'} /></Tooltip>, <Tooltip text={t?.tooltips?.tri_channel} key="tri"><TriIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'Tri-channel'} /></Tooltip>);
+                angIconList.push(<Tooltip text={t?.tooltips?.angulation_no} key="ang-no"><AngulationNoIcon className={iconSizeClass} withLeftDot={angulationNoDot} /></Tooltip>);
                 break;
             case 'EXO022':
-                connIconList.push(<CcIcon key="cc" className={iconSizeClass} withLeftDot={connectionTypeForTable === 'CC'} />, <ExtIcon key="ext" className={iconSizeClass} withLeftDot={connectionTypeForTable === 'Branemark'} />, <TriIcon key="tri" className={iconSizeClass} withLeftDot={connectionTypeForTable === 'Tri-channel'} />, <MuaIcon key="mua" className={iconSizeClass} withLeftDot={connectionTypeForTable === 'Multi-Unit'} />);
-                angIconList.push(<AngulationNoIcon key="ang-no" className={iconSizeClass} withLeftDot={angulationNoDot} />);
+                connIconList.push(<Tooltip text={t?.tooltips?.cc} key="cc"><CcIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'CC'} /></Tooltip>, <Tooltip text={t?.tooltips?.branemark} key="ext"><ExtIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'Branemark'} /></Tooltip>, <Tooltip text={t?.tooltips?.tri_channel} key="tri"><TriIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'Tri-channel'} /></Tooltip>, <Tooltip text={t?.tooltips?.multi_unit} key="mua"><MuaIcon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'Multi-Unit'} /></Tooltip>);
+                angIconList.push(<Tooltip text={t?.tooltips?.angulation_no} key="ang-no"><AngulationNoIcon className={iconSizeClass} withLeftDot={angulationNoDot} /></Tooltip>);
                 break;
             case 'EXO006':
-                connIconList.push(<N1Icon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'N1 TCC'} />);
-                angIconList.push(<AngulationNoIcon key="ang-no" className={iconSizeClass} withLeftDot={angulationNoDot} />);
+                connIconList.push(<Tooltip text={t?.tooltips?.n1}><N1Icon className={iconSizeClass} withLeftDot={connectionTypeForTable === 'N1 TCC'} /></Tooltip>);
+                angIconList.push(<Tooltip text={t?.tooltips?.angulation_no} key="ang-no"><AngulationNoIcon className={iconSizeClass} withLeftDot={angulationNoDot} /></Tooltip>);
                 break;
             case 'EXO031':
                 break;
             default:
                 const icon = renderConnectionIcon(connectionType);
                 if (icon) connIconList.push(icon);
-                if (caseData.angulacion === true) angIconList.push(<AngulationYesIcon key="ang-yes" className={iconSizeClass} withLeftDot={angulationYesDot}/>);
-                if (caseData.angulacion === false) angIconList.push(<AngulationNoIcon key="ang-no" className={iconSizeClass} withLeftDot={angulationNoDot}/>);
+                if (caseData.angulacion === true) angIconList.push(<Tooltip text={t?.tooltips?.angulation_yes} key="ang-yes"><AngulationYesIcon className={iconSizeClass} withLeftDot={angulationYesDot}/></Tooltip>);
+                if (caseData.angulacion === false) angIconList.push(<Tooltip text={t?.tooltips?.angulation_no} key="ang-no"><AngulationNoIcon className={iconSizeClass} withLeftDot={angulationNoDot}/></Tooltip>);
                 break;
         }
 
@@ -455,9 +471,9 @@ const CaseDetailIcons: React.FC<CaseDetailIconsProps> = ({ caseData, isModal = f
 
     if (id === 'EXO022') {
         const isMUA = connectionTypeForTable === 'Multi-Unit' || connectionTypeForTable === 'MUA';
-        torqueIcon = isMUA ? <Icon15 className={iconSizeClass} /> : <Icon35 className={iconSizeClass} />;
+        torqueIcon = isMUA ? <Tooltip text={t?.tooltips?.torque_15}><Icon15 className={iconSizeClass} /></Tooltip> : <Tooltip text={t?.tooltips?.torque_35}><Icon35 className={iconSizeClass} /></Tooltip>;
     } else if (id === 'EXO021') {
-        torqueIcon = <Icon35 className={iconSizeClass} />;
+        torqueIcon = <Tooltip text={t?.tooltips?.torque_35}><Icon35 className={iconSizeClass} /></Tooltip>;
     } else if (status === CaseStatus.Procera) {
       let isMUA = false;
       if (connectionTypeForTable) {
@@ -467,43 +483,48 @@ const CaseDetailIcons: React.FC<CaseDetailIconsProps> = ({ caseData, isModal = f
       }
 
       if (isMUA) {
-        torqueIcon = <Icon15 className={iconSizeClass} />;
+        torqueIcon = <Tooltip text={t?.tooltips?.torque_15}><Icon15 className={iconSizeClass} /></Tooltip>;
       } else {
-        torqueIcon = <Icon35 className={iconSizeClass} />;
+        torqueIcon = <Tooltip text={t?.tooltips?.torque_35}><Icon35 className={iconSizeClass} /></Tooltip>;
       }
     } else { // Local cases
       if (caseData.torque) {
         let TorqueIcon;
+        let torqueText;
         switch (caseData.torque) {
           case 15:
             TorqueIcon = Icon15;
+            torqueText = t?.tooltips?.torque_15;
             break;
           case 20:
             TorqueIcon = Icon20;
+            torqueText = t?.tooltips?.torque_20;
             break;
           case 35:
             TorqueIcon = Icon35;
+            torqueText = t?.tooltips?.torque_35;
             break;
           default:
             TorqueIcon = null;
+            torqueText = '';
         }
         if (TorqueIcon) {
-          torqueIcon = <TorqueIcon className={iconSizeClass} />;
+          torqueIcon = <Tooltip text={torqueText}><TorqueIcon className={iconSizeClass} /></Tooltip>;
         }
       }
     }
     
     const softwareIcons = (caseData.status === CaseStatus.Procera || caseData.status === CaseStatus.Local) ? (
         <>
-            <DTXIcon className="h-8" />
-            <ExocadIcon className="h-6" />
-            <ThreeShapeIcon className="h-6" />
-            {caseData.status === CaseStatus.Local && caseData.id !== 'EXO020' && <DentalwingsIcon className="h-6" />}
+            <Tooltip text={t?.tooltips?.dtx}><DTXIcon className="h-8" /></Tooltip>
+            <Tooltip text={t?.tooltips?.exocad}><ExocadIcon className="h-6" /></Tooltip>
+            <Tooltip text={t?.tooltips?.three_shape}><ThreeShapeIcon className="h-6" /></Tooltip>
+            {caseData.status === CaseStatus.Local && caseData.id !== 'EXO020' && <Tooltip text={t?.tooltips?.dentalwings}><DentalwingsIcon className="h-6" /></Tooltip>}
         </>
     ) : null;
 
     const screwIcon = (caseData.status === CaseStatus.Procera || caseData.status === CaseStatus.Local) ? (
-        <ScrewIcon className={iconSizeClass} />
+        <Tooltip text={t?.tooltips?.screw_included}><ScrewIcon className={iconSizeClass} /></Tooltip>
     ) : null;
     
     const imageThumbnail = imageUrls?.[0] ? (
@@ -584,6 +605,27 @@ const CaseDetailIcons: React.FC<CaseDetailIconsProps> = ({ caseData, isModal = f
                 </div>
             )}
         </div>
+    );
+  };
+  
+  if (isModal) {
+    return (
+      <div className="border border-slate-200 rounded-lg overflow-hidden mb-6">
+          <button
+              onClick={() => setIsCharacteristicsOpen(!isCharacteristicsOpen)}
+              className="w-full flex items-center justify-between p-3 text-left bg-[var(--card-bg-yellow)]"
+              aria-expanded={isCharacteristicsOpen}
+              aria-controls="restoration-characteristics-content"
+          >
+              <h3 className="font-semibold text-slate-800">{t?.characteristics_title}</h3>
+              {isCharacteristicsOpen ? <ChevronUpIcon className="h-5 w-5 text-slate-700" /> : <ChevronDownIcon className="h-5 w-5 text-slate-700" />}
+          </button>
+          {isCharacteristicsOpen && (
+              <div id="restoration-characteristics-content" className="p-4 bg-white animate-simple-fade-in">
+                  <ModalIconsContent />
+              </div>
+          )}
+      </div>
     );
   }
 

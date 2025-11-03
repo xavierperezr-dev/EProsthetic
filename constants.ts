@@ -820,7 +820,6 @@ export const ZIRCONIA_BRIDGE_DATA = [
 ];
 
 export const ZIRCONIA_BRIDGE_CC_DATA = [
-  { rowKey: 'conexion', type: 'header' },
   { rowKey: 'screw', np: '37367', rp: '37606', wp: '37606' },
   { rowKey: 'screwdriver', np: 'Omnigrip', rp: 'Omnigrip', wp: 'Omnigrip' },
   { rowKey: 'labScrew', np: '37374', rp: '37607', wp: '37607' },
@@ -841,13 +840,13 @@ export const ZIRCONIA_BRIDGE_BRANEMARK_DATA = [
 ];
 
 export const ZIRCONIA_BRIDGE_TRICHANNEL_DATA = [
-  { rowKey: 'screw', np: '28837', rp: '28816', wp: '28816', '6': '28816' },
-  { rowKey: 'screwdriver', np: 'Unigrip', rp: 'Unigrip', wp: 'Unigrip', '6': 'Unigrip' },
-  { rowKey: 'labScrew', np: '', rp: '', wp: '', '6': '' },
-  { rowKey: 'elosScanbody', np: 'IO 2A-A', rp: 'IO 2A-B', wp: 'IO 2A-C', '6': 'IO 2A-D' },
-  { rowKey: 'elosScanbodyKit', kit: 'IO 2A Kit' },
-  { rowKey: 'replicaIOS', np: 'PMA-NBR35-1', rp: 'PMA-NBR43-1', wp: 'PMA-NBR50-1', '6': 'PMA-NBR60-1' },
-  { rowKey: 'desktopScanbody', np: '300452', rp: '300453', wp: '300454', '6': '300469' },
+  { rowKey: 'screw', np: '28837', rp: '28816', wp: '28816', '6.0': '28816' },
+  { rowKey: 'screwdriver', np: 'Unigrip', rp: 'Unigrip', wp: 'Unigrip', '6.0': 'Unigrip' },
+  { rowKey: 'labScrew', np: '', rp: '', wp: '', '6.0': '' },
+  { rowKey: 'elosScanbody', np: 'IO 2A-A', rp: 'IO 2A-B', wp: 'IO 2A-C', '6.0': 'IO 2A-D' },
+  { rowKey: 'elosScanbodyKit', np: '', rp: 'IO 2A Kit', wp: '', '6.0': '' },
+  { rowKey: 'replicaIOS', np: 'PMA-NBR35-1', rp: 'PMA-NBR43-1', wp: 'PMA-NBR50-1', '6.0': 'PMA-NBR60-1' },
+  { rowKey: 'desktopScanbody', np: '300452', rp: '300453', wp: '300454', '6.0': '300469' },
 ];
 
 export const PROCERA_FCZ_IMPLANT_CROWN_DATA = [

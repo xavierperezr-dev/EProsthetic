@@ -34,7 +34,7 @@ const Modal: React.FC<ModalProps> = ({
   isDismissable = true,
   showHeader = true,
   id,
-  maxWidth = 'max-w-5xl',
+  maxWidth = 'max-w-7xl',
   isTableEditMode,
   onSaveChanges,
 }) => {

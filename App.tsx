@@ -21,7 +21,7 @@ import ConnectionSelector from './components/ConnectionSelector';
 import BotonesModalContent from './components/BotonesModalContent';
 import ExosModalContent from './components/ExosModalContent';
 import IntroModal from './components/IntroModal';
-import DownloadLibraries from './components/DownloadLibraries';
+import ResourceButtons from './components/ResourceButtons';
 import DownloadCenterModalContent from './components/DownloadCenterModalContent';
 
 const getStorePath = (country: Language) => {
@@ -45,7 +45,7 @@ const SupportModal: React.FC<{ t: any }> = ({ t }) => {
   const emailAddress = "soporte.tecnico@nobelbiocare.com";
   const phoneNumber = t.support_modal_phone_number_copy;
   const phoneTel = t.support_modal_phone_tel;
-  const newBookingUrl = "https://outlook.office365.com/book/SoporteTcnicoNobelBiocare@dentalco.org/";
+  const newBookingUrl = "https://outlook.office35.com/book/SoporteTcnicoNobelBiocare@dentalco.org/";
   const newQrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=128x128&data=${encodeURIComponent(newBookingUrl)}`;
 
   return (
@@ -129,7 +129,7 @@ function TablaComponentesConexion({
   imageUrl?: string;
 }) {
   const platformColors: { [key: string]: string } = {
-    '3.0': 'text-gray-600', np: 'text-pink-600', rp: 'text-amber-600', wp: 'text-blue-600', '6': 'text-green-600', 'np_rp': 'text-purple-600',
+    '3.0': 'text-gray-600', np: 'text-pink-600', rp: 'text-amber-600', wp: 'text-blue-600', '6.0': 'text-purple-600', '6': 'text-purple-600', 'np / rp¹': 'text-purple-600', 'np_rp': 'text-purple-600',
   };
 
   const renderCell = (ref: string) => {
@@ -159,7 +159,7 @@ function TablaComponentesConexion({
               <th className="px-3 py-1.5 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider">{t.conexion || 'Componente'}</th>
               {platformHeaders.map(p => (
                 <th key={p} className={`px-3 py-1.5 text-center text-xs font-semibold uppercase tracking-wider ${platformColors[p.toLowerCase()] || 'text-slate-700'}`}>
-                  {p === '6' ? '6.0' : p.replace('_', ' / ').toUpperCase()}
+                  {p}
                 </th>
               ))}
             </tr>
@@ -174,7 +174,8 @@ function TablaComponentesConexion({
                   </td>
                 ) : (
                   platformHeaders.map(p => {
-                    const colKey = p.toLowerCase().includes('/') ? p.replace(' / ', '_') : p.toLowerCase().split(' ')[0].replace(/[¹²³]/g, '');
+                    const cleanHeader = p.toLowerCase().replace(/[¹²³]/g, '');
+                    const colKey = cleanHeader.includes('/') ? cleanHeader.replace(/ /g, '').replace('/', '_') : cleanHeader.split(' ')[0];
                     return (
                       <td key={`${row.rowKey}-${p}`} className="px-2 py-1.5 text-center whitespace-nowrap text-xs text-slate-600 border-b border-l border-slate-200">
                         {renderCell(row[colKey])}
@@ -192,7 +193,18 @@ function TablaComponentesConexion({
   );
 }
 
-function TablaMUA({ data, title, t, platformHeaders, storeCountry, imageUrl, hasAngle = false }: { data: any[]; title: string; t: any; platformHeaders: string[]; storeCountry: Language; imageUrl?: string; hasAngle?: boolean; }) {
+// FIX: Refactored TablaMUA to be a React.FC with an explicit props interface to resolve TypeScript errors with the 'key' prop.
+interface TablaMUAProps {
+    data: any[];
+    title: string;
+    t: any;
+    platformHeaders: string[];
+    storeCountry: Language;
+    imageUrl?: string;
+    hasAngle?: boolean;
+}
+
+const TablaMUA: React.FC<TablaMUAProps> = ({ data, title, t, platformHeaders, storeCountry, imageUrl, hasAngle = false }) => {
     const renderCell = (ref: string) => {
         if (!ref || ref === '—') return <span className="text-slate-400">—</span>;
         const storePath = getStorePath(storeCountry);
@@ -346,15 +358,15 @@ const App: React.FC = () => {
                     if(caseData.id === 'EXO021'){
                          switch(selectedConn){
                             case 'CC': tableData = <TablaComponentesConexion data={UNIVERSAL_BASE_NON_ROTATING_CC_DATA} title={t.universalBaseTable.cc} platformHeaders={['np', 'rp', 'wp']} {...commonTableProps} t={t.universalBaseTable} />; break;
-                            case 'Branemark': tableData = <TablaComponentesConexion data={UNIVERSAL_BASE_NON_ROTATING_BRANEMARK_DATA} title={t.universalBaseTable.externalHex} platformHeaders={['np', 'rp', 'wp']} {...commonTableProps} t={t.universalBaseTable} />; break;
+                            case 'Brånemark': tableData = <TablaComponentesConexion data={UNIVERSAL_BASE_NON_ROTATING_BRANEMARK_DATA} title={t.universalBaseTable.externalHex} platformHeaders={['np', 'rp', 'wp']} {...commonTableProps} t={t.universalBaseTable} />; break;
                             case 'Tri-channel': tableData = <TablaComponentesConexion data={UNIVERSAL_BASE_NON_ROTATING_TRICHANNEL_DATA} title={t.universalBaseTable.triChannel} platformHeaders={['np', 'rp', 'wp']} {...commonTableProps} t={t.universalBaseTable} />; break;
                          }
                     } else { // EXO022
                          switch(selectedConn){
                             case 'CC': tableData = <><TablaComponentesConexion data={UNIVERSAL_BASE_ROTATING_CC_DATA} title={t.universalBaseRotatingCCTable.title} platformHeaders={['np', 'rp', 'wp']} {...commonTableProps} t={t.universalBaseRotatingTable} /><TablaComponentesConexion data={UNIVERSAL_BASE_ROTATING_CONICO_CC_DATA} title={t.universalBaseRotatingConicoCCTable.title} platformHeaders={['np', 'rp', 'wp']} {...commonTableProps} t={t.universalBaseRotatingTable} /></>; break;
-                            case 'Branemark': tableData = <><TablaComponentesConexion data={UNIVERSAL_BASE_ROTATING_BRANEMARK_DATA} title={t.universalBaseRotatingBranemarkTable.title} platformHeaders={['np', 'rp', 'wp']} {...commonTableProps} t={t.universalBaseRotatingTable} /><TablaComponentesConexion data={UNIVERSAL_BASE_ROTATING_CONICO_BRANEMARK_DATA} title={t.universalBaseRotatingConicoBranemarkTable.title} platformHeaders={['np', 'rp', 'wp']} {...commonTableProps} t={t.universalBaseRotatingTable} /></>; break;
+                            case 'Brånemark': tableData = <><TablaComponentesConexion data={UNIVERSAL_BASE_ROTATING_BRANEMARK_DATA} title={t.universalBaseRotatingBranemarkTable.title} platformHeaders={['np', 'rp', 'wp']} {...commonTableProps} t={t.universalBaseRotatingTable} /><TablaComponentesConexion data={UNIVERSAL_BASE_ROTATING_CONICO_BRANEMARK_DATA} title={t.universalBaseRotatingConicoBranemarkTable.title} platformHeaders={['np', 'rp', 'wp']} {...commonTableProps} t={t.universalBaseRotatingTable} /></>; break;
                             case 'Tri-channel': tableData = <><TablaComponentesConexion data={UNIVERSAL_BASE_ROTATING_TRICHANNEL_DATA} title={t.universalBaseRotatingTriChannelTable.title} platformHeaders={['np', 'rp', 'wp']} {...commonTableProps} t={t.universalBaseRotatingTable} /><TablaComponentesConexion data={UNIVERSAL_BASE_ROTATING_CONICO_TRICHANNEL_DATA} title={t.universalBaseRotatingConicoTriChannelTable.title} platformHeaders={['np', 'rp', 'wp']} {...commonTableProps} t={t.universalBaseRotatingTable} /></>; break;
-                            case 'Multi-Unit': tableData = <><TablaComponentesConexion data={UNIVERSAL_MULTI_UNIT_RECTO_DATA} title={t.universalMultiUnitTable.rectoTitle} platformHeaders={['np_rp', 'wp']} footerText={t.universalMultiUnitTable.footerRecto} {...commonTableProps} t={t.universalMultiUnitTable} /><TablaComponentesConexion data={UNIVERSAL_MULTI_UNIT_CONICO_DATA} title={t.universalMultiUnitTable.conicoTitle} platformHeaders={['np_rp', 'wp']} {...commonTableProps} t={t.universalMultiUnitTable} /></>; break;
+                            case 'Multi Unit': tableData = <><TablaComponentesConexion data={UNIVERSAL_MULTI_UNIT_RECTO_DATA} title={t.universalMultiUnitTable.rectoTitle} platformHeaders={['np_rp', 'wp']} footerText={t.universalMultiUnitTable.footerRecto} {...commonTableProps} t={t.universalMultiUnitTable} /><TablaComponentesConexion data={UNIVERSAL_MULTI_UNIT_CONICO_DATA} title={t.universalMultiUnitTable.conicoTitle} platformHeaders={['np_rp', 'wp']} {...commonTableProps} t={t.universalMultiUnitTable} /></>; break;
                          }
                     }
 
@@ -370,7 +382,7 @@ const App: React.FC = () => {
             }
             case 'EXO016': {
                 const Content = () => {
-                    const connections = ['CC', 'Branemark', 'Tri-channel', 'N1 TCC'];
+                    const connections = ['CC', 'Brånemark', 'Tri-channel', 'N1 TCC'];
                     const [selectedConn, setSelectedConn] = useState(initialConnection || 'CC');
                     if (selectedConn === 'N1 TCC') {
                         return (
@@ -395,19 +407,38 @@ const App: React.FC = () => {
                 const Content = () => {
                     const connections = caseData.compatibleConnections?.map(c => c.toString()) || [];
                     const [selectedConn, setSelectedConn] = useState(initialConnection || connections[0]);
-                    let tableData, tableTitle, platformHeaders;
-                    // FIX: Use a local `tableT` variable typed as `any` to avoid TypeScript errors when assigning different translation objects.
-                    let tableT: any;
+                    let tableData, tableTitle, platformHeaders, tableT, footer;
                     switch(selectedConn) {
-                        case 'CC': tableData = ZIRCONIA_BRIDGE_CC_DATA; tableTitle = t.zirconiaBridgeCCTable.title; platformHeaders = ['np', 'rp', 'wp']; tableT = t.proceraFCZImplantCrownTable; break;
-                        case 'Branemark': tableData = ZIRCONIA_BRIDGE_BRANEMARK_DATA; tableTitle = t.zirconiaBridgeBranemarkTable.title; platformHeaders = ['np', 'rp', 'wp']; tableT = t.proceraFCZImplantCrownTable; break;
-                        case 'Tri-channel': tableData = ZIRCONIA_BRIDGE_TRICHANNEL_DATA; tableTitle = t.zirconiaBridgeTriChannelTable.title; platformHeaders = ['np', 'rp', 'wp', '6']; tableT = t.proceraFCZImplantCrownTable; break;
-                        case 'Multi-Unit': tableData = MULTI_UNIT_CONNECTION_DATA; tableTitle = t.universalMultiUnitTable.connectionTitle; platformHeaders = ['np_rp', 'wp']; tableT=t.universalMultiUnitTable; break;
+                        case 'CC': 
+                            tableData = ZIRCONIA_BRIDGE_CC_DATA;
+                            tableTitle = t.zirconiaBridgeCCTable.title;
+                            platformHeaders = ['np', 'rp', 'wp'];
+                            tableT = t.proceraFCZImplantCrownTable;
+                            break;
+                        case 'Brånemark': 
+                            tableData = ZIRCONIA_BRIDGE_BRANEMARK_DATA;
+                            tableTitle = t.zirconiaBridgeBranemarkTable.title;
+                            platformHeaders = ['np', 'rp', 'wp'];
+                            tableT = t.proceraFCZImplantCrownTable;
+                            break;
+                        case 'Tri-channel': 
+                            tableData = ZIRCONIA_BRIDGE_TRICHANNEL_DATA;
+                            tableTitle = t.zirconiaBridgeTriChannelTable.title;
+                            platformHeaders = ['np', 'rp', 'wp', '6.0'];
+                            tableT = t.proceraFCZImplantCrownTable;
+                            break;
+                        case 'Multi Unit': 
+                            tableData = MULTI_UNIT_CONNECTION_DATA;
+                            tableTitle = t.universalMultiUnitTable.connectionTitle;
+                            platformHeaders = ['np / rp¹', 'wp²'];
+                            tableT=t.universalMultiUnitTable;
+                            footer = t.universalMultiUnitTable.footerRecto;
+                            break;
                     }
                     return (
                         <div>
                             <ConnectionSelector connections={connections} selectedConnection={selectedConn} onConnectionChange={setSelectedConn} t={t.modal} />
-                            {tableData && <TablaComponentesConexion data={tableData} title={tableTitle} platformHeaders={platformHeaders} {...commonTableProps} t={tableT} />}
+                            {tableData && <TablaComponentesConexion data={tableData} title={tableTitle} platformHeaders={platformHeaders} {...commonTableProps} t={tableT} footerText={footer} />}
                         </div>
                     );
                 };
@@ -439,12 +470,12 @@ const App: React.FC = () => {
             }
             case 'EXO027': {
                 const Content = () => {
-                    const connections = ['CC', 'Branemark', 'Tri-channel'];
+                    const connections = ['CC', 'Brånemark', 'Tri-channel'];
                     const [selectedConn, setSelectedConn] = useState(initialConnection || connections[0]);
                     let tableData, tableTitle, platformHeaders;
                     switch(selectedConn) {
                         case 'CC': tableData = PROCERA_TITANIUM_CC_DATA; tableTitle = t.proceraTitaniumPillarTable.ccTitle; platformHeaders = ['3.0', 'np', 'rp', 'wp']; break;
-                        case 'Branemark': tableData = PROCERA_TITANIUM_BRANEMARK_DATA; tableTitle = t.proceraTitaniumPillarTable.branemarkTitle; platformHeaders = ['np', 'rp', 'wp']; break;
+                        case 'Brånemark': tableData = PROCERA_TITANIUM_BRANEMARK_DATA; tableTitle = t.proceraTitaniumPillarTable.branemarkTitle; platformHeaders = ['np', 'rp', 'wp']; break;
                         case 'Tri-channel': tableData = PROCERA_TITANIUM_TRICHANNEL_DATA; tableTitle = t.proceraTitaniumPillarTable.triChannelTitle; platformHeaders = ['np', 'rp', 'wp', '6']; break;
                     }
                     return (
@@ -459,12 +490,12 @@ const App: React.FC = () => {
             }
              case 'EXO030': {
                 const Content = () => {
-                    const connections = ['CC', 'Branemark', 'Tri-channel'];
+                    const connections = ['CC', 'Brånemark', 'Tri-channel'];
                     const [selectedConn, setSelectedConn] = useState(initialConnection || connections[0]);
                     let tableData, tableTitle, platformHeaders, tableFooter;
                     switch(selectedConn) {
                         case 'CC': tableData = PROCERA_ZIRCONIA_CC_DATA; tableTitle = t.proceraZirconiaPillarTable.ccTitle; platformHeaders = ['np', 'rp', 'wp']; break;
-                        case 'Branemark': tableData = PROCERA_ZIRCONIA_BRANEMARK_DATA; tableTitle = t.proceraZirconiaPillarTable.branemarkTitle; platformHeaders = ['np', 'rp', 'wp']; break;
+                        case 'Brånemark': tableData = PROCERA_ZIRCONIA_BRANEMARK_DATA; tableTitle = t.proceraZirconiaPillarTable.branemarkTitle; platformHeaders = ['np', 'rp', 'wp']; break;
                         case 'Tri-channel': tableData = PROCERA_ZIRCONIA_TRICHANNEL_DATA; tableTitle = t.proceraZirconiaPillarTable.triChannelTitle; platformHeaders = ['np', 'rp', 'wp', '6']; tableFooter = t.proceraZirconiaPillarTable.triChannelFooter; break;
                     }
                     return (
@@ -479,16 +510,16 @@ const App: React.FC = () => {
             }
             case 'EXO029': {
                 const Content = () => {
-                    const connections = ['CC', 'Branemark', 'Tri-channel', 'Multi-Unit'];
+                    const connections = ['CC', 'Brånemark', 'Tri-channel', 'Multi Unit'];
                     const [selectedConn, setSelectedConn] = useState(initialConnection || connections[0]);
                     let tableData, tableTitle, platformHeaders;
                     // FIX: Use a local `tableT` variable typed as `any` to dynamically assign the correct translation object based on connection type.
                     let tableT: any;
                     switch(selectedConn) {
                         case 'CC': tableData = PROCERA_TITANIUM_BRIDGE_CC_DATA; tableTitle = t.proceraTitaniumBridgeTable.ccTitle; platformHeaders = ['np', 'rp', 'wp']; tableT = t.proceraFCZImplantCrownTable; break;
-                        case 'Branemark': tableData = PROCERA_TITANIUM_BRIDGE_BRANEMARK_DATA; tableTitle = t.proceraTitaniumBridgeTable.branemarkTitle; platformHeaders = ['np', 'rp', 'wp']; tableT = t.proceraFCZImplantCrownTable; break;
-                        case 'Tri-channel': tableData = PROCERA_TITANIUM_BRIDGE_TRICHANNEL_UPDATED_DATA; tableTitle = t.proceraTitaniumBridgeTable.triChannelTitle; platformHeaders = ['np', 'rp', 'wp', '6']; tableT = t.triChannelTestTable; break;
-                        case 'Multi-Unit': tableData = MULTI_UNIT_CONNECTION_DATA; tableTitle = t.universalMultiUnitTable.connectionTitle; platformHeaders = ['np_rp', 'wp']; tableT = t.universalMultiUnitTable; break;
+                        case 'Brånemark': tableData = PROCERA_TITANIUM_BRIDGE_BRANEMARK_DATA; tableTitle = t.proceraTitaniumBridgeTable.branemarkTitle; platformHeaders = ['np', 'rp', 'wp']; tableT = t.proceraFCZImplantCrownTable; break;
+                        case 'Tri-channel': tableData = PROCERA_TITANIUM_BRIDGE_TRICHANNEL_UPDATED_DATA; tableTitle = t.proceraTitaniumBridgeTable.triChannelTitle; platformHeaders = ['np', 'rp', 'wp', '6']; tableT = t.universalBaseTable; break;
+                        case 'Multi Unit': tableData = MULTI_UNIT_CONNECTION_DATA; tableTitle = t.universalMultiUnitTable.connectionTitle; platformHeaders = ['np_rp', 'wp']; tableT = t.universalMultiUnitTable; break;
                     }
                     return (
                         <div>
@@ -502,16 +533,16 @@ const App: React.FC = () => {
             }
             case 'EXO032': {
                 const Content = () => {
-                    const connections = ['CC', 'Branemark', 'Tri-channel', 'Multi-Unit'];
+                    const connections = ['CC', 'Brånemark', 'Tri-channel', 'Multi Unit'];
                     const [selectedConn, setSelectedConn] = useState(initialConnection || connections[0]);
                     let tableData, tableTitle, platformHeaders;
                     // FIX: Use a local `tableT` variable typed as `any` to dynamically assign the correct translation object based on connection type.
                     let tableT: any;
                     switch(selectedConn) {
                         case 'CC': tableData = NOBELPROCERA_TITANIUM_BAR_CC_DATA; tableTitle = t.nobelProceraTitaniumBarTable.ccTitle; platformHeaders = ['np', 'rp', 'wp']; tableT = t.nobelProceraTitaniumBarTable; break;
-                        case 'Branemark': tableData = NOBELPROCERA_TITANIUM_BAR_BRANEMARK_DATA; tableTitle = t.nobelProceraTitaniumBarTable.branemarkTitle; platformHeaders = ['np', 'rp', 'wp']; tableT = t.nobelProceraTitaniumBarTable; break;
+                        case 'Brånemark': tableData = NOBELPROCERA_TITANIUM_BAR_BRANEMARK_DATA; tableTitle = t.nobelProceraTitaniumBarTable.branemarkTitle; platformHeaders = ['np', 'rp', 'wp']; tableT = t.nobelProceraTitaniumBarTable; break;
                         case 'Tri-channel': tableData = NOBELPROCERA_TITANIUM_BAR_TRICHANNEL_DATA; tableTitle = t.nobelProceraTitaniumBarTable.triChannelTitle; platformHeaders = ['np', 'rp', 'wp', '6']; tableT = t.nobelProceraTitaniumBarTable; break;
-                        case 'Multi-Unit': tableData = MULTI_UNIT_CONNECTION_DATA; tableTitle = t.universalMultiUnitTable.connectionTitle; platformHeaders = ['np_rp', 'wp']; tableT = t.universalMultiUnitTable; break;
+                        case 'Multi Unit': tableData = MULTI_UNIT_CONNECTION_DATA; tableTitle = t.universalMultiUnitTable.connectionTitle; platformHeaders = ['np_rp', 'wp']; tableT = t.universalMultiUnitTable; break;
                     }
                     return (
                         <div>
@@ -538,7 +569,7 @@ const App: React.FC = () => {
             }
             case 'EXO014': {
                  const Content = () => {
-                    const connections = ['CC', 'N1 TCC', 'N1 Base', 'On1', 'Branemark', 'Tri-channel'];
+                    const connections = ['CC', 'N1 TCC', 'N1 Base', 'On1', 'Brånemark', 'Tri-channel'];
                     const [selectedConn, setSelectedConn] = useState(initialConnection || connections[0]);
                     let tableData, tableTitle, platformHeaders, tableT;
                     switch(selectedConn) {
@@ -546,7 +577,7 @@ const App: React.FC = () => {
                         case 'N1 TCC': tableData = N1_TCC_UNITARIA_NO_ROTATORIA_DATA; tableTitle = t.n1TccUnitariaTable.title; platformHeaders = ['np', 'rp']; tableT = t.n1TccUnitariaTable; break;
                         case 'N1 Base': tableData = N1_BASE_UNITARIA_NO_ROTATORIO_DATA; tableTitle = t.n1BaseUniversalTable.unitariaTitle; platformHeaders = ['np', 'rp']; tableT = t.n1BaseUniversalTable; break;
                         case 'On1': tableData = PILAR_UNIVERSAL_ON1_ROTATORIO_DATA; tableTitle = t.pilarUniversalOn1Table.rotatorioTitle; platformHeaders = ['np', 'rp', 'wp']; tableT = t.pilarUniversalOn1Table; break;
-                        case 'Branemark': tableData = PROCERA_TITANIUM_BRANEMARK_DATA; tableTitle = t.proceraTitaniumPillarTable.branemarkTitle; platformHeaders = ['np', 'rp', 'wp']; tableT = t.proceraFCZImplantCrownTable; break;
+                        case 'Brånemark': tableData = PROCERA_TITANIUM_BRANEMARK_DATA; tableTitle = t.proceraTitaniumPillarTable.branemarkTitle; platformHeaders = ['np', 'rp', 'wp']; tableT = t.proceraFCZImplantCrownTable; break;
                         case 'Tri-channel': tableData = PROCERA_TITANIUM_TRICHANNEL_DATA; tableTitle = t.proceraTitaniumPillarTable.triChannelTitle; platformHeaders = ['np', 'rp', 'wp', '6']; tableT = t.proceraFCZImplantCrownTable; break;
                     }
                     return (
@@ -574,7 +605,7 @@ const App: React.FC = () => {
             }
             case 'EXO034': {
                 const Content = () => {
-                    const connections = ['CC', 'N1 TCC', 'Branemark', 'Tri-channel'];
+                    const connections = ['CC', 'N1 TCC', 'Brånemark', 'Tri-channel'];
                     const [selectedConn, setSelectedConn] = useState(initialConnection || connections[0]);
                     let tables: React.ReactNode[] = [];
                     
@@ -587,7 +618,7 @@ const App: React.FC = () => {
                             tables.push(<TablaMUA key="n1-r" data={MUA_XEAL_N1_TCC_RECTO_DATA} title={t.multiUnitAbutmentsTable.n1TccRectoTitle} platformHeaders={['1.5','2.5','3.5','4.5']} t={t} storeCountry={storeCountry} imageUrl={caseData.imageUrls[2]} />);
                             tables.push(<TablaMUA key="n1-a" data={MUA_XEAL_N1_TCC_ANGULADO_DATA} title={t.multiUnitAbutmentsTable.n1TccAnguladoTitle} platformHeaders={['2.5','3.5','4.5']} t={t} storeCountry={storeCountry} hasAngle />);
                             break;
-                        case 'Branemark': 
+                        case 'Brånemark': 
                             tables.push(<TablaMUA key="br-r" data={MUA_BRANEMARK_RECTO_DATA} title={t.multiUnitAbutmentsTable.branemarkRectoTitle} platformHeaders={['1','2','3','4','5']} t={t} storeCountry={storeCountry} imageUrl={caseData.imageUrls[3]} />);
                             tables.push(<TablaMUA key="br-a" data={MUA_BRANEMARK_ANGULADO_DATA} title={t.multiUnitAbutmentsTable.branemarkAnguladoTitle} platformHeaders={['2','3','4','5']} t={t} storeCountry={storeCountry} hasAngle />);
                             break;
@@ -610,22 +641,22 @@ const App: React.FC = () => {
                 content = <p>{t.modal.no_components_description}</p>;
         }
 
+        if ((caseData.status === CaseStatus.Local || caseData.status === CaseStatus.Procera) && caseData.id !== 'EXO031') {
+            setModalFooter(
+                <ResourceButtons
+                    t={t.modal}
+                    caseData={caseData}
+                    onOpenDownloadsModal={() => handleHelp001Click(caseData)}
+                    language={language}
+                />
+            );
+        }
+
         const modalBody = (
             <React.Fragment>
                 <CaseDetailIcons caseData={caseData} isModal t={t.caseCard} connectionTypeForTable={initialConnection} />
-                <div className="my-6 border-t border-slate-200"></div>
+                <hr className="my-6 border-slate-200" />
                 {content}
-                {(caseData.status === CaseStatus.Local || caseData.status === CaseStatus.Procera) && caseData.id !== 'EXO031' && (
-                    <div className="my-6 border-t border-slate-200 pt-6">
-                        <DownloadLibraries
-                            title={t.modal.resources_title}
-                            t={t.preMilledBlanksTable}
-                            links={resourceLinks}
-                            onSupportClick={onSupportClick}
-                            isProcera={isProcera}
-                        />
-                    </div>
-                )}
             </React.Fragment>
         );
         
@@ -793,6 +824,7 @@ const App: React.FC = () => {
                 caseData={modalCaseData || undefined}
                 t={t}
                 id={modalId}
+                footer={modalFooter}
             >
                 {modalContent}
             </Modal>
