@@ -261,6 +261,26 @@ export const MuaIcon: React.FC<{ className?: string; withLeftDot?: boolean }> = 
   </svg>
 );
 
+export const MuaOtrosIcon: React.FC<{ className?: string; withLeftDot?: boolean }> = ({ className, withLeftDot }) => (
+  <svg viewBox="0 0 28 30" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <title>MUA Otros</title>
+    {withLeftDot && <circle cx="3" cy="12" r="3" fill="#4CAF50" stroke="none" />}
+    <g transform="translate(4, 0)">
+      <g>
+        <circle cx="12" cy="12" r="10" />
+        <circle cx="12" cy="12" r="7" />
+        <circle cx="12" cy="14" r="1.5" />
+        <path d="M10 11 A 3.5 3.5 0 0 1 14 11" />
+        <path d="M8.5 9 A 6 6 0 0 1 15.5 9" />
+      </g>
+      <text x="12" y="27" textAnchor="middle" fontSize="5" fontWeight="bold" fill="currentColor" stroke="none">
+          <tspan x="12">MUA</tspan>
+          <tspan x="12" dy="5">otros</tspan>
+      </text>
+    </g>
+  </svg>
+);
+
 export const N1Icon: React.FC<{ className?: string; withLeftDot?: boolean }> = ({ className, withLeftDot }) => (
     <svg viewBox="0 0 28 30" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
         <title>N1 Profile</title>

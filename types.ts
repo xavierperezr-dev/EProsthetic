@@ -25,7 +25,7 @@ export enum CaseStatus {
 export enum ConnectionType {
   Branemark = "Brånemark",
   CC = "CC",
-  MultiUnit = "Multi Unit",
+  MultiUnit = "MUA",
   N1 = "N1",
   N1Base = "N1 Base",
   On1 = "On1",
@@ -60,9 +60,9 @@ export interface DentalCase {
 
 export interface Filters {
   searchText: string;
-  status: CaseStatus | "";
+  status: CaseStatus[];
   type: RestorationType | "";
-  connectionType: ConnectionType | "";
+  connectionType: ConnectionType[];
   softwareType: SoftwareType | "";
-  angulation: "true" | "false" | "";
+  angulation: string;
 }

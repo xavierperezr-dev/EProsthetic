@@ -1,5 +1,5 @@
 import React from 'react';
-import { InfoIcon, DownloadIcon, GlobeIcon, MenuIcon } from './icons';
+import { InfoIcon, DownloadIcon, GlobeIcon, MenuIcon, SparklesIcon } from './icons';
 import { Language } from '../types';
 
 interface HeaderProps {
@@ -16,7 +16,7 @@ interface HeaderProps {
   onToggleMenu: () => void;
   menuData: { [key: string]: { id: string; label: string; imageUrl: string; }[] };
   onMenuItemClick: (caseId: string) => void;
-  onOrientadorClick: () => void;
+  onAssistantClick: () => void;
 }
 
 const Header: React.FC<HeaderProps> = ({ 
@@ -33,7 +33,7 @@ const Header: React.FC<HeaderProps> = ({
   onToggleMenu,
   menuData,
   onMenuItemClick,
-  onOrientadorClick
+  onAssistantClick
 }) => {
 
   return (
@@ -42,10 +42,11 @@ const Header: React.FC<HeaderProps> = ({
         {/* Top row */}
         <div className="flex justify-between items-center gap-4">
            <button
-              onClick={onOrientadorClick}
-              className="inline-flex items-center justify-center gap-2 h-9 px-4 text-sm font-semibold text-[color:var(--text-primary)] bg-white rounded-md border border-[color:var(--accent-primary)] hover:bg-purple-50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[color:var(--accent-primary)]"
+              onClick={onAssistantClick}
+              className="inline-flex items-center justify-center gap-2 h-9 px-4 text-sm font-semibold text-white bg-blue-600 rounded-md hover:bg-blue-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
            >
-              Orientador .......
+              <SparklesIcon className="h-5 w-5 text-yellow-300" />
+              <span>{t.assistant_button}</span>
            </button>
           <div className="flex items-center gap-4">
             {(language === 'en' || language === 'es' || language === 'pt') && (

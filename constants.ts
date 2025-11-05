@@ -243,11 +243,11 @@ export const MOCK_CASES: DentalCase[] = [
     id: "EXO022",
     caseNumber: 11,
     patientName: {
-      en: "Nobel Biocare® - Universal Base Engaging",
-      es: "Nobel Biocare® - Base Universal Rotatoria",
-      pt: "Nobel Biocare® - Base Universal Rotatória",
-      fr: "Nobel Biocare® - Base Universelle Rotative",
-      sv: "Nobel Biocare® - Universal Base Roterande"
+      en: "Universal Base Engaging",
+      es: "Base Universal Rotatoria",
+      pt: "Base Universal Rotatória",
+      fr: "Base Universelle Rotative",
+      sv: "Universal Base Roterande"
     },
     restorationType: [RestorationType.Multiple],
     connectionType: ConnectionType.MultiUnit,
@@ -319,7 +319,7 @@ export const MOCK_CASES: DentalCase[] = [
     },
     restorationType: [RestorationType.Unitaria],
     connectionType: ConnectionType.N1,
-    compatibleConnections: [ConnectionType.CC, ConnectionType.N1, ConnectionType.N1Base, ConnectionType.On1, ConnectionType.Branemark, ConnectionType.TriChannel],
+    compatibleConnections: [ConnectionType.CC, ConnectionType.N1, ConnectionType.N1Base, ConnectionType.Branemark, ConnectionType.TriChannel],
     n1Type: N1Type.BaseASC,
     status: CaseStatus.Standard,
     reference: "REF-2024-09-10",
@@ -388,9 +388,11 @@ export const MOCK_CASES: DentalCase[] = [
     },
     restorationType: [RestorationType.Multiple],
     connectionType: ConnectionType.MultiUnit,
+    compatibleConnections: [ConnectionType.CC, ConnectionType.TriChannel, ConnectionType.Branemark, ConnectionType.N1, ConnectionType.N1Base, ConnectionType.MultiUnit],
     status: CaseStatus.Otros,
     reference: "REF-2024-10-25",
     imageUrls: ["https://dexis.com/sites/g/files/wdvifx221/files/styles/optimized/public/DTX_Product_hero2.png.webp?itok=0Xfhaf9L"],
+    angulacion: false,
   },
   {
     id: "EXO033",
@@ -410,7 +412,7 @@ export const MOCK_CASES: DentalCase[] = [
       "https://www.ganarnobelbiocare.com/nobeldesign/E-Prosthetic/Images/Temp%20Screw.png"
     ],
     baseCementada: false,
-    angulacion: false,
+    angulacion: true,
     torque: 15,
   },
   {
@@ -1063,6 +1065,83 @@ export const MUA_TRICHANNEL_ANGULADO_DATA = [
     { rowKey: 'wp_30', angle: '30°', '2': '—', '3': '—', '4': '29240', '5': '29241' },
 ];
 
+export const MUA_OTRAS_MARCAS_ASTRA_EV_DATA = [
+    { connection: '3.6', angle: '0°', '1.5 mm': 'TRM42.406/1', '2.5 mm': 'TRM42.406/2', '3.5 mm': 'TRM42.406/3', '4.5 mm': '-', '5.5 mm': '-' },
+    { connection: '3.6', angle: '17°', '1.5 mm': 'TRM42.059/1', '2.5 mm': 'TRM42.059/2', '3.5 mm': 'TRM46.059/3', '4.5 mm': 'TRM46.059/4', '5.5 mm': '-' },
+    { connection: '3.6', angle: '30°', '1.5 mm': '-', '2.5 mm': '-', '3.5 mm': '-', '4.5 mm': '-', '5.5 mm': '-' },
+    { connection: '4.2', angle: '0°', '1.5 mm': 'TRM42.036/1', '2.5 mm': 'TRM42.036/2', '3.5 mm': 'TRM42.036/3', '4.5 mm': 'TRM47.036/4', '5.5 mm': 'TRM47.036/5' },
+    { connection: '4.2', angle: '17°', '1.5 mm': '-', '2.5 mm': '-', '3.5 mm': 'TRM46.036/3', '4.5 mm': 'TRM46.036/4', '5.5 mm': 'TRM47.036/5¹' },
+    { connection: '4.2', angle: '30°', '1.5 mm': '-', '2.5 mm': '-', '3.5 mm': '-', '4.5 mm': '-', '5.5 mm': '-' },
+    { connection: '4.8', angle: '0°', '1.5 mm': 'TRM42.037/1', '2.5 mm': 'TRM42.037/2', '3.5 mm': 'TRM42.037/3', '4.5 mm': '-', '5.5 mm': '-' },
+    { connection: '4.8', angle: '17°', '1.5 mm': '-', '2.5 mm': '-', '3.5 mm': 'TRM46.037/3', '4.5 mm': 'TRM46.037/4', '5.5 mm': '-' },
+    { connection: '4.8', angle: '30°', '1.5 mm': '-', '2.5 mm': '-', '3.5 mm': '-', '4.5 mm': '-', '5.5 mm': '-' },
+    { connection: '5.4', angle: '0°', '1.5 mm': 'TRM42.407/1', '2.5 mm': 'TRM42.407/2', '3.5 mm': '-', '4.5 mm': '-', '5.5 mm': '-' },
+    { connection: '5.4', angle: '17°', '1.5 mm': '-', '2.5 mm': '-', '3.5 mm': '-', '4.5 mm': 'TRM47.037/4', '5.5 mm': 'TRM47.037/5' },
+    { connection: '5.4', angle: '30°', '1.5 mm': '-', '2.5 mm': '-', '3.5 mm': '-', '4.5 mm': '-', '5.5 mm': '-' },
+];
+
+export const MUA_OTRAS_MARCAS_ASTRA_OSSEOSPEED_DATA = [
+    { connection: 'RP', angle: '0°', '1.5 mm': 'TRM42.024/1', '2.5 mm': 'TRM42.024/2', '3.5 mm': 'TRM42.024/3', '4.5 mm': '-', '5.5 mm': '-' },
+    { connection: 'RP', angle: '17°', '1.5 mm': '-', '2.5 mm': '-', '3.5 mm': 'TRM46.024/3', '4.5 mm': 'TRM46.024/4', '5.5 mm': 'TRM47.024/5' },
+    { connection: 'RP', angle: '30°', '1.5 mm': '-', '2.5 mm': '-', '3.5 mm': '-', '4.5 mm': '-', '5.5 mm': '-' },
+    { connection: 'WP', angle: '0°', '1.5 mm': 'TRM42.025/1', '2.5 mm': 'TRM42.025/2', '3.5 mm': 'TRM42.025/3', '4.5 mm': '-', '5.5 mm': '-' },
+    { connection: 'WP', angle: '17°', '1.5 mm': '-', '2.5 mm': '-', '3.5 mm': 'TRM46.025/3', '4.5 mm': 'TRM46.025/4', '5.5 mm': 'TRM47.025/5' },
+    { connection: 'WP', angle: '30°', '1.5 mm': '-', '2.5 mm': '-', '3.5 mm': '-', '4.5 mm': '-', '5.5 mm': '-' },
+];
+
+export const MUA_OTRAS_MARCAS_BIOHORIZONS_DATA = [
+    { connection: 'NP', angle: '0°', '1 mm': 'TRM42.087/1', '2 mm': 'TRM42.087/2', '3 mm': 'TRM42.087/3', '4 mm': 'TRM42.087/4', '5 mm': 'TRM42.087/5' },
+    { connection: 'RP', angle: '0°', '1 mm': 'TRM42.088/1', '2 mm': 'TRM42.088/2', '3 mm': 'TRM42.088/3', '4 mm': '-', '5 mm': '-' },
+];
+
+export const MUA_OTRAS_MARCAS_DENTIUM_DATA = [
+    { connection: '3.6', angle: '0°', '1.5 mm': '-', '2.5 mm': '-', '3.5 mm': '-' },
+    { connection: '4.0', angle: '0°', '1.5 mm': '-', '2.5 mm': '-', '3.5 mm': '-' },
+    { connection: '4.5', angle: '0°', '1.5 mm': 'TRM42.090/1', '2.5 mm': 'TRM42.090/2', '3.5 mm': 'TRM42.090/3' },
+    { connection: '5.0', angle: '0°', '1.5 mm': '-', '2.5 mm': '-', '3.5 mm': '-' },
+];
+
+export const MUA_OTRAS_MARCAS_NEODENT_DATA = [
+    { connection: 'GM', angle: '0°', '1.5 mm': 'TRM42.035/1', '2.5 mm': 'TRM42.035/2', '3.5 mm': 'TRM42.035/3', '4.5 mm': '-' },
+    { connection: 'GM', angle: '17°', '1.5 mm': '-', '2.5 mm': 'TRM46.035/2', '3.5 mm': 'TRM46.035/3', '4.5 mm': 'TRM47.035/4' },
+    { connection: 'GM', angle: '30°', '1.5 mm': '-', '2.5 mm': '-', '3.5 mm': '-', '4.5 mm': '-' },
+];
+
+export const MUA_OTRAS_MARCAS_OSSTEM_DATA = [
+    { connection: 'Mini', angle: '0°', '1.5 mm': 'TRM42.072/1', '2.5 mm': 'TRM42.072/2', '3.5 mm': 'TRM42.072/3' },
+    { connection: 'Regular', angle: '0°', '1.5 mm': 'TRM42.073/1', '2.5 mm': 'TRM42.073/2', '3.5 mm': 'TRM42.073/3' },
+];
+
+export const MUA_OTRAS_MARCAS_STRAUMANN_BL_DATA = [
+    { connection: 'NP', angle: '0°', '1.5 mm': 'TRM42.043/1', '2.5 mm': 'TRM42.043/2', '3.5 mm': 'TRM42.043/3', '4.5 mm': '-' },
+    { connection: 'NP', angle: '17°', '1.5 mm': '-', '2.5 mm': 'TRM46.043/2', '3.5 mm': 'TRM46.043/3', '4.5 mm': 'TRM47.043/4' },
+    { connection: 'NP', angle: '30°', '1.5 mm': '-', '2.5 mm': '-', '3.5 mm': '-', '4.5 mm': '-' },
+    { connection: 'RP', angle: '0°', '1.5 mm': 'TRM42.044/1', '2.5 mm': 'TRM42.044/2', '3.5 mm': 'TRM42.044/3', '4.5 mm': '-' },
+    { connection: 'RP', angle: '17°', '1.5 mm': '-', '2.5 mm': 'TRM46.044/2', '3.5 mm': 'TRM46.044/3', '4.5 mm': 'TRM47.044/4' },
+    { connection: 'RP', angle: '30°', '1.5 mm': '-', '2.5 mm': '-', '3.5 mm': '-', '4.5 mm': '-' },
+];
+
+export const MUA_OTRAS_MARCAS_STRAUMANN_BLX_DATA = [
+    { connection: 'RB/WB', angle: '0°', '1.5 mm': 'TRM42.062/1', '2.5 mm': 'TRM42.062/2', '3.5 mm': '-', '4.5 mm': '-' },
+    { connection: 'RB/WB', angle: '17°', '1.5 mm': '-', '2.5 mm': 'TRM46.062/2', '3.5 mm': 'TRM46.062/3', '4.5 mm': 'TRM47.062/4' },
+    { connection: 'RB/WB', angle: '30°', '1.5 mm': '-', '2.5 mm': '-', '3.5 mm': '-', '4.5 mm': '-' },
+];
+
+export const MUA_OTRAS_MARCAS_ZIMMER_DATA = [
+    { connection: 'NP', angle: '0°', '1 mm': 'TRM42.019/1', '2 mm': 'TRM42.019/2', '2.5 mm': '-', '3 mm': 'TRM42.019/3', '3.5 mm': '-', '4 mm': '-', '4.5 mm': '-', '5 mm': 'TRM42.019/5' },
+    { connection: 'NP', angle: '17°', '1 mm': '-', '2 mm': '-', '2.5 mm': '-', '3 mm': 'TRM46.019/3', '3.5 mm': '-', '4 mm': 'TRM47.019/4', '4.5 mm': '-', '5 mm': '-' },
+    { connection: 'NP', angle: '30°', '1 mm': '-', '2 mm': '-', '2.5 mm': '-', '3 mm': '-', '3.5 mm': '-', '4 mm': '-', '4.5 mm': '-', '5 mm': '-' },
+    { connection: 'RP', angle: '0°', '1 mm': 'TRM42.020/1', '2 mm': 'TRM42.020/2', '2.5 mm': '-', '3 mm': '-', '3.5 mm': 'TRM42.020/3', '4 mm': 'TRM42.020/4', '4.5 mm': '-', '5 mm': '-' },
+    { connection: 'RP', angle: '17°', '1 mm': '-', '2 mm': '-', '2.5 mm': 'TRM46.020/2¹', '3 mm': '-', '3.5 mm': 'TRM46.020/3¹', '4 mm': '-', '4.5 mm': 'TRM47.020/4¹', '5 mm': '-' },
+    { connection: 'RP', angle: '30°', '1 mm': '-', '2 mm': '-', '2.5 mm': '-', '3 mm': '-', '3.5 mm': '-', '4 mm': '-', '4.5 mm': '-', '5 mm': '-' },
+];
+
+export const MUA_OTRAS_MARCAS_3I_DATA = [
+    { connection: 'NP', angle: '0°', '1 mm': 'TRM42.009/1', '2 mm': 'TRM42.009/2', '3 mm': 'TRM42.009/3', '4 mm': '-', '5 mm': '-' },
+    { connection: 'RP', angle: '0°', '1 mm': 'TRM42.017/1', '2 mm': 'TRM42.017/2', '3 mm': '-', '4 mm': 'TRM42.017/4', '5 mm': 'TRM42.017/5' },
+    { connection: 'RP', angle: '17°', '1 mm': '-', '2 mm': 'TRM46.012/2', '3 mm': 'TRM46.012/3', '4 mm': 'TRM46.012/4', '5 mm': '-' },
+    { connection: 'RP', angle: '30°', '1 mm': '-', '2 mm': '-', '3 mm': '-', '4 mm': '-', '5 mm': '-' },
+];
 
 export const REFERENCE_IMAGE_MAP: { [key: string]: string } = {
   // CC

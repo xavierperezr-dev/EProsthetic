@@ -70,17 +70,20 @@ const Modal: React.FC<ModalProps> = ({
   if (!isOpen || !modalRoot) return null;
 
   const isIntroModal = id === 'modal-intro';
+  const isAssistantModal = id === 'modal-assistant';
 
-  const modalContainerClasses = `relative z-10 w-full ${maxWidth} grid grid-rows-[auto_1fr_auto] max-h-[90vh] ${
-    isIntroModal
+  const modalContainerClasses = `relative z-10 w-full ${maxWidth} ${
+    isAssistantModal ? '' : 'grid grid-rows-[auto_1fr_auto]' // Don't use grid for assistant as it handles its own layout
+  } max-h-[90vh] ${
+    isIntroModal || isAssistantModal
       ? 'bg-transparent'
       : 'bg-white rounded-lg shadow-2xl border border-slate-200'
   }`;
-
-  const contentContainerClasses = `overflow-y-auto max-h-[65vh] ${
-    isIntroModal
-      ? ``
-      : `p-6`
+  
+  const contentContainerClasses = ` ${
+    isIntroModal || isAssistantModal
+      ? '' // Assistant and Intro handle their own padding and scroll
+      : 'overflow-y-auto max-h-[65vh] p-6'
   }`;
 
   const statusTagStyles: Record<CaseStatus, string> = {
@@ -116,7 +119,7 @@ const Modal: React.FC<ModalProps> = ({
         tabIndex={-1}
         className={modalContainerClasses}
       >
-        {showHeader && (
+        {showHeader && !isAssistantModal && (
           <div className="p-4 border-b border-slate-200 flex-shrink-0">
             <div className="flex items-center justify-between gap-4">
               <div className="flex items-center gap-3 flex-grow min-w-0">
@@ -159,7 +162,7 @@ const Modal: React.FC<ModalProps> = ({
           {children}
         </div>
         
-        {(footer || (isTableEditMode && onSaveChanges)) && (
+        {(footer || (isTableEditMode && onSaveChanges)) && !isAssistantModal && (
           <div className="p-4 bg-slate-50 border-t border-slate-200 rounded-b-lg mt-auto flex-shrink-0 flex items-center justify-between">
             <div>{footer}</div>
             {isTableEditMode && onSaveChanges && (

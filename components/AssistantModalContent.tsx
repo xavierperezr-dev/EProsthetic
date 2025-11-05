@@ -34,13 +34,21 @@ const OptionCard: React.FC<{label: string, icon: React.ReactNode, isSelected: bo
     return (
         <button 
             onClick={onClick} 
-            className={`p-6 rounded-xl border-2 text-center transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 ${isSelected ? 'bg-blue-100 border-blue-500 shadow-lg' : 'bg-white border-slate-300 hover:border-blue-400 hover:shadow-md'}`}
+            className={`p-6 rounded-xl border-2 text-center transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-400 bg-slate-900/60 backdrop-blur-md ${isSelected ? 'border-blue-400 shadow-lg scale-105' : 'border-slate-600 hover:border-slate-400 hover:bg-slate-900/80'}`}
         >
             <div className="mb-4 flex justify-center items-center h-24">{icon}</div>
-            <p className={`font-semibold text-lg ${isSelected ? 'text-blue-800' : 'text-slate-700'}`}>{label}</p>
+            <p className={`font-semibold text-lg ${isSelected ? 'text-white' : 'text-slate-100'}`}>{label}</p>
         </button>
     );
 };
+
+// FIX: Moved SummaryBadge outside the AssistantModalContent component definition. This prevents it from being redeclared on every render and allows TypeScript to correctly identify it as a React component, thus resolving issues with the 'key' prop.
+const SummaryBadge: React.FC<{ icon: React.ReactNode; label: string }> = ({ icon, label }) => (
+    <div className="flex items-center gap-1.5 bg-slate-200 text-slate-800 rounded-full px-2.5 py-1 text-xs font-semibold animate-simple-fade-in">
+        {icon}
+        <span>{label}</span>
+    </div>
+);
 
 const AssistantModalContent: React.FC<AssistantModalContentProps> = ({ onClose, onApplyFilters, t, allCases, language }) => {
   const steps = [
@@ -59,7 +67,6 @@ const AssistantModalContent: React.FC<AssistantModalContentProps> = ({ onClose, 
   });
   const [noResultsError, setNoResultsError] = useState(false);
   const [results, setResults] = useState<DentalCase[] | null>(null);
-  const [portalNode, setPortalNode] = useState<Element | null>(null);
   const [speakingCaseId, setSpeakingCaseId] = useState<string | null>(null);
 
   const handleSpeak = (text: string, caseId: string) => {
@@ -99,18 +106,6 @@ const AssistantModalContent: React.FC<AssistantModalContentProps> = ({ onClose, 
   }, [currentStep]);
 
   useEffect(() => {
-    const node = document.getElementById('modal-header-extra-content');
-    setPortalNode(node);
-
-    // Cleanup function to clear the content when the assistant is closed
-    return () => {
-      if (node) {
-        node.innerHTML = '';
-      }
-    };
-  }, []);
-
-  useEffect(() => {
     // If the restoration type is set to Unitaria, and MUA is selected, remove it.
     if (selections.restorationType === RestorationType.Unitaria && selections.connections.includes(ConnectionType.MultiUnit)) {
       setSelections(prev => ({
@@ -141,6 +136,10 @@ const AssistantModalContent: React.FC<AssistantModalContentProps> = ({ onClose, 
     setNoResultsError(false);
     
     const filteredResults = allCases.filter(c => {
+        if (selections.angulation && c.id === 'EXO031') {
+            return false;
+        }
+
         const matchesStatus = selections.status.length === 0 || selections.status.includes(c.status);
         const matchesType = !selections.restorationType || c.restorationType.includes(selections.restorationType);
         
@@ -152,10 +151,8 @@ const AssistantModalContent: React.FC<AssistantModalContentProps> = ({ onClose, 
 
         const matchesAngulation = (() => {
             if (selections.angulation === 'true') {
-                // If "Yes" is selected, only show angulated.
                 return getEffectiveAngulation(c) === true;
             }
-            // If "No" is selected ('false'), or nothing is selected (''), show all.
             return true;
         })();
         
@@ -179,12 +176,108 @@ const AssistantModalContent: React.FC<AssistantModalContentProps> = ({ onClose, 
   const handleConnectionToggle = (connection: ConnectionType) => {
     setNoResultsError(false);
     setSelections(prev => {
-        const newConnections = prev.connections.includes(connection)
-            ? prev.connections.filter(c => c !== connection)
-            : [...prev.connections, connection];
-        return { ...prev, connections: newConnections };
+        const { connections, restorationType } = prev;
+        const isCurrentlySelected = connections.includes(connection);
+        const tempConnections = new Set(connections);
+
+        if (isCurrentlySelected) {
+            tempConnections.delete(connection);
+        } else {
+            tempConnections.add(connection);
+
+            if (restorationType === RestorationType.Unitaria) {
+                if (connection === ConnectionType.N1) tempConnections.add(ConnectionType.N1Base);
+                if (connection === ConnectionType.N1Base) tempConnections.add(ConnectionType.N1);
+            } else if (restorationType === RestorationType.Multiple) {
+                if (connection === ConnectionType.N1Base || connection === ConnectionType.N1) {
+                    tempConnections.add(ConnectionType.N1);
+                    tempConnections.add(ConnectionType.N1Base);
+                    tempConnections.add(ConnectionType.MultiUnit);
+                }
+                if ([ConnectionType.CC, ConnectionType.Branemark, ConnectionType.TriChannel].includes(connection)) {
+                    tempConnections.add(ConnectionType.MultiUnit);
+                }
+            }
+        }
+
+        return { ...prev, connections: [...tempConnections] };
     });
   };
+
+    const getRestorationText = () => {
+        if (selections.restorationType === RestorationType.Unitaria) return t.wizard.step1_option1;
+        if (selections.restorationType === RestorationType.Multiple) return t.wizard.step1_option2;
+        return null;
+    };
+    const getStatusText = () => {
+        if (selections.status.length === 0) return null;
+        return selections.status.map(s => t.filterBar.options[s]).join(', ');
+    };
+    const getAngulationText = () => {
+        if (selections.angulation === 'true') return 'ASC';
+        if (selections.angulation === 'false') return 'No ASC';
+        return null;
+    };
+
+    const renderSummaryBadges = () => {
+        const badges = [];
+
+        if (selections.restorationType) {
+            badges.push(
+                <SummaryBadge
+                    key="restoration"
+                    label={getRestorationText() || ''}
+                    icon={selections.restorationType === RestorationType.Unitaria ? <Icons.UnitariaIndicatorIcon className="h-4 w-4" /> : <Icons.MultipleIndicatorIcon className="h-4 w-4" />}
+                />
+            );
+        }
+
+        if (selections.status.length > 0) {
+            badges.push(
+                <SummaryBadge
+                    key="status"
+                    label={getStatusText() || ''}
+                    icon={<Icons.FilterIcon className="h-3 w-3" />}
+                />
+            );
+        }
+        
+        if (selections.angulation) {
+            badges.push(
+                <SummaryBadge
+                    key="angulation"
+                    label={getAngulationText() || ''}
+                    icon={selections.angulation === 'true' ? <Icons.AngulationYesIcon className="h-4 w-4" /> : <Icons.AngulationNoIcon className="h-4 w-4" />}
+                />
+            );
+        }
+
+        if (selections.connections.length > 0) {
+            const connectionIcons: Record<ConnectionType, React.ReactNode> = {
+                [ConnectionType.CC]: <Icons.CcIcon className="h-4 w-4" />,
+                [ConnectionType.MultiUnit]: <Icons.MuaIcon className="h-4 w-4" />,
+                [ConnectionType.N1]: <Icons.N1Icon className="h-4 w-4" />,
+                [ConnectionType.N1Base]: <Icons.N1BaseIcon className="h-4 w-4" />,
+                [ConnectionType.On1]: <Icons.On1Icon className="h-4 w-4" />,
+                [ConnectionType.Branemark]: <Icons.ExtIcon className="h-4 w-4" />,
+                [ConnectionType.TriChannel]: <Icons.TriIcon className="h-4 w-4" />,
+                [ConnectionType.Pearl]: <Icons.PearlIcon className="h-4 w-4" />,
+            };
+
+            selections.connections.forEach(conn => {
+                badges.push(
+                    <SummaryBadge
+                        key={conn}
+                        label={conn}
+                        icon={connectionIcons[conn]}
+                    />
+                );
+            });
+        }
+
+        return badges;
+    };
+
 
   const renderStepContent = () => {
     switch (currentStep) {
@@ -193,13 +286,13 @@ const AssistantModalContent: React.FC<AssistantModalContentProps> = ({ onClose, 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <OptionCard
               label={t.wizard.step1_option1}
-              icon={<Icons.UnitariaIndicatorIcon className="h-24 w-24 text-slate-700" />}
+              icon={<Icons.UnitariaIndicatorIcon className="h-24 w-24 text-white" />}
               isSelected={selections.restorationType === RestorationType.Unitaria}
               onClick={() => handleSelectAndAdvance('restorationType', RestorationType.Unitaria)}
             />
             <OptionCard
               label={t.wizard.step1_option2}
-              icon={<Icons.MultipleIndicatorIcon className="h-24 w-24 text-slate-700" />}
+              icon={<Icons.MultipleIndicatorIcon className="h-24 w-24 text-white" />}
               isSelected={selections.restorationType === RestorationType.Multiple}
               onClick={() => handleSelectAndAdvance('restorationType', RestorationType.Multiple)}
             />
@@ -210,12 +303,7 @@ const AssistantModalContent: React.FC<AssistantModalContentProps> = ({ onClose, 
         
         const handleStatusToggle = (status: CaseStatus) => {
             setNoResultsError(false);
-            setSelections(prev => {
-                const newStatus = prev.status.includes(status)
-                    ? prev.status.filter(s => s !== status)
-                    : [...prev.status, status];
-                return { ...prev, status: newStatus };
-            });
+            setSelections(prev => ({ ...prev, status: prev.status.includes(status) ? prev.status.filter(s => s !== status) : [...prev.status, status] }));
         };
 
         return (
@@ -224,7 +312,7 @@ const AssistantModalContent: React.FC<AssistantModalContentProps> = ({ onClose, 
                     <button
                         key={opt}
                         onClick={() => handleStatusToggle(opt)}
-                        className={`p-4 h-20 rounded-lg border-2 text-center font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 relative ${selections.status.includes(opt) ? 'bg-blue-100 border-blue-500 text-blue-800' : 'bg-white border-slate-300 hover:border-blue-400'}`}
+                        className={`p-4 h-20 rounded-lg border-2 text-center font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-400 bg-slate-900/60 backdrop-blur-md text-white relative ${selections.status.includes(opt) ? 'border-blue-400' : 'border-slate-600 hover:border-slate-400'}`}
                     >
                         {t.wizard.production_options[opt]}
                         {selections.status.includes(opt) && (
@@ -241,13 +329,13 @@ const AssistantModalContent: React.FC<AssistantModalContentProps> = ({ onClose, 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <OptionCard
               label={t.wizard.step3_option1}
-              icon={<Icons.AngulationYesIcon className="h-24 w-24 text-slate-700" />}
+              icon={<Icons.AngulationYesIcon className="h-24 w-24 text-white" />}
               isSelected={selections.angulation === 'true'}
               onClick={() => handleSelectAndAdvance('angulation', 'true')}
             />
             <OptionCard
               label={t.wizard.step3_option2}
-              icon={<Icons.AngulationNoIcon className="h-24 w-24 text-slate-700" />}
+              icon={<Icons.AngulationNoIcon className="h-24 w-24 text-white" />}
               isSelected={selections.angulation === 'false'}
               onClick={() => handleSelectAndAdvance('angulation', 'false')}
             />
@@ -276,10 +364,10 @@ const AssistantModalContent: React.FC<AssistantModalContentProps> = ({ onClose, 
                             onClick={() => handleConnectionToggle(opt.type)} 
                             disabled={isDisabled}
                             title={isDisabled ? "No disponible para restauración unitaria" : opt.type}
-                            className={`p-2 rounded-lg border-2 flex flex-col items-center justify-center gap-2 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 relative ${
-                                selections.connections.includes(opt.type) ? 'bg-blue-100 border-blue-500' : 
-                                isDisabled ? 'bg-slate-100 border-slate-200 opacity-60 cursor-not-allowed' : 
-                                'bg-white border-slate-300 hover:border-blue-400'
+                            className={`p-2 rounded-lg border-2 flex flex-col items-center justify-center gap-2 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-400 relative text-white bg-slate-900/60 backdrop-blur-md ${
+                                selections.connections.includes(opt.type) ? 'border-blue-400' : 
+                                isDisabled ? 'border-slate-700 opacity-50 cursor-not-allowed' : 
+                                'border-slate-600 hover:border-slate-400'
                             }`}
                         >
                             <div className="h-20 w-20 flex items-center justify-center">{opt.icon}</div>
@@ -302,24 +390,24 @@ const AssistantModalContent: React.FC<AssistantModalContentProps> = ({ onClose, 
                             const isSpeaking = speakingCaseId === caseData.id;
 
                             return (
-                                <li key={caseData.id} className="p-4 bg-white border border-slate-200 rounded-lg shadow-sm">
+                                <li key={caseData.id} className="p-4 bg-white/5 border border-white/20 rounded-lg shadow-sm">
                                     <div className="flex items-start gap-4">
                                         <img 
                                             src={caseData.imageUrls[0]} 
                                             alt={caseData.patientName[language]}
-                                            className="w-20 h-20 object-contain rounded-md bg-slate-100 flex-shrink-0"
+                                            className="w-20 h-20 object-contain rounded-md bg-slate-700/50 flex-shrink-0"
                                             loading="lazy"
                                         />
                                         <div className="flex-grow">
-                                            <span className="font-semibold text-slate-800 text-left">{caseData.patientName[language]}</span>
+                                            <span className="font-semibold text-white text-left">{caseData.patientName[language]}</span>
                                             {description && (
-                                                <p className="text-sm text-slate-600 mt-2">{description}</p>
+                                                <p className="text-sm text-slate-300 mt-2">{description}</p>
                                             )}
                                         </div>
                                         {description && (
                                             <button 
                                                 onClick={() => handleSpeak(description, caseData.id)}
-                                                className="p-2 text-slate-500 rounded-full hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-blue-500 flex-shrink-0"
+                                                className="p-2 text-slate-300 rounded-full hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-red-500 flex-shrink-0"
                                                 aria-label={isSpeaking ? "Detener lectura" : "Leer descripción"}
                                             >
                                                 {isSpeaking 
@@ -340,122 +428,112 @@ const AssistantModalContent: React.FC<AssistantModalContentProps> = ({ onClose, 
     }
   };
 
-  const SummaryPortal: React.FC = () => {
-    const hasSelections = selections.restorationType || selections.status.length > 0 || selections.angulation || selections.connections.length > 0;
-    if (currentStep === 1 || !hasSelections || !portalNode) return null;
-
-    const summaryContent = (
-        <div className="bg-[color:var(--card-bg-yellow)] rounded-full flex items-center gap-1.5 p-1 animate-simple-fade-in">
-          {selections.restorationType && (
-              <div className="h-8 w-8 bg-white rounded-full border border-slate-200 shadow-sm flex items-center justify-center" title={selections.restorationType}>
-                  {selections.restorationType === RestorationType.Unitaria ? <Icons.UnitariaIndicatorIcon className="h-full w-full p-1 text-slate-700" /> : <Icons.MultipleIndicatorIcon className="h-full w-full p-1 text-slate-700" />}
-              </div>
-          )}
-          {selections.status.length > 0 && (
-              <div className="h-8 w-8 bg-white rounded-full border border-slate-200 shadow-sm flex items-center justify-center" title={selections.status.map(s => t.wizard.production_options[s]).join(', ')}>
-                  <div className="h-full w-full flex items-center justify-center text-center text-xs font-bold text-white bg-slate-500 rounded-full p-1 leading-none">
-                     {selections.status.length}
-                  </div>
-              </div>
-          )}
-          {selections.angulation && (
-              <div className="h-8 w-8 bg-white rounded-full border border-slate-200 shadow-sm flex items-center justify-center" title={selections.angulation === 'true' ? 'Con angulación' : 'Sin angulación'}>
-                  {selections.angulation === 'true' ? <Icons.AngulationYesIcon className="h-full w-full p-1 text-slate-700" /> : <Icons.AngulationNoIcon className="h-full w-full p-1 text-slate-700" />}
-              </div>
-          )}
-          {selections.connections.length > 0 && (
-              <div className="h-8 w-8 bg-white rounded-full border border-slate-200 shadow-sm flex items-center justify-center" title={selections.connections.join(', ')}>
-                   <div className="h-full w-full flex items-center justify-center text-center text-xs font-bold text-white bg-slate-500 rounded-full p-1 leading-none">
-                     {selections.connections.length}
-                  </div>
-              </div>
-          )}
-        </div>
-      );
-
-    return ReactDOM.createPortal(summaryContent, portalNode);
-  };
-
   return (
-    <div className="p-4">
-        <SummaryPortal />
+      <div className="relative rounded-lg overflow-hidden h-[85vh] max-h-[800px] shadow-2xl flex flex-col bg-slate-800">
+          <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="absolute top-0 left-0 w-full h-full object-cover z-0"
+              src="https://www.ganarnobelbiocare.com/nobeldesign/E-Prosthetic/Video/Asist2.mp4"
+              disablePictureInPicture
+              controlsList="nodownload"
+          ></video>
+          <div className="absolute inset-0 bg-slate-900/70 backdrop-blur-sm z-10"></div>
 
-        <div className="mb-8">
-            <div className="flex justify-between mb-1">
-                <span className="text-base font-medium text-blue-700">{steps[currentStep-1]}</span>
-                <span className="text-sm font-medium text-blue-700">Paso {currentStep} de {steps.length}</span>
-            </div>
-            <div className="w-full bg-slate-200 rounded-full h-2.5">
-                <div className="bg-blue-600 h-2.5 rounded-full transition-all duration-300" style={{ width: `${(currentStep / steps.length) * 100}%` }}></div>
-            </div>
-        </div>
-
-        <div className="min-h-[400px] flex items-center justify-center">
-            {renderStepContent()}
-        </div>
-        
-        {currentStep === steps.length - 1 && noResultsError && (
-          <div className="text-center text-red-600 font-semibold bg-red-100 p-3 rounded-md mt-6 -mb-2 animate-simple-fade-in" role="alert">
-            {t.wizard.no_results_message}
-          </div>
-        )}
-
-        <div className="mt-8 pt-6 border-t border-slate-200 flex justify-between items-center">
-            <button 
-                onClick={handleReset}
-                className="px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-100 rounded-md"
-            >
-                {t.wizard.reset_button}
-            </button>
-            <div className="flex gap-4">
-                <button 
-                    onClick={handleBack}
-                    className="px-6 py-2 text-sm font-semibold text-slate-700 bg-white border border-slate-300 rounded-md hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed"
-                    disabled={currentStep === 1}
-                >
-                    {t.wizard.back_button}
+          <header className="relative z-20 p-4 border-b border-slate-700 flex-shrink-0 bg-slate-900/60 backdrop-blur-md">
+            <div className="flex items-center justify-between gap-4">
+                <h2 id="modal-title" className="text-xl font-semibold text-white flex-shrink-0">{t.modal.assistant_title}</h2>
+                <div className="flex-grow flex items-center gap-2 flex-wrap justify-start ml-4">
+                    {renderSummaryBadges()}
+                </div>
+                <button onClick={onClose} className="p-1.5 text-slate-300 rounded-full hover:bg-white/10 hover:text-white focus:outline-none focus:ring-2 ring-offset-slate-800 focus:ring-white flex-shrink-0">
+                    <Icons.CloseIcon className="w-6 h-6" />
                 </button>
-                {currentStep === 2 ? (
-                    <button
-                        onClick={handleNext}
-                        className="px-6 py-2 text-sm font-semibold text-white bg-blue-600 rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
-                        disabled={selections.status.length === 0}
-                    >
-                        {t.wizard.next_button}
-                    </button>
-                ) : currentStep === steps.length - 1 ? (
-                    <button 
-                        onClick={findResults}
-                        className="px-6 py-2 text-sm font-semibold text-white bg-green-600 rounded-md hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
-                        disabled={selections.connections.length === 0}
-                    >
-                        {t.wizard.finish_button}
-                    </button>
-                ) : currentStep === steps.length ? (
-                     <button 
-                        onClick={() => onApplyFilters(selections)} 
-                        className="px-6 py-2 text-sm font-semibold text-white bg-green-600 rounded-md hover:bg-green-700"
-                     >
-                        {t.wizard.apply_filters_button}
-                    </button>
-                ) : currentStep === 4 ? (
-                     <button 
-                        onClick={findResults}
-                        className="px-6 py-2 text-sm font-semibold text-white bg-blue-600 rounded-md hover:bg-blue-700"
-                     >
-                        {t.wizard.next_button}
-                    </button>
-                ) : (
-                    <button
-                        onClick={handleNext}
-                        className="px-6 py-2 text-sm font-semibold text-white bg-blue-600 rounded-md hover:bg-blue-700"
-                    >
-                        {t.wizard.next_button}
-                    </button>
-                )}
             </div>
-        </div>
-    </div>
+          </header>
+
+          <main className="relative z-20 p-4 flex-grow flex flex-col overflow-y-auto custom-scrollbar">
+              <div className="mb-8">
+                  <div className="flex justify-between mb-1">
+                      <span className="text-base font-medium text-blue-300">{steps[currentStep-1]}</span>
+                      <span className="text-sm font-medium text-blue-300">Paso {currentStep} de {steps.length}</span>
+                  </div>
+                  <div className="w-full bg-white/20 rounded-full h-2.5">
+                      <div className="bg-blue-500 h-2.5 rounded-full transition-all duration-300" style={{ width: `${(currentStep / steps.length) * 100}%` }}></div>
+                  </div>
+              </div>
+
+              <div className="min-h-[400px] flex items-center justify-center flex-grow">
+                  {renderStepContent()}
+              </div>
+
+              {currentStep === steps.length - 1 && noResultsError && (
+                <div className="text-center text-red-300 font-semibold bg-red-500/20 p-3 rounded-md mt-6 animate-simple-fade-in" role="alert">
+                  {t.wizard.no_results_message}
+                </div>
+              )}
+          </main>
+          
+          <footer className="relative z-20 mt-auto p-4 border-t border-white/20 flex-shrink-0">
+            <div className="flex justify-between items-center">
+                <button 
+                    onClick={handleReset}
+                    className="px-4 py-2 text-sm font-semibold text-slate-300 hover:bg-white/10 rounded-md"
+                >
+                    {t.wizard.reset_button}
+                </button>
+                <div className="flex gap-4">
+                    <button 
+                        onClick={handleBack}
+                        className="px-6 py-2 text-sm font-semibold text-slate-200 bg-white/10 border border-slate-300 rounded-md hover:bg-white/20 disabled:opacity-50 disabled:cursor-not-allowed"
+                        disabled={currentStep === 1}
+                    >
+                        {t.wizard.back_button}
+                    </button>
+                    {currentStep === 2 ? (
+                        <button
+                            onClick={handleNext}
+                            className="px-6 py-2 text-sm font-semibold text-white bg-blue-600 rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                            disabled={selections.status.length === 0}
+                        >
+                            {t.wizard.next_button}
+                        </button>
+                    ) : currentStep === steps.length - 1 ? (
+                        <button 
+                            onClick={findResults}
+                            className="px-6 py-2 text-sm font-semibold text-white bg-green-600 rounded-md hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                            disabled={selections.connections.length === 0}
+                        >
+                            {t.wizard.finish_button}
+                        </button>
+                    ) : currentStep === steps.length ? (
+                         <button 
+                            onClick={() => onApplyFilters(selections)} 
+                            className="px-6 py-2 text-sm font-semibold text-white bg-green-600 rounded-md hover:bg-green-700"
+                         >
+                            {t.wizard.apply_filters_button}
+                        </button>
+                    ) : currentStep === 4 ? (
+                         <button 
+                            onClick={findResults}
+                            className="px-6 py-2 text-sm font-semibold text-white bg-blue-600 rounded-md hover:bg-blue-700"
+                         >
+                            {t.wizard.next_button}
+                        </button>
+                    ) : (
+                        <button
+                            onClick={handleNext}
+                            className="px-6 py-2 text-sm font-semibold text-white bg-blue-600 rounded-md hover:bg-blue-700"
+                        >
+                            {t.wizard.next_button}
+                        </button>
+                    )}
+                </div>
+            </div>
+          </footer>
+      </div>
   );
 };
 

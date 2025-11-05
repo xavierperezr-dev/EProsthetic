@@ -1,4 +1,5 @@
 import React from 'react';
+import { MuaOtrosIcon, ToothIcon, SearchIcon, ResetIcon } from './icons';
 
 interface DevDebugPageProps {
   t: any;
@@ -73,6 +74,31 @@ const DevDebugPage: React.FC<DevDebugPageProps> = ({ t }) => {
     <div className="p-4">
       {renderTable("Modales de Fichas de Casos", caseModalData)}
       {renderTable("Otros Modales de la Aplicación", otherModalData)}
+      <div className="mt-8">
+        <h3 className="text-xl font-bold text-[color:var(--text-primary)] mb-4 pb-2 border-b border-slate-200">
+          {t.iconGridTitle}
+        </h3>
+        <div className="p-4 bg-white border border-slate-200 rounded-lg shadow-sm">
+            <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-6 text-slate-600">
+                <div className="flex flex-col items-center">
+                    <MuaOtrosIcon className="h-12 w-12 text-green-500" />
+                    <span className="text-xs mt-1">MuaOtrosIcon</span>
+                </div>
+                <div className="flex flex-col items-center">
+                    <ToothIcon className="h-12 w-12" />
+                    <span className="text-xs mt-1">ToothIcon</span>
+                </div>
+                <div className="flex flex-col items-center">
+                    <SearchIcon className="h-12 w-12" />
+                    <span className="text-xs mt-1">SearchIcon</span>
+                </div>
+                <div className="flex flex-col items-center">
+                    <ResetIcon className="h-12 w-12" />
+                    <span className="text-xs mt-1">ResetIcon</span>
+                </div>
+            </div>
+        </div>
+      </div>
     </div>
   );
 };

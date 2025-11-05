@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { GoogleGenAI, Type } from "@google/genai";
-import { DentalCase, CaseStatus, RestorationType, Language } from '../types';
+import { DentalCase, CaseStatus, RestorationType, Language, ConnectionType } from '../types';
 import { ChevronLeftIcon, ChevronRightIcon, WarrantyIcon, UnitariaIndicatorIcon, MultipleIndicatorIcon, DTXIcon, ExocadIcon, ThreeShapeIcon, DentalwingsIcon, TableIcon, EyeIcon, SparklesIcon, SpinnerIcon, SpeakerWaveIcon, SpeakerXMarkIcon, ExternalLinkIcon, CheckIcon } from './icons';
 import CaseDetailIcons from './CaseDetailIcons';
 
@@ -233,7 +233,7 @@ Provide the response in the ${language} language as a single, valid JSON object 
         className={`absolute top-3 right-3 text-xs font-bold rounded-full h-7 w-7 flex items-center justify-center ring-2 ring-white z-10 transition-all duration-200 ${
           isIdCopied
             ? 'bg-green-500 text-white'
-            : 'bg-[color:var(--accent-primary)] text-white hover:bg-[color:var(--accent-primary-hover)]'
+            : 'bg-slate-200 text-slate-900 hover:bg-slate-300'
         }`}
         aria-label={`${t.copy_id_label}: ${caseData.id}`}
         title={`${t.copy_id_label}: ${caseData.id}`}
@@ -326,7 +326,7 @@ Provide the response in the ${language} language as a single, valid JSON object 
                     </button>
                     {showTooltip && (
                     <div 
-                        className="absolute right-full top-0 mr-2 w-72 p-4 text-sm text-white bg-slate-800/95 rounded-lg shadow-lg z-10 text-left animate-simple-fade-in flex flex-col"
+                        className="absolute right-full top-0 mr-2 w-72 p-4 text-sm text-white bg-slate-800/95 backdrop-blur-sm rounded-lg shadow-lg z-10 text-left animate-simple-fade-in flex flex-col"
                         onClick={(e) => e.stopPropagation()}
                     >
                         {isGeneratingDescription ? (
@@ -454,11 +454,11 @@ Provide the response in the ${language} language as a single, valid JSON object 
                         CC
                       </button>
                       <button
-                        onClick={() => onReferenceClick(caseData, 'Branemark')}
+                        onClick={() => onReferenceClick(caseData, ConnectionType.Branemark)}
                         className={finalInfoButtonClass}
                         aria-label={`${t.aria_view_refs_branemark_for} ${patientName[language]}`}
                       >
-                        Branemark
+                        Brånemark
                       </button>
                       <button
                         onClick={() => onReferenceClick(caseData, 'Tri-channel')}
@@ -469,11 +469,11 @@ Provide the response in the ${language} language as a single, valid JSON object 
                       </button>
                       {(caseData.id === 'EXO022' || caseData.id === 'EXO024' || caseData.id === 'EXO025' || caseData.id === 'EXO029' || caseData.id === 'EXO032') && (
                         <button
-                          onClick={() => onReferenceClick(caseData, 'Multi-Unit')}
+                          onClick={() => onReferenceClick(caseData, ConnectionType.MultiUnit)}
                           className={finalInfoButtonClass}
                           aria-label={`${t.aria_view_refs_mua_for} ${patientName[language]}`}
                         >
-                          Multi-Unit
+                          MUA
                         </button>
                       )}
                     </div>
@@ -487,11 +487,11 @@ Provide the response in the ${language} language as a single, valid JSON object 
                         CC
                       </button>
                       <button
-                        onClick={() => onReferenceClick(caseData, 'Branemark')}
+                        onClick={() => onReferenceClick(caseData, ConnectionType.Branemark)}
                         className={finalInfoButtonClass}
                         aria-label={`${t.aria_view_refs_branemark_for} ${patientName[language]}`}
                       >
-                        Branemark
+                        Brånemark
                       </button>
                       <button
                         onClick={() => onReferenceClick(caseData, 'Tri-channel')}
@@ -535,11 +535,11 @@ Provide the response in the ${language} language as a single, valid JSON object 
                         CC
                       </button>
                       <button
-                        onClick={() => onReferenceClick(caseData, 'Branemark')}
+                        onClick={() => onReferenceClick(caseData, ConnectionType.Branemark)}
                         className={finalInfoButtonClass}
                         aria-label={`${t.aria_view_refs_branemark_for} ${patientName[language]}`}
                       >
-                        Branemark
+                        Brånemark
                       </button>
                       <button
                         onClick={() => onReferenceClick(caseData, 'Tri-channel')}
@@ -559,11 +559,11 @@ Provide the response in the ${language} language as a single, valid JSON object 
                         CC
                       </button>
                       <button
-                        onClick={() => onReferenceClick(caseData, 'Branemark')}
+                        onClick={() => onReferenceClick(caseData, ConnectionType.Branemark)}
                         className={finalInfoButtonClass}
                         aria-label={`${t.aria_view_refs_branemark_for} ${patientName[language]}`}
                       >
-                        Branemark
+                        Brånemark
                       </button>
                       <button
                         onClick={() => onReferenceClick(caseData, 'Tri-channel')}
@@ -578,8 +578,7 @@ Provide the response in the ${language} language as a single, valid JSON object 
                       <button onClick={() => onReferenceClick(caseData, 'CC')} className={finalInfoButtonClass}>CC</button>
                       <button onClick={() => onReferenceClick(caseData, 'N1 TCC')} className={finalInfoButtonClass}>N1 TCC</button>
                       <button onClick={() => onReferenceClick(caseData, 'N1 Base')} className={finalInfoButtonClass}>N1 Base</button>
-                      <button onClick={() => onReferenceClick(caseData, 'On1')} className={finalInfoButtonClass}>On1</button>
-                      <button onClick={() => onReferenceClick(caseData, 'Branemark')} className={finalInfoButtonClass}>Branemark</button>
+                      <button onClick={() => onReferenceClick(caseData, ConnectionType.Branemark)} className={finalInfoButtonClass}>Brånemark</button>
                       <button onClick={() => onReferenceClick(caseData, 'Tri-channel')} className={finalInfoButtonClass}>Tri-channel</button>
                     </div>
                   ) : caseData.id === 'EXO034' ? (
@@ -599,11 +598,11 @@ Provide the response in the ${language} language as a single, valid JSON object 
                         N1 TCC
                       </button>
                       <button
-                        onClick={() => onReferenceClick(caseData, 'Branemark')}
+                        onClick={() => onReferenceClick(caseData, ConnectionType.Branemark)}
                         className={finalInfoButtonClass}
                         aria-label={`Ver referencias Branemark para ${patientName[language]}`}
                       >
-                        Branemark
+                        Brånemark
                       </button>
                       <button
                         onClick={() => onReferenceClick(caseData, 'Tri-channel')}
@@ -611,6 +610,13 @@ Provide the response in the ${language} language as a single, valid JSON object 
                         aria-label={`Ver referencias Tri-channel para ${patientName[language]}`}
                       >
                         Tri-channel
+                      </button>
+                      <button
+                        onClick={() => onReferenceClick(caseData, 'MUA otras marcas')}
+                        className={finalInfoButtonClass}
+                        aria-label={`Ver referencias MUA otras marcas para ${patientName[language]}`}
+                      >
+                        MUA otras marcas
                       </button>
                     </div>
                   ) : (

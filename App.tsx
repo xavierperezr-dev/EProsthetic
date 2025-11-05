@@ -12,10 +12,11 @@ import SelecProLocal from './components/SelecProLocal';
 import DevDebugPage from './components/DevDebugPage';
 import CustomerServiceModal from './components/CustomerServiceModal';
 import TablaTriChannel from './components/TriChannelTable';
-import { MOCK_CASES, UNIVERSAL_BASE_NON_ROTATING_DATA, UNIVERSAL_BASE_ROTATING_DATA, PRE_MILLED_BLANKS_DATA, PRE_MILLED_DESCRIPTIONS, UNIVERSAL_BASE_ROTATING_CC_DATA, UNIVERSAL_BASE_ROTATING_BRANEMARK_DATA, UNIVERSAL_BASE_ROTATING_TRICHANNEL_DATA, UNIVERSAL_MULTI_UNIT_RECTO_DATA, UNIVERSAL_MULTI_UNIT_CONICO_DATA, PILAR_UNIVERSAL_ON1_NO_ROTATORIO_DATA, PILAR_UNIVERSAL_ON1_ROTATORIO_DATA, N1_BASE_UNITARIA_NO_ROTATORIO_DATA, N1_BASE_PUENTE_ROTATORIO_DATA, N1_TCC_UNITARIA_NO_ROTATORIA_DATA, ZIRCONIA_BRIDGE_DATA, ZIRCONIA_BRIDGE_CC_DATA, ZIRCONIA_BRIDGE_BRANEMARK_DATA, ZIRCONIA_BRIDGE_TRICHANNEL_DATA, REFERENCE_IMAGE_MAP, PRE_MILLED_BLANKS_N1_TCC_DATA, N1_TCC_CASE_DATA, ELOS_TOOLS_DATA, UNIVERSAL_BASE_NON_ROTATING_CC_DATA, UNIVERSAL_BASE_NON_ROTATING_BRANEMARK_DATA, UNIVERSAL_BASE_NON_ROTATING_TRICHANNEL_DATA, UNIVERSAL_BASE_ROTATING_CONICO_CC_DATA, UNIVERSAL_BASE_ROTATING_CONICO_BRANEMARK_DATA, UNIVERSAL_BASE_ROTATING_CONICO_TRICHANNEL_DATA, MULTI_UNIT_CONNECTION_DATA, PROCERA_FCZ_IMPLANT_CROWN_DATA, PROCERA_TITANIUM_CC_DATA, PROCERA_TITANIUM_BRANEMARK_DATA, PROCERA_TITANIUM_TRICHANNEL_DATA, PROCERA_TITANIUM_ASC_CC_DATA, PROCERA_TITANIUM_ASC_TRICHANNEL_DATA, PROCERA_ZIRCONIA_CC_DATA, PROCERA_ZIRCONIA_BRANEMARK_DATA, PROCERA_ZIRCONIA_TRICHANNEL_DATA, PROCERA_TITANIUM_BRIDGE_CC_DATA, PROCERA_TITANIUM_BRIDGE_BRANEMARK_DATA, PROCERA_TITANIUM_BRIDGE_TRICHANNEL_UPDATED_DATA, NOBELPROCERA_TITANIUM_BAR_CC_DATA, NOBELPROCERA_TITANIUM_BAR_BRANEMARK_DATA, NOBELPROCERA_TITANIUM_BAR_TRICHANNEL_DATA, NOBEL_PEARL_COMPONENTS_DATA, MUA_XEAL_CC_RECTO_DATA, MUA_XEAL_CC_ANGULADO_DATA, MUA_XEAL_N1_TCC_RECTO_DATA, MUA_XEAL_N1_TCC_ANGULADO_DATA, MUA_BRANEMARK_RECTO_DATA, MUA_BRANEMARK_ANGULADO_DATA, MUA_TRICHANNEL_RECTO_DATA, MUA_TRICHANNEL_ANGULADO_DATA, TRI_CHANNEL_TABLE_DATA } from './constants';
+import { MOCK_CASES, UNIVERSAL_BASE_NON_ROTATING_DATA, UNIVERSAL_BASE_ROTATING_DATA, PRE_MILLED_BLANKS_DATA, PRE_MILLED_DESCRIPTIONS, UNIVERSAL_BASE_ROTATING_CC_DATA, UNIVERSAL_BASE_ROTATING_BRANEMARK_DATA, UNIVERSAL_BASE_ROTATING_TRICHANNEL_DATA, UNIVERSAL_MULTI_UNIT_RECTO_DATA, UNIVERSAL_MULTI_UNIT_CONICO_DATA, PILAR_UNIVERSAL_ON1_NO_ROTATORIO_DATA, PILAR_UNIVERSAL_ON1_ROTATORIO_DATA, N1_BASE_UNITARIA_NO_ROTATORIO_DATA, N1_BASE_PUENTE_ROTATORIO_DATA, N1_TCC_UNITARIA_NO_ROTATORIA_DATA, ZIRCONIA_BRIDGE_DATA, ZIRCONIA_BRIDGE_CC_DATA, ZIRCONIA_BRIDGE_BRANEMARK_DATA, ZIRCONIA_BRIDGE_TRICHANNEL_DATA, REFERENCE_IMAGE_MAP, PRE_MILLED_BLANKS_N1_TCC_DATA, N1_TCC_CASE_DATA, ELOS_TOOLS_DATA, UNIVERSAL_BASE_NON_ROTATING_CC_DATA, UNIVERSAL_BASE_NON_ROTATING_BRANEMARK_DATA, UNIVERSAL_BASE_NON_ROTATING_TRICHANNEL_DATA, UNIVERSAL_BASE_ROTATING_CONICO_CC_DATA, UNIVERSAL_BASE_ROTATING_CONICO_BRANEMARK_DATA, UNIVERSAL_BASE_ROTATING_CONICO_TRICHANNEL_DATA, MULTI_UNIT_CONNECTION_DATA, PROCERA_FCZ_IMPLANT_CROWN_DATA, PROCERA_TITANIUM_CC_DATA, PROCERA_TITANIUM_BRANEMARK_DATA, PROCERA_TITANIUM_TRICHANNEL_DATA, PROCERA_TITANIUM_ASC_CC_DATA, PROCERA_TITANIUM_ASC_TRICHANNEL_DATA, PROCERA_ZIRCONIA_CC_DATA, PROCERA_ZIRCONIA_BRANEMARK_DATA, PROCERA_ZIRCONIA_TRICHANNEL_DATA, PROCERA_TITANIUM_BRIDGE_CC_DATA, PROCERA_TITANIUM_BRIDGE_BRANEMARK_DATA, PROCERA_TITANIUM_BRIDGE_TRICHANNEL_UPDATED_DATA, NOBELPROCERA_TITANIUM_BAR_CC_DATA, NOBELPROCERA_TITANIUM_BAR_BRANEMARK_DATA, NOBELPROCERA_TITANIUM_BAR_TRICHANNEL_DATA, NOBEL_PEARL_COMPONENTS_DATA, MUA_XEAL_CC_RECTO_DATA, MUA_XEAL_CC_ANGULADO_DATA, MUA_XEAL_N1_TCC_RECTO_DATA, MUA_XEAL_N1_TCC_ANGULADO_DATA, MUA_BRANEMARK_RECTO_DATA, MUA_BRANEMARK_ANGULADO_DATA, MUA_TRICHANNEL_RECTO_DATA, MUA_TRICHANNEL_ANGULADO_DATA, TRI_CHANNEL_TABLE_DATA, MUA_OTRAS_MARCAS_ASTRA_EV_DATA, MUA_OTRAS_MARCAS_ASTRA_OSSEOSPEED_DATA, MUA_OTRAS_MARCAS_BIOHORIZONS_DATA, MUA_OTRAS_MARCAS_DENTIUM_DATA, MUA_OTRAS_MARCAS_NEODENT_DATA, MUA_OTRAS_MARCAS_OSSTEM_DATA, MUA_OTRAS_MARCAS_STRAUMANN_BL_DATA, MUA_OTRAS_MARCAS_STRAUMANN_BLX_DATA, MUA_OTRAS_MARCAS_ZIMMER_DATA, MUA_OTRAS_MARCAS_3I_DATA } from './constants';
 import { translations } from './translations';
+import { caseDescriptions } from './prescripcion';
 import { DentalCase, Filters, RestorationType, ConnectionType, CaseStatus, Language, SoftwareType } from './types';
-import { DownloadIcon, InfoIcon, MagnifyingGlassIcon, ExternalLinkIcon, FilterIcon, ArrowRightIcon, WhatsAppIcon, CalendarIcon, EmailIcon, PhoneIcon, ClipboardIcon, CheckIcon } from './components/icons';
+import { DownloadIcon, InfoIcon, MagnifyingGlassIcon, ExternalLinkIcon, FilterIcon, ArrowRightIcon, WhatsAppIcon, CalendarIcon, EmailIcon, PhoneIcon, ClipboardIcon, CheckIcon, SpeakerWaveIcon, SpeakerXMarkIcon } from './components/icons';
 import CaseDetailIcons from './components/CaseDetailIcons';
 import ConnectionSelector from './components/ConnectionSelector';
 import BotonesModalContent from './components/BotonesModalContent';
@@ -24,6 +25,7 @@ import IntroModal from './components/IntroModal';
 import ResourceButtons from './components/ResourceButtons';
 import DownloadCenterModalContent from './components/DownloadCenterModalContent';
 import AssistantModalContent, { AssistantSelections } from './components/AssistantModalContent';
+import FilterTooltip from './components/FilterTooltip';
 
 const getStorePath = (country: Language) => {
     switch (country) {
@@ -33,6 +35,43 @@ const getStorePath = (country: Language) => {
       default: return 'es/es';
     }
 };
+
+const generateSearchableString = (data: any): string => {
+    if (!data) return '';
+    if (Array.isArray(data)) {
+        return data.map(item => generateSearchableString(item)).join(' ');
+    }
+    if (typeof data === 'object') {
+        return Object.values(data).map(value => generateSearchableString(value)).join(' ');
+    }
+    return String(data);
+};
+
+const caseToTablesMap: { [key: string]: any[] } = {
+    'EXO021': [UNIVERSAL_BASE_NON_ROTATING_DATA],
+    'EXO022': [UNIVERSAL_BASE_ROTATING_DATA, UNIVERSAL_MULTI_UNIT_RECTO_DATA, UNIVERSAL_MULTI_UNIT_CONICO_DATA],
+    'EXO016': [PRE_MILLED_BLANKS_DATA, PRE_MILLED_BLANKS_N1_TCC_DATA],
+    'EXO024': [ZIRCONIA_BRIDGE_DATA, MULTI_UNIT_CONNECTION_DATA],
+    'EXO025': [ZIRCONIA_BRIDGE_DATA, MULTI_UNIT_CONNECTION_DATA],
+    'EXO026': [PROCERA_FCZ_IMPLANT_CROWN_DATA],
+    'EXO028': [PROCERA_TITANIUM_ASC_CC_DATA, PROCERA_TITANIUM_ASC_TRICHANNEL_DATA],
+    'EXO027': [PROCERA_TITANIUM_CC_DATA, PROCERA_TITANIUM_BRANEMARK_DATA, PROCERA_TITANIUM_TRICHANNEL_DATA],
+    'EXO030': [PROCERA_ZIRCONIA_CC_DATA, PROCERA_ZIRCONIA_BRANEMARK_DATA, PROCERA_ZIRCONIA_TRICHANNEL_DATA],
+    'EXO029': [PROCERA_TITANIUM_BRIDGE_CC_DATA, PROCERA_TITANIUM_BRIDGE_BRANEMARK_DATA, PROCERA_TITANIUM_BRIDGE_TRICHANNEL_UPDATED_DATA, MULTI_UNIT_CONNECTION_DATA],
+    'EXO032': [NOBELPROCERA_TITANIUM_BAR_CC_DATA, NOBELPROCERA_TITANIUM_BAR_BRANEMARK_DATA, NOBELPROCERA_TITANIUM_BAR_TRICHANNEL_DATA, MULTI_UNIT_CONNECTION_DATA],
+    'EXO013': [N1_BASE_UNITARIA_NO_ROTATORIO_DATA, N1_BASE_PUENTE_ROTATORIO_DATA],
+    'EXO006': [N1_TCC_UNITARIA_NO_ROTATORIA_DATA],
+    'EXO014': [PROCERA_TITANIUM_CC_DATA, N1_TCC_UNITARIA_NO_ROTATORIA_DATA, N1_BASE_UNITARIA_NO_ROTATORIO_DATA, PROCERA_TITANIUM_BRANEMARK_DATA, PROCERA_TITANIUM_TRICHANNEL_DATA],
+    'EXO019': [PILAR_UNIVERSAL_ON1_NO_ROTATORIO_DATA, PILAR_UNIVERSAL_ON1_ROTATORIO_DATA],
+    'EXO020': [NOBEL_PEARL_COMPONENTS_DATA],
+    'EXO034': [MUA_XEAL_CC_RECTO_DATA, MUA_XEAL_CC_ANGULADO_DATA, MUA_XEAL_N1_TCC_RECTO_DATA, MUA_XEAL_N1_TCC_ANGULADO_DATA, MUA_BRANEMARK_RECTO_DATA, MUA_BRANEMARK_ANGULADO_DATA, MUA_TRICHANNEL_RECTO_DATA, MUA_TRICHANNEL_ANGULADO_DATA, MUA_OTRAS_MARCAS_ASTRA_EV_DATA, MUA_OTRAS_MARCAS_ASTRA_OSSEOSPEED_DATA, MUA_OTRAS_MARCAS_BIOHORIZONS_DATA, MUA_OTRAS_MARCAS_DENTIUM_DATA, MUA_OTRAS_MARCAS_NEODENT_DATA, MUA_OTRAS_MARCAS_OSSTEM_DATA, MUA_OTRAS_MARCAS_STRAUMANN_BL_DATA, MUA_OTRAS_MARCAS_STRAUMANN_BLX_DATA, MUA_OTRAS_MARCAS_ZIMMER_DATA, MUA_OTRAS_MARCAS_3I_DATA],
+};
+
+const searchableDataMap: { [key: string]: string } = {};
+for (const caseId in caseToTablesMap) {
+    searchableDataMap[caseId] = generateSearchableString(caseToTablesMap[caseId]).toLowerCase();
+}
+
 
 const SupportModal: React.FC<{ t: any }> = ({ t }) => {
   const [copied, setCopied] = useState('');
@@ -46,72 +85,83 @@ const SupportModal: React.FC<{ t: any }> = ({ t }) => {
   const emailAddress = "soporte.tecnico@nobelbiocare.com";
   const phoneNumber = t.support_modal_phone_number_copy;
   const phoneTel = t.support_modal_phone_tel;
-  const newBookingUrl = "https://outlook.office35.com/book/SoporteTcnicoNobelBiocare@dentalco.org/";
+  const newBookingUrl = "https://outlook.office365.com/book/SoporteTcnicoNobelBiocare@dentalco.org/";
   const newQrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=128x128&data=${encodeURIComponent(newBookingUrl)}`;
 
   return (
-    <div className="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-sm">
-      {/* Block 1: WhatsApp */}
-      <div className="bg-white p-4 rounded-lg border border-slate-200 flex flex-col">
-        <div>
-          <h4 className="font-bold text-lg text-[color:var(--text-primary)] mb-2 flex items-center gap-2">
-            <WhatsAppIcon className="h-6 w-6 text-green-500" /> {t.support_modal_whatsapp_title}
-          </h4>
-          <p className="text-slate-600 mb-2">{t.support_modal_intro}</p>
-        </div>
-        <div className="mt-auto">
-          <div className="flex justify-center my-4">
-              <img src="https://api.qrserver.com/v1/create-qr-code/?size=128x128&data=https://wa.me/16573635454" alt="WhatsApp QR Code" className="w-32 h-32" />
+    <div className="relative p-4 text-sm rounded-b-lg overflow-hidden">
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute top-0 left-0 w-full h-full object-cover z-0"
+        src="https://www.ganarnobelbiocare.com/nobeldesign/E-Prosthetic/Video/Asist4.mp4"
+      ></video>
+      <div className="absolute top-0 left-0 w-full h-full bg-black/60 z-10"></div>
+      <div className="relative z-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* Block 1: WhatsApp */}
+        <div className="bg-slate-800/70 backdrop-blur-sm p-4 rounded-lg border border-slate-600 flex flex-col text-white">
+          <div>
+            <h4 className="font-bold text-lg text-white mb-2 flex items-center gap-2">
+              <WhatsAppIcon className="h-6 w-6 text-green-400" /> {t.support_modal_whatsapp_title}
+            </h4>
+            <p className="text-slate-300 mb-2">{t.support_modal_intro}</p>
           </div>
-          <p className="text-slate-500 text-center text-xs">{t.support_modal_manual} <br /> <b>{t.support_modal_contact_name}</b> <br /> <b>+1 (657) 363-5454</b> ({t.support_modal_whatsapp_only})</p>
+          <div className="mt-auto">
+            <div className="flex justify-center my-4">
+              <img src="https://api.qrserver.com/v1/create-qr-code/?size=128x128&data=https://wa.me/16573635454" alt="WhatsApp QR Code" className="w-32 h-32 bg-white p-1 rounded-md border-4 border-white" />
+            </div>
+            <p className="text-slate-400 text-center text-xs">{t.support_modal_manual} <br /> <b>{t.support_modal_contact_name}</b> <br /> <b>+1 (657) 363-5454</b> ({t.support_modal_whatsapp_only})</p>
+          </div>
         </div>
-      </div>
 
-      {/* Block 2: Calendar */}
-      <div className="bg-white p-4 rounded-lg border border-slate-200 flex flex-col">
-        <div>
-          <h4 className="font-bold text-lg text-[color:var(--text-primary)] mb-2 flex items-center gap-2">
-            <CalendarIcon className="h-6 w-6 text-blue-500" /> {t.support_modal_book_title}
-          </h4>
-          <p className="text-slate-600 mb-2">{t.support_modal_book_intro}</p>
-        </div>
-        <div className="mt-auto">
-          <div className="flex justify-center my-4">
-              <img src={newQrUrl} alt="Calendar QR Code" className="w-32 h-32" />
+        {/* Block 2: Calendar */}
+        <div className="bg-slate-800/70 backdrop-blur-sm p-4 rounded-lg border border-slate-600 flex flex-col text-white">
+          <div>
+            <h4 className="font-bold text-lg text-white mb-2 flex items-center gap-2">
+              <CalendarIcon className="h-6 w-6 text-blue-400" /> {t.support_modal_book_title}
+            </h4>
+            <p className="text-slate-300 mb-2">{t.support_modal_book_intro}</p>
           </div>
-          <a href={newBookingUrl} target="_blank" rel="noopener noreferrer" className="text-center block text-[color:var(--accent-primary)] hover:underline">{t.support_modal_book_link}</a>
+          <div className="mt-auto">
+            <div className="flex justify-center my-4">
+              <img src={newQrUrl} alt="Calendar QR Code" className="w-32 h-32 bg-white p-1 rounded-md border-4 border-white" />
+            </div>
+            <a href={newBookingUrl} target="_blank" rel="noopener noreferrer" className="text-center block text-blue-400 hover:underline">{t.support_modal_book_link}</a>
+          </div>
         </div>
-      </div>
-      
-      {/* Block 3: Email */}
-      <div className="bg-white p-4 rounded-lg border border-slate-200 flex flex-col">
-          <h4 className="font-bold text-lg text-[color:var(--text-primary)] mb-2 flex items-center gap-2">
-              <EmailIcon className="h-6 w-6 text-red-500" /> {t.support_modal_email_title}
+        
+        {/* Block 3: Email */}
+        <div className="bg-slate-800/70 backdrop-blur-sm p-4 rounded-lg border border-slate-600 flex flex-col text-white">
+          <h4 className="font-bold text-lg text-white mb-2 flex items-center gap-2">
+            <EmailIcon className="h-6 w-6 text-red-400" /> {t.support_modal_email_title}
           </h4>
-          <p className="text-slate-600 mb-4 flex-grow">{t.support_modal_email_intro}</p>
-          <a href={`mailto:${emailAddress}`} className="text-center block text-[color:var(--accent-primary)] hover:underline">{t.support_modal_email_link}</a>
-          <div className="text-center text-slate-500 my-2">{t.support_modal_email_address_text}</div>
+          <p className="text-slate-300 mb-4 flex-grow">{t.support_modal_email_intro}</p>
+          <a href={`mailto:${emailAddress}`} className="text-center block text-blue-400 hover:underline">{t.support_modal_email_link}</a>
+          <div className="text-center text-slate-400 my-2">{t.support_modal_email_address_text}</div>
           <div className="relative mt-1">
-              <input type="text" readOnly value={emailAddress} className="w-full bg-slate-100 border-slate-300 rounded-md text-center p-2 text-slate-700" />
-              <button onClick={() => copyToClipboard(emailAddress, 'email')} className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-500 hover:text-[color:var(--accent-primary)]" aria-label={t.copy_email_aria_label}>
-                  {copied === 'email' ? <CheckIcon className="h-5 w-5"/> : <ClipboardIcon className="h-5 w-5"/>}
-              </button>
+            <input type="text" readOnly value={emailAddress} className="w-full bg-slate-700 border-slate-500 rounded-md text-center p-2 text-slate-200" />
+            <button onClick={() => copyToClipboard(emailAddress, 'email')} className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white" aria-label={t.copy_email_aria_label}>
+              {copied === 'email' ? <CheckIcon className="h-5 w-5"/> : <ClipboardIcon className="h-5 w-5"/>}
+            </button>
           </div>
-      </div>
+        </div>
 
-      {/* Block 4: Phone */}
-      <div className="bg-white p-4 rounded-lg border border-slate-200 flex flex-col">
-          <h4 className="font-bold text-lg text-[color:var(--text-primary)] mb-2 flex items-center gap-2">
-              <PhoneIcon className="h-6 w-6 text-purple-500" /> {t.support_modal_phone_title}
+        {/* Block 4: Phone */}
+        <div className="bg-slate-800/70 backdrop-blur-sm p-4 rounded-lg border border-slate-600 flex flex-col text-white">
+          <h4 className="font-bold text-lg text-white mb-2 flex items-center gap-2">
+            <PhoneIcon className="h-6 w-6 text-purple-400" /> {t.support_modal_phone_title}
           </h4>
-          <div className="text-center text-slate-600 mb-4 whitespace-pre-line flex-grow">{t.support_modal_phone_schedule}</div>
-          <a href={`tel:${phoneTel}`} className="w-full text-center py-2 px-4 bg-[color:var(--accent-primary)] text-white font-semibold rounded-md hover:bg-[color:var(--accent-primary-hover)] transition-colors">{t.support_modal_phone_cta}</a>
+          <div className="text-center text-slate-300 mb-4 whitespace-pre-line flex-grow">{t.support_modal_phone_schedule}</div>
+          <a href={`tel:${phoneTel}`} className="w-full text-center py-2 px-4 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 transition-colors">{t.support_modal_phone_cta}</a>
           <div className="relative mt-3">
-              <input type="text" readOnly value={phoneNumber} className="w-full bg-slate-100 border-slate-300 rounded-md text-center p-2 text-slate-700" />
-               <button onClick={() => copyToClipboard(phoneNumber, 'phone')} className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-500 hover:text-[color:var(--accent-primary)]" aria-label={t.copy_phone_aria_label}>
-                  {copied === 'phone' ? <CheckIcon className="h-5 w-5"/> : <ClipboardIcon className="h-5 w-5"/>}
-              </button>
+            <input type="text" readOnly value={phoneNumber} className="w-full bg-slate-700 border-slate-500 rounded-md text-center p-2 text-slate-200" />
+            <button onClick={() => copyToClipboard(phoneNumber, 'phone')} className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white" aria-label={t.copy_phone_aria_label}>
+              {copied === 'phone' ? <CheckIcon className="h-5 w-5"/> : <ClipboardIcon className="h-5 w-5"/>}
+            </button>
           </div>
+        </div>
       </div>
     </div>
   );
@@ -253,11 +303,82 @@ const TablaMUA: React.FC<TablaMUAProps> = ({ data, title, t, platformHeaders, st
             </div>
         </div>
     );
-}
+};
+
+const TablaOtrasMarcas: React.FC<{
+  title: string;
+  headers: string[];
+  data: any[];
+  t: any;
+  storeCountry: Language;
+  notes?: string;
+}> = ({ title, headers, data, t, storeCountry, notes }) => {
+    const dataWithRowSpans = useMemo(() => {
+        return data.map((row, index, arr) => {
+            if (index === 0 || arr[index - 1].connection !== row.connection) {
+                let span = 1;
+                for (let i = index + 1; i < arr.length; i++) {
+                    if (arr[i].connection === row.connection) {
+                        span++;
+                    } else {
+                        break;
+                    }
+                }
+                return { ...row, rowSpan: span };
+            }
+            return { ...row, rowSpan: 0 };
+        });
+    }, [data]);
+
+    const renderCell = (ref: string) => {
+        if (!ref || ref === '-') return <span className="text-slate-400">—</span>;
+        const storePath = getStorePath(storeCountry);
+        const searchTerm = ref.replace(/[¹*]/g, '').trim();
+        const url = `https://store.nobelbiocare.com/${storePath}/catalogsearch/result/?q=${encodeURIComponent(searchTerm)}`;
+        return (
+            <a href={url} className="font-semibold text-[color:var(--accent-primary)] hover:text-[color:var(--accent-primary-hover)] hover:underline transition-colors" target="_blank" rel="noopener noreferrer">
+                {ref}
+            </a>
+        );
+    };
+
+    return (
+        <div className="mb-8 last:mb-0">
+            <h3 className="text-xl font-semibold text-slate-800 mb-2">{title}</h3>
+            <div className="overflow-x-auto border border-slate-200 rounded-lg shadow-sm bg-white">
+                <table className="min-w-full text-xs">
+                    <thead className="bg-slate-50">
+                        <tr>
+                            <th className="px-3 py-2 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider">Conexión</th>
+                            <th className="px-3 py-2 text-center text-xs font-semibold text-slate-700 uppercase tracking-wider">Ángulo</th>
+                            {headers.map(h => <th key={h} className="px-3 py-2 text-center text-xs font-semibold text-slate-700 uppercase tracking-wider">{h}</th>)}
+                        </tr>
+                    </thead>
+                    <tbody className="bg-white divide-y divide-slate-100">
+                        {dataWithRowSpans.map((row, index) => (
+                            <tr key={index} className="hover:bg-slate-50">
+                                {row.rowSpan > 0 && (
+                                    <td rowSpan={row.rowSpan} className="px-3 py-2 whitespace-nowrap font-medium text-slate-800 text-left border-r border-slate-100 align-top">{row.connection}</td>
+                                )}
+                                <td className="px-3 py-2 text-center whitespace-nowrap text-slate-600">{row.angle}</td>
+                                {headers.map(header => (
+                                    <td key={header} className="px-3 py-2 text-center whitespace-nowrap text-slate-600">
+                                        {renderCell(row[header])}
+                                    </td>
+                                ))}
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+            {notes && <p className="text-xs text-slate-600 mt-2">{notes}</p>}
+        </div>
+    );
+};
 
 
 const App: React.FC = () => {
-    const [filters, setFilters] = useState<Filters>({ searchText: '', status: '', type: '', connectionType: '', softwareType: '', angulation: '' });
+    const [filters, setFilters] = useState<Filters>({ searchText: '', status: [], type: '', connectionType: [], softwareType: '', angulation: '' });
     const [language, setLanguage] = useState<Language>('es');
     const [storeCountry, setStoreCountry] = useState<Language>('es');
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -270,11 +391,20 @@ const App: React.FC = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isIntroModalOpen, setIsIntroModalOpen] = useState(true);
     const [activeSearchTerm, setActiveSearchTerm] = useState('');
+    const [isModalSpeaking, setIsModalSpeaking] = useState(false);
     const caseRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
     const menuRef = useRef<HTMLDivElement>(null);
 
     const t = translations[language];
-    const initialFilters: Filters = { searchText: '', status: '', type: '', connectionType: '', softwareType: '', angulation: '' };
+    const initialFilters: Filters = { searchText: '', status: [], type: '', connectionType: [], softwareType: '', angulation: '' };
+    
+    useEffect(() => {
+        if (!isModalOpen) {
+            window.speechSynthesis.cancel();
+            setIsModalSpeaking(false);
+        }
+    }, [isModalOpen]);
+
 
     const filteredCases = useMemo(() => {
         return MOCK_CASES.filter(c => {
@@ -282,21 +412,31 @@ const App: React.FC = () => {
             const nameMatch = c.patientName[language].toLowerCase().includes(searchLower);
             const idMatch = c.id.toLowerCase().includes(searchLower);
             const refMatch = c.reference.toLowerCase().includes(searchLower);
-            
-            const statusMatch = !filters.status || c.status === filters.status;
-            const typeMatch = !filters.type || c.restorationType.includes(filters.type);
-            const connectionMatch = !filters.connectionType || c.connectionType === filters.connectionType || c.compatibleConnections?.includes(filters.connectionType);
-            const angulationMatch = !filters.angulation || String(c.angulacion) === filters.angulation;
+            const tableDataMatch = searchableDataMap[c.id]?.includes(searchLower) || false;
 
-            return (nameMatch || idMatch || refMatch) && statusMatch && typeMatch && connectionMatch && angulationMatch;
+            const statusMatch = filters.status.length === 0 || filters.status.includes(c.status);
+            const typeMatch = !filters.type || c.restorationType.includes(filters.type);
+            const connectionMatch = filters.connectionType.length === 0 || filters.connectionType.some(ct => c.connectionType === ct || c.compatibleConnections?.includes(ct));
+            const angulationMatch = !filters.angulation ||
+                (filters.angulation === 'true' && c.angulacion === true) ||
+                (filters.angulation === 'false' && c.angulacion !== 'N/A');
+
+            return (nameMatch || idMatch || refMatch || tableDataMatch) && statusMatch && typeMatch && connectionMatch && angulationMatch;
         }).sort((a, b) => a.caseNumber - b.caseNumber);
     }, [MOCK_CASES, filters, activeSearchTerm, language]);
 
     const isAnyFilterActive = useMemo(() => {
-        return Object.values(filters).some(val => val !== '') || activeSearchTerm !== '';
+        return (
+            activeSearchTerm !== '' ||
+            filters.status.length > 0 ||
+            filters.type !== '' ||
+            filters.connectionType.length > 0 ||
+            filters.softwareType !== '' ||
+            filters.angulation !== ''
+        );
     }, [filters, activeSearchTerm]);
     
-    const handleFilterChange = (name: keyof Filters, value: string) => setFilters(prev => ({ ...prev, [name]: value }));
+    const handleFilterChange = (name: keyof Filters, value: string | string[]) => setFilters(prev => ({ ...prev, [name]: value }));
     const handleResetFilters = () => { setFilters(initialFilters); setActiveSearchTerm(''); };
     const handleCloseModal = () => setIsModalOpen(false);
     
@@ -311,15 +451,16 @@ const App: React.FC = () => {
         searchText: '',
         softwareType: '',
         type: assistantFilters.restorationType,
-        status: assistantFilters.status[0] || "",
+        status: assistantFilters.status,
         angulation: assistantFilters.angulation,
-        connectionType: assistantFilters.connections[0] || "",
+        // FIX: Renamed 'connections' to 'connectionType' to match the 'Filters' interface.
+        connectionType: assistantFilters.connections,
       });
       handleCloseModal();
     };
 
-    const handleOrientadorClick = () => {
-        setModalTitle(t.modal.orientador_title);
+    const handleAssistantClick = () => {
+        setModalTitle(t.modal.assistant_title);
         setModalContent(
           <AssistantModalContent
             onClose={handleCloseModal}
@@ -330,9 +471,46 @@ const App: React.FC = () => {
           />
         );
         setIsModalOpen(true);
-        setModalId('modal-orientador');
+        setModalId('modal-assistant');
         setModalFooter(null);
     };
+
+    const handleModalSpeak = (text: string, lang: Language) => {
+        if (!text || isModalSpeaking) return;
+
+        const utterance = new SpeechSynthesisUtterance(text);
+        const voices = window.speechSynthesis.getVoices();
+        const voice = voices.find(v => v.lang.startsWith(lang));
+        if (voice) {
+            utterance.voice = voice;
+        } else {
+            utterance.lang = lang;
+        }
+        
+        utterance.rate = 1.2;
+
+        utterance.onstart = () => setIsModalSpeaking(true);
+        utterance.onend = () => setIsModalSpeaking(false);
+        utterance.onerror = (event: SpeechSynthesisErrorEvent) => {
+            setIsModalSpeaking(false);
+            console.error("Speech synthesis error:", event.error);
+        };
+
+        const synth = window.speechSynthesis;
+        synth.cancel();
+        if (synth.paused) {
+            synth.resume();
+        }
+        synth.speak(utterance);
+    };
+
+    const handleModalStopSpeaking = () => {
+        if (isModalSpeaking) {
+            window.speechSynthesis.cancel();
+            setIsModalSpeaking(false);
+        }
+    };
+
 
     const handleOpenModal = (caseData: DentalCase, initialConnection?: string) => {
         setModalCaseData(caseData);
@@ -340,10 +518,9 @@ const App: React.FC = () => {
         setModalId(`modal-${caseData.id}`);
         setModalFooter(null);
 
-        const onSupportClick = () => {
-            setModalTitle('Soporte Técnico');
-            setModalContent(<SupportModal t={t.modal} />);
-        };
+        // FIX: Removed unused 'onSupportClick' function that was causing a TypeScript error on line 369.
+        // This function was declared but never used within its scope, and its name may have
+        // conflicted with a prop name, likely confusing the type checker.
     
         const getProceraUrl = (lang: Language): string => {
             const storePath = getStorePath(lang);
@@ -375,6 +552,48 @@ const App: React.FC = () => {
 
         const commonTableProps = { t: t, storeCountry, imageUrl: caseData.imageUrls[0] };
         
+        let descriptionComponent = null;
+        if (caseData.id === 'EXO033') {
+            const descriptionData = caseDescriptions[caseData.id];
+            const descriptionText = descriptionData?.description[language] || descriptionData?.description['es'];
+            if (descriptionText) {
+                const storePath = getStorePath(storeCountry);
+                const articleNumber = '302502';
+                const url = `https://store.nobelbiocare.com/${storePath}/catalogsearch/result/?q=${articleNumber}`;
+                const parts = descriptionText.split(articleNumber);
+
+                descriptionComponent = (
+                    <div className="mt-4 p-4 bg-slate-50 border border-slate-200 rounded-lg">
+                        <div className="flex items-start gap-3">
+                            <button
+                                onClick={() => isModalSpeaking ? handleModalStopSpeaking() : handleModalSpeak(descriptionText, language)}
+                                className="text-slate-500 hover:text-slate-800 transition-colors flex-shrink-0 mt-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[color:var(--accent-primary)] rounded-full p-1"
+                                // FIX: Corrected ternary operator syntax for aria-label.
+                                aria-label={isModalSpeaking ? t.caseCard.stop_speech_label : t.caseCard.text_to_speech_label}
+                                title={isModalSpeaking ? t.caseCard.stop_speech_label : t.caseCard.text_to_speech_label}
+                            >
+                                {isModalSpeaking ? <SpeakerXMarkIcon className="h-6 w-6" /> : <SpeakerWaveIcon className="h-6 w-6" />}
+                            </button>
+                            <p className="text-sm text-slate-700 whitespace-pre-wrap">
+                                {parts.length > 1 ? (
+                                    <>
+                                        {parts[0]}
+                                        <a href={url} target="_blank" rel="noopener noreferrer" className="text-blue-600 font-bold hover:underline inline-flex items-center gap-1">
+                                            {articleNumber}
+                                            <ExternalLinkIcon className="h-3 w-3" />
+                                        </a>
+                                        {parts[1]}
+                                    </>
+                                ) : (
+                                    descriptionText
+                                )}
+                            </p>
+                        </div>
+                    </div>
+                );
+            }
+        }
+        
         let content: React.ReactNode = <p>{t.modal.no_components_description}</p>;
 
         switch(caseData.id) {
@@ -383,7 +602,7 @@ const App: React.FC = () => {
                 const Content = () => {
                     const connections = caseData.compatibleConnections?.map(c => c.toString()) || [];
                     const [selectedConn, setSelectedConn] = useState(initialConnection || connections[0]);
-                    let tableData, tableTitle;
+                    let tableData;
                     if(caseData.id === 'EXO021'){
                          switch(selectedConn){
                             case 'CC': tableData = <TablaComponentesConexion data={UNIVERSAL_BASE_NON_ROTATING_CC_DATA} title={t.universalBaseTable.cc} platformHeaders={['np', 'rp', 'wp']} {...commonTableProps} t={t.universalBaseTable} />; break;
@@ -395,12 +614,12 @@ const App: React.FC = () => {
                             case 'CC': tableData = <><TablaComponentesConexion data={UNIVERSAL_BASE_ROTATING_CC_DATA} title={t.universalBaseRotatingCCTable.title} platformHeaders={['np', 'rp', 'wp']} {...commonTableProps} t={t.universalBaseRotatingTable} /><TablaComponentesConexion data={UNIVERSAL_BASE_ROTATING_CONICO_CC_DATA} title={t.universalBaseRotatingConicoCCTable.title} platformHeaders={['np', 'rp', 'wp']} {...commonTableProps} t={t.universalBaseRotatingTable} /></>; break;
                             case 'Brånemark': tableData = <><TablaComponentesConexion data={UNIVERSAL_BASE_ROTATING_BRANEMARK_DATA} title={t.universalBaseRotatingBranemarkTable.title} platformHeaders={['np', 'rp', 'wp']} {...commonTableProps} t={t.universalBaseRotatingTable} /><TablaComponentesConexion data={UNIVERSAL_BASE_ROTATING_CONICO_BRANEMARK_DATA} title={t.universalBaseRotatingConicoBranemarkTable.title} platformHeaders={['np', 'rp', 'wp']} {...commonTableProps} t={t.universalBaseRotatingTable} /></>; break;
                             case 'Tri-channel': tableData = <><TablaComponentesConexion data={UNIVERSAL_BASE_ROTATING_TRICHANNEL_DATA} title={t.universalBaseRotatingTriChannelTable.title} platformHeaders={['np', 'rp', 'wp']} {...commonTableProps} t={t.universalBaseRotatingTable} /><TablaComponentesConexion data={UNIVERSAL_BASE_ROTATING_CONICO_TRICHANNEL_DATA} title={t.universalBaseRotatingConicoTriChannelTable.title} platformHeaders={['np', 'rp', 'wp']} {...commonTableProps} t={t.universalBaseRotatingTable} /></>; break;
-                            case 'Multi Unit': tableData = <><TablaComponentesConexion data={UNIVERSAL_MULTI_UNIT_RECTO_DATA} title={t.universalMultiUnitTable.rectoTitle} platformHeaders={['np_rp', 'wp']} footerText={t.universalMultiUnitTable.footerRecto} {...commonTableProps} t={t.universalMultiUnitTable} /><TablaComponentesConexion data={UNIVERSAL_MULTI_UNIT_CONICO_DATA} title={t.universalMultiUnitTable.conicoTitle} platformHeaders={['np_rp', 'wp']} {...commonTableProps} t={t.universalMultiUnitTable} /></>; break;
+                            case ConnectionType.MultiUnit: tableData = <><TablaComponentesConexion data={UNIVERSAL_MULTI_UNIT_RECTO_DATA} title={t.universalMultiUnitTable.rectoTitle} platformHeaders={['np_rp', 'wp']} {...commonTableProps} t={t.universalMultiUnitTable} footerText={t.universalMultiUnitTable.footerRecto} /><TablaComponentesConexion data={UNIVERSAL_MULTI_UNIT_CONICO_DATA} title={t.universalMultiUnitTable.conicoTitle} platformHeaders={['np_rp', 'wp']} {...commonTableProps} t={t.universalMultiUnitTable} /></>; break;
                          }
                     }
-
                     return (
                         <div>
+                            <CaseDetailIcons caseData={caseData} isModal t={t.caseCard} connectionTypeForTable={selectedConn} />
                             <ConnectionSelector connections={connections} selectedConnection={selectedConn} onConnectionChange={setSelectedConn} t={t.modal} />
                             {tableData}
                         </div>
@@ -413,61 +632,53 @@ const App: React.FC = () => {
                 const Content = () => {
                     const connections = ['CC', 'Brånemark', 'Tri-channel', 'N1 TCC'];
                     const [selectedConn, setSelectedConn] = useState(initialConnection || 'CC');
+
+                    const handleDataChange = (newData: any[]) => {
+                        console.log("Data changed:", newData);
+                    };
+
+                    let tableContent = null;
                     if (selectedConn === 'N1 TCC') {
-                        return (
-                            <div>
-                                <ConnectionSelector connections={connections} selectedConnection={selectedConn} onConnectionChange={setSelectedConn} t={t.modal} />
-                                <TablaComponentesConexion data={PRE_MILLED_BLANKS_N1_TCC_DATA} title={t.preMilledBlanksN1TCCTable.title} platformHeaders={['np', 'rp']} {...commonTableProps} t={t.preMilledBlanksN1TCCTable}/>
-                            </div>
-                        );
+                        tableContent = <TablaComponentesConexion data={PRE_MILLED_BLANKS_N1_TCC_DATA} title={t.preMilledBlanksN1TCCTable.title} platformHeaders={['np', 'rp']} {...commonTableProps} t={t.preMilledBlanksN1TCCTable} />;
+                    } else {
+                        tableContent = <PreMilledBlanksPage 
+                            t={t.preMilledBlanksTable}
+                            storeCountry={storeCountry}
+                            connectionType={selectedConn}
+                            data={PRE_MILLED_BLANKS_DATA} 
+                            onDataChange={handleDataChange}
+                            imageUrl={N1_TCC_CASE_DATA.imageUrls[0]}
+                        />;
                     }
+
                     return (
                         <div>
+                            <CaseDetailIcons caseData={caseData} isModal t={t.caseCard} connectionTypeForTable={selectedConn} />
                             <ConnectionSelector connections={connections} selectedConnection={selectedConn} onConnectionChange={setSelectedConn} t={t.modal} />
-                            <PreMilledBlanksPage t={t.preMilledBlanksTable} storeCountry={storeCountry} connectionType={selectedConn} data={PRE_MILLED_BLANKS_DATA} onDataChange={() => {}} imageUrl={N1_TCC_CASE_DATA.imageUrls[0]}/>
+                            {tableContent}
                         </div>
                     );
                 };
                 content = <Content />;
                 break;
             }
-             case 'EXO024':
-             case 'EXO025': {
+            case 'EXO024':
+            case 'EXO025': {
                 const Content = () => {
-                    const connections = caseData.compatibleConnections?.map(c => c.toString()) || [];
-                    const [selectedConn, setSelectedConn] = useState(initialConnection || connections[0]);
-                    let tableData, tableTitle, platformHeaders, tableT, footer;
-                    switch(selectedConn) {
-                        case 'CC': 
-                            tableData = ZIRCONIA_BRIDGE_CC_DATA;
-                            tableTitle = t.zirconiaBridgeCCTable.title;
-                            platformHeaders = ['np', 'rp', 'wp'];
-                            tableT = t.proceraFCZImplantCrownTable;
-                            break;
-                        case 'Brånemark': 
-                            tableData = ZIRCONIA_BRIDGE_BRANEMARK_DATA;
-                            tableTitle = t.zirconiaBridgeBranemarkTable.title;
-                            platformHeaders = ['np', 'rp', 'wp'];
-                            tableT = t.proceraFCZImplantCrownTable;
-                            break;
-                        case 'Tri-channel': 
-                            tableData = ZIRCONIA_BRIDGE_TRICHANNEL_DATA;
-                            tableTitle = t.zirconiaBridgeTriChannelTable.title;
-                            platformHeaders = ['np', 'rp', 'wp', '6.0'];
-                            tableT = t.proceraFCZImplantCrownTable;
-                            break;
-                        case 'Multi Unit': 
-                            tableData = MULTI_UNIT_CONNECTION_DATA;
-                            tableTitle = t.universalMultiUnitTable.connectionTitle;
-                            platformHeaders = ['np / rp¹', 'wp²'];
-                            tableT=t.universalMultiUnitTable;
-                            footer = t.universalMultiUnitTable.footerRecto;
-                            break;
-                    }
+                    const connections = ['CC', 'Brånemark', 'Tri-channel', ConnectionType.MultiUnit];
+                    const [selectedConn, setSelectedConn] = useState(initialConnection || 'CC');
+                    let tableData;
+                     switch(selectedConn){
+                        case 'CC': tableData = <TablaComponentesConexion data={ZIRCONIA_BRIDGE_CC_DATA} title={t.zirconiaBridgeCCTable.title} platformHeaders={['np', 'rp', 'wp']} {...commonTableProps} t={t.proceraFCZImplantCrownTable} />; break;
+                        case 'Brånemark': tableData = <TablaComponentesConexion data={ZIRCONIA_BRIDGE_BRANEMARK_DATA} title={t.zirconiaBridgeBranemarkTable.title} platformHeaders={['np', 'rp', 'wp']} {...commonTableProps} t={t.proceraFCZImplantCrownTable} />; break;
+                        case 'Tri-channel': tableData = <TablaComponentesConexion data={ZIRCONIA_BRIDGE_TRICHANNEL_DATA} title={t.zirconiaBridgeTriChannelTable.title} platformHeaders={['np', 'rp', 'wp', '6.0']} {...commonTableProps} t={t.proceraFCZImplantCrownTable} />; break;
+                        case ConnectionType.MultiUnit: tableData = <TablaComponentesConexion data={MULTI_UNIT_CONNECTION_DATA} title={t.universalMultiUnitTable.connectionTitle} platformHeaders={['np_rp', 'wp']} {...commonTableProps} t={t.universalMultiUnitTable} />; break;
+                     }
                     return (
                         <div>
+                            <CaseDetailIcons caseData={caseData} isModal t={t.caseCard} connectionTypeForTable={selectedConn} />
                             <ConnectionSelector connections={connections} selectedConnection={selectedConn} onConnectionChange={setSelectedConn} t={t.modal} />
-                            {tableData && <TablaComponentesConexion data={tableData} title={tableTitle} platformHeaders={platformHeaders} {...commonTableProps} t={tableT} footerText={footer} />}
+                            {tableData}
                         </div>
                     );
                 };
@@ -475,62 +686,70 @@ const App: React.FC = () => {
                 break;
             }
             case 'EXO026': {
-                content = <TablaComponentesConexion data={PROCERA_FCZ_IMPLANT_CROWN_DATA} title={t.proceraFCZImplantCrownTable.title} platformHeaders={['np', 'rp', 'wp']} {...commonTableProps} t={t.proceraFCZImplantCrownTable} />;
+                content = (
+                    <div>
+                        <CaseDetailIcons caseData={caseData} isModal t={t.caseCard} />
+                        <TablaComponentesConexion data={PROCERA_FCZ_IMPLANT_CROWN_DATA} title={t.proceraFCZImplantCrownTable.title} platformHeaders={['np', 'rp', 'wp']} {...commonTableProps} t={t.proceraFCZImplantCrownTable} />
+                    </div>
+                );
                 break;
             }
             case 'EXO028': {
-                const Content = () => {
+                 const Content = () => {
                     const connections = ['CC', 'Tri-channel'];
-                    const [selectedConn, setSelectedConn] = useState(initialConnection || connections[0]);
-                    let tableData, tableTitle, platformHeaders, tableFooter;
-                    switch(selectedConn) {
-                        case 'CC': tableData = PROCERA_TITANIUM_ASC_CC_DATA; tableTitle = t.proceraTitaniumAscPillarTable.ccTitle; platformHeaders = ['np', 'rp', 'wp']; tableFooter = t.proceraTitaniumAscPillarTable.ccFooter; break;
-                        case 'Tri-channel': tableData = PROCERA_TITANIUM_ASC_TRICHANNEL_DATA; tableTitle = t.proceraTitaniumAscPillarTable.triChannelTitle; platformHeaders = ['np', 'rp', 'wp', '6']; tableFooter = t.proceraTitaniumAscPillarTable.triChannelFooter; break;
-                    }
+                    const [selectedConn, setSelectedConn] = useState(initialConnection || 'CC');
+                    let tableData;
+                     switch(selectedConn){
+                        case 'CC': tableData = <TablaComponentesConexion data={PROCERA_TITANIUM_ASC_CC_DATA} title={t.proceraTitaniumAscPillarTable.ccTitle} platformHeaders={['np', 'rp', 'wp']} {...commonTableProps} t={t.proceraFCZImplantCrownTable} footerText={t.proceraTitaniumAscPillarTable.ccFooter} />; break;
+                        case 'Tri-channel': tableData = <TablaComponentesConexion data={PROCERA_TITANIUM_ASC_TRICHANNEL_DATA} title={t.proceraTitaniumAscPillarTable.triChannelTitle} platformHeaders={['np', 'rp', 'wp', '6']} {...commonTableProps} t={t.proceraFCZImplantCrownTable} footerText={t.proceraTitaniumAscPillarTable.triChannelFooter} />; break;
+                     }
                     return (
                         <div>
+                            <CaseDetailIcons caseData={caseData} isModal t={t.caseCard} connectionTypeForTable={selectedConn} />
                             <ConnectionSelector connections={connections} selectedConnection={selectedConn} onConnectionChange={setSelectedConn} t={t.modal} />
-                            {tableData && <TablaComponentesConexion data={tableData} title={tableTitle} platformHeaders={platformHeaders} footerText={tableFooter} {...commonTableProps} t={t.proceraFCZImplantCrownTable} />}
+                            {tableData}
                         </div>
                     );
                 };
                 content = <Content />;
                 break;
             }
-            case 'EXO027': {
-                const Content = () => {
+             case 'EXO027': {
+                 const Content = () => {
                     const connections = ['CC', 'Brånemark', 'Tri-channel'];
-                    const [selectedConn, setSelectedConn] = useState(initialConnection || connections[0]);
-                    let tableData, tableTitle, platformHeaders;
-                    switch(selectedConn) {
-                        case 'CC': tableData = PROCERA_TITANIUM_CC_DATA; tableTitle = t.proceraTitaniumPillarTable.ccTitle; platformHeaders = ['3.0', 'np', 'rp', 'wp']; break;
-                        case 'Brånemark': tableData = PROCERA_TITANIUM_BRANEMARK_DATA; tableTitle = t.proceraTitaniumPillarTable.branemarkTitle; platformHeaders = ['np', 'rp', 'wp']; break;
-                        case 'Tri-channel': tableData = PROCERA_TITANIUM_TRICHANNEL_DATA; tableTitle = t.proceraTitaniumPillarTable.triChannelTitle; platformHeaders = ['np', 'rp', 'wp', '6']; break;
-                    }
+                    const [selectedConn, setSelectedConn] = useState(initialConnection || 'CC');
+                    let tableData;
+                     switch(selectedConn){
+                        case 'CC': tableData = <TablaComponentesConexion data={PROCERA_TITANIUM_CC_DATA} title={t.proceraTitaniumPillarTable.ccTitle} platformHeaders={['3.0', 'np', 'rp', 'wp']} {...commonTableProps} t={t.proceraFCZImplantCrownTable} />; break;
+                        case 'Brånemark': tableData = <TablaComponentesConexion data={PROCERA_TITANIUM_BRANEMARK_DATA} title={t.proceraTitaniumPillarTable.branemarkTitle} platformHeaders={['np', 'rp', 'wp']} {...commonTableProps} t={t.proceraFCZImplantCrownTable} />; break;
+                        case 'Tri-channel': tableData = <TablaComponentesConexion data={PROCERA_TITANIUM_TRICHANNEL_DATA} title={t.proceraTitaniumPillarTable.triChannelTitle} platformHeaders={['np', 'rp', 'wp', '6']} {...commonTableProps} t={t.proceraFCZImplantCrownTable} />; break;
+                     }
                     return (
                         <div>
+                            <CaseDetailIcons caseData={caseData} isModal t={t.caseCard} connectionTypeForTable={selectedConn} />
                             <ConnectionSelector connections={connections} selectedConnection={selectedConn} onConnectionChange={setSelectedConn} t={t.modal} />
-                            {tableData && <TablaComponentesConexion data={tableData} title={tableTitle} platformHeaders={platformHeaders} {...commonTableProps} t={t.proceraFCZImplantCrownTable} />}
+                            {tableData}
                         </div>
                     );
                 };
                 content = <Content />;
                 break;
             }
-             case 'EXO030': {
-                const Content = () => {
+            case 'EXO030': {
+                 const Content = () => {
                     const connections = ['CC', 'Brånemark', 'Tri-channel'];
-                    const [selectedConn, setSelectedConn] = useState(initialConnection || connections[0]);
-                    let tableData, tableTitle, platformHeaders, tableFooter;
-                    switch(selectedConn) {
-                        case 'CC': tableData = PROCERA_ZIRCONIA_CC_DATA; tableTitle = t.proceraZirconiaPillarTable.ccTitle; platformHeaders = ['np', 'rp', 'wp']; break;
-                        case 'Brånemark': tableData = PROCERA_ZIRCONIA_BRANEMARK_DATA; tableTitle = t.proceraZirconiaPillarTable.branemarkTitle; platformHeaders = ['np', 'rp', 'wp']; break;
-                        case 'Tri-channel': tableData = PROCERA_ZIRCONIA_TRICHANNEL_DATA; tableTitle = t.proceraZirconiaPillarTable.triChannelTitle; platformHeaders = ['np', 'rp', 'wp', '6']; tableFooter = t.proceraZirconiaPillarTable.triChannelFooter; break;
-                    }
+                    const [selectedConn, setSelectedConn] = useState(initialConnection || 'CC');
+                    let tableData;
+                     switch(selectedConn){
+                        case 'CC': tableData = <TablaComponentesConexion data={PROCERA_ZIRCONIA_CC_DATA} title={t.proceraZirconiaPillarTable.ccTitle} platformHeaders={['np', 'rp', 'wp']} {...commonTableProps} t={t.proceraFCZImplantCrownTable} />; break;
+                        case 'Brånemark': tableData = <TablaComponentesConexion data={PROCERA_ZIRCONIA_BRANEMARK_DATA} title={t.proceraZirconiaPillarTable.branemarkTitle} platformHeaders={['np', 'rp', 'wp']} {...commonTableProps} t={t.proceraFCZImplantCrownTable} />; break;
+                        case 'Tri-channel': tableData = <TablaComponentesConexion data={PROCERA_ZIRCONIA_TRICHANNEL_DATA} title={t.proceraZirconiaPillarTable.triChannelTitle} platformHeaders={['np', 'rp', 'wp', '6']} {...commonTableProps} t={t.proceraFCZImplantCrownTable} footerText={t.proceraZirconiaPillarTable.triChannelFooter} />; break;
+                     }
                     return (
                         <div>
-                            <ConnectionSelector connections={connections} selectedConnection={selectedConn} onConnectionChange={setSelectedConn} t={t.modal} />
-                            {tableData && <TablaComponentesConexion data={tableData} title={tableTitle} platformHeaders={platformHeaders} footerText={tableFooter} {...commonTableProps} t={t.proceraFCZImplantCrownTable} />}
+                           <CaseDetailIcons caseData={caseData} isModal t={t.caseCard} connectionTypeForTable={selectedConn} />
+                           <ConnectionSelector connections={connections} selectedConnection={selectedConn} onConnectionChange={setSelectedConn} t={t.modal} />
+                           {tableData}
                         </div>
                     );
                 };
@@ -538,45 +757,43 @@ const App: React.FC = () => {
                 break;
             }
             case 'EXO029': {
-                const Content = () => {
-                    const connections = ['CC', 'Brånemark', 'Tri-channel', 'Multi Unit'];
-                    const [selectedConn, setSelectedConn] = useState(initialConnection || connections[0]);
-                    let tableData, tableTitle, platformHeaders;
-                    // FIX: Use a local `tableT` variable typed as `any` to dynamically assign the correct translation object based on connection type.
-                    let tableT: any;
-                    switch(selectedConn) {
-                        case 'CC': tableData = PROCERA_TITANIUM_BRIDGE_CC_DATA; tableTitle = t.proceraTitaniumBridgeTable.ccTitle; platformHeaders = ['np', 'rp', 'wp']; tableT = t.proceraFCZImplantCrownTable; break;
-                        case 'Brånemark': tableData = PROCERA_TITANIUM_BRIDGE_BRANEMARK_DATA; tableTitle = t.proceraTitaniumBridgeTable.branemarkTitle; platformHeaders = ['np', 'rp', 'wp']; tableT = t.proceraFCZImplantCrownTable; break;
-                        case 'Tri-channel': tableData = PROCERA_TITANIUM_BRIDGE_TRICHANNEL_UPDATED_DATA; tableTitle = t.proceraTitaniumBridgeTable.triChannelTitle; platformHeaders = ['np', 'rp', 'wp', '6']; tableT = t.universalBaseTable; break;
-                        case 'Multi Unit': tableData = MULTI_UNIT_CONNECTION_DATA; tableTitle = t.universalMultiUnitTable.connectionTitle; platformHeaders = ['np_rp', 'wp']; tableT = t.universalMultiUnitTable; break;
-                    }
+                 const Content = () => {
+                    const connections = ['CC', 'Brånemark', 'Tri-channel', ConnectionType.MultiUnit];
+                    const [selectedConn, setSelectedConn] = useState(initialConnection || 'CC');
+                    let tableData;
+                     switch(selectedConn){
+                        case 'CC': tableData = <TablaComponentesConexion data={PROCERA_TITANIUM_BRIDGE_CC_DATA} title={t.proceraTitaniumBridgeTable.ccTitle} platformHeaders={['np', 'rp', 'wp']} {...commonTableProps} t={t.proceraFCZImplantCrownTable} />; break;
+                        case 'Brånemark': tableData = <TablaComponentesConexion data={PROCERA_TITANIUM_BRIDGE_BRANEMARK_DATA} title={t.proceraTitaniumBridgeTable.branemarkTitle} platformHeaders={['np', 'rp', 'wp']} {...commonTableProps} t={t.proceraFCZImplantCrownTable} />; break;
+                        case 'Tri-channel': tableData = <TablaComponentesConexion data={PROCERA_TITANIUM_BRIDGE_TRICHANNEL_UPDATED_DATA} title={t.proceraTitaniumBridgeTable.triChannelTitle} platformHeaders={['np', 'rp', 'wp', '6']} {...commonTableProps} t={t.nobelProceraTitaniumBarTable} />; break;
+                        case ConnectionType.MultiUnit: tableData = <TablaComponentesConexion data={MULTI_UNIT_CONNECTION_DATA} title={t.universalMultiUnitTable.connectionTitle} platformHeaders={['np_rp', 'wp']} {...commonTableProps} t={t.universalMultiUnitTable} />; break;
+                     }
                     return (
                         <div>
-                            <ConnectionSelector connections={connections} selectedConnection={selectedConn} onConnectionChange={setSelectedConn} t={t.modal} />
-                            {tableData && <TablaComponentesConexion data={tableData} title={tableTitle} platformHeaders={platformHeaders} {...commonTableProps} t={tableT} />}
+                           <CaseDetailIcons caseData={caseData} isModal t={t.caseCard} connectionTypeForTable={selectedConn} />
+                           <ConnectionSelector connections={connections} selectedConnection={selectedConn} onConnectionChange={setSelectedConn} t={t.modal} />
+                           {tableData}
                         </div>
                     );
                 };
                 content = <Content />;
                 break;
             }
-            case 'EXO032': {
-                const Content = () => {
-                    const connections = ['CC', 'Brånemark', 'Tri-channel', 'Multi Unit'];
-                    const [selectedConn, setSelectedConn] = useState(initialConnection || connections[0]);
-                    let tableData, tableTitle, platformHeaders;
-                    // FIX: Use a local `tableT` variable typed as `any` to dynamically assign the correct translation object based on connection type.
-                    let tableT: any;
-                    switch(selectedConn) {
-                        case 'CC': tableData = NOBELPROCERA_TITANIUM_BAR_CC_DATA; tableTitle = t.nobelProceraTitaniumBarTable.ccTitle; platformHeaders = ['np', 'rp', 'wp']; tableT = t.nobelProceraTitaniumBarTable; break;
-                        case 'Brånemark': tableData = NOBELPROCERA_TITANIUM_BAR_BRANEMARK_DATA; tableTitle = t.nobelProceraTitaniumBarTable.branemarkTitle; platformHeaders = ['np', 'rp', 'wp']; tableT = t.nobelProceraTitaniumBarTable; break;
-                        case 'Tri-channel': tableData = NOBELPROCERA_TITANIUM_BAR_TRICHANNEL_DATA; tableTitle = t.nobelProceraTitaniumBarTable.triChannelTitle; platformHeaders = ['np', 'rp', 'wp', '6']; tableT = t.nobelProceraTitaniumBarTable; break;
-                        case 'Multi Unit': tableData = MULTI_UNIT_CONNECTION_DATA; tableTitle = t.universalMultiUnitTable.connectionTitle; platformHeaders = ['np_rp', 'wp']; tableT = t.universalMultiUnitTable; break;
-                    }
+             case 'EXO032': {
+                 const Content = () => {
+                    const connections = ['CC', 'Brånemark', 'Tri-channel', ConnectionType.MultiUnit];
+                    const [selectedConn, setSelectedConn] = useState(initialConnection || 'CC');
+                    let tableData;
+                     switch(selectedConn){
+                        case 'CC': tableData = <TablaComponentesConexion data={NOBELPROCERA_TITANIUM_BAR_CC_DATA} title={t.nobelProceraTitaniumBarTable.ccTitle} platformHeaders={['np', 'rp', 'wp']} {...commonTableProps} t={t.nobelProceraTitaniumBarTable} />; break;
+                        case 'Brånemark': tableData = <TablaComponentesConexion data={NOBELPROCERA_TITANIUM_BAR_BRANEMARK_DATA} title={t.nobelProceraTitaniumBarTable.branemarkTitle} platformHeaders={['np', 'rp', 'wp']} {...commonTableProps} t={t.nobelProceraTitaniumBarTable} />; break;
+                        case 'Tri-channel': tableData = <TablaComponentesConexion data={NOBELPROCERA_TITANIUM_BAR_TRICHANNEL_DATA} title={t.nobelProceraTitaniumBarTable.triChannelTitle} platformHeaders={['np', 'rp', 'wp', '6']} {...commonTableProps} t={t.nobelProceraTitaniumBarTable} />; break;
+                        case ConnectionType.MultiUnit: tableData = <TablaComponentesConexion data={MULTI_UNIT_CONNECTION_DATA} title={t.universalMultiUnitTable.connectionTitle} platformHeaders={['np_rp', 'wp']} {...commonTableProps} t={t.universalMultiUnitTable} />; break;
+                     }
                     return (
                         <div>
-                            <ConnectionSelector connections={connections} selectedConnection={selectedConn} onConnectionChange={setSelectedConn} t={t.modal} />
-                            {tableData && <TablaComponentesConexion data={tableData} title={tableTitle} platformHeaders={platformHeaders} {...commonTableProps} t={tableT} />}
+                           <CaseDetailIcons caseData={caseData} isModal t={t.caseCard} connectionTypeForTable={selectedConn} />
+                           <ConnectionSelector connections={connections} selectedConnection={selectedConn} onConnectionChange={setSelectedConn} t={t.modal} />
+                           {tableData}
                         </div>
                     );
                 };
@@ -586,6 +803,7 @@ const App: React.FC = () => {
             case 'EXO013': {
                 content = (
                     <div>
+                        <CaseDetailIcons caseData={caseData} isModal t={t.caseCard} />
                         <TablaComponentesConexion data={N1_BASE_UNITARIA_NO_ROTATORIO_DATA} title={t.n1BaseUniversalTable.unitariaTitle} platformHeaders={['np', 'rp']} {...commonTableProps} t={t.n1BaseUniversalTable} />
                         <TablaComponentesConexion data={N1_BASE_PUENTE_ROTATORIO_DATA} title={t.n1BaseUniversalTable.puenteTitle} platformHeaders={['np', 'rp']} {...commonTableProps} t={t.n1BaseUniversalTable} />
                     </div>
@@ -593,273 +811,401 @@ const App: React.FC = () => {
                 break;
             }
             case 'EXO006': {
-                content = <TablaComponentesConexion data={N1_TCC_UNITARIA_NO_ROTATORIA_DATA} title={t.n1TccUnitariaTable.title} platformHeaders={['np', 'rp']} footerText={t.n1TccUnitariaTable.footer} {...commonTableProps} t={t.n1TccUnitariaTable} />;
-                break;
-            }
-            case 'EXO014': {
-                 const Content = () => {
-                    const connections = ['CC', 'N1 TCC', 'N1 Base', 'On1', 'Brånemark', 'Tri-channel'];
-                    const [selectedConn, setSelectedConn] = useState(initialConnection || connections[0]);
-                    let tableData, tableTitle, platformHeaders, tableT;
-                    switch(selectedConn) {
-                        case 'CC': tableData = PROCERA_TITANIUM_CC_DATA; tableTitle = t.proceraTitaniumPillarTable.ccTitle; platformHeaders = ['3.0', 'np', 'rp', 'wp']; tableT = t.proceraFCZImplantCrownTable; break;
-                        case 'N1 TCC': tableData = N1_TCC_UNITARIA_NO_ROTATORIA_DATA; tableTitle = t.n1TccUnitariaTable.title; platformHeaders = ['np', 'rp']; tableT = t.n1TccUnitariaTable; break;
-                        case 'N1 Base': tableData = N1_BASE_UNITARIA_NO_ROTATORIO_DATA; tableTitle = t.n1BaseUniversalTable.unitariaTitle; platformHeaders = ['np', 'rp']; tableT = t.n1BaseUniversalTable; break;
-                        case 'On1': tableData = PILAR_UNIVERSAL_ON1_ROTATORIO_DATA; tableTitle = t.pilarUniversalOn1Table.rotatorioTitle; platformHeaders = ['np', 'rp', 'wp']; tableT = t.pilarUniversalOn1Table; break;
-                        case 'Brånemark': tableData = PROCERA_TITANIUM_BRANEMARK_DATA; tableTitle = t.proceraTitaniumPillarTable.branemarkTitle; platformHeaders = ['np', 'rp', 'wp']; tableT = t.proceraFCZImplantCrownTable; break;
-                        case 'Tri-channel': tableData = PROCERA_TITANIUM_TRICHANNEL_DATA; tableTitle = t.proceraTitaniumPillarTable.triChannelTitle; platformHeaders = ['np', 'rp', 'wp', '6']; tableT = t.proceraFCZImplantCrownTable; break;
-                    }
-                    return (
-                        <div>
-                            <ConnectionSelector connections={connections} selectedConnection={selectedConn} onConnectionChange={setSelectedConn} t={t.modal} />
-                            {tableData && <TablaComponentesConexion data={tableData} title={tableTitle} platformHeaders={platformHeaders} {...commonTableProps} t={tableT} />}
-                        </div>
-                    );
-                };
-                content = <Content />;
-                break;
-            }
-            case 'EXO019': {
                 content = (
                     <div>
-                        <TablaComponentesConexion data={PILAR_UNIVERSAL_ON1_NO_ROTATORIO_DATA} title={t.pilarUniversalOn1Table.noRotatorioTitle} platformHeaders={['np', 'rp', 'wp']} footerText={t.pilarUniversalOn1Table.footer} {...commonTableProps} t={t.pilarUniversalOn1Table} />
-                        <TablaComponentesConexion data={PILAR_UNIVERSAL_ON1_ROTATORIO_DATA} title={t.pilarUniversalOn1Table.rotatorioTitle} platformHeaders={['np', 'rp', 'wp']} footerText={t.pilarUniversalOn1Table.footer} {...commonTableProps} t={t.pilarUniversalOn1Table} />
+                        <CaseDetailIcons caseData={caseData} isModal t={t.caseCard} />
+                        <TablaComponentesConexion data={N1_TCC_UNITARIA_NO_ROTATORIA_DATA} title={t.n1TccUnitariaTable.title} platformHeaders={['np', 'rp']} {...commonTableProps} t={t.n1TccUnitariaTable} footerText={t.n1TccUnitariaTable.footer} />
                     </div>
                 );
                 break;
             }
-            case 'EXO020': {
-                content = <TablaComponentesConexion data={NOBEL_PEARL_COMPONENTS_DATA} title={t.nobelPearlTable.title} platformHeaders={['np', 'rp', 'wp']} footerText={t.nobelPearlTable.footer} {...commonTableProps} t={t.nobelPearlTable} />;
-                break;
-            }
-            case 'EXO034': {
-                const Content = () => {
-                    const connections = ['CC', 'N1 TCC', 'Brånemark', 'Tri-channel'];
-                    const [selectedConn, setSelectedConn] = useState(initialConnection || connections[0]);
-                    let tables: React.ReactNode[] = [];
-                    
-                    switch(selectedConn) {
-                        case 'CC': 
-                            tables.push(<TablaMUA key="cc-r" data={MUA_XEAL_CC_RECTO_DATA} title={t.multiUnitAbutmentsTable.ccRectoTitle} platformHeaders={['1.5','2.5','3.5','4.5']} t={t} storeCountry={storeCountry} imageUrl={caseData.imageUrls[0]} />);
-                            tables.push(<TablaMUA key="cc-a" data={MUA_XEAL_CC_ANGULADO_DATA} title={t.multiUnitAbutmentsTable.ccAnguladoTitle} platformHeaders={['2.5','3.5','4.5']} t={t} storeCountry={storeCountry} hasAngle />);
-                            break;
-                        case 'N1 TCC': 
-                            tables.push(<TablaMUA key="n1-r" data={MUA_XEAL_N1_TCC_RECTO_DATA} title={t.multiUnitAbutmentsTable.n1TccRectoTitle} platformHeaders={['1.5','2.5','3.5','4.5']} t={t} storeCountry={storeCountry} imageUrl={caseData.imageUrls[2]} />);
-                            tables.push(<TablaMUA key="n1-a" data={MUA_XEAL_N1_TCC_ANGULADO_DATA} title={t.multiUnitAbutmentsTable.n1TccAnguladoTitle} platformHeaders={['2.5','3.5','4.5']} t={t} storeCountry={storeCountry} hasAngle />);
-                            break;
-                        case 'Brånemark': 
-                            tables.push(<TablaMUA key="br-r" data={MUA_BRANEMARK_RECTO_DATA} title={t.multiUnitAbutmentsTable.branemarkRectoTitle} platformHeaders={['1','2','3','4','5']} t={t} storeCountry={storeCountry} imageUrl={caseData.imageUrls[3]} />);
-                            tables.push(<TablaMUA key="br-a" data={MUA_BRANEMARK_ANGULADO_DATA} title={t.multiUnitAbutmentsTable.branemarkAnguladoTitle} platformHeaders={['2','3','4','5']} t={t} storeCountry={storeCountry} hasAngle />);
-                            break;
-                        case 'Tri-channel': 
-                            tables.push(<TablaMUA key="tr-r" data={MUA_TRICHANNEL_RECTO_DATA} title={t.multiUnitAbutmentsTable.triChannelRectoTitle} platformHeaders={['1','2','3','4','5']} t={t} storeCountry={storeCountry} imageUrl={caseData.imageUrls[4]} />);
-                            tables.push(<TablaMUA key="tr-a" data={MUA_TRICHANNEL_ANGULADO_DATA} title={t.multiUnitAbutmentsTable.triChannelAnguladoTitle} platformHeaders={['2','3','4','5']} t={t} storeCountry={storeCountry} hasAngle />);
-                            break;
-                    }
+             case 'EXO014': {
+                 const Content = () => {
+                    const connections = ['CC', 'N1 TCC', 'N1 Base', 'Branemark', 'Tri-channel'];
+                    const [selectedConn, setSelectedConn] = useState(initialConnection || 'CC');
+                    let tableData;
+                     switch(selectedConn){
+                        case 'CC': tableData = <TablaComponentesConexion data={PROCERA_TITANIUM_CC_DATA} title={t.proceraTitaniumPillarTable.ccTitle} platformHeaders={['3.0', 'np', 'rp', 'wp']} {...commonTableProps} t={t.proceraFCZImplantCrownTable} />; break;
+                        case 'N1 TCC': tableData = <TablaComponentesConexion data={N1_TCC_UNITARIA_NO_ROTATORIA_DATA} title={t.n1TccUnitariaTable.title} platformHeaders={['np', 'rp']} {...commonTableProps} t={t.n1TccUnitariaTable} footerText={t.n1TccUnitariaTable.footer} />; break;
+                        case 'N1 Base': tableData = <><TablaComponentesConexion data={N1_BASE_UNITARIA_NO_ROTATORIO_DATA} title={t.n1BaseUniversalTable.unitariaTitle} platformHeaders={['np', 'rp']} {...commonTableProps} t={t.n1BaseUniversalTable} /><TablaComponentesConexion data={N1_BASE_PUENTE_ROTATORIO_DATA} title={t.n1BaseUniversalTable.puenteTitle} platformHeaders={['np', 'rp']} {...commonTableProps} t={t.n1BaseUniversalTable} /></>; break;
+                        case 'Branemark': tableData = <TablaComponentesConexion data={PROCERA_TITANIUM_BRANEMARK_DATA} title={t.proceraTitaniumPillarTable.branemarkTitle} platformHeaders={['np', 'rp', 'wp']} {...commonTableProps} t={t.proceraFCZImplantCrownTable} />; break;
+                        case 'Tri-channel': tableData = <TablaComponentesConexion data={PROCERA_TITANIUM_TRICHANNEL_DATA} title={t.proceraTitaniumPillarTable.triChannelTitle} platformHeaders={['np', 'rp', 'wp', '6']} {...commonTableProps} t={t.proceraFCZImplantCrownTable} />; break;
+                     }
                     return (
                         <div>
-                            <ConnectionSelector connections={connections} selectedConnection={selectedConn} onConnectionChange={setSelectedConn} t={t.modal} />
-                            {tables}
+                           <CaseDetailIcons caseData={caseData} isModal t={t.caseCard} connectionTypeForTable={selectedConn} />
+                           <ConnectionSelector connections={connections} selectedConnection={selectedConn} onConnectionChange={setSelectedConn} t={t.modal} />
+                           {tableData}
                         </div>
                     );
                 };
                 content = <Content />;
                 break;
             }
-            default:
-                content = <p>{t.modal.no_components_description}</p>;
-        }
+             case 'EXO019': {
+                content = (
+                    <div>
+                        <CaseDetailIcons caseData={caseData} isModal t={t.caseCard} />
+                        <TablaComponentesConexion data={PILAR_UNIVERSAL_ON1_NO_ROTATORIO_DATA} title={t.pilarUniversalOn1Table.noRotatorioTitle} platformHeaders={['np', 'rp', 'wp']} {...commonTableProps} t={t.pilarUniversalOn1Table} />
+                        <TablaComponentesConexion data={PILAR_UNIVERSAL_ON1_ROTATORIO_DATA} title={t.pilarUniversalOn1Table.rotatorioTitle} platformHeaders={['np', 'rp', 'wp']} {...commonTableProps} t={t.pilarUniversalOn1Table} footerText={t.pilarUniversalOn1Table.footer} />
+                    </div>
+                );
+                break;
+            }
+             case 'EXO020': {
+                content = (
+                    <div>
+                        <CaseDetailIcons caseData={caseData} isModal t={t.caseCard} />
+                        <TablaComponentesConexion data={NOBEL_PEARL_COMPONENTS_DATA} title={t.nobelPearlTable.title} platformHeaders={['np', 'rp', 'wp']} {...commonTableProps} t={t.nobelPearlTable} footerText={t.nobelPearlTable.footer} />
+                    </div>
+                );
+                break;
+            }
+            case 'EXO023': {
+              const descriptionData = caseDescriptions[caseData.id];
+              const descriptionText = descriptionData?.description[language] || descriptionData?.description['es'];
+              let descriptionComponent = null;
+              if (descriptionText) {
+                  const linkTextMap: {[key: string]: string} = { es: 'Ver como', en: 'See how', pt: 'Ver como', fr: 'Voir comment', sv: 'Se hur' };
+                  const linkText = linkTextMap[language] || 'See how';
+                  const parts = descriptionText.split(linkText);
 
-        if ((caseData.status === CaseStatus.Local || caseData.status === CaseStatus.Procera) && caseData.id !== 'EXO031') {
-            setModalFooter(
-                <ResourceButtons
-                    t={t.modal}
-                    caseData={caseData}
-                    onOpenDownloadsModal={() => handleHelp001Click(caseData)}
-                    language={language}
-                />
-            );
+                  descriptionComponent = (
+                      <div className="mt-4 p-4 bg-slate-50 border border-slate-200 rounded-lg">
+                          <p className="text-sm text-slate-700">
+                              {parts[0]}
+                              <a href="https://www.youtube.com/watch?v=D-a6h3tI1mA" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-semibold hover:underline inline-flex items-center gap-1 ml-1">
+                                  {linkText}
+                                  <ExternalLinkIcon className="h-4 w-4" />
+                              </a>
+                              {parts.length > 1 && parts[1]}
+                          </p>
+                      </div>
+                  );
+              }
+              content = (
+                <div>
+                  <CaseDetailIcons caseData={caseData} isModal t={t.caseCard} />
+                  {descriptionComponent}
+                </div>
+              );
+              break;
+            }
+            case 'EXO034': {
+                 const Content = () => {
+                    const connections = ['CC', 'N1 TCC', 'Branemark', 'Tri-channel', 'MUA otras marcas'];
+                    const [selectedConn, setSelectedConn] = useState(initialConnection || 'CC');
+                    let tableData;
+                     switch(selectedConn){
+                        case 'CC': tableData = <><TablaMUA data={MUA_XEAL_CC_RECTO_DATA} title={t.multiUnitAbutmentsTable.ccRectoTitle} platformHeaders={['1.5', '2.5', '3.5', '4.5']} t={t.multiUnitAbutmentsTable} storeCountry={storeCountry} imageUrl={caseData.imageUrls[0]} /><TablaMUA data={MUA_XEAL_CC_ANGULADO_DATA} title={t.multiUnitAbutmentsTable.ccAnguladoTitle} platformHeaders={['2.5', '3.5', '4.5']} t={t.multiUnitAbutmentsTable} hasAngle storeCountry={storeCountry} /></>; break;
+                        case 'N1 TCC': tableData = <><TablaMUA data={MUA_XEAL_N1_TCC_RECTO_DATA} title={t.multiUnitAbutmentsTable.n1TccRectoTitle} platformHeaders={['1.5', '2.5', '3.5', '4.5']} t={t.multiUnitAbutmentsTable} storeCountry={storeCountry} imageUrl={caseData.imageUrls[2]} /><TablaMUA data={MUA_XEAL_N1_TCC_ANGULADO_DATA} title={t.multiUnitAbutmentsTable.n1TccAnguladoTitle} platformHeaders={['2.5', '3.5', '4.5']} t={t.multiUnitAbutmentsTable} hasAngle storeCountry={storeCountry} /></>; break;
+                        case 'Branemark': tableData = <><TablaMUA data={MUA_BRANEMARK_RECTO_DATA} title={t.multiUnitAbutmentsTable.branemarkRectoTitle} platformHeaders={['1', '2', '3', '4', '5']} t={t.multiUnitAbutmentsTable} storeCountry={storeCountry} imageUrl={caseData.imageUrls[4]} /><TablaMUA data={MUA_BRANEMARK_ANGULADO_DATA} title={t.multiUnitAbutmentsTable.branemarkAnguladoTitle} platformHeaders={['2', '3', '4', '5']} t={t.multiUnitAbutmentsTable} hasAngle storeCountry={storeCountry} /></>; break;
+                        case 'Tri-channel': tableData = <><TablaMUA data={MUA_TRICHANNEL_RECTO_DATA} title={t.multiUnitAbutmentsTable.triChannelRectoTitle} platformHeaders={['1', '2', '3', '4', '5']} t={t.multiUnitAbutmentsTable} storeCountry={storeCountry} imageUrl={caseData.imageUrls[5]} /><TablaMUA data={MUA_TRICHANNEL_ANGULADO_DATA} title={t.multiUnitAbutmentsTable.triChannelAnguladoTitle} platformHeaders={['2', '3', '4', '5']} t={t.multiUnitAbutmentsTable} hasAngle storeCountry={storeCountry} /></>; break;
+                        case 'MUA otras marcas': tableData = <>
+                          <TablaOtrasMarcas title="Astra Tech Implant System™ EV" headers={['1.5 mm', '2.5 mm', '3.5 mm', '4.5 mm', '5.5 mm']} data={MUA_OTRAS_MARCAS_ASTRA_EV_DATA} t={t} storeCountry={storeCountry} notes="Driver: 29158 with 25 Ncm. ¹Solo 30°" />
+                          <TablaOtrasMarcas title="Astra Tech Implant System® OsseoSpeed®" headers={['1.5 mm', '2.5 mm', '3.5 mm', '4.5 mm', '5.5 mm']} data={MUA_OTRAS_MARCAS_ASTRA_OSSEOSPEED_DATA} t={t} storeCountry={storeCountry} notes="Driver: 29158 with 15 Ncm. ¹Driver: Refer to original manufacturer." />
+                          <TablaOtrasMarcas title="BioHorizons® Tapered Internal" headers={['1 mm', '2 mm', '3 mm', '4 mm', '5 mm']} data={MUA_OTRAS_MARCAS_BIOHORIZONS_DATA} t={t} storeCountry={storeCountry} notes="Driver: 29158 with 30 Ncm." />
+                          <TablaOtrasMarcas title="Dentium® SuperLine® & Implantium®" headers={['1.5 mm', '2.5 mm', '3.5 mm']} data={MUA_OTRAS_MARCAS_DENTIUM_DATA} t={t} storeCountry={storeCountry} notes="Driver: 29158 with 30 Ncm." />
+                          <TablaOtrasMarcas title="Neodent® Grand Morse®" headers={['1.5 mm', '2.5 mm', '3.5 mm', '4.5 mm']} data={MUA_OTRAS_MARCAS_NEODENT_DATA} t={t} storeCountry={storeCountry} notes="Driver: 29158 with 32 Ncm." />
+                          <TablaOtrasMarcas title="Osstem® TS" headers={['1.5 mm', '2.5 mm', '3.5 mm']} data={MUA_OTRAS_MARCAS_OSSTEM_DATA} t={t} storeCountry={storeCountry} notes="Driver: 29158 with 30 Ncm." />
+                          <TablaOtrasMarcas title="Straumann® Bone Level" headers={['1.5 mm', '2.5 mm', '3.5 mm', '4.5 mm']} data={MUA_OTRAS_MARCAS_STRAUMANN_BL_DATA} t={t} storeCountry={storeCountry} notes="Driver: 29158 with 35 Ncm." />
+                          <TablaOtrasMarcas title="Straumann® BLX" headers={['1.5 mm', '2.5 mm', '3.5 mm', '4.5 mm']} data={MUA_OTRAS_MARCAS_STRAUMANN_BLX_DATA} t={t} storeCountry={storeCountry} notes="Driver: 29158 with 35 Ncm." />
+                          <TablaOtrasMarcas title="Zimmer Dental Tapered Screw-Vent®" headers={['1 mm', '2 mm', '2.5 mm', '3 mm', '3.5 mm', '4 mm', '4.5 mm', '5 mm']} data={MUA_OTRAS_MARCAS_ZIMMER_DATA} t={t} storeCountry={storeCountry} notes="Driver: 29158 with 30 Ncm. ¹Solo 17°" />
+                          <TablaOtrasMarcas title="3i™ Certain®" headers={['1 mm', '2 mm', '3 mm', '4 mm', '5 mm']} data={MUA_OTRAS_MARCAS_3I_DATA} t={t} storeCountry={storeCountry} notes="Driver: 29158 with 20 Ncm." />
+                        </>; break;
+                     }
+                    return (
+                        <div>
+                           <CaseDetailIcons caseData={caseData} isModal t={t.caseCard} connectionTypeForTable={selectedConn} />
+                           <ConnectionSelector connections={connections} selectedConnection={selectedConn} onConnectionChange={setSelectedConn} t={t.modal} />
+                           {tableData}
+                        </div>
+                    );
+                };
+                content = <Content />;
+                break;
+            }
+            case 'EXO033': {
+              content = (
+                <div>
+                  <CaseDetailIcons caseData={caseData} isModal t={t.caseCard} />
+                  {descriptionComponent}
+                </div>
+              );
+              break;
+            }
         }
-
-        const modalBody = (
-            <React.Fragment>
-                <CaseDetailIcons caseData={caseData} isModal t={t.caseCard} connectionTypeForTable={initialConnection} />
-                <hr className="my-6 border-slate-200" />
-                {content}
-            </React.Fragment>
-        );
         
-        setModalContent(modalBody);
+        const onOpenDownloadsModal = () => {
+            if (language === 'fr' || language === 'sv') {
+                setModalTitle(t.modal.descargas_procera_modal_title);
+                setModalContent(<DescargasOtherProcera t={t.modal} onClose={handleCloseModal} language={language} onOpenSelecProLocal={handleOpenSelecProLocal} />);
+                setModalId('modal-support-frsv');
+            } else {
+                setModalTitle(t.modal.descargas_procera_modal_title);
+                setModalContent(<DescargasProceraModalContent t={t.modal} onClose={handleCloseModal} language={language} onOpenSelecProLocal={handleOpenSelecProLocal} />);
+                setModalId('modal-support-espt');
+            }
+        };
+
+        const modalFooterContent = <ResourceButtons t={t.modal} caseData={caseData} onOpenDownloadsModal={onOpenDownloadsModal} language={language} />;
+        
+        setModalContent(content);
+        if (caseData.id !== 'EXO033') {
+          setModalFooter(modalFooterContent);
+        }
         setIsModalOpen(true);
     };
 
     const handleHelp001Click = (caseData: DentalCase) => {
-        setModalCaseData(caseData);
-        setModalId('modal-help001');
-        setModalTitle(t.modal.descargas_procera_modal_title);
-        if (language === 'en' || language === 'es' || language === 'pt') {
-            setModalContent(<DescargasProceraModalContent t={t.modal} onClose={handleCloseModal} language={language} onOpenSelecProLocal={() => setModalContent(<SelecProLocal t={t.modal} onClose={handleCloseModal} language={language}/>)}/>);
+        if (language === 'fr' || language === 'sv') {
+            setModalTitle(t.modal.descargas_procera_modal_title);
+            setModalContent(<DescargasOtherProcera t={t.modal} onClose={handleCloseModal} language={language} onOpenSelecProLocal={handleOpenSelecProLocal} />);
+            setModalId('modal-support-frsv');
         } else {
-            setModalContent(<DescargasOtherProcera t={t.modal} onClose={handleCloseModal} language={language} onOpenSelecProLocal={() => setModalContent(<SelecProLocal t={t.modal} onClose={handleCloseModal} language={language}/>)}/>);
+            setModalTitle(t.modal.descargas_procera_modal_title);
+            setModalContent(<DescargasProceraModalContent t={t.modal} onClose={handleCloseModal} language={language} onOpenSelecProLocal={handleOpenSelecProLocal} />);
+            setModalId('modal-support-espt');
         }
         setIsModalOpen(true);
+        setModalFooter(null);
     };
 
+    const handleOpenSelecProLocal = () => {
+        setModalTitle(t.modal.selec_pro_local_title);
+        setModalContent(<SelecProLocal t={t.modal} onClose={handleCloseModal} language={language} />);
+        setModalId('modal-selec-pro-local');
+    };
+    
     const handleTablesClick = (caseData: DentalCase) => {
-        setModalCaseData(caseData);
-        setModalId('modal-dev-debug');
         setModalTitle(t.modal.tables_modal_title);
         setModalContent(<DevDebugPage t={t.devDebugPage} />);
         setIsModalOpen(true);
-    };
-    
-    const handleMenuItemClick = (caseId: string) => {
-        const cardElement = caseRefs.current[caseId];
-        if (cardElement) {
-            cardElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            cardElement.classList.add('highlight-card');
-            setTimeout(() => {
-                cardElement.classList.remove('highlight-card');
-            }, 1500);
-        }
-        setIsMenuOpen(false);
+        setModalId('modal-tables');
+        setModalFooter(null);
     };
 
-    useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
-            if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-                setIsMenuOpen(false);
-            }
-        };
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => document.removeEventListener('mousedown', handleClickOutside);
-    }, []);
-    
-    const menuData = useMemo(() => {
-      const categories: { [key: string]: { id: string; label: string; imageUrl: string }[] } = {};
-      MOCK_CASES.forEach(c => {
-        const category = t.filterBar.options[c.status] || 'Others';
-        if (!categories[category]) {
-          categories[category] = [];
-        }
-        categories[category].push({
-          id: c.id,
-          label: c.patientName[language],
-          imageUrl: c.imageUrls[0] || '',
-        });
-      });
-      return categories;
-    }, [language, t]);
+    const [tableData, setTableData] = useState(TRI_CHANNEL_TABLE_DATA);
 
-    const handleDownloadCenterClick = () => {
-        const handleOpenWorkflowSelector = () => {
-            setModalTitle(t.modal.selec_pro_local_title);
-            setModalContent(<SelecProLocal t={t.modal} onClose={handleCloseModal} language={language}/>);
-        };
-
-        const downloadLinks = [
-            { text: 'NobelProcera Overview V3.pdf', href: '#' },
-            { text: 'Local Production Overview V1.2.pdf', href: '#' },
-            { text: 'Material and component compatibility V2.1.pdf', href: '#' },
-        ];
-
-        setModalTitle(t.header.download_center_button);
-        setModalId('modal-download-center');
+    const handleTableTestClick = (caseData: DentalCase) => {
+        setModalTitle(t.triChannelTestTable.title);
         setModalContent(
-            <DownloadCenterModalContent
-                links={downloadLinks}
-                t={t}
-                onClose={handleCloseModal}
-                onOpenWorkflowSelector={handleOpenWorkflowSelector}
+          <TablaTriChannel
+            t={t.triChannelTestTable}
+            storeCountry={storeCountry}
+            isTableEditMode
+            data={tableData}
+            onDataChange={setTableData}
+          />
+        );
+        setIsModalOpen(true);
+        setModalId('modal-table-test');
+    };
+
+    const handleSupportClick = () => {
+        setModalTitle(t.header.support_button);
+        setModalContent(<SupportModal t={t.modal} />);
+        setIsModalOpen(true);
+        setModalId('modal-support');
+        setModalFooter(null);
+    };
+
+    const handleCustomerServiceClick = () => {
+        setModalTitle(t.modal.customer_service_title);
+        setModalContent(<CustomerServiceModal t={t.modal} language={language} />);
+        setIsModalOpen(true);
+        setModalId('modal-customer-service');
+        setModalFooter(null);
+    };
+
+    const [caseModalData, setCaseModalData] = useState([
+        { title: 'Puente sobre implantes Procera Zirconia estética', caseId: 'EXO024', modalType: 'Tablas de componentes con selector' },
+        { title: 'Base Universal No rotatoria', caseId: 'EXO021', modalType: 'Tablas de componentes con selector' },
+    ]);
+    const [modalAnalysisData, setModalAnalysisData] = useState([
+        { modalName: 'Componentes/Referencias', description: 'Muestra tablas de componentes para un caso específico.', sections: ['Selector de Conexión', 'Tabla(s) de Componentes', 'Recursos Adicionales (pie de página)'] },
+        { modalName: 'Soporte Técnico', description: 'Ofrece múltiples vías de contacto para soporte.', sections: ['WhatsApp (QR)', 'Agendar Sesión (QR/Enlace)', 'Email', 'Teléfono'] },
+    ]);
+
+    const handleExosClick = (caseData: DentalCase) => {
+        setModalTitle(t.modal.exos_modal_title);
+        setModalContent(
+            <ExosModalContent
+                t={t.exos_modal}
                 language={language}
+                isTableEditMode
+                caseModalData={caseModalData}
+                onCaseModalDataChange={setCaseModalData}
+                modalAnalysisData={modalAnalysisData}
+                onModalAnalysisDataChange={setModalAnalysisData}
             />
         );
         setIsModalOpen(true);
+        setModalId('modal-exos');
     };
+
+    const handleDownloadCenterClick = () => {
+      const links = [
+        { text: 'NobelProcera Prosthetic solutions Overview', href: 'https://www.ganarnobelbiocare.com/nobeldesign/E-Prosthetic/PDF/GMT%2095136_ES%20NobelProcera%20product%20overview.pdf' },
+        { text: 'Universal Base product overview', href: 'https://www.ganarnobelbiocare.com/nobeldesign/E-Prosthetic/PDF/87971_Universal%20Base%20product%20overview_ES.pdf' },
+        { text: 'Titanium Blanks product overview', href: 'https://www.ganarnobelbiocare.com/nobeldesign/E-Prosthetic/PDF/88412_Titanium%20Blanks%20product%20overview_ES.pdf' },
+        { text: 'Product Overview NobelPearl', href: 'https://www.ganarnobelbiocare.com/nobeldesign/E-Prosthetic/PDF/88966_Product%20Overview%20NobelPearl_ES.pdf' },
+        { text: 'Prosthetic Overview N1', href: 'https://www.ganarnobelbiocare.com/nobeldesign/E-Prosthetic/PDF/87730%20Nobel%20Biocare%20N1%20System%20ProdOverw%2021.2%20ES.pdf' },
+      ];
+
+      setModalTitle(t.modal.download_center_title);
+      setModalContent(
+          <DownloadCenterModalContent
+              links={links}
+              t={t}
+              onClose={handleCloseModal}
+              onOpenWorkflowSelector={handleOpenSelecProLocal}
+              language={language}
+          />
+      );
+      setIsModalOpen(true);
+      setModalId('modal-download-center');
+      setModalFooter(null);
+    };
+    
+    const menuData = useMemo(() => {
+        return MOCK_CASES.reduce((acc, caseItem) => {
+            const category = t.filterBar.options[caseItem.status] || 'Others';
+            if (!acc[category]) {
+                acc[category] = [];
+            }
+            acc[category].push({
+                id: caseItem.id,
+                label: caseItem.patientName[language],
+                imageUrl: caseItem.imageUrls[0],
+            });
+            return acc;
+        }, {} as { [key: string]: { id: string; label: string; imageUrl: string; }[] });
+    }, [language, t]);
+
+    const handleMenuItemClick = (caseId: string) => {
+        setIsMenuOpen(false);
+        const element = caseRefs.current[caseId];
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            // Highlight effect
+            element.classList.add('animate-highlight');
+            setTimeout(() => {
+                element.classList.remove('animate-highlight');
+            }, 2000);
+        }
+    };
+    
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+          if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+            setIsMenuOpen(false);
+          }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+          document.removeEventListener("mousedown", handleClickOutside);
+        };
+      }, [menuRef]);
 
     return (
         <div className="flex flex-col min-h-screen bg-slate-50">
-            <Modal isOpen={isIntroModalOpen} onClose={() => {}} title="" backButtonLabel="" isDismissable={false} showHeader={false} id="modal-intro" maxWidth="max-w-xl">
-              <IntroModal onConfirm={handleConfirmIntro} t={translations} />
-            </Modal>
+            {isIntroModalOpen && (
+                <Modal 
+                    isOpen={isIntroModalOpen} 
+                    onClose={() => {}} 
+                    title="" 
+                    isDismissable={false} 
+                    showHeader={false}
+                    id="modal-intro"
+                    maxWidth="max-w-2xl"
+                    backButtonLabel=""
+                >
+                    <IntroModal onConfirm={handleConfirmIntro} t={translations} />
+                </Modal>
+            )}
             
             <Header
-                title={t.header.title}
-                language={language}
-                storeCountry={storeCountry}
-                onLanguageChange={setLanguage}
-                onSupportClick={() => { setIsModalOpen(true); setModalTitle('Soporte Técnico'); setModalContent(<SupportModal t={t.modal} />); }}
-                onCustomerServiceClick={() => { setIsModalOpen(true); setModalTitle(t.modal.customer_service_title); setModalContent(<CustomerServiceModal t={t.modal} language={language}/>); }}
-                onDownloadCenterClick={handleDownloadCenterClick}
-                onGlobeClick={() => setIsIntroModalOpen(true)}
-                t={t.header}
-                isMenuOpen={isMenuOpen}
-                onToggleMenu={() => setIsMenuOpen(!isMenuOpen)}
-                menuData={menuData}
-                onMenuItemClick={handleMenuItemClick}
-                onOrientadorClick={handleOrientadorClick}
+              title={t.header.title}
+              language={language}
+              storeCountry={storeCountry}
+              onLanguageChange={(lang) => setLanguage(lang)}
+              onSupportClick={handleSupportClick}
+              onCustomerServiceClick={handleCustomerServiceClick}
+              onDownloadCenterClick={handleDownloadCenterClick}
+              onGlobeClick={() => setIsIntroModalOpen(true)}
+              t={t.header}
+              isMenuOpen={isMenuOpen}
+              onToggleMenu={() => setIsMenuOpen(!isMenuOpen)}
+              menuData={menuData}
+              onMenuItemClick={handleMenuItemClick}
+              onAssistantClick={handleAssistantClick}
             />
 
-            <div className="flex-1 w-full max-w-screen-2xl mx-auto flex">
-                <aside className={`flex-shrink-0 transition-all duration-300 ease-in-out ${isFilterBarCollapsed ? 'w-20' : 'w-80'}`}>
-                    <div className="sticky top-[145px] h-[calc(100vh-160px)] p-4">
-                        <FilterBar 
-                            filters={filters} 
-                            onFilterChange={handleFilterChange} 
-                            onResetFilters={handleResetFilters}
-                            isAnyFilterActive={isAnyFilterActive}
-                            t={t.filterBar}
-                            isCollapsed={isFilterBarCollapsed}
-                            onToggle={() => setIsFilterBarCollapsed(!isFilterBarCollapsed)}
-                        />
-                    </div>
-                </aside>
-                <main className="flex-1 p-4 sm:p-6 lg:p-8 min-w-0">
-                    <div className="flex items-center justify-between mb-6">
-                        <div className="relative flex-grow">
-                            <input
-                                type="text"
-                                placeholder={t.filterBar.search_placeholder}
-                                value={activeSearchTerm}
-                                onChange={(e) => setActiveSearchTerm(e.target.value)}
-                                className="w-full h-12 pl-12 pr-4 text-sm bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[color:var(--accent-primary)]"
+            <div className="flex-grow w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="grid grid-cols-12 gap-8 py-8">
+                    <aside className={`col-span-12 lg:col-span-3 transition-all duration-300 ease-in-out`}>
+                        <div className="sticky top-24">
+                           <div className="relative mb-6">
+                               <input
+                                   type="search"
+                                   placeholder={t.filterBar.search_placeholder}
+                                   value={filters.searchText}
+                                   onChange={(e) => handleFilterChange('searchText', e.target.value)}
+                                   onBlur={(e) => setActiveSearchTerm(e.target.value)}
+                                   onKeyDown={(e) => { if (e.key === 'Enter') setActiveSearchTerm(filters.searchText); }}
+                                   className="w-full h-11 pl-10 pr-4 rounded-md border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[color:var(--accent-primary)]"
+                               />
+                               <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
+                           </div>
+                           <FilterBar
+                                filters={filters}
+                                onFilterChange={handleFilterChange}
+                                onResetFilters={handleResetFilters}
+                                isAnyFilterActive={isAnyFilterActive}
+                                t={t.filterBar}
+                                isCollapsed={isFilterBarCollapsed}
+                                onToggle={() => setIsFilterBarCollapsed(!isFilterBarCollapsed)}
                             />
-                            <MagnifyingGlassIcon className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
                         </div>
-                    </div>
-                    
-                    <CaseGrid 
-                        cases={filteredCases} 
-                        onReferenceClick={handleOpenModal}
-                        onHelp001Click={handleHelp001Click}
-                        onTablesClick={handleTablesClick}
-                        onTableTestClick={() => {}}
-                        onExosClick={() => {}}
-                        t={t.caseCard} 
-                        tNotes={t.notes} 
-                        language={language}
-                        isAnyFilterActive={isAnyFilterActive}
-                        caseRefs={caseRefs}
-                    />
-                </main>
+                    </aside>
+                    <main className="col-span-12 lg:col-span-9">
+                        <CaseGrid
+                            cases={filteredCases}
+                            onReferenceClick={handleOpenModal}
+                            onHelp001Click={handleHelp001Click}
+                            onTablesClick={handleTablesClick}
+                            onTableTestClick={handleTableTestClick}
+                            onExosClick={handleExosClick}
+                            t={t.caseCard}
+                            tNotes={t.notes}
+                            language={language}
+                            isAnyFilterActive={isAnyFilterActive}
+                            caseRefs={caseRefs}
+                        />
+                    </main>
+                </div>
             </div>
-            
-            <Footer t={t.footer} storeCountry={storeCountry} onSupportClick={() => {}} />
 
-            <Modal 
-                isOpen={isModalOpen}
-                onClose={handleCloseModal}
-                title={modalTitle}
-                backButtonLabel={t.modal.back_button}
-                caseData={modalCaseData || undefined}
-                t={t}
-                id={modalId}
-                footer={modalFooter}
+            <Footer t={t.footer} storeCountry={storeCountry} onSupportClick={handleSupportClick} />
+            <FilterTooltip isActive={isAnyFilterActive} onResetFilters={handleResetFilters} t={t.tooltip} />
+
+            <Modal
+              isOpen={isModalOpen}
+              onClose={handleCloseModal}
+              title={modalTitle}
+              footer={modalFooter}
+              backButtonLabel={t.modal.back_button}
+              caseData={modalCaseData || undefined}
+              t={t}
+              id={modalId}
             >
-                {modalContent}
+              {modalContent}
             </Modal>
         </div>
     );
 };
 
+// FIX: Added default export to the App component.
+// This resolves the error in 'index.tsx' which tries to import 'App' as a default export.
 export default App;

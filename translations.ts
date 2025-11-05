@@ -6,6 +6,7 @@ const enTranslations = {
     support_button: "Technical Support",
     customer_service_button: "Customer Service",
     download_center_button: "Download Center",
+    assistant_button: "Assistant",
   },
   intro_modal: {
     title: "Welcome to the E-Prosthetic Overview",
@@ -75,7 +76,7 @@ const enTranslations = {
     aria_view_refs_cc_for: "View CC references for",
     aria_view_refs_branemark_for: "View Branemark references for",
     aria_view_refs_tri_for: "View Tri-channel references for",
-    aria_view_refs_mua_for: "View Multi-Unit references for",
+    aria_view_refs_mua_for: "View MUA references for",
     aria_view_refs_n1tcc_for: "View N1 TCC references for",
     aria_view_refs_for: "View references for",
     aria_download_for: "Download for",
@@ -83,6 +84,7 @@ const enTranslations = {
     aria_view_details_for: "View details for",
     copy_id_label: "Copy ID",
     characteristics_title: "Restoration Characteristics",
+    description_not_found: "Description not found for this product.",
     tooltips: {
       unitaria: "Unitary Restoration",
       multiple: "Multiple Restoration",
@@ -104,7 +106,9 @@ const enTranslations = {
       three_shape: "Compatible with 3Shape",
       dentalwings: "Compatible with Dentalwings",
       screw_included: "Clinical screw included"
-    }
+    },
+    text_to_speech_label: "Read description aloud",
+    stop_speech_label: "Stop reading",
   },
   footer: {
     socialTitle: 'SOCIAL MEDIA',
@@ -117,7 +121,7 @@ const enTranslations = {
     }
   },
   modal: {
-    orientador_title: "Assistant",
+    assistant_title: "Assistant",
     close_aria_label: "Close modal",
     back_button: "Back",
     descargas_procera_modal_title: "Library Download",
@@ -587,6 +591,7 @@ const esTranslations = {
     support_button: "Soporte Técnico",
     customer_service_button: "Atención al cliente",
     download_center_button: "Centro de descargas",
+    assistant_button: "Asistente",
   },
   intro_modal: {
     title: "Bienvenido al E-Prosthetic Overview",
@@ -656,7 +661,7 @@ const esTranslations = {
     aria_view_refs_cc_for: "Ver referencias CC para",
     aria_view_refs_branemark_for: "Ver referencias Branemark para",
     aria_view_refs_tri_for: "Ver referencias Tri-channel para",
-    aria_view_refs_mua_for: "Ver referencias Multi-Unit para",
+    aria_view_refs_mua_for: "Ver referencias MUA para",
     aria_view_refs_n1tcc_for: "Ver referencias N1 TCC",
     aria_view_refs_for: "Ver referencias para",
     aria_download_for: "Descargar para",
@@ -664,6 +669,7 @@ const esTranslations = {
     aria_view_details_for: "Ver detalles de",
     copy_id_label: "Copiar ID",
     characteristics_title: "Características Restauración",
+    description_not_found: "No se encontró descripción para este producto.",
     tooltips: {
         unitaria: "Restauración Unitaria",
         multiple: "Restauración Múltiple",
@@ -685,7 +691,9 @@ const esTranslations = {
         three_shape: "Compatible con 3Shape",
         dentalwings: "Compatible con Dentalwings",
         screw_included: "Tornillo clínico incluido"
-    }
+    },
+    text_to_speech_label: "Leer descripción en voz alta",
+    stop_speech_label: "Detener lectura",
   },
   footer: {
     socialTitle: 'REDES SOCIALES',
@@ -698,7 +706,7 @@ const esTranslations = {
     }
   },
   modal: {
-    orientador_title: "Orientador",
+    assistant_title: "Asistente",
     close_aria_label: "Cerrar modal",
     back_button: "Atrás",
     descargas_procera_modal_title: "Descarga de Librerías",
@@ -1168,9 +1176,17 @@ const esTranslations = {
 // FIX: Added placeholder translations for other languages
 const ptTranslations = {
   ...esTranslations,
+  header: {
+    ...esTranslations.header,
+    support_button: "Suporte Técnico",
+    customer_service_button: "Atendimento ao Cliente",
+    download_center_button: "Centro de Downloads",
+    assistant_button: "Assistente",
+  },
   wizard: { ...enTranslations.wizard },
   caseCard: {
     ...esTranslations.caseCard,
+    description_not_found: "Descrição não encontrada para este produto.",
     characteristics_title: "Características da Restauração",
     tooltips: {
       unitaria: "Restauração Unitária",
@@ -1193,14 +1209,24 @@ const ptTranslations = {
       three_shape: "Compatível com 3Shape",
       dentalwings: "Compatível com Dentalwings",
       screw_included: "Parafuso clínico incluído"
-    }
+    },
+    text_to_speech_label: "Ler descrição em voz alta",
+    stop_speech_label: "Parar leitura",
   },
 };
 const frTranslations = {
   ...enTranslations,
+  header: {
+    ...enTranslations.header,
+    support_button: "Support Technique",
+    customer_service_button: "Service Client",
+    download_center_button: "Centre de Téléchargement",
+    assistant_button: "Assistant",
+  },
   wizard: { ...enTranslations.wizard },
   caseCard: {
     ...enTranslations.caseCard,
+    description_not_found: "Description non trouvée pour ce produit.",
     characteristics_title: "Caractéristiques de la Restauration",
     tooltips: {
       unitaria: "Restauration Unitaire",
@@ -1223,14 +1249,24 @@ const frTranslations = {
       three_shape: "Compatible avec 3Shape",
       dentalwings: "Compatible avec Dentalwings",
       screw_included: "Vis clinique incluse"
-    }
+    },
+    text_to_speech_label: "Lire la description à haute voix",
+    stop_speech_label: "Arrêter la lecture",
   },
 };
 const svTranslations = {
   ...enTranslations,
+  header: {
+    ...enTranslations.header,
+    support_button: "Teknisk Support",
+    customer_service_button: "Kundservice",
+    download_center_button: "Nedladdningscenter",
+    assistant_button: "Assistent",
+  },
   wizard: { ...enTranslations.wizard },
   caseCard: {
     ...enTranslations.caseCard,
+    description_not_found: "Beskrivning hittades inte för den här produkten.",
     characteristics_title: "Restaureringsegenskaper",
     tooltips: {
       unitaria: "Singel-restaurering",
@@ -1253,7 +1289,9 @@ const svTranslations = {
       three_shape: "Kompatibel med 3Shape",
       dentalwings: "Kompatibel med Dentalwings",
       screw_included: "Klinisk skruv ingår"
-    }
+    },
+    text_to_speech_label: "Läs beskrivningen högt",
+    stop_speech_label: "Sluta läsa",
   },
 };
 

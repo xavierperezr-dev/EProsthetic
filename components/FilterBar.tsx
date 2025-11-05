@@ -5,7 +5,7 @@ import SegmentedControl from './SegmentedControl';
 
 interface FilterBarProps {
   filters: Filters;
-  onFilterChange: (name: keyof Filters, value: string) => void;
+  onFilterChange: (name: keyof Filters, value: string | string[]) => void;
   onResetFilters: () => void;
   isAnyFilterActive: boolean;
   t: any; // Translation object
@@ -55,13 +55,58 @@ const FilterBar: React.FC<FilterBarProps> = ({ filters, onFilterChange, onResetF
     { value: "false", label: t.options.no, icon: <AngulationNoIcon className="h-14" /> },
   ];
 
+  const handleStatusChange = (statusValue: CaseStatus | "") => {
+    if (statusValue === "") {
+        onFilterChange('status', []);
+    } else {
+        const currentStatus = filters.status;
+        const newStatus = currentStatus.includes(statusValue)
+            ? currentStatus.filter(s => s !== statusValue)
+            : [...currentStatus, statusValue];
+        onFilterChange('status', newStatus);
+    }
+  };
+
+  const handleConnectionTypeChange = (connValue: ConnectionType | "") => {
+    if (connValue === "") {
+        onFilterChange('connectionType', []);
+    } else {
+        const currentConnections = filters.connectionType;
+        const newConnections = currentConnections.includes(connValue)
+            ? currentConnections.filter(c => c !== connValue)
+            : [...currentConnections, connValue];
+        onFilterChange('connectionType', newConnections);
+    }
+  };
+
+  const handleAngulationChange = (angulationValue: "true" | "false" | "") => {
+    onFilterChange('angulation', angulationValue);
+  };
+
   return (
     <div className={`bg-white rounded-lg shadow-md h-full transition-all duration-300 ease-in-out flex flex-col ${isCollapsed ? 'p-3' : 'p-6'}`}>
-      <div className="flex items-start mb-4 pb-3 border-b border-slate-200 flex-shrink-0">
-        <h2 className={`text-lg font-semibold text-[color:var(--text-primary)] whitespace-nowrap overflow-hidden transition-all duration-300 ease-in-out ${isCollapsed ? 'max-w-0 opacity-0' : 'max-w-xs opacity-100'}`}>
-          {t.title}
-        </h2>
-        <div className="relative flex-shrink-0 ml-auto">
+      <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-200 flex-shrink-0">
+        <div className="flex items-center gap-2">
+           <button
+              onClick={onResetFilters}
+              disabled={!isAnyFilterActive}
+              className={`flex items-center justify-center h-9 text-sm font-semibold rounded-md transition-all duration-200 border
+              ${isCollapsed ? 'w-9 p-0' : 'px-4 py-2'}
+              ${
+                isAnyFilterActive
+                  ? 'bg-[var(--card-bg-raspberry)] text-white border-transparent hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-[var(--card-bg-raspberry)]'
+                  : 'text-slate-400 bg-slate-100 border-slate-300 cursor-not-allowed'
+              }`}
+              title={t.reset_button}
+            >
+              <ResetIcon className="h-5 w-5" />
+              <span className={isCollapsed ? 'sr-only' : 'ml-2'}>{t.reset_button}</span>
+            </button>
+            <h2 className={`text-lg font-semibold text-[color:var(--text-primary)] whitespace-nowrap overflow-hidden transition-all duration-300 ease-in-out ${isCollapsed ? 'max-w-0 opacity-0' : 'max-w-xs opacity-100'}`}>
+              {t.title}
+            </h2>
+        </div>
+        <div className="relative flex items-center gap-2">
           <button
             onClick={onToggle}
             className="p-1.5 text-slate-600 rounded-full hover:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-[color:var(--accent-primary)]"
@@ -86,26 +131,30 @@ const FilterBar: React.FC<FilterBarProps> = ({ filters, onFilterChange, onResetF
             </label>
             <div role="group" aria-label={t.production_label} className="grid grid-cols-3 gap-1 bg-slate-100 rounded-md p-0.5 ring-1 ring-inset ring-slate-200">
               {statusOptions.map((option) => {
-                const isSelected = filters.status === option.value;
-                const isFilterActive = isSelected && option.value !== '';
-                const isAllSelected = isSelected && option.value === '';
+                const isAllButton = option.value === "";
+                const isSelected = isAllButton
+                  ? filters.status.length === 0
+                  : filters.status.includes(option.value as CaseStatus);
                 
+                let buttonClass = 'text-slate-600 hover:bg-white/60';
+                if (isSelected) {
+                  if (isAllButton) {
+                    buttonClass = 'bg-white shadow-sm text-slate-800 ring-1 ring-inset ring-slate-300';
+                  } else {
+                    buttonClass = 'bg-white shadow-sm ring-2 ring-inset ring-[color:var(--accent-primary)] text-[color:var(--accent-primary)]';
+                  }
+                }
+
                 return (
                   <button
                     key={option.value}
                     type="button"
-                    onClick={() => onFilterChange('status', option.value)}
+                    onClick={() => handleStatusChange(option.value as CaseStatus | "")}
                     className={`
                       w-full px-2 py-1 text-xs font-semibold transition-all duration-200 rounded flex items-center justify-center
                       focus:outline-none focus:ring-2 focus:ring-[color:var(--accent-primary)] focus:ring-offset-2
                       min-h-9
-                      ${
-                        isFilterActive
-                          ? 'bg-white shadow-sm ring-2 ring-inset ring-[color:var(--accent-primary)] text-[color:var(--accent-primary)]'
-                          : isAllSelected
-                            ? 'bg-white shadow-sm text-slate-800 ring-1 ring-inset ring-slate-300'
-                            : 'text-slate-600 hover:bg-white/60'
-                      }
+                      ${buttonClass}
                     `}
                     aria-pressed={isSelected}
                   >
@@ -132,24 +181,88 @@ const FilterBar: React.FC<FilterBarProps> = ({ filters, onFilterChange, onResetF
             <label htmlFor="angulation" className="block text-sm font-medium text-slate-600 mb-1">
               {t.angulated_access_label}
             </label>
-            <SegmentedControl
-              name="angulation"
-              options={angulationOptions}
-              value={filters.angulation}
-              onChange={(value) => onFilterChange('angulation', value)}
-            />
+            <div role="group" aria-label={t.angulated_access_label} className="grid grid-cols-3 gap-1 bg-slate-100 rounded-md p-0.5 ring-1 ring-inset ring-slate-200">
+              {angulationOptions.map((option) => {
+                const isSelected = filters.angulation === option.value;
+                
+                let buttonClass = 'text-slate-600 hover:bg-white/60';
+                if (isSelected) {
+                  if (option.value === "") {
+                    buttonClass = 'bg-white shadow-sm text-slate-800 ring-1 ring-inset ring-slate-300';
+                  } else {
+                    buttonClass = 'bg-white shadow-sm ring-2 ring-inset ring-[color:var(--accent-primary)] text-[color:var(--accent-primary)]';
+                  }
+                }
+
+                const content = option.icon ? (
+                    <>
+                      {React.cloneElement(option.icon, { className: 'h-12' })}
+                      <span className="mt-1">{option.label}</span>
+                    </>
+                ) : (
+                    <span className="font-semibold text-sm">{option.label}</span>
+                );
+
+                return (
+                  <button
+                    key={option.value}
+                    type="button"
+                    onClick={() => handleAngulationChange(option.value as "true" | "false" | "")}
+                    className={`
+                      w-full h-24 px-1 py-2 text-xs font-semibold transition-all duration-200 rounded flex flex-col items-center justify-center gap-1
+                      focus:outline-none focus:ring-2 focus:ring-[color:var(--accent-primary)] focus:ring-offset-2
+                      ${buttonClass}
+                    `}
+                    aria-pressed={isSelected}
+                    title={option.label}
+                  >
+                    {content}
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
           <div>
             <label htmlFor="connectionType" className="block text-sm font-medium text-slate-600 mb-1">
               {t.connection_type_label}
             </label>
-            <SegmentedControl
-              name="connectionType"
-              options={connectionTypeOptions}
-              value={filters.connectionType}
-              onChange={(value) => onFilterChange('connectionType', value)}
-            />
+            <div role="group" aria-label={t.connection_type_label} className="space-y-2">
+              <button
+                type="button"
+                onClick={() => handleConnectionTypeChange("")}
+                className={`w-full h-9 px-2 py-1 text-sm font-semibold transition-all duration-200 rounded-md flex items-center justify-center ${
+                  filters.connectionType.length === 0
+                    ? 'bg-white shadow-sm ring-1 ring-inset ring-slate-400 text-slate-800'
+                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200 ring-1 ring-slate-200'
+                }`}
+                aria-pressed={filters.connectionType.length === 0}
+              >
+                {t.options.all}
+              </button>
+              <div className="grid grid-cols-4 gap-2">
+                {connectionTypeOptions.filter(o => o.value !== "").map((option) => {
+                  const isSelected = filters.connectionType.includes(option.value as ConnectionType);
+
+                  const buttonClass = isSelected
+                    ? 'bg-white shadow-md ring-2 ring-inset ring-[color:var(--accent-primary)] text-[color:var(--accent-primary)]'
+                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200 ring-1 ring-inset ring-slate-200';
+
+                  return (
+                    <button
+                      key={option.value}
+                      type="button"
+                      title={option.label}
+                      onClick={() => handleConnectionTypeChange(option.value as ConnectionType)}
+                      className={`aspect-square p-2 text-xs font-semibold transition-all duration-200 rounded-md flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-[color:var(--accent-primary)] focus:ring-offset-1 ${buttonClass}`}
+                      aria-pressed={isSelected}
+                    >
+                      {option.icon ? React.cloneElement(option.icon, { className: 'h-10 w-10' }) : option.label}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
           </div>
 
           <div>
@@ -164,22 +277,6 @@ const FilterBar: React.FC<FilterBarProps> = ({ filters, onFilterChange, onResetF
             />
           </div>
         </div>
-        
-        <div className="pt-4 mt-auto border-t border-slate-200 flex-shrink-0">
-             <button
-              onClick={onResetFilters}
-              disabled={!isAnyFilterActive}
-              className={`flex items-center justify-center w-full h-9 px-4 py-2 text-sm font-semibold rounded-md transition-all duration-200 border
-              ${
-                isAnyFilterActive
-                  ? 'bg-white text-[color:var(--accent-primary)] border-[color:var(--accent-primary)] hover:bg-[color:var(--accent-primary)] hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[color:var(--accent-primary)]'
-                  : 'text-slate-500 bg-slate-100 border-slate-300 cursor-not-allowed'
-              }`}
-            >
-              <ResetIcon className="h-4 w-4 mr-2" />
-              {t.reset_button}
-            </button>
-          </div>
       </div>
     </div>
   );

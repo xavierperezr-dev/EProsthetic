@@ -33,12 +33,18 @@ const DarkBgSelectionButton: React.FC<{
   isSelected: boolean;
   children: React.ReactNode;
   className?: string;
-}> = ({ onClick, isSelected, children, className = "" }) => {
+  disabled?: boolean;
+}> = ({ onClick, isSelected, children, className = "", disabled = false }) => {
     const baseClasses = "font-bold rounded-lg transition-all duration-200 transform";
     const selectedClasses = "bg-white text-[color:var(--accent-primary)] scale-110 shadow-lg";
-    const unselectedClasses = "bg-white/20 text-white hover:bg-white/40";
+    const unselectedClasses = `bg-white/20 text-white ${!disabled ? 'hover:bg-white/40' : ''}`;
+    const disabledClasses = disabled ? 'opacity-50 cursor-not-allowed' : '';
+
     return (
-        <button onClick={onClick} className={`${baseClasses} ${isSelected ? selectedClasses : unselectedClasses} ${className}`}>
+        <button 
+            onClick={onClick} 
+            disabled={disabled}
+            className={`${baseClasses} ${isSelected ? selectedClasses : unselectedClasses} ${disabledClasses} ${className}`}>
             {children}
         </button>
     );
@@ -47,14 +53,31 @@ const DarkBgSelectionButton: React.FC<{
 const IntroModal: React.FC<IntroModalProps> = ({ onConfirm, t }) => {
   const [selectedLanguage, setSelectedLanguage] = useState<Language | null>(null);
   const [selectedCountry, setSelectedCountry] = useState<Language | null>(null);
-  const languages: Language[] = ['en', 'es', 'pt', 'fr', 'sv'];
-  const countries: Language[] = ['es', 'pt', 'fr', 'sv'];
+  const languages: Language[] = ['en', 'es', 'pt'];
+  const countries: Language[] = ['es', 'pt'];
   const modalT = selectedLanguage ? t[selectedLanguage].intro_modal : t.en.intro_modal;
   const DESIGN1_VIDEO_SRC = "https://www.ganarnobelbiocare.com/nobeldesign/E-Prosthetic/Video/intro2.mp4";
+
+  const handleLanguageSelect = (lang: Language) => {
+    setSelectedLanguage(lang);
+    if (lang === 'es') {
+      setSelectedCountry('es');
+    } else if (lang === 'pt') {
+      setSelectedCountry('pt');
+    } else { // for 'en'
+      setSelectedCountry(null);
+    }
+  };
+
+  const handleCountrySelect = (country: Language) => {
+    setSelectedCountry(country);
+  };
 
   const handleConfirm = () => {
     if (selectedLanguage && selectedCountry) onConfirm(selectedLanguage, selectedCountry);
   };
+
+  const isCountrySelectionDisabled = !selectedLanguage;
 
   return (
     <VideoBackground videoSrc={DESIGN1_VIDEO_SRC}>
@@ -66,25 +89,46 @@ const IntroModal: React.FC<IntroModalProps> = ({ onConfirm, t }) => {
             <GlobeIcon className="h-6 w-6" />
             <span>{modalT.language_section_title}</span>
           </h3>
-          <div className="flex justify-center items-center gap-4">
-            {languages.map(lang => (
-              <DarkBgSelectionButton key={lang} onClick={() => setSelectedLanguage(lang)} isSelected={selectedLanguage === lang} className="px-5 py-2 text-base">
-                {lang.toUpperCase()}
-              </DarkBgSelectionButton>
-            ))}
+          <div className="flex justify-center items-center">
+            {/* Container for ES/PT */}
+            <div className="flex gap-4">
+              <DarkBgSelectionButton onClick={() => handleLanguageSelect('es')} isSelected={selectedLanguage === 'es'} className="w-20 px-5 py-2 text-base">ES</DarkBgSelectionButton>
+              <DarkBgSelectionButton onClick={() => handleLanguageSelect('pt')} isSelected={selectedLanguage === 'pt'} className="w-20 px-5 py-2 text-base">PT</DarkBgSelectionButton>
+            </div>
+            {/* Separator */}
+            <div className="w-px h-8 bg-white/30 mx-4"></div>
+            {/* Container for EN */}
+            <div className="flex">
+              <DarkBgSelectionButton onClick={() => handleLanguageSelect('en')} isSelected={selectedLanguage === 'en'} className="w-20 px-5 py-2 text-base">EN</DarkBgSelectionButton>
+            </div>
           </div>
         </div>
         <div>
-          <h3 className="text-lg font-semibold mb-4 flex items-center justify-center gap-2 drop-shadow-md">
+          <h3 className={`text-lg font-semibold mb-4 flex items-center justify-center gap-2 drop-shadow-md transition-opacity ${isCountrySelectionDisabled ? 'opacity-50' : ''}`}>
             <StoreIcon className="h-6 w-6" />
             <span>{modalT.online_store_country_section_title}</span>
           </h3>
-          <div className="flex justify-center items-center gap-4">
-             {countries.map(country => (
-              <DarkBgSelectionButton key={country} onClick={() => setSelectedCountry(country)} isSelected={selectedCountry === country} className="px-5 py-2 text-base">
-                {country.toUpperCase()}
-              </DarkBgSelectionButton>
-            ))}
+          <div className="flex justify-center items-center">
+            {/* Container for ES/PT country buttons, aligned with the language buttons */}
+            <div className="flex gap-4">
+              <DarkBgSelectionButton 
+                onClick={() => handleCountrySelect('es')} 
+                isSelected={selectedCountry === 'es'} 
+                className="w-20 px-5 py-2 text-base"
+                disabled={isCountrySelectionDisabled}
+              >ES</DarkBgSelectionButton>
+              <DarkBgSelectionButton 
+                onClick={() => handleCountrySelect('pt')} 
+                isSelected={selectedCountry === 'pt'} 
+                className="w-20 px-5 py-2 text-base"
+                disabled={isCountrySelectionDisabled}
+              >PT</DarkBgSelectionButton>
+            </div>
+            {/* Placeholder to keep alignment */}
+            <div className="w-px h-8 mx-4 opacity-0"></div>
+            <div className="flex">
+              <div className="w-20"></div> {/* Invisible placeholder */}
+            </div>
           </div>
         </div>
       </div>
