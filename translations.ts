@@ -84,6 +84,7 @@ const enTranslations = {
     aria_view_details_for: "View details for",
     copy_id_label: "Copy ID",
     characteristics_title: "Restoration Characteristics",
+    product_description_title: "Product Description",
     description_not_found: "Description not found for this product.",
     tooltips: {
       unitaria: "Unitary Restoration",
@@ -669,6 +670,7 @@ const esTranslations = {
     aria_view_details_for: "Ver detalles de",
     copy_id_label: "Copiar ID",
     characteristics_title: "Características Restauración",
+    product_description_title: "Descripción del Producto",
     description_not_found: "No se encontró descripción para este producto.",
     tooltips: {
         unitaria: "Restauración Unitaria",
@@ -1183,9 +1185,9 @@ const ptTranslations = {
     download_center_button: "Centro de Downloads",
     assistant_button: "Assistente",
   },
-  wizard: { ...enTranslations.wizard },
   caseCard: {
     ...esTranslations.caseCard,
+    product_description_title: "Descrição do Produto",
     description_not_found: "Descrição não encontrada para este produto.",
     characteristics_title: "Características da Restauração",
     tooltips: {
@@ -1223,9 +1225,9 @@ const frTranslations = {
     download_center_button: "Centre de Téléchargement",
     assistant_button: "Assistant",
   },
-  wizard: { ...enTranslations.wizard },
   caseCard: {
     ...enTranslations.caseCard,
+    product_description_title: "Description du Produit",
     description_not_found: "Description non trouvée pour ce produit.",
     characteristics_title: "Caractéristiques de la Restauration",
     tooltips: {
@@ -1263,9 +1265,9 @@ const svTranslations = {
     download_center_button: "Nedladdningscenter",
     assistant_button: "Assistent",
   },
-  wizard: { ...enTranslations.wizard },
   caseCard: {
     ...enTranslations.caseCard,
+    product_description_title: "Produktbeskrivning",
     description_not_found: "Beskrivning hittades inte för den här produkten.",
     characteristics_title: "Restaureringsegenskaper",
     tooltips: {

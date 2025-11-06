@@ -67,8 +67,8 @@ export const caseDescriptions: { [key: string]: { description: { [key: string]: 
     'EXO033': {
         description: {
             es: "Se trata de un Tornillo Protésico Temporal diseñado para Aditamentos Multi-unit de Nobel Biocare y es un componente diseñado para restauraciones temporales y muy especialmente para restauraciones impresas con resinas OnX.\n• Número de artículo 302502\n• Permite angular el acceso del tornillo\n• Requiere el destornillador Omnigrip Mini.\n• Disponible para plataformas NP, RP y WP\n• Composición Titanio",
-            en: "This is a Temporary Prosthetic Screw designed for Nobel Biocare Multi-unit Abutments and is a component designed for temporary restorations, especially for printed restorations with OnX resins.\n• Article number 302502\n• Requires the Omnigrip Mini screwdriver.\n• Available for NP, RP, and WP platforms\n• Composition: Titanium",
-            pt: "Este é um Parafuso Protético Temporário concebido para Abutments Multi-unit da Nobel Biocare e é um componente concebido para restaurações temporárias, especialmente para restaurações impressas com resinas OnX.\n• Número de artigo 302502\n• Requer a chave de fenda Omnigrip Mini.\n• Disponível para plataformas NP, RP e WP\n• Composição: Titânio"
+            en: "This is a Temporary Prosthetic Screw designed for Nobel Biocare Multi-unit Abutments and is a component designed for temporary restorations, especially for printed restorations with OnX resins.\n• Article number 302502\n• Allows for angulated screw access\n• Requires the Omnigrip Mini screwdriver.\n• Available for NP, RP, and WP platforms\n• Composition: Titanium",
+            pt: "Este é um Parafuso Protético Temporário concebido para Abutments Multi-unit da Nobel Biocare e é um componente concebido para restaurações temporárias, especialmente para restaurações impressas com resinas OnX.\n• Número de artigo 302502\n• Permite angular o acesso do parafuso\n• Requer a chave de fenda Omnigrip Mini.\n• Disponível para plataformas NP, RP e WP\n• Composição: Titânio"
         }
     },
     'EXO021': {
