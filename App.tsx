@@ -89,17 +89,7 @@ const SupportModal: React.FC<{ t: any }> = ({ t }) => {
   const newQrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=128x128&data=${encodeURIComponent(newBookingUrl)}`;
 
   return (
-    <div className="relative p-4 text-sm rounded-b-lg overflow-hidden">
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute top-0 left-0 w-full h-full object-cover z-0"
-        src="https://www.ganarnobelbiocare.com/nobeldesign/E-Prosthetic/Video/Asist4.mp4"
-      ></video>
-      <div className="absolute top-0 left-0 w-full h-full bg-black/60 z-10"></div>
-      <div className="relative z-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Block 1: WhatsApp */}
         <div className="bg-slate-800/70 backdrop-blur-sm p-4 rounded-lg border border-slate-600 flex flex-col text-white">
           <div>
@@ -110,7 +100,7 @@ const SupportModal: React.FC<{ t: any }> = ({ t }) => {
           </div>
           <div className="mt-auto">
             <div className="flex justify-center my-4">
-              <img src="https://api.qrserver.com/v1/create-qr-code/?size=128x128&data=https://wa.me/16573635454" alt="WhatsApp QR Code" className="w-32 h-32 bg-white p-1 rounded-md border-4 border-white" />
+              <img src="https://api.qrserver.com/v1/create-qr-code/?size=128x128&data=https://wa.me/16573635454" alt="WhatsApp QR Code" className="w-32 h-32 bg-white p-1 rounded-md" />
             </div>
             <p className="text-slate-400 text-center text-xs">{t.support_modal_manual} <br /> <b>{t.support_modal_contact_name}</b> <br /> <b>+1 (657) 363-5454</b> ({t.support_modal_whatsapp_only})</p>
           </div>
@@ -126,7 +116,7 @@ const SupportModal: React.FC<{ t: any }> = ({ t }) => {
           </div>
           <div className="mt-auto">
             <div className="flex justify-center my-4">
-              <img src={newQrUrl} alt="Calendar QR Code" className="w-32 h-32 bg-white p-1 rounded-md border-4 border-white" />
+              <img src={newQrUrl} alt="Calendar QR Code" className="w-32 h-32 bg-white p-1 rounded-md" />
             </div>
             <a href={newBookingUrl} target="_blank" rel="noopener noreferrer" className="text-center block text-blue-400 hover:underline">{t.support_modal_book_link}</a>
           </div>
@@ -162,7 +152,6 @@ const SupportModal: React.FC<{ t: any }> = ({ t }) => {
             </button>
           </div>
         </div>
-      </div>
     </div>
   );
 };
@@ -630,7 +619,7 @@ const App: React.FC = () => {
             }
             case 'EXO016': {
                 const Content = () => {
-                    const connections = ['CC', 'Brånemark', 'Tri-channel', 'N1 TCC'];
+                    const connections = ['CC', ConnectionType.Branemark, 'Tri-channel', 'N1 TCC'];
                     const [selectedConn, setSelectedConn] = useState(initialConnection || 'CC');
 
                     const handleDataChange = (newData: any[]) => {
@@ -874,7 +863,7 @@ const App: React.FC = () => {
                       <div className="mt-4 p-4 bg-slate-50 border border-slate-200 rounded-lg">
                           <p className="text-sm text-slate-700">
                               {parts[0]}
-                              <a href="https://www.youtube.com/watch?v=D-a6h3tI1mA" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-semibold hover:underline inline-flex items-center gap-1 ml-1">
+                              <a href="https://tw.dtxstudio.com/video/96336" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-semibold hover:underline inline-flex items-center gap-1 ml-1">
                                   {linkText}
                                   <ExternalLinkIcon className="h-4 w-4" />
                               </a>
@@ -1049,8 +1038,9 @@ const App: React.FC = () => {
         { text: 'NobelProcera Prosthetic solutions Overview', href: 'https://www.ganarnobelbiocare.com/nobeldesign/E-Prosthetic/PDF/GMT%2095136_ES%20NobelProcera%20product%20overview.pdf' },
         { text: 'Universal Base product overview', href: 'https://www.ganarnobelbiocare.com/nobeldesign/E-Prosthetic/PDF/87971_Universal%20Base%20product%20overview_ES.pdf' },
         { text: 'Titanium Blanks product overview', href: 'https://www.ganarnobelbiocare.com/nobeldesign/E-Prosthetic/PDF/88412_Titanium%20Blanks%20product%20overview_ES.pdf' },
-        { text: 'Product Overview NobelPearl', href: 'https://www.ganarnobelbiocare.com/nobeldesign/E-Prosthetic/PDF/88966_Product%20Overview%20NobelPearl_ES.pdf' },
-        { text: 'Prosthetic Overview N1', href: 'https://www.ganarnobelbiocare.com/nobeldesign/E-Prosthetic/PDF/87730%20Nobel%20Biocare%20N1%20System%20ProdOverw%2021.2%20ES.pdf' },
+        { text: 'Product Overview On1', href: 'https://www.ganarnobelbiocare.com/nobeldesign/E-prosthetic/PDF/87583_On1_product_overview_ES.pdf' },
+        { text: 'Product Overview Nobelpearl', href: 'https://www.ganarnobelbiocare.com/nobeldesign/E-Prosthetic/PDF/88966_Product%20Overview%20NobelPearl_ES.pdf' },
+        { text: 'Prosthetic overview N1', href: 'https://www.ganarnobelbiocare.com/nobeldesign/E-Prosthetic/PDF/87730%20Nobel%20Biocare%20N1%20System%20ProdOverw%2021.2%20ES.pdf' },
       ];
 
       setModalTitle(t.modal.download_center_title);

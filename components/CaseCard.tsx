@@ -26,6 +26,8 @@ const CaseCard: React.FC<CaseCardProps> = ({ caseData, displayNumber, onReferenc
   const [showTooltip, setShowTooltip] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [isIdCopied, setIsIdCopied] = useState(false);
+  const [isSpeaking, setIsSpeaking] = useState(false);
+  const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
 
   const { patientName, status, imageUrls, observaciones, notes, id, restorationType } = caseData;
   
@@ -49,6 +51,56 @@ const CaseCard: React.FC<CaseCardProps> = ({ caseData, displayNumber, onReferenc
     ? `text-white ${borderColorClass} hover:bg-black/20`
     : `text-[color:var(--accent-primary)] ${borderColorClass} hover:bg-slate-800 hover:text-white`;
   const finalInfoButtonClass = `${infoButtonBaseClasses} ${dynamicInfoButtonClasses}`;
+
+  useEffect(() => {
+    // This helps to populate the voices list on some browsers.
+    window.speechSynthesis.getVoices();
+    // Cleanup speech synthesis on component unmount.
+    return () => {
+      window.speechSynthesis.cancel();
+    };
+  }, []);
+
+  const handleSpeak = (text: string | null) => {
+    if (!text || isSpeaking) return;
+
+    const utterance = new SpeechSynthesisUtterance(text);
+    const voices = window.speechSynthesis.getVoices();
+    const voice = voices.find(v => v.lang.startsWith(language));
+    if (voice) {
+        utterance.voice = voice;
+    } else {
+        utterance.lang = language;
+    }
+    
+    utterance.rate = 1.2;
+    utteranceRef.current = utterance;
+
+    utterance.onstart = () => setIsSpeaking(true);
+    utterance.onend = () => {
+      setIsSpeaking(false);
+      utteranceRef.current = null;
+    };
+    utterance.onerror = (event: SpeechSynthesisErrorEvent) => {
+      setIsSpeaking(false);
+      utteranceRef.current = null;
+      console.error("Speech synthesis error:", event.error);
+    };
+
+    const synth = window.speechSynthesis;
+    synth.cancel();
+    if (synth.paused) {
+        synth.resume();
+    }
+    synth.speak(utterance);
+  };
+
+  const handleStopSpeaking = () => {
+    if (isSpeaking) {
+      window.speechSynthesis.cancel();
+    }
+  };
+
 
   const nextImage = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -207,6 +259,14 @@ const CaseCard: React.FC<CaseCardProps> = ({ caseData, displayNumber, onReferenc
                       >
                         <div className="flex justify-between items-center mb-2 border-b border-slate-600 pb-1">
                           <h4 className="font-bold text-slate-300">{t.product_description_title}</h4>
+                          <button
+                            onClick={() => isSpeaking ? handleStopSpeaking() : handleSpeak(description)}
+                            className="text-slate-300 hover:text-white transition-colors"
+                            aria-label={isSpeaking ? t.stop_speech_label : t.text_to_speech_label}
+                            title={isSpeaking ? t.stop_speech_label : t.text_to_speech_label}
+                          >
+                            {isSpeaking ? <SpeakerXMarkIcon className="h-5 w-5" /> : <SpeakerWaveIcon className="h-5 w-5" />}
+                          </button>
                         </div>
                         <div className="max-h-60 overflow-y-auto custom-scrollbar pr-2">
                             <p className="text-slate-200 whitespace-pre-wrap">{description}</p>

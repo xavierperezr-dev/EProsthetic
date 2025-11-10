@@ -82,6 +82,16 @@ const ResourceButtons: React.FC<ResourceButtonsProps> = ({ t, caseData, onOpenDo
                     >
                         NobelProcera Overview
                     </a>
+                ) : caseData?.id === 'EXO019' ? (
+                     <a
+                        href="https://www.ganarnobelbiocare.com/nobeldesign/E-prosthetic/PDF/87583_On1_product_overview_ES.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        download
+                        className={`${baseButtonClasses} ${activeButtonClasses}`}
+                    >
+                        Product Overview On1
+                    </a>
                 ) : caseData && universalBaseCases.includes(caseData.id) ? (
                     <a
                         href="https://www.ganarnobelbiocare.com/nobeldesign/E-Prosthetic/PDF/87971_Universal%20Base%20product%20overview_ES.pdf"
@@ -110,7 +120,7 @@ const ResourceButtons: React.FC<ResourceButtonsProps> = ({ t, caseData, onOpenDo
                         download
                         className={`${baseButtonClasses} ${activeButtonClasses}`}
                     >
-                        NobelPearl Overview
+                        Product Overview Nobelpearl
                     </a>
                 ) : null}
 
@@ -134,6 +144,17 @@ const ResourceButtons: React.FC<ResourceButtonsProps> = ({ t, caseData, onOpenDo
                         className={`${baseButtonClasses} ${activeButtonClasses}`}
                     >
                         {t.procera_tracking_button}
+                        <ExternalLinkIcon className="h-4 w-4 ml-2" />
+                    </a>
+                )}
+                {caseData?.id === 'EXO023' && (
+                    <a
+                        href="https://tw.dtxstudio.com/video/96336"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`${baseButtonClasses} ${activeButtonClasses}`}
+                    >
+                        Ver Video
                         <ExternalLinkIcon className="h-4 w-4 ml-2" />
                     </a>
                 )}

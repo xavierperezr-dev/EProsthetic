@@ -44,26 +44,52 @@ const CaseDetailIcons: React.FC<CaseDetailIconsProps> = ({ caseData, isModal = f
   const multipleSizeClass = "h-20 w-20";
 
   const renderConnectionIcon = (connection: ConnectionType, size: string = iconSizeClass) => {
+    let iconElement;
+    let tooltipText;
     switch (connection) {
       case ConnectionType.CC:
-        if (status === CaseStatus.Otros) {
-          return null;
-        }
-        return <Tooltip text={t?.tooltips?.cc}><CcIcon className={size} /></Tooltip>;
-      case ConnectionType.TriChannel: return <Tooltip text={t?.tooltips?.tri_channel}><TriIcon className={size} /></Tooltip>;
-      case ConnectionType.Branemark: return <Tooltip text={t?.tooltips?.branemark}><ExtIcon className={size} /></Tooltip>;
+        if (status === CaseStatus.Otros) return null;
+        iconElement = <CcIcon className={size} />;
+        tooltipText = t?.tooltips?.cc;
+        break;
+      case ConnectionType.TriChannel:
+        iconElement = <TriIcon className={size} />;
+        tooltipText = t?.tooltips?.tri_channel;
+        break;
+      case ConnectionType.Branemark:
+        iconElement = <ExtIcon className={size} />;
+        tooltipText = t?.tooltips?.branemark;
+        break;
       case ConnectionType.MultiUnit:
-        if (status === CaseStatus.Otros && !['EXO033', 'EXO023'].includes(id)) {
-          return null;
-        }
-        return <Tooltip text={t?.tooltips?.multi_unit}><MuaIcon className={size} /></Tooltip>;
-      case ConnectionType.N1: return <Tooltip text={t?.tooltips?.n1}><N1Icon className={size} /></Tooltip>;
-      case ConnectionType.N1Base: return <Tooltip text={t?.tooltips?.n1_base}><N1BaseIcon className={size} /></Tooltip>;
-      case ConnectionType.On1: return <Tooltip text={t?.tooltips?.on1}><On1Icon className={size} /></Tooltip>;
-      case ConnectionType.Pearl: return <Tooltip text={t?.tooltips?.pearl}><PearlIcon className={size} /></Tooltip>;
+        if (status === CaseStatus.Otros && !['EXO033', 'EXO023'].includes(id)) return null;
+        iconElement = <MuaIcon className={size} />;
+        tooltipText = t?.tooltips?.multi_unit;
+        break;
+      case ConnectionType.N1:
+        iconElement = <N1Icon className={size} />;
+        tooltipText = t?.tooltips?.n1;
+        break;
+      case ConnectionType.N1Base:
+        iconElement = <N1BaseIcon className={size} />;
+        tooltipText = t?.tooltips?.n1_base;
+        break;
+      case ConnectionType.On1:
+        iconElement = <On1Icon className={size} />;
+        tooltipText = t?.tooltips?.on1;
+        break;
+      case ConnectionType.Pearl:
+        iconElement = <PearlIcon className={size} />;
+        tooltipText = t?.tooltips?.pearl;
+        break;
       default: return null;
     }
+
+    if (isModal) {
+      return <Tooltip text={tooltipText}>{iconElement}</Tooltip>;
+    }
+    return iconElement;
   };
+
 
   const ModalIconsContent: React.FC = () => {
     const { restorationType, connectionType: caseConnectionType, angulacion, torque, status, id, notes, compatibleConnections } = caseData;
@@ -210,14 +236,14 @@ const CaseDetailIcons: React.FC<CaseDetailIconsProps> = ({ caseData, isModal = f
       return (
         <div className="flex flex-row items-center justify-center gap-2">
           <div className={groupFrameClasses}>
-            <Tooltip text={t?.tooltips?.cc}><CcIcon className={iconSizeClass} /></Tooltip>
-            <Tooltip text={t?.tooltips?.multi_unit}><MuaIcon className={iconSizeClass} /></Tooltip>
-            <Tooltip text={t?.tooltips?.angulation_yes}><AngulationYesIcon className={iconSizeClass} /></Tooltip>
+            <CcIcon className={iconSizeClass} />
+            <MuaIcon className={iconSizeClass} />
+            <AngulationYesIcon className={iconSizeClass} />
           </div>
           <div className={groupFrameClasses}>
-            <Tooltip text={t?.tooltips?.branemark}><ExtIcon className={iconSizeClass} /></Tooltip>
-            <Tooltip text={t?.tooltips?.tri_channel}><TriIcon className={iconSizeClass} /></Tooltip>
-            <Tooltip text={t?.tooltips?.angulation_no}><AngulationNoIcon className={iconSizeClass} /></Tooltip>
+            <ExtIcon className={iconSizeClass} />
+            <TriIcon className={iconSizeClass} />
+            <AngulationNoIcon className={iconSizeClass} />
           </div>
         </div>
       );
@@ -226,65 +252,65 @@ const CaseDetailIcons: React.FC<CaseDetailIconsProps> = ({ caseData, isModal = f
     const allIcons: React.ReactNode[] = [];
     switch (id) {
         case 'EXO014':
-            allIcons.push(<Tooltip text={t?.tooltips?.cc}><CcIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.n1}><N1Icon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.n1_base}><N1BaseIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.branemark}><ExtIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.tri_channel}><TriIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.angulation_no}><AngulationNoIcon className={iconSizeClass} /></Tooltip>);
+            allIcons.push(<CcIcon className={iconSizeClass} />, <N1Icon className={iconSizeClass} />, <N1BaseIcon className={iconSizeClass} />, <ExtIcon className={iconSizeClass} />, <TriIcon className={iconSizeClass} />, <AngulationNoIcon className={iconSizeClass} />);
             break;
         case 'EXO027':
         case 'EXO030':
-            allIcons.push(<Tooltip text={t?.tooltips?.cc}><CcIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.branemark}><ExtIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.tri_channel}><TriIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.angulation_no}><AngulationNoIcon className={iconSizeClass} /></Tooltip>);
+            allIcons.push(<CcIcon className={iconSizeClass} />, <ExtIcon className={iconSizeClass} />, <TriIcon className={iconSizeClass} />, <AngulationNoIcon className={iconSizeClass} />);
             break;
         case 'EXO026':
-            allIcons.push(<Tooltip text={t?.tooltips?.cc}><CcIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.angulation_yes}><AngulationYesIcon className={iconSizeClass} /></Tooltip>);
+            allIcons.push(<CcIcon className={iconSizeClass} />, <AngulationYesIcon className={iconSizeClass} />);
             break;
         case 'EXO028':
             return (
               <div className="flex flex-row items-center justify-center gap-2">
                 <div className={groupFrameClasses}>
-                  <Tooltip text={t?.tooltips?.cc}><CcIcon className={iconSizeClass} /></Tooltip>
-                  <Tooltip text={t?.tooltips?.angulation_yes}><AngulationYesIcon className={iconSizeClass} /></Tooltip>
+                  <CcIcon className={iconSizeClass} />
+                  <AngulationYesIcon className={iconSizeClass} />
                 </div>
                 <div className={groupFrameClasses}>
-                  <Tooltip text={t?.tooltips?.tri_channel}><TriIcon className={iconSizeClass} /></Tooltip>
-                  <Tooltip text={t?.tooltips?.angulation_no}><AngulationNoIcon className={iconSizeClass} /></Tooltip>
+                  <TriIcon className={iconSizeClass} />
+                  <AngulationNoIcon className={iconSizeClass} />
                 </div>
               </div>
             );
         case 'EXO029':
-            allIcons.push(<Tooltip text={t?.tooltips?.cc}><CcIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.branemark}><ExtIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.tri_channel}><TriIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.multi_unit}><MuaIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.angulation_no}><AngulationNoIcon className={iconSizeClass} /></Tooltip>);
+            allIcons.push(<CcIcon className={iconSizeClass} />, <ExtIcon className={iconSizeClass} />, <TriIcon className={iconSizeClass} />, <MuaIcon className={iconSizeClass} />, <AngulationNoIcon className={iconSizeClass} />);
             break;
         case 'EXO032':
-            allIcons.push(<Tooltip text={t?.tooltips?.cc}><CcIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.branemark}><ExtIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.tri_channel}><TriIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.multi_unit}><MuaIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.angulation_no}><AngulationNoIcon className={iconSizeClass} /></Tooltip>);
+            allIcons.push(<CcIcon className={iconSizeClass} />, <ExtIcon className={iconSizeClass} />, <TriIcon className={iconSizeClass} />, <MuaIcon className={iconSizeClass} />, <AngulationNoIcon className={iconSizeClass} />);
             break;
         case 'EXO034':
-             allIcons.push(<Tooltip text={t?.tooltips?.cc}><CcIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.n1}><N1Icon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.branemark}><ExtIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.tri_channel}><TriIcon className={iconSizeClass} /></Tooltip>);
+             allIcons.push(<CcIcon className={iconSizeClass} />, <N1Icon className={iconSizeClass} />, <ExtIcon className={iconSizeClass} />, <TriIcon className={iconSizeClass} />);
              break;
         case 'EXO031': 
             return isModal ? null : <div className="h-14"></div>;
         case 'EXO013':
-            allIcons.push(<Tooltip text={t?.tooltips?.n1_base}><N1BaseIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.angulation_yes}><AngulationYesIcon className={iconSizeClass} /></Tooltip>);
+            allIcons.push(<N1BaseIcon className={iconSizeClass} />, <AngulationYesIcon className={iconSizeClass} />);
             break;
         case 'EXO006':
-            allIcons.push(<Tooltip text={t?.tooltips?.n1}><N1Icon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.angulation_no}><AngulationNoIcon className={iconSizeClass} /></Tooltip>);
+            allIcons.push(<N1Icon className={iconSizeClass} />, <AngulationNoIcon className={iconSizeClass} />);
             break;
         case 'EXO016':
-            allIcons.push(<Tooltip text={t?.tooltips?.cc}><CcIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.branemark}><ExtIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.tri_channel}><TriIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.n1}><N1Icon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.angulation_no}><AngulationNoIcon className={iconSizeClass} /></Tooltip>);
+            allIcons.push(<CcIcon className={iconSizeClass} />, <ExtIcon className={iconSizeClass} />, <TriIcon className={iconSizeClass} />, <N1Icon className={iconSizeClass} />, <AngulationNoIcon className={iconSizeClass} />);
             break;
         case 'EXO019':
-            allIcons.push(<Tooltip text={t?.tooltips?.on1}><On1Icon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.angulation_no}><AngulationNoIcon className={iconSizeClass} /></Tooltip>);
+            allIcons.push(<On1Icon className={iconSizeClass} />, <AngulationNoIcon className={iconSizeClass} />);
             break;
         case 'EXO020':
-            allIcons.push(<Tooltip text={t?.tooltips?.pearl}><PearlIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.angulation_no}><AngulationNoIcon className={iconSizeClass} /></Tooltip>);
+            allIcons.push(<PearlIcon className={iconSizeClass} />, <AngulationNoIcon className={iconSizeClass} />);
             break;
         case 'EXO021':
-            allIcons.push(<Tooltip text={t?.tooltips?.cc}><CcIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.branemark}><ExtIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.tri_channel}><TriIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.angulation_no}><AngulationNoIcon className={iconSizeClass} /></Tooltip>);
+            allIcons.push(<CcIcon className={iconSizeClass} />, <ExtIcon className={iconSizeClass} />, <TriIcon className={iconSizeClass} />, <AngulationNoIcon className={iconSizeClass} />);
             break;
         case 'EXO022':
-            allIcons.push(<Tooltip text={t?.tooltips?.cc}><CcIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.branemark}><ExtIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.tri_channel}><TriIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.multi_unit}><MuaIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.angulation_no}><AngulationNoIcon className={iconSizeClass} /></Tooltip>);
+            allIcons.push(<CcIcon className={iconSizeClass} />, <ExtIcon className={iconSizeClass} />, <TriIcon className={iconSizeClass} />, <MuaIcon className={iconSizeClass} />, <AngulationNoIcon className={iconSizeClass} />);
             break;
         case 'EXO023':
-            allIcons.push(<Tooltip text={t?.tooltips?.cc}><CcIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.tri_channel}><TriIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.branemark}><ExtIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.n1}><N1Icon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.n1_base}><N1BaseIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.multi_unit}><MuaIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.angulation_no}><AngulationNoIcon className={iconSizeClass} /></Tooltip>);
+            allIcons.push(<CcIcon className={iconSizeClass} />, <TriIcon className={iconSizeClass} />, <ExtIcon className={iconSizeClass} />, <N1Icon className={iconSizeClass} />, <N1BaseIcon className={iconSizeClass} />, <MuaIcon className={iconSizeClass} />, <AngulationNoIcon className={iconSizeClass} />);
             break;
         case 'EXO033':
-            allIcons.push(<Tooltip text={t?.tooltips?.multi_unit}><MuaIcon className={iconSizeClass} /></Tooltip>, <Tooltip text={t?.tooltips?.angulation_yes}><AngulationYesIcon className={iconSizeClass} /></Tooltip>);
+            allIcons.push(<MuaIcon className={iconSizeClass} />, <AngulationYesIcon className={iconSizeClass} />);
             break;
         default:
             const icon = renderConnectionIcon(connectionType);

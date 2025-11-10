@@ -1,6 +1,6 @@
 import React from 'react';
 import { ChevronLeftIcon, DownloadIcon, InfoIcon } from './icons';
-import { Language } from '../types';
+import { Language, ConnectionType } from '../types';
 
 interface PreMilledBlanksPageProps {
   t: any; // Translation object for this page
@@ -227,7 +227,7 @@ const PreMilledBlanksPage: React.FC<PreMilledBlanksPageProps> = ({ t, storeCount
     switch (connectionType) {
       case 'CC':
         return <TablaConexion connectionKey="cc" title="Conical Connection (CC)" t={t} storeCountry={storeCountry} imageUrl={imageUrl} isTableEditMode={!!isTableEditMode} data={data} onDataChange={onDataChange} />;
-      case 'Brånemark':
+      case ConnectionType.Branemark:
         return <TablaConexion connectionKey="externalHex" title="Brånemark System® (Hexágono Externo)" t={t} storeCountry={storeCountry} imageUrl={imageUrl} isTableEditMode={!!isTableEditMode} data={data} onDataChange={onDataChange} />;
       case 'Tri-channel':
         return <TablaConexion connectionKey="triChannel" title="NobelReplace® (Tri-channel)" t={t} storeCountry={storeCountry} imageUrl={imageUrl} isTableEditMode={!!isTableEditMode} data={data} onDataChange={onDataChange} />;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Language } from '../types';
-import { DownloadIcon, ExternalLinkIcon, DownloadCenterIllustration } from './icons';
+import { DownloadIcon, ExternalLinkIcon } from './icons';
 
 const getLangPath = (language: Language) => {
   switch (language) {
@@ -31,26 +31,20 @@ const DownloadCenterModalContent: React.FC<DownloadCenterModalContentProps> = ({
   
   const langPath = getLangPath(language);
   const proceraTrackingUrl = `https://store.nobelbiocare.com/${langPath}/procera/`;
-
-  const overviewLink = links.find(link => link.text.includes("Overview"));
-  const otherLinks = links.filter(link => !link.text.includes("Overview"));
   
-  const baseButtonClass = "w-full inline-flex items-center justify-center gap-2 h-11 px-4 text-sm font-semibold rounded-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[color:var(--accent-primary)]";
+  const baseButtonClass = "w-full inline-flex items-center justify-center gap-2 h-11 px-4 text-sm font-semibold rounded-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white backdrop-blur-sm";
   
-  const docLinkClass = `${baseButtonClass} justify-start text-left text-slate-800 bg-slate-100 border border-slate-300 hover:bg-slate-200`;
-  const actionButtonClass = `${baseButtonClass} text-white bg-[color:var(--accent-primary)] hover:bg-[color:var(--accent-primary-hover)]`;
+  const docLinkClass = `${baseButtonClass} justify-start text-left text-slate-100 bg-white/10 border border-slate-400 hover:bg-white/20`;
+  const actionButtonClass = `${baseButtonClass} text-white bg-blue-500/80 hover:bg-blue-600/80 border border-blue-400`;
 
   const handleContextMenu = (e: React.MouseEvent) => e.preventDefault();
 
   return (
-    <div className="p-4 flex flex-col gap-6">
-      <div className="flex justify-center">
-        <DownloadCenterIllustration className="h-24 w-auto text-[color:var(--accent-primary)]" />
-      </div>
+    <div className="p-4">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
-        {/* Left Column: Other Document Downloads */}
+        {/* Left Column: All Document Downloads */}
         <div className="space-y-2">
-          {otherLinks.map((link, index) => (
+          {links.map((link, index) => (
             <a
               key={index}
               href={link.href}
@@ -60,29 +54,15 @@ const DownloadCenterModalContent: React.FC<DownloadCenterModalContentProps> = ({
               className={docLinkClass}
               onContextMenu={handleContextMenu}
             >
-              <DownloadIcon className="h-5 w-5 flex-shrink-0 text-[color:var(--accent-primary)]" />
+              <DownloadIcon className="h-5 w-5 flex-shrink-0 text-slate-200" />
               <span className="flex-grow truncate" title={link.text}>{link.text}</span>
-              <ExternalLinkIcon className="h-4 w-4 flex-shrink-0 text-slate-500" />
+              <ExternalLinkIcon className="h-4 w-4 flex-shrink-0 text-slate-400" />
             </a>
           ))}
         </div>
         
-        {/* Right Column: Key Actions & Overview */}
+        {/* Right Column: Key Actions */}
         <div className="space-y-2">
-          {overviewLink && (
-            <a
-              href={overviewLink.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              download
-              className={docLinkClass}
-              onContextMenu={handleContextMenu}
-            >
-              <DownloadIcon className="h-5 w-5 flex-shrink-0 text-[color:var(--accent-primary)]" />
-              <span className="flex-grow truncate" title={overviewLink.text}>{overviewLink.text}</span>
-              <ExternalLinkIcon className="h-4 w-4 flex-shrink-0 text-slate-500" />
-            </a>
-          )}
           <button
             onClick={handleDownloadLibrariesClick}
             className={actionButtonClass}

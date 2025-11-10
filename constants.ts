@@ -468,17 +468,17 @@ export const MOCK_CASES: DentalCase[] = [
     id: "TEST001",
     caseNumber: 21,
     patientName: {
-      en: "TEST",
-      es: "TEST",
-      pt: "TESTE",
-      fr: "TEST",
-      sv: "TEST"
+      en: "New universal bases",
+      es: "Nuevas bases universales",
+      pt: "Novas bases universais",
+      fr: "Nouvelles bases universelles",
+      sv: "Nya universella baser"
     },
     restorationType: [RestorationType.Unitaria, RestorationType.Multiple],
     connectionType: ConnectionType.CC,
     status: CaseStatus.Otros,
     reference: "REF-TEST-001",
-    imageUrls: ["https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1280&auto=format&fit=crop"],
+    imageUrls: ["https://www.ganarnobelbiocare.com/nobeldesign/E-Prosthetic/Images/Soon.jpg"],
     notes: "This is a test case.",
     baseCementada: true,
     angulacion: false,
