@@ -32,9 +32,7 @@ const CaseCard: React.FC<CaseCardProps> = ({ caseData, displayNumber, onReferenc
   const { patientName, status, imageUrls, observaciones, notes, id, restorationType } = caseData;
   
   const videoSrc =
-    isHovered && caseData.id === 'EXO024'
-      ? 'https://www.ganarnobelbiocare.com/nobeldesign/E-Prosthetic/Video/People.mp4'
-      : isHovered && caseData.id === 'EXO025'
+    isHovered && caseData.id === 'EXO025'
       ? 'https://www.ganarnobelbiocare.com/nobeldesign/E-Prosthetic/Video/Pibanimation.mp4'
       : null;
 
