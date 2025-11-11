@@ -151,6 +151,42 @@ const CaseCard: React.FC<CaseCardProps> = ({ caseData, displayNumber, onReferenc
     }, 2000);
   };
 
+  const handleCopyStats = () => {
+    const visitsRaw = localStorage.getItem('appVisits');
+    const visits = visitsRaw ? JSON.parse(visitsRaw) : [];
+
+    if (visits.length === 0) {
+        navigator.clipboard.writeText('No usage data available.');
+        setIsIdCopied(true);
+        setTimeout(() => setIsIdCopied(false), 2000);
+        return;
+    }
+
+    const statsByMonth: { [key: string]: { totalVisits: number; uniqueUsers: Set<string> } } = {};
+
+    visits.forEach((visit: { userId: string; timestamp: string }) => {
+        const month = visit.timestamp.substring(0, 7); // YYYY-MM
+        if (!statsByMonth[month]) {
+            statsByMonth[month] = { totalVisits: 0, uniqueUsers: new Set() };
+        }
+        statsByMonth[month].totalVisits++;
+        statsByMonth[month].uniqueUsers.add(visit.userId);
+    });
+
+    let statsString = 'Estadísticas de Uso de la Aplicación:\n\n';
+
+    Object.keys(statsByMonth).sort().reverse().forEach(month => {
+        const monthStats = statsByMonth[month];
+        statsString += `Mes: ${month}\n`;
+        statsString += `  - Visitas Totales: ${monthStats.totalVisits}\n`;
+        statsString += `  - Usuarios Únicos: ${monthStats.uniqueUsers.size}\n\n`;
+    });
+
+    navigator.clipboard.writeText(statsString);
+    setIsIdCopied(true);
+    setTimeout(() => setIsIdCopied(false), 2000);
+};
+
   return (
     <div 
       className={`bg-white rounded-lg overflow-hidden transition-all duration-300 ease-in-out border border-black flex flex-col relative group h-full ${isAnyFilterActive ? 'ring-2 ring-offset-1 ring-slate-800 shadow-xl' : 'shadow-sm'} hover:shadow-2xl hover:-translate-y-1`}
@@ -158,14 +194,14 @@ const CaseCard: React.FC<CaseCardProps> = ({ caseData, displayNumber, onReferenc
       onMouseLeave={() => setIsHovered(false)}
     >
       <button
-        onClick={handleCopyId}
+        onClick={caseData.id === 'TEST001' ? handleCopyStats : handleCopyId}
         className={`absolute top-3 right-3 text-xs font-bold rounded-full h-7 w-7 flex items-center justify-center ring-2 ring-white z-10 transition-all duration-200 ${
           isIdCopied
             ? 'bg-green-500 text-white'
             : 'bg-slate-200 text-slate-900 hover:bg-slate-300'
         }`}
-        aria-label={`${t.copy_id_label}: ${caseData.id}`}
-        title={`${t.copy_id_label}: ${caseData.id}`}
+        aria-label={caseData.id === 'TEST001' ? 'Copiar estadísticas de uso' : `${t.copy_id_label}: ${caseData.id}`}
+        title={caseData.id === 'TEST001' ? 'Copiar estadísticas de uso' : `${t.copy_id_label}: ${caseData.id}`}
       >
         {isIdCopied ? <CheckIcon className="h-4 w-4" /> : displayNumber}
       </button>

@@ -379,13 +379,31 @@ const App: React.FC = () => {
     const [isFilterBarCollapsed, setIsFilterBarCollapsed] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isIntroModalOpen, setIsIntroModalOpen] = useState(true);
-    const [activeSearchTerm, setActiveSearchTerm] = useState('');
     const [isModalSpeaking, setIsModalSpeaking] = useState(false);
     const caseRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
     const menuRef = useRef<HTMLDivElement>(null);
 
     const t = translations[language];
     const initialFilters: Filters = { searchText: '', status: [], type: '', connectionType: [], softwareType: '', angulation: '' };
+    
+    useEffect(() => {
+        // User and Visit Tracking
+        let userId = localStorage.getItem('appUserId');
+        if (!userId) {
+            userId = `user-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
+            localStorage.setItem('appUserId', userId);
+        }
+
+        const visitsRaw = localStorage.getItem('appVisits');
+        const visits = visitsRaw ? JSON.parse(visitsRaw) : [];
+
+        visits.push({
+            userId: userId,
+            timestamp: new Date().toISOString(),
+        });
+
+        localStorage.setItem('appVisits', JSON.stringify(visits));
+    }, []);
     
     useEffect(() => {
         if (!isModalOpen) {
@@ -418,7 +436,7 @@ const App: React.FC = () => {
 
     const filteredCases = useMemo(() => {
         return MOCK_CASES.filter(c => {
-            const searchLower = activeSearchTerm.toLowerCase();
+            const searchLower = filters.searchText.toLowerCase();
             const nameMatch = c.patientName[language].toLowerCase().includes(searchLower);
             const idMatch = c.id.toLowerCase().includes(searchLower);
             const refMatch = c.reference.toLowerCase().includes(searchLower);
@@ -433,21 +451,21 @@ const App: React.FC = () => {
 
             return (nameMatch || idMatch || refMatch || tableDataMatch) && statusMatch && typeMatch && connectionMatch && angulationMatch;
         }).sort((a, b) => a.caseNumber - b.caseNumber);
-    }, [MOCK_CASES, filters, activeSearchTerm, language]);
+    }, [MOCK_CASES, filters, language]);
 
     const isAnyFilterActive = useMemo(() => {
         return (
-            activeSearchTerm !== '' ||
+            filters.searchText !== '' ||
             filters.status.length > 0 ||
             filters.type !== '' ||
             filters.connectionType.length > 0 ||
             filters.softwareType !== '' ||
             filters.angulation !== ''
         );
-    }, [filters, activeSearchTerm]);
+    }, [filters]);
     
     const handleFilterChange = (name: keyof Filters, value: string | string[]) => setFilters(prev => ({ ...prev, [name]: value }));
-    const handleResetFilters = () => { setFilters(initialFilters); setActiveSearchTerm(''); };
+    const handleResetFilters = () => { setFilters(initialFilters); };
     
     const handleConfirmIntro = (lang: Language, country: Language) => {
         setLanguage(lang);
@@ -462,7 +480,6 @@ const App: React.FC = () => {
         type: assistantFilters.restorationType,
         status: assistantFilters.status,
         angulation: assistantFilters.angulation,
-        // FIX: Renamed 'connections' to 'connectionType' to match the 'Filters' interface.
         connectionType: assistantFilters.connections,
       });
       handleCloseModal();
@@ -527,10 +544,6 @@ const App: React.FC = () => {
         setModalId(`modal-${caseData.id}`);
         setModalFooter(null);
 
-        // FIX: Removed unused 'onSupportClick' function that was causing a TypeScript error on line 369.
-        // This function was declared but never used within its scope, and its name may have
-        // conflicted with a prop name, likely confusing the type checker.
-    
         const getProceraUrl = (lang: Language): string => {
             const storePath = getStorePath(lang);
             switch (lang) {
@@ -577,7 +590,6 @@ const App: React.FC = () => {
                             <button
                                 onClick={() => isModalSpeaking ? handleModalStopSpeaking() : handleModalSpeak(descriptionText, language)}
                                 className="text-slate-500 hover:text-slate-800 transition-colors flex-shrink-0 mt-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[color:var(--accent-primary)] rounded-full p-1"
-                                // FIX: Corrected ternary operator syntax for aria-label.
                                 aria-label={isModalSpeaking ? t.caseCard.stop_speech_label : t.caseCard.text_to_speech_label}
                                 title={isModalSpeaking ? t.caseCard.stop_speech_label : t.caseCard.text_to_speech_label}
                             >
@@ -958,7 +970,6 @@ const App: React.FC = () => {
         handleOpenDownloadsHelpModal();
     };
 
-    // FIX: Removed redeclared `handleOpenSelecProLocal` function. It was already defined earlier in the component.
     const handleTablesClick = (caseData: DentalCase) => {
         setModalTitle(t.modal.tables_modal_title);
         setModalContent(<DevDebugPage t={t.devDebugPage} />);
@@ -1125,8 +1136,6 @@ const App: React.FC = () => {
                                    placeholder={t.filterBar.search_placeholder}
                                    value={filters.searchText}
                                    onChange={(e) => handleFilterChange('searchText', e.target.value)}
-                                   onBlur={(e) => setActiveSearchTerm(e.target.value)}
-                                   onKeyDown={(e) => { if (e.key === 'Enter') setActiveSearchTerm(filters.searchText); }}
                                    className="w-full h-11 pl-10 pr-4 rounded-md bg-[color:var(--accent-primary)] text-white placeholder-slate-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[color:var(--accent-primary)] focus:ring-white"
                                />
                                <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-300" />
