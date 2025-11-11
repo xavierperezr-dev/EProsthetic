@@ -451,7 +451,7 @@ const App: React.FC = () => {
 
             return (nameMatch || idMatch || refMatch || tableDataMatch) && statusMatch && typeMatch && connectionMatch && angulationMatch;
         }).sort((a, b) => a.caseNumber - b.caseNumber);
-    }, [MOCK_CASES, filters, language]);
+    }, [filters.searchText, filters.status, filters.type, filters.connectionType, filters.angulation, language]);
 
     const isAnyFilterActive = useMemo(() => {
         return (
@@ -1181,6 +1181,7 @@ const App: React.FC = () => {
               caseData={modalCaseData || undefined}
               t={t}
               id={modalId}
+              maxWidth={modalId === 'modal-download-center' ? 'max-w-7xl' : undefined}
             >
               {modalContent}
             </Modal>
