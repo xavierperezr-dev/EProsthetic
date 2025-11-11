@@ -65,6 +65,7 @@ const DownloadCenterModalContent: React.FC<DownloadCenterModalContentProps> = ({
   const langPath = getLangPath(language);
   const proceraTrackingUrl = `https://store.nobelbiocare.com/${langPath}/procera/`;
   const catalogUrl = "https://www.ganarnobelbiocare.com/nobeldesign/E-Prosthetic/PDF/89351%20Catalogo%20NB%202025.pdf";
+  const digitalSolutionsUrl = "https://www.ganarnobelbiocare.com/nobeldesign/E-Prosthetic/PDF/95290%20Digital%20solutions%20GB.pdf";
   
   const baseButtonClass = "w-full inline-flex items-center justify-center gap-2 h-11 px-4 text-sm font-semibold rounded-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white backdrop-blur-sm";
   const docLinkClass = `${baseButtonClass} justify-start text-left text-slate-100 bg-white/10 border border-slate-400 hover:bg-white/20`;
@@ -88,7 +89,8 @@ const DownloadCenterModalContent: React.FC<DownloadCenterModalContentProps> = ({
   ];
   
   const generalButtons = [
-      { text: t.modal.general_catalog_button, href: catalogUrl }
+      { text: t.modal.general_catalog_button, href: catalogUrl },
+      { text: t.modal.digital_solutions_button, href: digitalSolutionsUrl },
   ];
 
   return (
