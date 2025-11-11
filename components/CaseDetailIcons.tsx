@@ -217,7 +217,7 @@ const CaseDetailIcons: React.FC<CaseDetailIconsProps> = ({ caseData, isModal = f
             )}
 
             {/* 6. Screw */}
-            {notes?.includes("tornillo clínico incluido") && (
+            {notes?.includes("tornillo Protésico incluido") && (
                  <LabeledBlock label={t?.screw_label}>
                     <div className="flex items-center justify-center min-h-[5rem]">
                         <Tooltip text={t?.tooltips?.screw_included}><ScrewIcon className={iconSizeClass} /></Tooltip>

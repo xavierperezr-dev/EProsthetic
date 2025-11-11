@@ -1,5 +1,5 @@
 import React from 'react';
-import { FacebookIcon, XIcon, LinkedInIcon, InstagramIcon, YouTubeIcon } from './icons';
+import { LinkedInIcon, InstagramIcon, YouTubeIcon } from './icons';
 import { Language } from '../types';
 
 interface FooterProps {
@@ -10,8 +10,6 @@ interface FooterProps {
 
 const Footer: React.FC<FooterProps> = ({ t }) => {
   const socialIcons = [
-    { href: t.social.facebook, Icon: FacebookIcon, label: "Facebook" },
-    { href: t.social.x, Icon: XIcon, label: "X" },
     { href: t.social.linkedin, Icon: LinkedInIcon, label: "LinkedIn" },
     { href: t.social.instagram, Icon: InstagramIcon, label: "Instagram" },
     { href: t.social.youtube, Icon: YouTubeIcon, label: "YouTube" },

@@ -394,6 +394,27 @@ const App: React.FC = () => {
         }
     }, [isModalOpen]);
 
+    const handleCloseModal = () => setIsModalOpen(false);
+
+    const handleOpenSelecProLocal = () => {
+        setModalTitle(t.modal.selec_pro_local_title);
+        setModalContent(<SelecProLocal t={t.modal} onClose={handleCloseModal} language={language} />);
+        setModalId('modal-selec-pro-local');
+    };
+
+    const handleOpenDownloadsHelpModal = () => {
+        if (language === 'fr' || language === 'sv') {
+            setModalTitle(t.modal.descargas_procera_modal_title);
+            setModalContent(<DescargasOtherProcera t={t.modal} onClose={handleCloseModal} language={language} onOpenSelecProLocal={handleOpenSelecProLocal} />);
+            setModalId('modal-support-frsv');
+        } else {
+            setModalTitle(t.modal.descargas_procera_modal_title);
+            setModalContent(<DescargasProceraModalContent t={t.modal} onClose={handleCloseModal} language={language} onOpenSelecProLocal={handleOpenSelecProLocal} />);
+            setModalId('modal-support-espt');
+        }
+        setIsModalOpen(true);
+        setModalFooter(null);
+    };
 
     const filteredCases = useMemo(() => {
         return MOCK_CASES.filter(c => {
@@ -427,7 +448,6 @@ const App: React.FC = () => {
     
     const handleFilterChange = (name: keyof Filters, value: string | string[]) => setFilters(prev => ({ ...prev, [name]: value }));
     const handleResetFilters = () => { setFilters(initialFilters); setActiveSearchTerm(''); };
-    const handleCloseModal = () => setIsModalOpen(false);
     
     const handleConfirmIntro = (lang: Language, country: Language) => {
         setLanguage(lang);
@@ -925,19 +945,7 @@ const App: React.FC = () => {
             }
         }
         
-        const onOpenDownloadsModal = () => {
-            if (language === 'fr' || language === 'sv') {
-                setModalTitle(t.modal.descargas_procera_modal_title);
-                setModalContent(<DescargasOtherProcera t={t.modal} onClose={handleCloseModal} language={language} onOpenSelecProLocal={handleOpenSelecProLocal} />);
-                setModalId('modal-support-frsv');
-            } else {
-                setModalTitle(t.modal.descargas_procera_modal_title);
-                setModalContent(<DescargasProceraModalContent t={t.modal} onClose={handleCloseModal} language={language} onOpenSelecProLocal={handleOpenSelecProLocal} />);
-                setModalId('modal-support-espt');
-            }
-        };
-
-        const modalFooterContent = <ResourceButtons t={t.modal} caseData={caseData} onOpenDownloadsModal={onOpenDownloadsModal} language={language} />;
+        const modalFooterContent = <ResourceButtons t={t.modal} caseData={caseData} onOpenDownloadsModal={handleOpenDownloadsHelpModal} language={language} />;
         
         setModalContent(content);
         if (caseData.id !== 'EXO033') {
@@ -947,25 +955,10 @@ const App: React.FC = () => {
     };
 
     const handleHelp001Click = (caseData: DentalCase) => {
-        if (language === 'fr' || language === 'sv') {
-            setModalTitle(t.modal.descargas_procera_modal_title);
-            setModalContent(<DescargasOtherProcera t={t.modal} onClose={handleCloseModal} language={language} onOpenSelecProLocal={handleOpenSelecProLocal} />);
-            setModalId('modal-support-frsv');
-        } else {
-            setModalTitle(t.modal.descargas_procera_modal_title);
-            setModalContent(<DescargasProceraModalContent t={t.modal} onClose={handleCloseModal} language={language} onOpenSelecProLocal={handleOpenSelecProLocal} />);
-            setModalId('modal-support-espt');
-        }
-        setIsModalOpen(true);
-        setModalFooter(null);
+        handleOpenDownloadsHelpModal();
     };
 
-    const handleOpenSelecProLocal = () => {
-        setModalTitle(t.modal.selec_pro_local_title);
-        setModalContent(<SelecProLocal t={t.modal} onClose={handleCloseModal} language={language} />);
-        setModalId('modal-selec-pro-local');
-    };
-    
+    // FIX: Removed redeclared `handleOpenSelecProLocal` function. It was already defined earlier in the component.
     const handleTablesClick = (caseData: DentalCase) => {
         setModalTitle(t.modal.tables_modal_title);
         setModalContent(<DevDebugPage t={t.devDebugPage} />);
@@ -1034,22 +1027,12 @@ const App: React.FC = () => {
     };
 
     const handleDownloadCenterClick = () => {
-      const links = [
-        { text: 'NobelProcera Prosthetic solutions Overview', href: 'https://www.ganarnobelbiocare.com/nobeldesign/E-Prosthetic/PDF/GMT%2095136_ES%20NobelProcera%20product%20overview.pdf' },
-        { text: 'Universal Base product overview', href: 'https://www.ganarnobelbiocare.com/nobeldesign/E-Prosthetic/PDF/87971_Universal%20Base%20product%20overview_ES.pdf' },
-        { text: 'Titanium Blanks product overview', href: 'https://www.ganarnobelbiocare.com/nobeldesign/E-Prosthetic/PDF/88412_Titanium%20Blanks%20product%20overview_ES.pdf' },
-        { text: 'Product Overview On1', href: 'https://www.ganarnobelbiocare.com/nobeldesign/E-prosthetic/PDF/87583_On1_product_overview_ES.pdf' },
-        { text: 'Product Overview Nobelpearl', href: 'https://www.ganarnobelbiocare.com/nobeldesign/E-Prosthetic/PDF/88966_Product%20Overview%20NobelPearl_ES.pdf' },
-        { text: 'Prosthetic overview N1', href: 'https://www.ganarnobelbiocare.com/nobeldesign/E-Prosthetic/PDF/87730%20Nobel%20Biocare%20N1%20System%20ProdOverw%2021.2%20ES.pdf' },
-      ];
-
       setModalTitle(t.modal.download_center_title);
       setModalContent(
           <DownloadCenterModalContent
-              links={links}
               t={t}
               onClose={handleCloseModal}
-              onOpenWorkflowSelector={handleOpenSelecProLocal}
+              onOpenWorkflowSelector={handleOpenDownloadsHelpModal}
               language={language}
           />
       );
@@ -1144,9 +1127,9 @@ const App: React.FC = () => {
                                    onChange={(e) => handleFilterChange('searchText', e.target.value)}
                                    onBlur={(e) => setActiveSearchTerm(e.target.value)}
                                    onKeyDown={(e) => { if (e.key === 'Enter') setActiveSearchTerm(filters.searchText); }}
-                                   className="w-full h-11 pl-10 pr-4 rounded-md border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[color:var(--accent-primary)]"
+                                   className="w-full h-11 pl-10 pr-4 rounded-md bg-[color:var(--accent-primary)] text-white placeholder-slate-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[color:var(--accent-primary)] focus:ring-white"
                                />
-                               <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
+                               <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-300" />
                            </div>
                            <FilterBar
                                 filters={filters}
