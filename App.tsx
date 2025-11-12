@@ -47,6 +47,212 @@ const generateSearchableString = (data: any): string => {
     return String(data);
 };
 
+const TemporalAbutmentsTables: React.FC<{ storeCountry: Language }> = ({ storeCountry }) => {
+    const renderCell = (ref: string | undefined) => {
+        if (!ref || ref === '-') return <span className="text-slate-500">—</span>;
+        const storePath = getStorePath(storeCountry);
+        const searchTerm = ref.replace('*', '');
+        const url = `https://store.nobelbiocare.com/${storePath}/catalogsearch/result/?q=${encodeURIComponent(searchTerm)}`;
+        return (
+          <a href={url} className="font-semibold text-[color:var(--accent-primary)] hover:text-[color:var(--accent-primary-hover)] hover:underline transition-colors" target="_blank" rel="noopener noreferrer">
+            {ref}
+          </a>
+        );
+    };
+
+    const thClass = "px-3 py-2 text-center text-[10px] font-semibold text-slate-700 uppercase tracking-wider";
+    const thClassLeft = `${thClass} text-left`;
+    const tdClass = "px-3 py-2 whitespace-nowrap text-center text-slate-600";
+    const tdClassHeader = "px-3 py-2 whitespace-nowrap font-medium text-slate-800 text-left";
+    const trClass = "hover:bg-slate-50";
+
+    return (
+        <div className="space-y-8 mt-6">
+            <div>
+                <div className="flex items-center gap-4 mb-3">
+                    <img src="https://store.nobelbiocare.com/es/es/media/catalog/product/cache/8b702e05dee6f1504d8f77fa0603bd46/3/6/36664_00_57c0.png" alt="Pilar temporal Unitarios (No rotatorio) para CC Conical Connection" className="w-16 h-16 object-contain rounded-md border p-1 bg-white shadow-sm" />
+                    <h3 className="text-xl font-semibold text-slate-800">Pilar temporal Unitarios (No rotatorio) para CC Conical Connection</h3>
+                </div>
+                <div className="overflow-x-auto border border-slate-200 rounded-lg shadow-sm bg-white">
+                    <table className="min-w-full text-[10px]">
+                        <thead className="bg-slate-50 border-b border-slate-200">
+                            <tr>
+                                <th className={thClassLeft} rowSpan={2}></th>
+                                <th className={thClass} colSpan={4}>Unitarios (No rotatorio)</th>
+                            </tr>
+                            <tr>
+                                <th className={thClass}>1.5 mm</th>
+                                <th className={thClass}>3 mm</th>
+                                <th className={thClass}>1.5 mm snap</th>
+                                <th className={thClass}>3 mm snap</th>
+                            </tr>
+                        </thead>
+                        <tbody className="divide-y divide-slate-200">
+                            <tr className={trClass}><td className={tdClassHeader}>3.0¹</td><td className={tdClass}>{renderCell('36779')}</td><td className={tdClass}>{renderCell('-')}</td><td className={tdClass}>{renderCell('-')}</td><td className={tdClass}>{renderCell('-')}</td></tr>
+                            <tr className={trClass}><td className={tdClassHeader} style={{ color: '#A7358B', fontWeight: 'bold' }}>NP</td><td className={tdClass}>{renderCell('36663')}</td><td className={tdClass}>{renderCell('-')}</td><td className={tdClass}>{renderCell('38760')}</td><td className={tdClass}>{renderCell('38847')}</td></tr>
+                            <tr className={trClass}><td className={tdClassHeader} style={{ color: '#FECD50', fontWeight: 'bold' }}>RP</td><td className={tdClass}>{renderCell('36664')}</td><td className={tdClass}>{renderCell('-')}</td><td className={tdClass}>{renderCell('38761')}</td><td className={tdClass}>{renderCell('38848')}</td></tr>
+                            <tr className={trClass}><td className={tdClassHeader} style={{ color: '#245BA7', fontWeight: 'bold' }}>WP</td><td className={tdClass}>{renderCell('37823')}</td><td className={tdClass}>{renderCell('37824')}</td><td className={tdClass}>{renderCell('38762')}</td><td className={tdClass}>{renderCell('38849')}</td></tr>
+                            <tr className={trClass}><td className={tdClassHeader}>Destornillador</td><td className={tdClass} colSpan={4}>{renderCell('Unigrip')}</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p className="text-[10px] text-slate-500 mt-2 text-right">Torque manual. Tornillo Clínico incluido *Torque 15Ncm</p>
+            </div>
+
+            <div>
+                <div className="flex items-center gap-4 mb-3">
+                    <img src="https://store.nobelbiocare.com/es/es/media/catalog/product/cache/8b702e05dee6f1504d8f77fa0603bd46/3/6/36662_00_58aa.png" alt="Pilar temporal Puentes (rotatorios) para CC Conical Connection" className="w-16 h-16 object-contain rounded-md border p-1 bg-white shadow-sm" />
+                    <h3 className="text-xl font-semibold text-slate-800">Pilar temporal Puentes (rotatorios) para CC Conical Connection</h3>
+                </div>
+                <div className="overflow-x-auto border border-slate-200 rounded-lg shadow-sm bg-white">
+                    <table className="min-w-full text-[10px]">
+                        <thead className="bg-slate-50 border-b border-slate-200">
+                            <tr><th className={thClassLeft}></th><th className={thClass}>1.5 mm</th><th className={thClass}>3 mm</th></tr>
+                        </thead>
+                        <tbody className="divide-y divide-slate-200">
+                            <tr className={trClass}><td className={tdClassHeader}>3.0¹</td><td className={tdClass}>{renderCell('-')}</td><td className={tdClass}>{renderCell('-')}</td></tr>
+                            <tr className={trClass}><td className={tdClassHeader} style={{ color: '#A7358B', fontWeight: 'bold' }}>NP</td><td className={tdClass}>{renderCell('36661')}</td><td className={tdClass}>{renderCell('-')}</td></tr>
+                            <tr className={trClass}><td className={tdClassHeader} style={{ color: '#FECD50', fontWeight: 'bold' }}>RP</td><td className={tdClass}>{renderCell('36662')}</td><td className={tdClass}>{renderCell('-')}</td></tr>
+                            <tr className={trClass}><td className={tdClassHeader} style={{ color: '#245BA7', fontWeight: 'bold' }}>WP</td><td className={tdClass}>{renderCell('37825')}</td><td className={tdClass}>{renderCell('37826')}</td></tr>
+                            <tr className={trClass}><td className={tdClassHeader}>Destornillador</td><td className={tdClass} colSpan={2}>{renderCell('Unigrip')}</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p className="text-[10px] text-slate-500 mt-2 text-right">Torque 35 Ncm. Tornillo Clínico incluido. *Torque 15Ncm</p>
+            </div>
+
+            <div>
+                <div className="flex items-center gap-4 mb-3">
+                    <img src="https://store.nobelbiocare.com/es/es/media/catalog/product/cache/8b702e05dee6f1504d8f77fa0603bd46/2/9/29046_cc01.png" alt="Pilar temporal para Multi-unit" className="w-16 h-16 object-contain rounded-md border p-1 bg-white shadow-sm" />
+                    <h3 className="text-xl font-semibold text-slate-800">Pilar temporal para Multi-unit</h3>
+                </div>
+                <div className="overflow-x-auto border border-slate-200 rounded-lg shadow-sm bg-white">
+                    <table className="w-full text-[10px]">
+                        <thead className="bg-slate-50 border-b border-slate-200">
+                            <tr>
+                                <th className={thClassLeft}></th>
+                                <th className={thClass}>Regular</th>
+                                <th className={thClass}>Snap</th>
+                            </tr>
+                        </thead>
+                        <tbody className="divide-y divide-slate-200">
+                            <tr className={trClass}>
+                                <td className={tdClassHeader} style={{ color: '#A7358B', fontWeight: 'bold' }}>NP</td>
+                                <td className={tdClass}>{renderCell('29046')}</td>
+                                <td className={tdClass}>{renderCell('38915')}</td>
+                            </tr>
+                            <tr className={trClass}>
+                                <td className={tdClassHeader} style={{ color: '#FECD50', fontWeight: 'bold' }}>RP / WP</td>
+                                <td className={tdClass}>{renderCell('29046')}</td>
+                                <td className={tdClass}>{renderCell('-')}</td>
+                            </tr>
+                            <tr className={trClass}>
+                                <td className={tdClassHeader}>Solo Hex ext. <span style={{ color: '#245BA7', fontWeight: 'bold' }}>WP</span></td>
+                                <td className={tdClass}>{renderCell('29047')}</td>
+                                <td className={tdClass}>{renderCell('-')}</td>
+                            </tr>
+                            <tr className={trClass}>
+                                <td className={tdClassHeader}>Destornillador</td>
+                                <td className={tdClass}>{renderCell('Unigrip')}</td>
+                                <td className={tdClass}>{renderCell('Unigrip')}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p className="text-[10px] text-slate-500 mt-2 text-right">Torque 15 Ncm. Tornillo Clínico incluido.</p>
+            </div>
+
+            <div>
+                 <div className="flex items-center gap-4 mb-3">
+                    <img src="https://store.nobelbiocare.com/es/es/media/catalog/product/cache/8b702e05dee6f1504d8f77fa0603bd46/3/8/38703_1_2b11.png" alt="Pilar temporal para On1" className="w-16 h-16 object-contain rounded-md border p-1 bg-white shadow-sm" />
+                    <h3 className="text-xl font-semibold text-slate-800">Pilar temporal para On1</h3>
+                </div>
+                <div className="overflow-x-auto border border-slate-200 rounded-lg shadow-sm bg-white">
+                    <table className="w-full text-[10px]">
+                        <thead className="bg-slate-50 border-b border-slate-200"><tr><th className={thClassLeft}></th><th className={thClass}>Unitarios</th><th className={thClass}>Puentes</th></tr></thead>
+                        <tbody className="divide-y divide-slate-200">
+                            <tr className={trClass}><td className={tdClassHeader} style={{ color: '#A7358B', fontWeight: 'bold' }}>NP</td><td className={tdClass}>{renderCell('38701')}</td><td className={tdClass}>{renderCell('38702')}</td></tr>
+                            <tr className={trClass}><td className={tdClassHeader} style={{ color: '#FECD50', fontWeight: 'bold' }}>RP</td><td className={tdClass}>{renderCell('38703')}</td><td className={tdClass}>{renderCell('38704')}</td></tr>
+                            <tr className={trClass}><td className={tdClassHeader} style={{ color: '#245BA7', fontWeight: 'bold' }}>WP</td><td className={tdClass}>{renderCell('38705')}</td><td className={tdClass}>{renderCell('38706')}</td></tr>
+                            <tr className={trClass}><td className={tdClassHeader}>Destornillador</td><td className={tdClass} colSpan={2}>{renderCell('Unigrip')}</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p className="text-[10px] text-slate-500 mt-2 text-right">Torque 35 Ncm. Tornillo Clínico incluido.</p>
+            </div>
+            <div>
+                 <div className="flex items-center gap-4 mb-3">
+                    <img src="https://store.nobelbiocare.com/es/es/media/catalog/product/cache/8b702e05dee6f1504d8f77fa0603bd46/3/0/300936_9935.png" alt="Pilar temporal Unitarios (No rotatorio) N1 TCC" className="w-16 h-16 object-contain rounded-md border p-1 bg-white shadow-sm" />
+                    <h3 className="text-xl font-semibold text-slate-800">Pilar temporal Unitarios (No rotatorio) N1 TCC</h3>
+                </div>
+                <div className="overflow-x-auto border border-slate-200 rounded-lg shadow-sm bg-white">
+                    <table className="w-full text-[10px]">
+                        <thead className="bg-slate-50 border-b border-slate-200"><tr><th className={thClassLeft}></th><th className={thClass}>1.5 mm</th><th className={thClass}>3 mm</th></tr></thead>
+                        <tbody className="divide-y divide-slate-200">
+                            <tr className={trClass}><td className={tdClassHeader} style={{ color: '#A7358B', fontWeight: 'bold' }}>NP</td><td className={tdClass}>{renderCell('300934')}</td><td className={tdClass}>{renderCell('300935')}</td></tr>
+                            <tr className={trClass}><td className={tdClassHeader} style={{ color: '#FECD50', fontWeight: 'bold' }}>RP</td><td className={tdClass}>{renderCell('300936')}</td><td className={tdClass}>{renderCell('300937')}</td></tr>
+                            <tr className={trClass}><td className={tdClassHeader}>Destornillador</td><td className={tdClass} colSpan={2}>{renderCell('Omnigrip-Mini')}</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p className="text-[10px] text-slate-500 mt-2 text-right">Torque 20 Ncm. Tornillo Clínico incluido</p>
+            </div>
+             <div>
+                <h3 className="text-xl font-semibold mb-3 text-slate-800">Pilar temporal sobre base N1</h3>
+                <div className="overflow-x-auto border border-slate-200 rounded-lg shadow-sm bg-white">
+                    <table className="w-full text-[10px]">
+                        <thead className="bg-slate-50 border-b border-slate-200"><tr><th className={thClassLeft}></th><th className={thClass}>Unitarios</th><th className={thClass}>Puentes</th></tr></thead>
+                        <tbody className="divide-y divide-slate-200">
+                            <tr className={trClass}><td className={tdClassHeader} style={{ color: '#A7358B', fontWeight: 'bold' }}>NP</td><td className={tdClass}>{renderCell('300994')}</td><td className={tdClass}>{renderCell('300996')}</td></tr>
+                            <tr className={trClass}><td className={tdClassHeader} style={{ color: '#FECD50', fontWeight: 'bold' }}>RP</td><td className={tdClass}>{renderCell('300995')}</td><td className={tdClass}>{renderCell('300997')}</td></tr>
+                            <tr className={trClass}><td className={tdClassHeader}>Destornillador</td><td className={tdClass} colSpan={2}>{renderCell('Omnigrip-Mini')}</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p className="text-[10px] text-slate-500 mt-2 text-right">Torque 20 Ncm. Tornillo Clínico incluido</p>
+            </div>
+            <div>
+                <div className="flex items-center gap-4 mb-3">
+                    <img src="https://store.nobelbiocare.com/es/es/media/catalog/product/cache/8b702e05dee6f1504d8f77fa0603bd46/2/9/29030_acdf.png" alt="Pilar temporal Unitarios (No rotatorio) para Hex. Externo" className="w-16 h-16 object-contain rounded-md border p-1 bg-white shadow-sm" />
+                    <h3 className="text-xl font-semibold text-slate-800">Pilar temporal Unitarios (No rotatorio) para Hex. Externo</h3>
+                </div>
+                <div className="overflow-x-auto border border-slate-200 rounded-lg shadow-sm bg-white">
+                    <table className="w-full text-[10px]">
+                        <thead className="bg-slate-50 border-b border-slate-200"><tr><th className={thClassLeft}></th><th className={thClass}>Unitarios</th><th className={thClass}>Puentes</th></tr></thead>
+                        <tbody className="divide-y divide-slate-200">
+                            <tr className={trClass}><td className={tdClassHeader} style={{ color: '#A7358B', fontWeight: 'bold' }}>NP</td><td className={tdClass}>{renderCell('29028')}</td><td className={tdClass}>{renderCell('29029')}</td></tr>
+                            <tr className={trClass}><td className={tdClassHeader} style={{ color: '#FECD50', fontWeight: 'bold' }}>RP</td><td className={tdClass}>{renderCell('29030')}</td><td className={tdClass}>{renderCell('29031')}</td></tr>
+                            <tr className={trClass}><td className={tdClassHeader} style={{ color: '#245BA7', fontWeight: 'bold' }}>WP</td><td className={tdClass}>{renderCell('29032')}</td><td className={tdClass}>{renderCell('29033')}</td></tr>
+                            <tr className={trClass}><td className={tdClassHeader}>Destornillador</td><td className={tdClass} colSpan={2}>{renderCell('Unigrip')}</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p className="text-[10px] text-slate-500 mt-2 text-right">Torque 35 Ncm. Tornillo Clínico incluido.</p>
+            </div>
+             <div>
+                <div className="flex items-center gap-4 mb-3">
+                    <img src="https://store.nobelbiocare.com/es/es/media/catalog/product/cache/8b702e05dee6f1504d8f77fa0603bd46/2/9/29036_77b0.png" alt="Pilar temporal para Tri-Channel" className="w-16 h-16 object-contain rounded-md border p-1 bg-white shadow-sm" />
+                    <h3 className="text-xl font-semibold text-slate-800">Pilar temporal para Tri-Channel</h3>
+                </div>
+                <div className="overflow-x-auto border border-slate-200 rounded-lg shadow-sm bg-white">
+                    <table className="w-full text-[10px]">
+                        <thead className="bg-slate-50 border-b border-slate-200"><tr><th className={thClassLeft}></th><th className={thClass}>Unitarios</th><th className={thClass}>Puentes</th></tr></thead>
+                        <tbody className="divide-y divide-slate-200">
+                            <tr className={trClass}><td className={tdClassHeader} style={{ color: '#A7358B', fontWeight: 'bold' }}>NP</td><td className={tdClass}>{renderCell('36834')}</td><td className={tdClass}>{renderCell('36835')}</td></tr>
+                            <tr className={trClass}><td className={tdClassHeader} style={{ color: '#FECD50', fontWeight: 'bold' }}>RP</td><td className={tdClass}>{renderCell('29036')}</td><td className={tdClass}>{renderCell('29037')}</td></tr>
+                            <tr className={trClass}><td className={tdClassHeader} style={{ color: '#245BA7', fontWeight: 'bold' }}>WP</td><td className={tdClass}>{renderCell('29038')}</td><td className={tdClass}>{renderCell('29039')}</td></tr>
+                            <tr className={trClass}><td className={tdClassHeader}>6</td><td className={tdClass}>{renderCell('31456')}</td><td className={tdClass}>{renderCell('31457')}</td></tr>
+                            <tr className={trClass}><td className={tdClassHeader}>Destornillador</td><td className={tdClass} colSpan={2}>{renderCell('Unigrip')}</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p className="text-[10px] text-slate-500 mt-2 text-right">Torque 35 Ncm. Tornillo clínico incluido.</p>
+            </div>
+        </div>
+    );
+};
+
+
 const caseToTablesMap: { [key: string]: any[] } = {
     'EXO021': [UNIVERSAL_BASE_NON_ROTATING_DATA],
     'EXO022': [UNIVERSAL_BASE_ROTATING_DATA, UNIVERSAL_MULTI_UNIT_RECTO_DATA, UNIVERSAL_MULTI_UNIT_CONICO_DATA],
@@ -955,6 +1161,15 @@ const App: React.FC = () => {
               );
               break;
             }
+            case 'EXO035': {
+              content = (
+                <div>
+                  <CaseDetailIcons caseData={caseData} isModal t={t.caseCard} />
+                  <TemporalAbutmentsTables storeCountry={storeCountry} />
+                </div>
+              );
+              break;
+            }
         }
         
         const modalFooterContent = <ResourceButtons t={t.modal} caseData={caseData} onOpenDownloadsModal={handleOpenDownloadsHelpModal} language={language} />;
@@ -1073,10 +1288,10 @@ const App: React.FC = () => {
         if (element) {
             element.scrollIntoView({ behavior: 'smooth', block: 'center' });
             // Highlight effect
-            element.classList.add('animate-highlight');
+            element.classList.add('highlight-card');
             setTimeout(() => {
-                element.classList.remove('animate-highlight');
-            }, 2000);
+                element.classList.remove('highlight-card');
+            }, 1500);
         }
     };
     

@@ -192,7 +192,7 @@ const CaseDetailIcons: React.FC<CaseDetailIconsProps> = ({ caseData, isModal = f
             )}
 
             {/* 4. Torque */}
-            {displayTorque && (
+            {displayTorque && id !== 'EXO035' && (
                 <LabeledBlock label={t?.torque_label}>
                     <div className="flex items-center justify-center min-h-[5rem]">
                         {displayTorque === 15 && <Tooltip text={t?.tooltips?.torque_15}><Icon15 className={iconSizeClass} /></Tooltip>}
@@ -217,7 +217,7 @@ const CaseDetailIcons: React.FC<CaseDetailIconsProps> = ({ caseData, isModal = f
             )}
 
             {/* 6. Screw */}
-            {notes?.includes("tornillo Protésico incluido") && (
+            {notes?.includes("tornillo clínico incluido") && id !== 'EXO035' && (
                  <LabeledBlock label={t?.screw_label}>
                     <div className="flex items-center justify-center min-h-[5rem]">
                         <Tooltip text={t?.tooltips?.screw_included}><ScrewIcon className={iconSizeClass} /></Tooltip>
@@ -311,6 +311,9 @@ const CaseDetailIcons: React.FC<CaseDetailIconsProps> = ({ caseData, isModal = f
             break;
         case 'EXO033':
             allIcons.push(<MuaIcon className={iconSizeClass} />, <AngulationYesIcon className={iconSizeClass} />);
+            break;
+        case 'EXO035':
+            allIcons.push(<CcIcon className={iconSizeClass} />, <ExtIcon className={iconSizeClass} />, <TriIcon className={iconSizeClass} />, <MuaIcon className={iconSizeClass} />, <N1Icon className={iconSizeClass} />, <N1BaseIcon className={iconSizeClass} />, <On1Icon className={iconSizeClass} />, <AngulationNoIcon className={iconSizeClass} />);
             break;
         default:
             const icon = renderConnectionIcon(connectionType);

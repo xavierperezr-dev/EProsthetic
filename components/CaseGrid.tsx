@@ -28,7 +28,7 @@ const CaseGrid: React.FC<CaseGridProps> = ({ cases, onReferenceClick, onHelp001C
     );
   }
 
-  const specialCaseId = 'EXO026'; // Procera FCZ Implant Crown
+  const specialCaseIds = ['EXO026', 'EXO035'];
   const specialCaseColor = '--card-bg-raspberry'; // #e03e52
   
   // All other colors for rotation
@@ -45,7 +45,7 @@ const CaseGrid: React.FC<CaseGridProps> = ({ cases, onReferenceClick, onHelp001C
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       {cases.map((caseData) => {
-        const bgColorVar = caseData.id === specialCaseId
+        const bgColorVar = specialCaseIds.includes(caseData.id)
           ? specialCaseColor
           : regularBgColors[colorIndex++ % regularBgColors.length];
 

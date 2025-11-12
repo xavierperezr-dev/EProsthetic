@@ -484,6 +484,31 @@ export const MOCK_CASES: DentalCase[] = [
     angulacion: false,
     observaciones: "Distinctive color for testing purposes.",
   },
+  {
+    id: "EXO035",
+    caseNumber: 22,
+    patientName: {
+      en: "Temporary Abutments",
+      es: "Pilares Temporales",
+      pt: "Pilares Temporários",
+      fr: "Piliers Temporaires",
+      sv: "Temporära Distanser"
+    },
+    restorationType: [RestorationType.Unitaria, RestorationType.Multiple],
+    connectionType: ConnectionType.CC,
+    compatibleConnections: [ConnectionType.CC, ConnectionType.Branemark, ConnectionType.TriChannel, ConnectionType.MultiUnit, ConnectionType.N1, ConnectionType.N1Base, ConnectionType.On1],
+    status: CaseStatus.Standard,
+    reference: "REF-STD-TEMP-22",
+    imageUrls: [
+      "https://store.nobelbiocare.com/es/es/media/catalog/product/cache/8b702e05dee6f1504d8f77fa0603bd46/3/6/36664_00_57c0.png",
+      "https://store.nobelbiocare.com/es/es/media/catalog/product/cache/8b702e05dee6f1504d8f77fa0603bd46/3/8/38704_1_a15e.png",
+      "https://store.nobelbiocare.com/es/es/media/catalog/product/cache/8b702e05dee6f1504d8f77fa0603bd46/3/0/300936_9935.png"
+    ],
+    notes: "tornillo clínico incluido",
+    baseCementada: false,
+    angulacion: false,
+    torque: 35,
+  },
 ];
 
 export const N1_TCC_CASE_DATA: DentalCase = {

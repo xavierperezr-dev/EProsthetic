@@ -142,5 +142,12 @@ export const caseDescriptions: { [key: string]: { description: { [key: string]: 
             en: "A fundamental prosthetic component for full-arch rehabilitations, such as the All-on-4® treatment concept. This screw-retained abutment raises the restorative platform to the soft tissue level and allows for the correction of tilted implant angulation. It drastically simplifies prosthetic procedures and subsequent maintenance, as the prosthesis is fixed to the Multi-unit abutments and not directly to the implants. It ensures a passive fit of the framework and is the foundation for predictable and long-lasting results.",
             pt: "Componente protético fundamental para reabilitações de arcada completa, como o conceito de tratamento All-on-4®. Este pilar aparafusado eleva a plataforma restauradora ao nível do tecido mole e permite corrigir a angulação dos implantes inclinados. Simplifica drasticamente os procedimentos protéticos e a manutenção posterior, uma vez que a prótese é fixada aos pilares Multi-unit e não diretamente aos implantes. Assegura um ajuste passivo da estrutura e é a base para resultados previsíveis e duradouros."
         }
+    },
+    'EXO035': {
+        description: {
+            es: "Los pilares temporales de Nobel Biocare representan una pieza clave en el protocolo de tratamiento con implantes dentales, diseñados para ofrecer soluciones provisionales de alta calidad durante la fase de cicatrización y antes de la restauración definitiva. Estos componentes están orientados a mejorar los resultados estéticos y funcionales, así como la satisfacción del paciente, mediante la aplicación del probado concepto de Función Inmediata.",
+            en: "Nobel Biocare temporary abutments are a key piece in the dental implant treatment protocol, designed to offer high-quality provisional solutions during the healing phase and before the final restoration. These components are aimed at improving aesthetic and functional outcomes, as well as patient satisfaction, through the application of the proven Immediate Function concept.",
+            pt: "Os pilares temporários da Nobel Biocare representam uma peça fundamental no protocolo de tratamento com implantes dentários, concebidos para oferecer soluções provisórias de alta qualidade durante a fase de cicatrização e antes da restauração definitiva. Estes componentes visam melhorar os resultados estéticos e funcionais, bem como a satisfação do paciente, através da aplicação do comprovado conceito de Função Imediata."
+        }
     }
 };
