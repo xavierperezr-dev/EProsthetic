@@ -154,7 +154,10 @@ const CaseDetailIcons: React.FC<CaseDetailIconsProps> = ({ caseData, isModal = f
             <LabeledBlock label={t?.platform_label}>
                 <div className="flex items-center justify-center flex-wrap gap-2 min-h-[5rem] max-w-xs px-2">
                     {(compatibleConnections || [caseConnectionType]).map(conn => {
-                        const isSelected = (connectionTypeForTable || caseConnectionType) === conn;
+                        let isSelected = (connectionTypeForTable || caseConnectionType) === conn;
+                        if (id === 'EXO035') {
+                            isSelected = false;
+                        }
                         return (
                             <div
                                 key={conn}
